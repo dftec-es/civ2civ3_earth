@@ -81,9 +81,33 @@ reqs    =
       "OutputType", "Shield", "Local"
     }
 
+[effect_ai_cheat_happiness]
+type    = "Make_Content"
+value	= 1
+reqs	=
+    { "type", "name", "range"
+      "AI", "Cheating", "Player"
+    }
+
 [effect_ai_cheat_pollution]
 type    = "Pollu_Prod_Pct"
 value   = -20
+reqs    =
+    { "type", "name", "range"
+      "AI", "Cheating", "Player"
+    }
+
+[effect_ai_cheat_veteran]
+type    = "Veteran_Combat"
+value   = 20
+reqs    =
+    { "type", "name", "range"
+      "AI", "Cheating", "Player"
+    }
+
+[effect_ai_cheat_incite_cost]
+type    = "Incite_Cost_Pct"
+value   = 20
 reqs    =
     { "type", "name", "range"
       "AI", "Cheating", "Player"
@@ -451,7 +475,7 @@ reqs    =
       "OutputType", "Food", "Local"
     }
 
-; Base 0% food with Anarchy
+; Base 0% food waste with Anarchy
 [effect_food_waste_distance_2]
 type    = "Output_Waste_By_Distance"
 value   = -1
@@ -461,6 +485,7 @@ reqs    =
       "OutputType", "Food", "Local"
     }
 
+; base -1% trade each tile
 [effect_corruption_distance]
 type    = "Output_Waste_By_Distance"
 value   = 1
@@ -469,7 +494,7 @@ reqs    =
       "OutputType", "Trade", "Local"
     }
 
-; 1 + 1 = 2
+; 1 + 1 => -2% each tile without advanced tech / govs
 [effect_corruption_distance_ancient]
 type    = "Output_Waste_By_Distance"
 value   = 1
@@ -483,7 +508,7 @@ nreqs   =
       "Gov", "Communism", "Player"
     }
 
-; Total = 0
+; Total = 0 for Communism
 [effect_corruption_distance_communism]
 type    = "Output_Waste_By_Distance"
 value   = -1
@@ -493,7 +518,7 @@ reqs    =
       "OutputType", "Trade", "Local"
     }
 
-; Total = 0
+; Total = 0 for Federation with The Corporation, -1% for Federation alone
 [effect_corruption_distance_federation]
 type    = "Output_Waste_By_Distance"
 value   = -1
@@ -502,6 +527,8 @@ reqs    =
       "Gov", "Federation", "Player"
       "OutputType", "Trade", "Local"
     }
+
+; Corruption + waste = 30% for all govs
 
 [effect_corruption_anarchy]
 type    = "Output_Waste"
@@ -584,6 +611,7 @@ reqs    =
       "OutputType", "Trade", "Local"
     }
 
+; base -1% shields each tile
 [effect_waste_distance]
 type    = "Output_Waste_By_Distance"
 value   = 1
@@ -592,7 +620,7 @@ reqs    =
       "OutputType", "Shield", "Local"
     }
 
-; 1 + 1 = 2
+; 1 + 1 => -2% each tile without Trade or advanced govs
 [effect_waste_distance_ancient]
 type    = "Output_Waste_By_Distance"
 value   = 1
@@ -603,9 +631,11 @@ reqs    =
 nreqs   =
     { "type", "name", "range"
       "Tech", "Trade", "Player"
+      "Gov", "Communism", "Player"
+      "Gov", "Federation", "Player"
     }
 
-; 1 - 1 = 0
+; 1 - 1 = 0% with Communism
 [effect_waste_distance_communism]
 type    = "Output_Waste_By_Distance"
 value   = -1
@@ -615,7 +645,7 @@ reqs    =
       "OutputType", "Shield", "Local"
     }
 
-; 1 - 1 = 0
+; 1 - 1 = 0% with Federation
 [effect_waste_distance_federation]
 type    = "Output_Waste_By_Distance"
 value   = -1
@@ -750,6 +780,7 @@ nreqs   =
 ;      "Gov", "Democracy", "Player"
     }
 
+; additive with previous => x2 for Fundamentalism, Federation, Democracy
 [effect_base_unit_upkeep_gold_2]
 type    = "Upkeep_Factor"
 value   = 1
@@ -811,33 +842,29 @@ nreqs   =
 ;      "Gov", "Fundamentalism", "Player"
 ;      "Gov", "Federation", "Player"
 ;      "Gov", "Republic", "Player"
-;      "Gov", "Democracy", "Player"
+      "Gov", "Democracy", "Player"
     }
 
+; exclusive with above
 [effect_unit_unhappiness_democracy]
 type    = "Unhappy_Factor"
-value   = 1
+value   = 2
 reqs    =
     { "type", "name", "range"
       "Gov", "Democracy", "Player"
     }
-nreqs    =
-    { "type", "name", "range"
-      "Building", "Women's Suffrage", "Player"
-    }
 
-[effect_unit_unhappiness_democracy_1]
-type    = "Make_Content_Mil"
-value   = 1
+; ...except Women's Suffrage reduces it back to Republic levels
+[effect_womens_suffrage_1]
+type    = "Unhappy_Factor"
+value   = -1
 reqs    =
     { "type", "name", "range"
+      "Building", "Women's Suffrage", "Player"
       "Gov", "Democracy", "Player"
     }
-nreqs    =
-    { "type", "name", "range"
-      "Building", "Women's Suffrage", "Player"
-    }
 
+; Govs with 1 free unit
 [effect_upkeep_free_mil_1]
 type    = "Make_Content_Mil"
 value   = 1
@@ -851,9 +878,10 @@ nreqs   =
       "Gov", "Fundamentalism", "Player"
       "Gov", "Federation", "Player"
 ;      "Gov", "Republic", "Player"
-;      "Gov", "Democracy", "Player"
+      "Gov", "Democracy", "Player"
     }
 
+; Govs with 2 free units (exclusive with previous)
 [effect_upkeep_free_mil_2]
 type    = "Make_Content_Mil"
 value   = 2
@@ -867,9 +895,10 @@ nreqs   =
 ;      "Gov", "Fundamentalism", "Player"
 ;      "Gov", "Federation", "Player"
       "Gov", "Republic", "Player"
-      "Gov", "Democracy", "Player"
+;      "Gov", "Democracy", "Player"
     }
 
+; Govs with 3 free units (exclusive with previous)
 [effect_upkeep_free_mil_3]
 type    = "Make_Content_Mil"
 value   = 3
@@ -883,6 +912,17 @@ nreqs   =
       "Gov", "Fundamentalism", "Player"
       "Gov", "Federation", "Player"
       "Gov", "Republic", "Player"
+      "Gov", "Democracy", "Player"
+    }
+
+; normally 2 for Democracy, but 1 of these not needed with Women's Suffrage
+; due to reduced Unhappy_Factor
+[effect_womens_suffrage_2]
+type    = "Make_Content_Mil"
+value   = -1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Women's Suffrage", "Player"
       "Gov", "Democracy", "Player"
     }
 
@@ -967,6 +1007,7 @@ reqs    =
       "OutputType", "Shield", "Local"
     }
 
+; Any city can support up to four units...
 [effect_upkeep_free_units_food_base]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 4
@@ -975,6 +1016,8 @@ reqs    =
       "OutputType", "Food", "Local"
     }
 
+; ...or its size, whichever is bigger. Units above this limit have a
+; food penalty.
 [effect_upkeep_free_units_food_5]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
@@ -1461,6 +1504,7 @@ nreqs   =
       "Tech", "Railroad", "World"
     }
 
+; Railroad because makes Pyramids obsolete
 [effect_gov_tile_penalty_tribal]
 type    = "Output_Penalty_Tile"
 value   = 2
@@ -1474,6 +1518,7 @@ nreqs   =
       "Tech", "Railroad", "World"
     }
 
+; Railroad because makes Pyramids obsolete
 [effect_gov_tile_penalty_despotism]
 type    = "Output_Penalty_Tile"
 value   = 2
@@ -2187,6 +2232,7 @@ reqs    =
       "OutputType", "Shield", "local"
     }
 
+; base effect is 50, so this halves food waste
 [effect_courthouse_2]
 type    = "Output_Waste_Pct"
 value   = 25
@@ -2229,6 +2275,7 @@ reqs    =
       "Building", "Factory", "City"
     }
 
+; base effect is 50, so this halves food waste
 [effect_granary]
 type    = "Output_Waste_Pct"
 value   = 25
@@ -2238,7 +2285,7 @@ reqs    =
       "OutputType", "Food", "local"
     }
 
-; Free Granary effect
+; Free Granary effect in small cities
 [effect_granary_base]
 type    = "Growth_Food"
 value   = 50
@@ -2397,6 +2444,7 @@ reqs    =
       "OutputType", "Luxury", "Local"
     }
 
+; Counteracts population pollution from any 2 other buildings
 [effect_mass_transit]
 type    = "Pollu_Pop_Pct"
 value   = -200
@@ -2598,6 +2646,7 @@ reqs    =
       "Building", "Police Station", "City"
     }
 
+; Net effect is to neutralize one unit's unhappiness
 [effect_police_station_democracy]
 type    = "Make_Content_Mil"
 value   = 1
@@ -2691,6 +2740,7 @@ nreqs   =
       "Building", "Hoover Dam", "City"
     }
 
+; Recycling Center gives a lesser additional bonus with plants
 [effect_recycling_center]
 type    = "Pollu_Prod_Pct"
 value   = -50
@@ -3198,6 +3248,7 @@ reqs    =
       "OutputType", "Luxury", "Local"
     }
 
+; Hoover Dam behaves like a (self-enhanced) Hydro Plant in its own city
 [effect_hoover_dam]
 type    = "Output_Bonus"
 value   = 25
@@ -3440,6 +3491,7 @@ reqs    =
       "Building", "Mausoleum of Mausolos", "Player"
     }
 
+; Note that this doesn't cancel a whole unit's unhappiness in Democracy
 [effect_statue_of_zeus]
 type    = "Make_Content_Mil"
 value   = 1
@@ -3756,6 +3808,7 @@ nreqs   =
       "Building", "Mfg. Plant", "City"
     }
 
+; Mfg. Plant => 2 slots total
 [effect_city_build_slots_mfg_plant]
 type    = "City_Build_Slots"
 value   = 2
@@ -3764,6 +3817,7 @@ reqs    =
       "Building", "Mfg. Plant", "City"
     }
 
+; free granary, etc, runs out
 [effect_city_image_1]
 type    = "City_Image"
 value   = 1
@@ -3772,6 +3826,7 @@ reqs    =
       "MinSize", "5", "City"
     }
 
+; needs Aqueduct
 [effect_city_image_2]
 type    = "City_Image"
 value   = 1
@@ -3788,6 +3843,7 @@ reqs    =
       "MinSize", "13", "City"
     }
 
+; needs Sewer System
 [effect_city_image_4]
 type    = "City_Image"
 value   = 1
@@ -3796,6 +3852,7 @@ reqs    =
       "MinSize", "17", "City"
     }
 
+; "Sea" nreq is for Transports, which are only supposed to clean pollution
 [effect_irrigate_src_tech]
 type    = "Irrig_Possible"
 value   = 1
