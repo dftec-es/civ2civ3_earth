@@ -1,0 +1,311 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description="Civ2Civ3 governments data for Freeciv"
+options="+Freeciv-2.5-ruleset"
+
+[governments]
+during_revolution="Anarchy"
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual government types, one per section.
+;
+; The actual tag used (the * in [government_*]) does not matter, except 
+; it must be unique within this file, and it may be used in debug 
+; output when reading this file.
+;
+; For the "official" rulesets, the order of these sections should not
+; be changed because that would break backward compatability with 
+; savegames.  (In particular, if Fundamentalism is added to default
+; ruleset, should be added at end.)
+;
+; Notes on fields:
+
+; name        = translatable name as seen by user
+; rule_name   = (optional) name for savegames, rulesets etc; if not
+;               present, 'name' is used. Since the name used in savegames
+;               must not change, use this when renaming a government after a
+;               ruleset has been released.
+; reqs        = requirements for this government (see README.effects)
+; graphic     = tag specifing preferred graphic
+; graphic_alt = alternate graphics tag if preferred is not found;
+;               should be a standard tag if preferred is not;
+;		otherwise may be "-"
+; ai_better   = AI will not consider this government for use if the
+;               government listed here is available
+
+; ruler_titles = ruler titles by nation, "-" is default, and non-matched 
+;	         nations are ignored 
+
+; helptext = optional help text string; should escape all raw newlines 
+;	     so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+;------------------------------------------------------------------------
+[government_anarchy]
+
+name        = _("Anarchy")
+; No reqs
+graphic     = "gov.anarchy"
+graphic_alt = "-"
+
+ruler_male_title = _("Warlord %s")
+ruler_female_title = _("Warlady %s")
+
+helptext = _("\
+Anarchy is simply the absence of any recognizable government.\
+ Citizens are disorganized and unproductive, and will spend all\
+ income as quickly as possible, rather than paying taxes or\
+ conducting research.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- All the income goes to luxuries (with a penalty of -50%).\n\
+- Buildings and technologies do not require any upkeep.\n\
+- Unit upkeep costs 1 shield (with 2 units free of upkeep per city).\n\
+- Military units do not cause unhappiness even when being aggressive.\n\
+- Corruption 0% (trade). Waste 30% (shields). Plus 2% for each tile away\
+ from the Capital.\
+")
+
+;------------------------------------------------------------------------
+[government_tribal]
+
+name        = _("Tribal")
+; No reqs
+graphic     = "s.tax_luxury"
+graphic_alt = "-"
+
+ruler_male_title = _("Warlord %s")
+ruler_female_title = _("Warlady %s")
+
+helptext = _("\
+Under Tribal, you are part ruler of your people.  Your\
+ control over your citizens is maintained largely by the spiritual counsel.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Increases by half the chance of land units getting the next veteran level\
+ after a battle.\n\
+- Unit upkeep costs 1 shield (with 2 units free of upkeep per city).\n\
+- Military units do not cause unhappiness even when being aggressive.\n\
+- Corruption 30% (trade). Waste 0% (shields). Plus 2% for each tile away\
+ from the Capital.\
+")
+
+;------------------------------------------------------------------------
+[government_despotism]
+
+name        = _("Despotism")
+; No reqs
+graphic     = "gov.despotism"
+graphic_alt = "-"
+
+ruler_male_title = _("Chief %s")
+ruler_female_title = _("?female:Chief %s")
+
+helptext = _("\
+Under Despotism, you are the absolute ruler of your people.  Your\
+ control over your citizens is maintained largely by martial law.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Increases +75% the production of gold in the Capital.\n\
+- Unit upkeep costs 1 gold (with 2 units free of upkeep per city).\n\
+- Military units do not cause unhappiness even when being aggressive.\n\
+- Corruption 20% (trade). Waste 10% (shields). Plus 2% for each tile away\
+ from the Capital.\
+")
+
+;------------------------------------------------------------------------
+[government_monarchy]
+
+name        = _("Monarchy")
+reqs = { "type", "name", "range"
+         "tech", "Monarchy", "Player"
+       }
+graphic     = "gov.monarchy"
+graphic_alt = "-"
+
+ruler_male_title = _("King %s")
+ruler_female_title = _("Queen %s")
+
+helptext = _("\
+Under Monarchy, a king or queen serves as a hereditary figurehead\
+ for your government.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Increases +50% the production of gold in the Capital.\n\
+- Unit upkeep costs 1 gold (with 3 units free of upkeep per city).\n\
+- Military units out of home cause 1 unhappy citizen.\n\
+- Corruption 10% (trade). Waste 20% (shields). Plus 2% for each tile away\
+ from the Capital.\n\
+- Celebration: +1 Trade point in any tile which already produces trade.\
+")
+
+;------------------------------------------------------------------------
+[government_communism]
+
+name        = _("Communism")
+reqs = { "type", "name", "range"
+         "tech", "Communism", "Player"
+       }
+graphic     = "gov.communism"
+graphic_alt = "-"
+
+ruler_male_title = _("Comrade %s")
+ruler_female_title = _("?female:Comrade %s")
+
+helptext = _("\
+A Communist government is based on the ideal that all people are\
+ equal.  All goods are owned by the state, rather than by private\
+ citizens.  Communism gives a balance between military and commercial\
+ styles of government.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- City improvements which would normally have an upkeep of 1 are free of upkeep.\n\
+- Unit upkeep costs 1 shield (with 3 units free of upkeep per city).\n\
+- Military units out of home cause 1 unhappy citizen.\n\
+- Corruption 30% (trade). Waste 0% (shields). Plus 1% for each tile away\
+ from the Capital.\
+")
+
+;------------------------------------------------------------------------
+[government_fundamentalism]
+
+name        = _("Fundamentalism")
+reqs = { "type", "name", "range"
+         "tech", "Theology", "Player"
+       }
+graphic     = "gov.fundamentalism"
+graphic_alt = "-"
+
+ruler_male_title = _("High Priest %s")
+ruler_female_title = _("High Priestess %s")
+
+helptext = _("\
+Fundamentalism is a form of government organized around a central\
+ set of beliefs. The beliefs, usually religious in nature, form\
+ a rigid guideline for actions and reactions of both the rulers\
+ and the people.\
+\n\n\
+In a fundamentalist society, the people and the rulers are entirely\
+ devoted to their beliefs, and are usually willing to die to\
+ preserve them.\
+\n\n\
+Improvements that normally convert unhappy citizens to content\
+ citizens, produce `tithes' (gold) equivalent to the number\
+ of people they would convert, and require no maintenance.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Reduces -50% the production of science in each city.\n\
+- Unit upkeep costs 2 gold (with 2 units free of upkeep per city).\n\
+- Military units out of home cause 1 unhappy citizen.\n\
+- Corruption 15% (trade). Waste 15% (shields). Plus 2% for each tile away\
+ from the Capital.\
+")
+
+;------------------------------------------------------------------------
+[government_federation]
+
+name        = _("Federation")
+reqs = { "type", "name", "range"
+         "tech", "Economics", "Player"
+       }
+graphic     = "s.tax_gold"
+graphic_alt = "-"
+
+ruler_male_title = _("Consul %s")
+ruler_female_title = _("?female:Consul %s")
+
+helptext = _("\
+Federalism is a system in which the power to govern is shared between\
+ national and provincial governments. \
+ This decentralization minimizes the corruption and waste caused by distance\
+ to capital, and avoids separatist movements.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Grants +1 Luxury point in each city.\n\
+- Unit upkeep costs 2 gold (with 2 units free of upkeep per city).\n\
+- Military units out of home cause 1 unhappy citizen.\n\
+- Corruption 0% (trade). Waste 30% (shields). Plus 1% for each tile away\
+ from the Capital.\n\
+- Celebration: +1 Trade point in any tile which already produces trade.\
+")
+
+;------------------------------------------------------------------------
+[government_republic]
+
+name        = _("Republic")
+reqs = { "type", "name", "range"
+         "tech", "The Republic", "Player"
+       }
+graphic     = "gov.republic"
+graphic_alt = "-"
+
+ruler_male_title = _("President %s")
+ruler_female_title = _("?female:President %s")
+
+helptext = _("\
+Under a Republican government, citizens hold an election to select a\
+ representative who will govern them; since elected leaders must\
+ remain popular to remain in control, citizens are given a greater\
+ degree of freedom.  Citizens under the Republic become unhappy\
+ easily, but the self-sufficiency of your citizens allows high levels\
+ of trade.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Unit upkeep costs 1 shield (with 1 unit free of upkeep per city).\n\
+- Military units out of home cause 1 unhappy citizen.\n\
+- Corruption 25% (trade). Waste 5% (shields). Plus 2% for each tile away\
+ from the Capital.\n\
+- Celebration: +1 Trade point in any tile which already produces trade\
+ (in total +2 Trade).\
+")
+
+;------------------------------------------------------------------------
+[government_democracy]
+
+name        = _("Democracy")
+reqs = { "type", "name", "range"
+         "tech", "Democracy", "Player"
+       }
+graphic     = "gov.democracy"
+graphic_alt = "-"
+
+ruler_male_title = _("Prime Minister %s")
+ruler_female_title = _("?female:Prime Minister %s")
+
+helptext = _("\
+Under Democracy, citizens govern directly by voting on issues.\
+ Democracy offers the highest possible level of trade, but also\
+ offers the most potential for unhappiness.  There is low corruption\
+ during Democracy, but citizens become very upset during\
+ wars.\
+"),
+; /* xgettext:no-c-format */
+_("\
+- Unit upkeep costs 2 gold (with 1 unit free of upkeep per city).\n\
+- Military units out of home cause 2 unhappy citizens.\n\
+- Corruption 5% (trade). Waste 25% (shields). Plus 2% for each tile away\
+ from the Capital.\n\
+- Celebration: +1 Trade point in any tile which already produces trade\
+ (in total +2 Trade).\
+")
