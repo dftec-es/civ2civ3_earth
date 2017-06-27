@@ -631,7 +631,7 @@ irrigation_result    = "no"
 irrigation_food_incr = 0
 irrigation_time      = 0
 mining_result        = "yes"
-mining_shield_incr   = 1
+mining_shield_incr   = 2
 mining_time          = 10
 transform_result     = "terrain_hills"
 transform_time       = 36
@@ -652,9 +652,9 @@ Mountains are regions of extreme altitude, making agriculture and\
  trade very difficult.\
 "), _("\
 Land units that move into mountains can see an extra space, but a\
- fast land unit ending its turn in mountains will start its next turn\
- with one fewer movement point. Big Land units may not move into\
- mountains without a road.\
+ fast land unit ending its turn in mountains without a road will start\
+ its next turn with one fewer movement point. Big Land units may not\
+ move into mountains without a road.\
 ")
 
 [terrain_plains]
@@ -1080,7 +1080,7 @@ build_time     = 2
 border_sq      = -1
 conflicts      = "Airstrip", "Airbase"
 native_to      = "Land", "Small Land", "Big Land"
-flags          = "NoAggressive", "NoStackDeath", "DiplomatDefense", "NativeTile"
+flags          = "NoAggressive", "DiplomatDefense", "NativeTile"
 helptext       = _("\
 Units in a fortress receive double defense against land units and boats. \
 Any kind of land unit remaining in a fortress for a whole turn without \
@@ -1133,7 +1133,7 @@ build_time     = 2
 border_sq      = -1
 conflicts      = "Fort", "Fortress"
 native_to      = "Air", "Helicopter", "Missile"
-flags          = "NoAggressive", "NoStackDeath", "ParadropFrom"
+flags          = "NoAggressive", "ParadropFrom"
 helptext       = _("\
 Airbases allow your air units to land and refuel. Units in an airbase \
 receive double defense against enemy air units. \

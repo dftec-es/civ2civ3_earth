@@ -100,13 +100,14 @@ Under a Tribal government, you are part ruler of your people. Your\
  control over your citizens is maintained largely by spiritual counsel.\
 "), _("\
 Compared to Despotism, a Tribal economy is more shield-oriented. Its\
- bonuses to veterancy and strong martial law can be an advantage in\
- wartime.\
+ bonuses to veterancy and happiness can be an advantage in wartime.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 * Increases by half the chance of land units getting the next veteran level\
  after a battle.\n\
+* Each city gets 3 extra content citizens (same effect than martial\
+ law, but without the need to keep garrison units).\n\
 * Each city can support up to 2 units for free; further units each cost\
  1 shield per turn.\n\
 * Unlike later governments, military units do not cause unhappiness even\

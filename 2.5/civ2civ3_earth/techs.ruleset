@@ -242,7 +242,10 @@ req2     = "Iron Working"
 flags    = ""
 graphic     = "a.construction"
 graphic_alt = "-"
-helptext = _("Allows Settlers, Workers and Engineers to build fortresses.")
+helptext = _("\
+Allows Settlers, Migrants, Workers and Engineers to build forts and \
+fortresses.\
+")
 cost     = 50
 
 [advance_currency]
@@ -541,6 +544,10 @@ req2     = "Electronics"
 flags    = ""
 graphic     = "a.miniaturization"
 graphic_alt = "-"
+helptext = _("\
+Allows Settlers, Migrants, Workers, Engineers and Transports to build \
+mines on deep ocean, required to get the bonus from Offshore Platforms.\
+")
 cost     = 480
 
 [advance_mobile_warfare]
@@ -662,7 +669,9 @@ req2     = "Electronics"
 flags    = ""
 graphic     = "a.radio"
 graphic_alt = "-"
-helptext = _("Allows Workers and Engineers to build airbases and buoys.")
+helptext = _("\
+Allows Workers and Engineers to build airstrips, airbases and buoys.\
+")
 cost     = 540
 
 [advance_railroad]
@@ -673,7 +682,10 @@ flags    = ""
 graphic     = "a.railroad"
 graphic_alt = "-"
 helptext = _("\
-Allows Settlers, Workers and Engineers to build railroads. Halves one-time revenue from new trade routes.\
+Allows Settlers, Migrants, Workers and Engineers to upgrade roads to \
+railroads.\
+"), _("\
+Halves one-time revenue from new trade routes.\
 "), _("\
 For Despotism or Tribal governments, cancels the penalty to worked \
 tiles with output greater than 2 (as if all your cities were always \
@@ -697,6 +709,9 @@ req2     = "Industrialization"
 flags    = ""
 graphic     = "a.refining"
 graphic_alt = "-"
+helptext = _("\
+Doubles the effect of mines on desert and glacier.
+")
 cost     = 400
 
 [advance_refrigeration]
@@ -788,7 +803,10 @@ req2     = "Laser"
 flags    = ""
 graphic     = "a.superconductors"
 graphic_alt = "-"
-helptext = _("Allows Settlers, Workers and Engineers to build maglevs.")
+helptext = _("\
+Allows Settlers, Migrants, Workers and Engineers to upgrade railroads \
+with maglev.\
+")
 cost     = 700
 
 [advance_tactics]

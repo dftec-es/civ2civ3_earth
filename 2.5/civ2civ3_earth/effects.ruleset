@@ -123,8 +123,6 @@ reqs    =
 nreqs    =
     { "type", "name", "range"
       "CityTile", "Center", "Local"
-      "Base", "Fortress", "Local"
-      "Base", "Airbase", "Local"
       "TerrainClass", "Oceanic", "Local"
     }
 
@@ -407,6 +405,7 @@ nreqs   =
       "UnitClass", "Helicopter", "Local"
       "UnitClass", "Air", "Local"
       "UnitClass", "Missile", "Local"
+      "Road", "Road", "Local"
     }
 
 ; Nuclear power gives +1 moves to sea units
@@ -1172,7 +1171,7 @@ reqs    =
 
 [effect_civil_war_tribal]
 type    = "Civil_War_Chance"
-value   = 90
+value   = 80
 reqs    =
     { "type", "name", "range"
       "Gov", "Tribal", "Player"
@@ -1180,7 +1179,7 @@ reqs    =
 
 [effect_civil_war_despotism]
 type    = "Civil_War_Chance"
-value   = 80
+value   = 90
 reqs    =
     { "type", "name", "range"
       "Gov", "Despotism", "Player"
@@ -1458,14 +1457,6 @@ reqs    =
       "Gov", "Monarchy", "Player"
     }
 
-[effect_martial_law_each_tribal]
-type    = "Martial_Law_Each"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Gov", "Tribal", "Player"
-    }
-
 [effect_martial_law_each_communism]
 type    = "Martial_Law_Each"
 value   = 2
@@ -1480,7 +1471,7 @@ value   = 3
 nreqs   =
     { "type", "name", "range"
 ;      "Gov", "Anarchy", "Player"
-;      "Gov", "Tribal", "Player"
+      "Gov", "Tribal", "Player"
 ;      "Gov", "Communism", "Player"
 ;      "Gov", "Despotism", "Player"
 ;      "Gov", "Monarchy", "Player"
@@ -1576,6 +1567,14 @@ nreqs   =
 ;      "Gov", "Federation", "Player"
 ;      "Gov", "Republic", "Player"
 ;      "Gov", "Democracy", "Player"
+    }
+
+[effect_content_tribal]
+type    = "Make_Content"
+value   = 3
+reqs    =
+    { "type", "name", "range"
+      "Gov", "Tribal", "Player"
     }
 
 [effect_combat_tribal]
@@ -2536,20 +2535,23 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Terrain", "Ocean", "Local"
+      "TerrainClass", "Oceanic", "Local"
       "Building", "Offshore Platform", "City"
       "OutputType", "Shield", "Local"
     }
 
 [effect_offshore_platform_1]
 type    = "Output_Add_Tile"
-value   = 1
+value   = -1
 reqs    =
     { "type", "name", "range"
       "Terrain", "Deep Ocean", "Local"
       "Building", "Offshore Platform", "City"
-      "Special", "Mine", "Local"
       "OutputType", "Shield", "Local"
+    }
+nreqs    =
+    { "type", "name", "range"
+      "Special", "Mine", "Local"
     }
 
 [effect_offshore_platform_2]
@@ -3741,6 +3743,28 @@ value   = -1
 reqs    =
     { "type", "name", "range"
       "MinYear", "1900", "World"
+    }
+
+[effect_oil_derrick_glacier]
+type    = "Output_Inc_Tile"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Refining", "Player"
+      "Terrain", "Glacier", "Local"
+      "Special", "Mine", "Local"
+      "OutputType", "Shield", "Local"
+    }
+
+[effect_oil_derrick_desert]
+type    = "Output_Inc_Tile"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Refining", "Player"
+      "Terrain", "Desert", "Local"
+      "Special", "Mine", "Local"
+      "OutputType", "Shield", "Local"
     }
 
 [effect_river_food_desert]

@@ -15,19 +15,16 @@ options="+Freeciv-2.5-ruleset"
 
 [about]
 ; Ruleset name
-name = _("Civ2Civ3 ruleset")
+name = _("Civ2Civ3 Earth ruleset")
 
 ; Description of the ruleset
 description = _("\
-You are playing Freeciv with civ2civ3 rules:\
+You are playing Freeciv with civ2civ3_earth rules:\
 \n\n\
 Gameplay more similar to civ3, keeping the combat system from civ2.\
 \n\n\
-Adapted for single player, with AI less aggressive at start,\
- but more challenging at the end.\
-\n\n\
 Detailed description of the differences from the classic ruleset can be\
- found in README.ruleset_civ2civ3.\
+ found in README.ruleset_civ2civ3_earth.\
 ")
 
 [options]

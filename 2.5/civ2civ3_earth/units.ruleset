@@ -25,8 +25,8 @@ options="+Freeciv-2.5-ruleset"
 ; helptxt       = displayed in the help for units with this flag (optional)
 flags =
   { "name", "helptxt"
-    _("Airbase"), _("Can build airbases and buoys.")
-    _("Transform"), _("Can transform terrain.")
+    _("Airbase")
+    _("Transform")
     _("AirAttacker"), _("Very bad at attacking AEGIS.")
     _("Submarine"), _("Attack value halved when attacking Destroyer.")
   }
@@ -1528,7 +1528,7 @@ A Helicopter's attack against units on land is a bombard attack; against \
 units on water it has a regular attack.\
 "), _("\
 Helicopters can also transport one unit of infantry; while most troops \
-must load or unload in a city or airbase units specialising in mobility \
+must load or unload in a city or airbase units specializing in mobility \
 (Paratroopers, Alpine Troops, Marines, Partisans, and Fanatics) can \
 embark or disembark at any time.\
 "), _("\
@@ -2014,9 +2014,10 @@ helptext      = _("\
 The Transport cannot attack on its own but\
  may defend itself when under attack.\
 "), _("\
-Transports can also clean pollution on water tiles.\
+Transports can also clean pollution and fallout on water tiles.\
 ")
-; FIXME: also cleans pollution in coastal cities (and faster than Engineers)
+; FIXME: also cleans pollution/fallout in coastal cities (and faster
+; than Engineers)
 
 [unit_cruise_missile]
 name          = _("Cruise Missile")
@@ -2043,6 +2044,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+targets       = "Air", "Missile", "Helicopter"
 flags         = "OneAttack", "AirAttacker", "CityBuster"
 roles         = ""
 helptext      = _("\
@@ -2105,16 +2107,12 @@ Similar to pollution and global warming, the risk of global nuclear\
  across the globe changes into desert, tundra, and ice. Settlers,\
  Workers, and Engineers can clean up nuclear fallout.\
 "), _("\
-TIP 1:  Nuking the ocean will not generate fallout, and is a most\
- effective (but expensive!!) way of getting rid of enemy\
- ships.\
-"), _("\
-TIP 2:  You may be involved in a situation where you've invaded an\
+TIP:  You may be involved in a situation where you've invaded an\
  enemy country en masse, but the enemy cities are too strong.\
- Before using a Nuclear unit, assemble a gang of Settlers, Workers,\
- and/or Engineers next to the city and have them ready to fix\
- the fallout on the same turn it occurs!  This minimizes the\
- chance of nuclear winter.  Eco-friendly nukes!\
+ Before using a Nuclear unit, assemble a gang of cleanup units\
+ next to the city and have them ready to fix the fallout on the\
+ same turn it occurs! This minimizes the chance of nuclear winter.\
+ Eco-friendly nukes!\
 ")
 
 [unit_diplomat]
