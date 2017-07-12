@@ -59,3 +59,4 @@ aggressive_default = 50
 ; Two barbarian nations, Land and Sea barbarians, needed
 *include "nation/barbarian.ruleset"
 *include "nation/pirate.ruleset"
+*include "nation/animals.ruleset"

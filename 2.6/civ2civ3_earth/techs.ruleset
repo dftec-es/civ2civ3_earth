@@ -78,7 +78,14 @@ req2     = "Machine Tools"
 flags    = ""
 graphic     = "a.advanced_flight"
 graphic_alt = "-"
-helptext = _("Enables movement of nuclear units.")
+helptext = _("\
+Aluminum resources produce 2 extra shields in the tile where they are \
+placed.\
+"), _("\
+Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
+Missile, Stealth Fighter and Stealth Bomber units with one extra \
+veteran level.\
+")
 cost     = 570
 
 [advance_alphabet]
@@ -143,8 +150,8 @@ req2     = "Construction"
 flags    = "Bridge"
 graphic     = "a.bridge_building"
 graphic_alt = "-"
-cost     = 80
 helptext = _("Allows roads to be built on river tiles.")
+cost     = 80
 
 [advance_bronze_working]
 name     = _("Bronze Working")
@@ -171,6 +178,13 @@ req2     = "Medicine"
 flags    = ""
 graphic     = "a.chemistry"
 graphic_alt = "-"
+helptext = _("\
+Rubber resources produce 2 extra shields in the tile where they are \
+placed.\
+"), _("\
+Cities with available Rubber build Marines, Paratroopers, Helicopter, \
+Mech. Inf. and Howitzer units with one extra veteran level.\
+")
 cost     = 160
 
 [advance_chivalry]
@@ -216,7 +230,6 @@ req2     = "Industrialization"
 flags    = ""
 graphic     = "a.communism"
 graphic_alt = "-"
-helptext = _("Reduces the effect of Cathedrals.")
 cost     = 420
 
 [advance_computers]
@@ -235,6 +248,11 @@ req2     = "Metallurgy"
 flags    = ""
 graphic     = "a.conscription"
 graphic_alt = "-"
+helptext = _("\
+Enables new Mobilization policy, which can be adjusted to reduce the \
+upkeep costs of your armies, but increasing the unhappiness caused by \
+your military units, and reducing the effect of martial law.\
+")
 cost     = 260
 
 [advance_construction]
@@ -245,8 +263,8 @@ flags    = ""
 graphic     = "a.construction"
 graphic_alt = "-"
 helptext = _("\
-Allows Settlers, Migrants, Workers and Engineers to build forts and \
-fortresses.\
+Allows Settlers, Migrants, Workers, Engineers, and military infantry \
+units to build forts and fortresses.\
 ")
 cost     = 50
 
@@ -333,6 +351,10 @@ req2     = "Chemistry"
 flags    = ""
 graphic     = "a.explosives"
 graphic_alt = "-"
+helptext = _("\
+Allows Settlers, Migrants, Workers and Engineers to build canals, and \
+naval mines. Allows Transports to build naval mines.\
+")
 cost     = 270
 
 [advance_feudalism]
@@ -387,6 +409,14 @@ req1     = "Invention"
 req2     = "Feudalism"
 graphic     = "a.gunpowder"
 graphic_alt = "-"
+helptext = _("\
+Niter resources produce 2 extra shields in the tile where they are \
+placed.\
+"), _("\
+Cities without available Niter build gunpowder based units with one \
+less veteran level: Musketeers, Riflemen, Alpine Troops, Dragoons, \
+Cavalry, Cannon, Artillery, Galleon, Frigate and Ironclad.\
+")
 cost     = 170
 
 [advance_horseback_riding]
@@ -396,6 +426,10 @@ req2     = "None"
 flags    = ""
 graphic     = "a.horseback_riding"
 graphic_alt = "-"
+helptext = _("\
+Cities with available Horses build units that require this resource \
+with one more veteran level.\
+")
 cost     = 10
 
 [advance_industrialization]
@@ -423,6 +457,10 @@ req2     = "Warrior Code"
 flags    = ""
 graphic     = "a.iron_working"
 graphic_alt = "-"
+helptext = _("\
+Cities without available Iron build units that require this resource \
+with one less veteran level.\
+")
 cost     = 30
 
 [advance_labor_union]
@@ -432,6 +470,7 @@ req2     = "Mobile Warfare"
 flags    = ""
 graphic     = "a.labor_union"
 graphic_alt = "-"
+helptext = _("Engineers are built with one extra veteran level.")
 cost     = 580
 
 [advance_laser]
@@ -522,10 +561,9 @@ req2     = "Trade"
 flags    = ""
 graphic     = "a.medicine"
 graphic_alt = "-"
-; /* xgettext:no-c-format */
 helptext = _("\
-Reduces the risk of plague in your cities by 30% of the base chance \
-(this is additive with the benefits of any buildings).\
+Land units (not wheeled) recover 2 extra HPs per turn, even without \
+resting. Except on Mountains, Glacier or Deep Ocean.\
 ")
 cost     = 120
 
@@ -605,6 +643,15 @@ req2     = "Atomic Theory"
 flags    = ""
 graphic     = "a.nuclear_fission"
 graphic_alt = "-"
+helptext = _("\
+Uranium resources produce 2 extra shields in the tile where they are \
+placed.\
+"), _("\
+Cities with available Uranium build Armor and Submarine units with \
+one extra veteran level. Cities with an Airport and available Uranium \
+can launch Nuclear weapons (with double range after the discovery of \
+Rocketry).\
+")
 cost     = 530
 
 [advance_nuclear_power]
@@ -635,6 +682,10 @@ req2     = "Magnetism"
 flags    = ""
 graphic     = "a.physics"
 graphic_alt = "-"
+helptext = _("\
+Wheeled units and naval units recover 2 extra HPs per turn. Except on \
+Mountains, Glacier or Deep Ocean.\
+")
 cost     = 130
 
 [advance_plastics]
@@ -653,6 +704,10 @@ req2     = "Ceremonial Burial"
 flags    = ""
 graphic     = "a.polytheism"
 graphic_alt = "-"
+helptext = _("\
+Cities with available Ivory build Elephant units with one more veteran \
+level.\
+")
 cost     = 30
 
 [advance_pottery]
@@ -672,7 +727,14 @@ flags    = ""
 graphic     = "a.radio"
 graphic_alt = "-"
 helptext = _("\
-Allows Workers and Engineers to build airstrips, airbases and buoys.\
+Allows Settlers, Migrants, Workers and Engineers to build airstrips, \
+airbases and buoys. Allows Transports to build buoys.\
+"), _("\
+Enables new Propaganda policy, which can be adjusted to use the \
+broadcasting media for cultural and scientific dissemination that \
+produces up to 3 extra culture per turn; or for nationalist propaganda \
+that reduces the unhappiness caused by the empire size, but increases \
+the unhappiness caused by enemy citizens in your cities.\
 ")
 cost     = 540
 
@@ -710,8 +772,8 @@ flags    = ""
 graphic     = "a.refining"
 graphic_alt = "-"
 helptext = _("\
-Allows Settlers, Migrants, Workers and Engineers to upgrade \
-mines to oil wells on desert and glacier.\
+Allows Settlers, Migrants, Workers and Engineers to upgrade mines to \
+oil wells on desert, tundra and glacier.\
 ")
 cost     = 400
 
@@ -744,7 +806,11 @@ req2     = "Miniaturization"
 flags    = ""
 graphic     = "a.rocketry"
 graphic_alt = "-"
-helptext = _("Doubles movement of nuclear units.")
+helptext = _("\
+Rocketry enables movement of Nuclear weapons where it was not possible, \
+or doubles the movement where it was already possible (from cities with \
+an Airport and available Uranium).\
+")
 cost     = 590
 
 [advance_sanitation]

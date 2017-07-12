@@ -1,6 +1,6 @@
-==========================================================
+=====================================
 Amplio Earth Tileset for Freeciv v2.6
-==========================================================
+=====================================
 
 Tileset based on Amplio2, but with small flags, small resources, and colors more similar to Amplio (and to minimap).
 Compiled by Bardo and released under GPLv2 license (see each .spec file for detailed credits).

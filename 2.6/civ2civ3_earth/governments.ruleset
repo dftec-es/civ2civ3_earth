@@ -101,13 +101,15 @@ Under a Tribal government, you are part ruler of your people. Your\
  control over your citizens is maintained largely by spiritual counsel.\
 "), _("\
 Compared to Despotism, a Tribal economy is more shield-oriented. Its\
- bonuses to veterancy and strong martial law can be an advantage in\
- wartime.\
+ bonuses to veterancy can be an advantage in wartime.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Increases by half the chance of land units getting the next veteran level\
- after a battle.\n\
+* Increases by half the chance of military units getting the next veteran\
+ level after a battle.\n\
+* Each city gets 1 extra content citizen.\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
 * Each city can support up to 2 units for free; further units each cost\
  1 shield per turn.\n\
 * Unlike later governments, military units do not cause unhappiness even\
@@ -209,6 +211,9 @@ Communism is a good government for maximizing shield production, and\
 _("\
 * City improvements which would normally have an upkeep of 1 gold are\
  free of upkeep.\n\
+* Cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 shield per turn.\n\
 * Each city tolerates up to 3 aggressively deployed military units;\
@@ -253,6 +258,8 @@ _("\
 * Base science production is half that of other governments. (A\
  Fundamentalist city with a Library produces as much science as a\
  city under another government does alone.)\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
 * Each city can support up to 2 units for free; further units each cost\
  2 gold per turn (except for Fanatics).\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
@@ -284,9 +291,11 @@ Federalism is a system in which the power to govern is shared between\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Each city receives 3 extra luxury points.\n\
+* Each city receives 2 extra luxury points.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
 * Each city can support up to 2 units for free; further units each cost\
  2 gold per turn.\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
@@ -326,6 +335,8 @@ _("\
 * Celebrating cities produce a further trade point for every worked tile\
  (land or water) which is already producing trade. (Cities below size 3\
  will not celebrate.)\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
 * Each city can support one unit for free; further units each cost\
  1 shield per turn.\n\
 * Each city tolerates a single aggressively deployed military unit;\
@@ -362,6 +373,8 @@ _("\
 * Celebrating cities produce a further trade point for every worked tile\
  (land or water) which is already producing trade. (Cities below size 3\
  will not celebrate.)\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
 * Each city can support one unit for free; further units each cost\
  2 gold per turn.\n\
 * Each city tolerates a single aggressively deployed military unit;\
@@ -369,6 +382,44 @@ _("\
 * Base corruption is 5%. This increases with distance from the capital\
  (half as fast with knowledge of The Corporation).\n\
 * Base production waste is 25%. This increases with distance from the\
+ capital (half as fast with knowledge of Trade).\
+")
+
+;------------------------------------------------------------------------
+[government_fascism]
+
+name        = _("Fascism")
+reqs = { "type", "name", "range"
+         "tech", "Tactics", "Player"
+       }
+graphic     = "gov.fascism"
+graphic_alt = "citizen.unhappy_0"
+
+ruler_male_title = _("Chancellor %s")
+ruler_female_title = _("?female:Chancellor %s")
+
+helptext = _("\
+Fascism seeks to solve economic, political, and social problems by\
+ achieving a national rebirth, exalting the nation or race above all\
+ else, and promoting cults of unity, strength, and purity.\
+"), _("\
+Fascism is better suited for militaristic nations.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Increases by a quarter the chance of military units getting the next\
+ veteran level after a battle.\n\
+* City improvements which would normally have an upkeep of 1 gold are\
+ free of upkeep.\n\
+* Citizens of enemy nationality cause extra unhappiness in the city.\n\
+* The costs to bribe your units or incite your cities are increased by\
+ +100%.\n\
+* Each city can support up to 3 units for free (the maximum possible);\
+ further units each cost 1 shield per turn.\n\
+* Military units do not cause unhappiness even when deployed aggressively.\n\
+* Base corruption is 20%. This increases with distance from the capital\
+ (half as fast with knowledge of The Corporation).\n\
+* Base production waste is 10%. This increases with distance from the\
  capital (half as fast with knowledge of Trade).\
 ")
 
@@ -394,3 +445,39 @@ _("\
 ;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
+
+[multiplier_mobilization]
+name      = _("Mobilization")
+start     = 0
+stop      = 2
+step      = 1
+offset    = -1
+default   = 2
+helptext  = _("\
+Mobilization is available with the knowledge of Conscription, and \
+can be used by your government to reduce the upkeep costs of your \
+armies, but increasing the unhappiness caused by your military units.\
+"), _("\
+Each step of mobilization increases by one the number of units free \
+of upkeep in each city, but reduces by one the number of units free \
+of causing military unhappiness, and reduces by one the max number \
+of units that can impose martial law.\
+")
+
+[multiplier_propaganda]
+name      = _("Propaganda")
+start     = 0
+stop      = 2
+step      = 1
+default   = 0
+helptext  = _("\
+Broadcasting media is available with the knowledge of Radio, and can \
+be used by your government for cultural and scientific dissemination, \
+but also for nationalist propaganda.\
+"), _("\
+Each step of propaganda increases by one the number of cities that your \
+empire can support before the empire size starts causing unhappiness \
+in your cities, but makes one additional citizen unhappy for each four \
+citizens of enemy nationality living in the city, and reduces by one \
+the culture produced each turn.\
+")

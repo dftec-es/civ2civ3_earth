@@ -63,7 +63,7 @@ granary_food_ini = 20, 20, 20, 20, 20, 30, 30, 40
 granary_food_inc = 0
 
 ; City center minimum outputs
-min_city_center_food    = 1
+min_city_center_food    = 0
 min_city_center_shield  = 0
 min_city_center_trade   = 0
 
@@ -189,7 +189,7 @@ tired_attack = TRUE
 ; If force_trade_route is set to TRUE it is illegal for an actor unit to
 ; enter the marketplace of a city if it can establish a trade route to it
 ; in stead.
-force_trade_route = TRUE
+force_trade_route = FALSE
 
 ; What each action should be called when showing them to the player.
 ; The first %s should be before the mnemonic of the action. A Freeciv client
@@ -390,8 +390,6 @@ target_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Unbribable", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
-      "Gov", "Republic", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
       "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
@@ -483,7 +481,7 @@ base_tech_cost   = 20
 ; "Normal Players" - Technology cost is reduced depending on the number of
 ;                    normal players (human and AI) which already know the
 ;                    tech.
-tech_leakage = "Embassies"
+tech_leakage = "None"
 
 ; Method of paying tech upkeep
 ; "None"   - no upkeep
@@ -511,7 +509,7 @@ victory_lead_pct   = 200
 ; How much each culture point affects the migration
 ; from/to the city. Each culture point count as this many permilles
 ; of a migration point.
-migration_pml = 50
+migration_pml = 10
 
 [calendar]
 ; Year in the beginning of the game
@@ -583,6 +581,15 @@ reqs           =
 frequency      = 100
 effects        = "DestroyBuilding"
 
+[disaster_natural_disaster]
+name           = _("Natural Disaster")
+reqs           =
+    { "type", "name", "range"
+      "Extra", "Wonder", "City"
+    }
+frequency      = 100
+effects        = "ReducePopulation"
+
 [disaster_industrial_accident]
 name           = _("Industrial Accident")
 reqs           =
@@ -599,7 +606,7 @@ reqs           =
       "Building", "Nuclear Plant", "City"
     }
 frequency      = 100
-effects        = "ReducePopulation", "Fallout"
+effects        = "ReducePopDestroy", "Fallout"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -718,16 +725,16 @@ cons_msg       = _("Your nation has achieved 10000 culture points!")
 [trade]
 settings =
   { "type",       "pct", "cancelling", "bonus"
-    "National",   0,     "Cancel",     "None"
-    "NationalIC", 0,     "Cancel",     "None"
-    "IN",         100,   "Cancel",     "None"
-    "INIC",       200,   "Cancel",     "None"
-    "Ally",       100,   "Cancel",     "None"
-    "AllyIC",     200,   "Cancel",     "None"
+    "National",   50,    "Inactive",   "None"
+    "NationalIC", 50,    "Inactive",   "None"
+    "IN",         0,     "Inactive",   "None"
+    "INIC",       0,     "Inactive",   "None"
+    "Ally",       50,    "Inactive",   "None"
+    "AllyIC",     50,    "Inactive",   "None"
     "Enemy",      0,     "Cancel",     "None"
     "EnemyIC",    0,     "Cancel",     "None"
-    "Team",       100,   "Cancel",     "None"
-    "TeamIC",     200,   "Cancel",     "None"
+    "Team",       50,    "Inactive",   "None"
+    "TeamIC",     50,    "Inactive",   "None"
   }
 
 [playercolors]
@@ -799,16 +806,22 @@ set =
       "temperature", 60
       "flatpoles", 0
       "startunits", "cwsx"
+      "huts", 30
       "citymindist", 3
+      "trademindist", 3
       "techlevel", 1
       "borders", "ENABLED"
       "foggedborders", "ENABLED"
       "restrictinfra", "ENABLED"
       "unreachableprotects", "DISABLED"
+      "airliftingstyle", "TO_ALLIES|DEST_UNLIMITED"
       "onsetbarbs", 120
       "occupychance", 100
       "razechance", 10
-      "techlossforgiveness", 0
+      "conquercost", 50
+      "diplbulbcost", 50
+      "techlossforgiveness", 50
       "techlossrestore", 50
       "revolentype", "RANDQUICK"
+      "revolen", 5
     }
