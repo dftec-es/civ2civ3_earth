@@ -245,7 +245,7 @@ reqs    =
 
 [effect_unhappysize]
 type    = "City_Unhappy_Size"
-value   = 4
+value   = 5
 
 ; Barbarian effects
 
@@ -270,7 +270,7 @@ reqs    =
 type    = "Not_Tech_Source"
 value   = 1
 reqs    =
-    { "type",   "name", "range"
+    { "type", "name", "range"
       "NationGroup", "Barbarian", "Player"
     }
 
@@ -337,6 +337,7 @@ reqs    =
     { "type", "name", "range", "present"
       "Extra", "Naval Mine", "Adjacent", TRUE
       "TerrainClass", "Oceanic", "Local", TRUE
+      "Terrain", "Deep Ocean", "Local", FALSE
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
@@ -356,6 +357,7 @@ reqs    =
     { "type", "name", "range", "present"
       "Extra", "Naval Mine", "Adjacent", TRUE
       "TerrainClass", "Oceanic", "Local", TRUE
+      "Terrain", "Deep Ocean", "Local", FALSE
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
@@ -374,6 +376,7 @@ value   = 50
 reqs    =
     { "type", "name", "range", "present"
       "Extra", "Naval Mine", "Adjacent", TRUE
+      "TerrainClass", "Oceanic", "Local", TRUE
       "Terrain", "Deep Ocean", "Local", FALSE
       "UnitClass", "Sea", "Local", TRUE
       "UnitType", "Submarine", "Local", FALSE
@@ -399,6 +402,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
+; Fortress HP regen (Every Land units)
 [effect_fortress_hp_regen]
 type    = "HP_Regen"
 value   = 25
@@ -436,6 +440,7 @@ reqs    =
     }
 
 ; Fortress defense: cumulative with fort
+; 50 + 50 = 100
 [effect_fortress_defense]
 type    = "Defend_Bonus"
 value   = 50
@@ -452,6 +457,7 @@ reqs    =
       "Extra", "Airbase", "Local"
     }
 
+; Airstrip HP regen (Every Air unit)
 [effect_airstrip_hp_regen]
 type    = "HP_Regen"
 value   = 10
@@ -510,6 +516,7 @@ reqs    =
     }
 
 ; Airbase defense: cumulative with airstrip
+; 50 + 50 = 100
 [effect_airbase_defense]
 type    = "Defend_Bonus"
 value   = 50
@@ -568,7 +575,16 @@ reqs    =
 
 [effect_trade_routes]
 type    = "Max_Trade_Routes"
-value   = 2
+value   = 1
+
+; 1 + 1 = 2
+[effect_trade_routes_corporation]
+type    = "Max_Trade_Routes"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Tech", "The Corporation", "Player"
+    }
 
 ; Base vision range - radius of vision is sqrt(5) = 2.24
 [effect_city_vision]
@@ -633,19 +649,18 @@ reqs    =
       "UnitClass", "Sea", "Local"
     }
 
-; Nuclear weapons have to start the turn in a city with Uranium and an Airport
-; in order to be able to move (until the discovery of Rocketry)
-[effect_nuclear_uranium]
+; Nuclear weapons have to start the turn in a city with an Airport
+; in order to move (until the discovery of Rocketry)
+[effect_nuclear_airport]
 type    = "Move_Bonus"
 value   = 8
 reqs    =
     { "type", "name", "range"
-      "Building", "Airport", "City", TRUE
-      "UnitType", "Nuclear", "Local", TRUE
-      "Extra", "Uranium", "Traderoute", TRUE
+      "Building", "Airport", "City"
+      "UnitType", "Nuclear", "Local"
     }
 
-; Rocketry enables movement of nuclear weapons where it was not possible,
+; Rocketry enables the movement of nuclear weapons,
 ; or doubles the movement where it was already possible
 [effect_nuclear_missile]
 type    = "Move_Bonus"
@@ -735,16 +750,6 @@ type    = "Output_Waste_Pct"
 value   = 50
 reqs    =
     { "type", "name", "range"
-      "OutputType", "Food", "Local"
-    }
-
-; Base 0% food waste with Anarchy
-[effect_food_waste_distance_2]
-type    = "Output_Waste_By_Distance"
-value   = -1
-reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
       "OutputType", "Food", "Local"
     }
 
@@ -1703,7 +1708,7 @@ reqs    =
 
 [effect_max_rates_fascism]
 type    = "Max_Rates"
-value   = 90
+value   = 80
 reqs    =
     { "type", "name", "range"
       "Gov", "Fascism", "Player"
@@ -1806,6 +1811,7 @@ reqs    =
       "Gov", "Democracy", "Player", FALSE
     }
 
+; Railroad because makes Pyramids obsolete
 [effect_gov_tile_penalty_anarchy]
 type    = "Output_Penalty_Tile"
 value   = 2
@@ -1813,9 +1819,9 @@ reqs    =
     { "type", "name", "range", "present"
       "Gov", "Anarchy", "Player", TRUE
       "Building", "Pyramids", "Player", FALSE
+      "Tech", "Railroad", "World", FALSE
     }
 
-; Railroad because makes Pyramids obsolete
 [effect_gov_tile_penalty_tribal]
 type    = "Output_Penalty_Tile"
 value   = 2
@@ -1924,6 +1930,18 @@ value   = 50
 reqs    =
     { "type", "name", "range", "present"
       "Gov", "Tribal", "Player", TRUE
+      "UnitClass", "Land", "Local", TRUE
+      "UnitFlag", "NonMil", "Local", FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE
+    }
+
+[effect_combat_tribal_1]
+type    = "Veteran_Combat"
+value   = 50
+reqs    =
+    { "type", "name", "range", "present"
+      "Gov", "Tribal", "Player", TRUE
+      "UnitClass", "Big Land", "Local", TRUE
       "UnitFlag", "NonMil", "Local", FALSE
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
@@ -1934,13 +1952,25 @@ value   = 25
 reqs    =
     { "type", "name", "range", "present"
       "Gov", "Fascism", "Player", TRUE
+      "UnitClass", "Land", "Local", TRUE
+      "UnitFlag", "NonMil", "Local", FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE
+    }
+
+[effect_combat_fascism_1]
+type    = "Veteran_Combat"
+value   = 25
+reqs    =
+    { "type", "name", "range", "present"
+      "Gov", "Fascism", "Player", TRUE
+      "UnitClass", "Big Land", "Local", TRUE
       "UnitFlag", "NonMil", "Local", FALSE
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
 [effect_nationality_fascism]
 type    = "Enemy_Citizen_Unhappy_Pct"
-value   = 25
+value   = 50
 reqs    =
     { "type", "name", "range", "present"
       "Gov", "Fascism", "Player", TRUE
@@ -2605,13 +2635,13 @@ reqs    =
       "Building", "Hospital", "City"
     }
 
-; Halved regen effect of Barracks for infantry in cities without Hospital
+; Halved regen effect of Barracks for units in cities without Hospital
 [effect_hospital_regen]
 type    = "HP_Regen"
 value   = -50
 reqs    =
     { "type", "name", "range", "present"
-      "UnitFlag", "Infantry", "Local", TRUE
+      "UnitFlag", "Hospital", "Local", TRUE
       "Building", "Hospital", "City", FALSE
     }
 
@@ -2624,7 +2654,19 @@ reqs    =
       "Building", "Hydro Plant", "City", TRUE
       "OutputType", "Shield", "Local", TRUE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
+    }
+
+; Hoover Dam enhances Hydro Plant in the same city
+[effect_hydro_plant_hoover]
+type    = "Output_Bonus"
+value   = 25
+reqs    =
+    { "type", "name", "range", "present"
+      "Building", "Factory", "City", TRUE
+      "Building", "Hydro Plant", "City", TRUE
+      "Building", "Hoover Dam", "City", TRUE
+      "OutputType", "Shield", "Local", TRUE
+      "Building", "Solar Plant", "City", FALSE
     }
 
 [effect_hydro_plant_1]
@@ -2636,7 +2678,18 @@ reqs    =
       "Building", "Hydro Plant", "City", TRUE
       "OutputType", "Shield", "Local", TRUE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
+    }
+
+[effect_hydro_plant_1_hoover]
+type    = "Output_Bonus"
+value   = 25
+reqs    =
+    { "type", "name", "range", "present"
+      "Building", "Mfg. Plant", "City", TRUE
+      "Building", "Hydro Plant", "City", TRUE
+      "Building", "Hoover Dam", "City", TRUE
+      "OutputType", "Shield", "Local", TRUE
+      "Building", "Solar Plant", "City", FALSE
     }
 
 [effect_hydro_plant_2]
@@ -2646,7 +2699,6 @@ reqs    =
     { "type", "name", "range", "present"
       "Building", "Hydro Plant", "City", TRUE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_hydro_plant_3]
@@ -2657,10 +2709,10 @@ reqs    =
       "Building", "Recycling Center", "City", TRUE
       "Building", "Hydro Plant", "City", TRUE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
-[effect_hydro_plant_4]
+; Hoover Dam reduces pollution of all your Hydro Plants
+[effect_hydro_plant_3_hoover]
 type    = "Pollu_Prod_Pct"
 value   = -25
 reqs    =
@@ -2668,7 +2720,6 @@ reqs    =
       "Building", "Hoover Dam", "Player", TRUE
       "Building", "Hydro Plant", "City", TRUE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_library]
@@ -2742,7 +2793,19 @@ reqs    =
       "OutputType", "Shield", "Local", TRUE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
+    }
+
+[effect_nuclear_plant_uranium]
+type    = "Output_Bonus"
+value   = 25
+reqs    =
+    { "type", "name", "range", "present"
+      "Building", "Factory", "City", TRUE
+      "Building", "Nuclear Plant", "City", TRUE
+      "Extra", "Uranium", "Traderoute", TRUE
+      "OutputType", "Shield", "Local", TRUE
+      "Building", "Hydro Plant", "City", FALSE
+      "Building", "Solar Plant", "City", FALSE
     }
 
 [effect_nuclear_plant_1]
@@ -2755,7 +2818,19 @@ reqs    =
       "OutputType", "Shield", "Local", TRUE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
+    }
+
+[effect_nuclear_plant_1_uranium]
+type    = "Output_Bonus"
+value   = 25
+reqs    =
+    { "type", "name", "range", "present"
+      "Building", "Mfg. Plant", "City", TRUE
+      "Building", "Nuclear Plant", "City", TRUE
+      "Extra", "Uranium", "Traderoute", TRUE
+      "OutputType", "Shield", "Local", TRUE
+      "Building", "Hydro Plant", "City", FALSE
+      "Building", "Solar Plant", "City", FALSE
     }
 
 [effect_nuclear_plant_2]
@@ -2766,7 +2841,6 @@ reqs    =
       "Building", "Nuclear Plant", "City", TRUE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_nuclear_plant_3]
@@ -2778,7 +2852,6 @@ reqs    =
       "Building", "Nuclear Plant", "City", TRUE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_offshore_platform]
@@ -3048,7 +3121,6 @@ reqs    =
       "Building", "Nuclear Plant", "City", FALSE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_power_plant_1]
@@ -3062,7 +3134,6 @@ reqs    =
       "Building", "Nuclear Plant", "City", FALSE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 ; Recycling Center gives a lesser additional bonus with plants
@@ -3075,7 +3146,6 @@ reqs    =
       "Building", "Nuclear Plant", "City", FALSE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_research_lab]
@@ -3175,7 +3245,6 @@ reqs    =
       "Building", "Factory", "City", TRUE
       "Building", "Solar Plant", "City", TRUE
       "OutputType", "Shield", "Local", TRUE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_solar_plant_1]
@@ -3186,7 +3255,6 @@ reqs    =
       "Building", "Mfg. Plant", "City", TRUE
       "Building", "Solar Plant", "City", TRUE
       "OutputType", "Shield", "Local", TRUE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_solar_plant_2]
@@ -3195,7 +3263,6 @@ value   = -75
 reqs    =
     { "type", "name", "range", "present"
       "Building", "Solar Plant", "City", TRUE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_solar_plant_3]
@@ -3205,7 +3272,6 @@ reqs    =
     { "type", "name", "range", "present"
       "Building", "Recycling Center", "City", TRUE
       "Building", "Solar Plant", "City", TRUE
-      "Building", "Hoover Dam", "City", FALSE
     }
 
 [effect_space_component]
@@ -3408,16 +3474,26 @@ reqs    =
     }
 
 [effect_asmiths_trading_co]
-type    = "Upkeep_Free"
+type    = "Output_Add_Tile"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "A.Smith's Trading Co.", "Player"
+      "Building", "Stock Exchange", "City"
+      "CityTile", "Center", "Local"
+      "OutputType", "Gold", "Local"
+    }
+
+[effect_asmiths_trading_co_1]
+type    = "Max_Trade_Routes"
 value   = 1
 reqs    =
-    { "type", "name", "range", "present"
-      "Building", "A.Smith's Trading Co.", "Player", TRUE
-      "Building", "Stock Exchange", "City", TRUE
+    { "type", "name", "range"
+      "Building", "A.Smith's Trading Co.", "City"
     }
 
 ;2 + 1 = 3
-[effect_asmiths_trading_co_1]
+[effect_asmiths_trading_co_2]
 type    = "Specialist_Output"
 value   = 1
 reqs    =
@@ -3518,19 +3594,10 @@ reqs    =
 
 [effect_darwins_voyage_culture]
 type    = "History"
-value   = 4
+value   = 3
 reqs    =
     { "type", "name", "range"
       "Building", "Darwin's Voyage", "City"
-    }
-
-[effect_eiffel_tower]
-type    = "Gain_AI_Love"
-value   = 20
-reqs    =
-    { "type", "name", "range", "present", "survives"
-      "Building", "Eiffel Tower", "Player", TRUE, FALSE
-      "Building", "Apollo Program", "World", FALSE, TRUE
     }
 
 [effect_eiffel_tower_1]
@@ -3656,43 +3723,7 @@ reqs    =
       "Building", "Hanging Gardens", "City"
     }
 
-; Hoover Dam behaves like a (self-enhanced) Hydro Plant in its own city
-[effect_hoover_dam]
-type    = "Output_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range"
-      "Building", "Factory", "City"
-      "Building", "Hoover Dam", "City"
-      "OutputType", "Shield", "Local"
-    }
-
-[effect_hoover_dam_1]
-type    = "Output_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range"
-      "Building", "Mfg. Plant", "City"
-      "Building", "Hoover Dam", "City"
-      "OutputType", "Shield", "Local"
-    }
-
-[effect_hoover_dam_2]
-type    = "Pollu_Prod_Pct"
-value   = -75
-reqs    =
-    { "type", "name", "range"
-      "Building", "Hoover Dam", "City"
-    }
-
-[effect_hoover_dam_3]
-type    = "Pollu_Prod_Pct"
-value   = -25
-reqs    =
-    { "type", "name", "range"
-      "Building", "Recycling Center", "City"
-      "Building", "Hoover Dam", "City"
-    }
+; Hoover Dam enhances Hydro Plants (see Hydro Plant effects)
 
 [effect_hoover_dam_culture]
 type    = "History"
@@ -3945,21 +3976,11 @@ reqs    =
     }
 
 [effect_marco_polos_embassy_1]
-type    = "Move_Bonus"
+type    = "Max_Trade_Routes"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Building", "Marco Polo's Embassy", "Player"
-      "UnitType", "Caravan", "Local"
-    }
-
-[effect_marco_polos_embassy_2]
-type    = "Move_Bonus"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Marco Polo's Embassy", "Player"
-      "UnitType", "Diplomat", "Local"
+      "Building", "Marco Polo's Embassy", "City"
     }
 
 [effect_marco_polos_embassy_culture]
@@ -4104,19 +4125,20 @@ reqs    =
     }
 
 [effect_internet_1]
+type    = "Tech_Parasite"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Internet", "Player"
+      "Tech", "Computers", "Player"
+    }
+
+[effect_internet_2]
 type    = "Reveal_Cities"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Building", "Internet", "Player"
-    }
-
-[effect_internet_2]
-type    = "Give_Imm_Tech"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Internet", "Player"
+      "Building", "Internet", "World"
     }
 
 [effect_internet_culture]
@@ -4181,6 +4203,24 @@ value   = 1
 reqs    =
     { "type", "name", "range"
       "Building", "Statue of Liberty", "Player"
+    }
+
+[effect_statue_of_liberty_2]
+type    = "Move_Bonus"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Statue of Liberty", "Player"
+      "UnitClass", "Merchant", "Local"
+    }
+
+[effect_statue_of_liberty_3]
+type    = "Move_Bonus"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Statue of Liberty", "Player"
+      "UnitFlag", "Diplomat", "Local"
     }
 
 [effect_statue_of_liberty_culture]
@@ -4259,8 +4299,7 @@ type    = "Veteran_Build"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Building", "United Nations", "Player"
-      "Building", "Police Station", "City"
+      "Building", "United Nations", "City"
       "UnitFlag", "Diplomat", "Local"
     }
 
@@ -4356,14 +4395,14 @@ reqs    =
 type    = "Pollu_Pop_Pct"
 value   = -100
 
-; tech_upkeep_divider = 6000, Max tech upkeep = 13
+; tech_upkeep_divider = 6000, Max tech upkeep = 12
 [effect_upkeep_tech_base]
 type    = "Tech_Upkeep_Free"
-value   = 3
+value   = 2
 
 [effect_tech_cost_base]
 type    = "Tech_Cost_Factor"
-value   = 3
+value   = 2
 
 ; Cities can always work tiles
 [effect_tile_workable]
@@ -4425,97 +4464,6 @@ value   = 1
 reqs    =
     { "type", "name", "range"
       "MinSize", "17", "City"
-    }
-
-; Tiles with goods must be worked to get the extra luxury
-[effect_goods_luxury_tile_0]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Incense", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_1]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Silk", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_2]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Tea", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_3]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Tobacco", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_4]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Wine", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_5]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Gems", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_6]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Gold", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_7]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Shellfish", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_8]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Spice", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_goods_luxury_tile_9]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Resource", "Furs", "Local"
-      "OutputType", "Luxury", "Local"
     }
 
 ; Trade routes spread the effect of goods
@@ -5031,32 +4979,12 @@ value   = -50
 reqs    =
     { "type", "name", "range", "present"
       "CityTile", "Center", "Local", TRUE
-      "UnitFlag", "Horses", "Local", TRUE
-      "Resource", "Horses", "Traderoute", FALSE
-    }
-
-[effect_goods_regen_2]
-type    = "HP_Regen"
-value   = -50
-reqs    =
-    { "type", "name", "range", "present"
-      "CityTile", "Center", "Local", TRUE
-      "UnitFlag", "Ivory", "Local", TRUE
-      "Resource", "Ivory", "Traderoute", FALSE
-    }
-
-[effect_goods_regen_3]
-type    = "HP_Regen"
-value   = -50
-reqs    =
-    { "type", "name", "range", "present"
-      "CityTile", "Center", "Local", TRUE
       "UnitFlag", "Coal", "Local", TRUE
       "Resource", "Coal", "Traderoute", FALSE
       "Resource", "Peat", "Traderoute", FALSE
     }
 
-[effect_goods_regen_4]
+[effect_goods_regen_2]
 type    = "HP_Regen"
 value   = -50
 reqs    =
@@ -5164,7 +5092,7 @@ value   = 2
 reqs    =
     { "type", "name", "range"
       "Extra", "Aluminum", "Local"
-      "Tech", "Advanced Flight", "Player"
+      "Tech", "Industrialization", "Player"
       "OutputType", "Shield", "Local"
     }
 
@@ -5209,7 +5137,7 @@ reqs    =
     { "type", "name", "range", "present"
       "Extra", "Aluminum", "Traderoute", TRUE
       "Extra", "Aluminum", "City", FALSE
-      "Tech", "Advanced Flight", "Player", TRUE
+      "Tech", "Industrialization", "Player", TRUE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5853,7 +5781,7 @@ reqs    =
     { "type", "name", "range", "present"
       "Extra", "Aluminum", "Traderoute", TRUE
       "Extra", "Aluminum", "City", FALSE
-      "Tech", "Advanced Flight", "Player", TRUE
+      "Tech", "Industrialization", "Player", TRUE
     }
 
 [effect_goods_extra_health_neg_3]
@@ -6146,7 +6074,7 @@ reqs    =
       "MinCulture", "10000", "Player"
     }
 
-; Cost to incite: +10% for each 100 culture points of the city 
+; Cost to incite: +10% for each 1000 culture points of the player 
 [effect_culture_incite_1]
 type    = "Incite_Cost_Pct"
 value   = 10
@@ -6391,110 +6319,6 @@ value   = 5
 reqs    =
     { "type", "name", "range"
       "MinCulture", "1000", "City"
-    }
-
-[effect_multiplier_propaganda_base]
-type    = "National_History"
-value   = 3
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-    }
-
-[effect_multiplier_propaganda_1]
-type    = "Empire_Size_Base"
-value   = 1
-multiplier = "Propaganda"
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-    }
-
-[effect_multiplier_propaganda_2]
-type    = "Empire_Size_Step"
-value   = 1
-multiplier = "Propaganda"
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-    }
-
-[effect_multiplier_propaganda_3]
-type    = "Enemy_Citizen_Unhappy_Pct"
-value   = 25
-multiplier = "Propaganda"
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-    }
-
-[effect_multiplier_propaganda_4]
-type    = "National_History"
-value   = -1
-multiplier = "Propaganda"
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Radio", "Player"
-    }
-
-[effect_multiplier_mobilization_1]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-multiplier = "Mobilization"
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Conscription", "Player"
-    }
-
-[effect_multiplier_mobilization_2]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-multiplier = "Mobilization"
-reqs    =
-    { "type", "name", "range", "present"
-      "Tech", "Conscription", "Player", TRUE
-      "OutputType", "Gold", "Local", TRUE
-      "Gov", "Despotism", "Player", FALSE
-      "Gov", "Monarchy", "Player", FALSE
-    }
-
-[effect_multiplier_mobilization_3]
-type    = "Make_Content_Mil"
-value   = -1
-multiplier = "Mobilization"
-reqs    =
-    { "type", "name", "range"
-      "Tech", "Conscription", "Player"
-    }
-
-[effect_multiplier_mobilization_4]
-type    = "Make_Content_Mil"
-value   = -1
-multiplier = "Mobilization"
-reqs    =
-    { "type", "name", "range", "present"
-      "Tech", "Conscription", "Player", TRUE
-      "Gov", "Democracy", "Player", TRUE
-      "Building", "Women's Suffrage", "Player", FALSE
-    }
-
-[effect_multiplier_mobilization_5]
-type    = "Martial_Law_Max"
-value   = -1
-multiplier = "Mobilization"
-reqs    =
-    { "type", "name", "range", "present"
-      "Tech", "Conscription", "Player", TRUE
-;      "Gov", "Anarchy", "Player", FALSE
-;      "Gov", "Tribal", "Player", FALSE
-;      "Gov", "Despotism", "Player", FALSE
-;      "Gov", "Monarchy", "Player", FALSE
-;      "Gov", "Fascism", "Player", FALSE
-;      "Gov", "Communism", "Player", FALSE
-      "Gov", "Fundamentalism", "Player", FALSE
-      "Gov", "Federation", "Player", FALSE
-      "Gov", "Republic", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
     }
 
 ;[effect_illegal_action_move_cost_base]

@@ -29,10 +29,11 @@ name = _("Civ2Civ3 Earth ruleset")
 
 ; Summary of the ruleset
 summary = _("\
-Gameplay more similar to civ3, keeping the combat system from civ2.\
+Gameplay more similar to civ3, keeping the combat system from civ2. \
+Aimed to be played on earth scenarios.\
 \n\n\
-The differences from the classic ruleset are listed in\
- README.ruleset_civ2civ3_earth.\
+The differences from the classic ruleset are listed in \
+README.ruleset_civ2civ3_earth.\
 ")
 
 ; Detailed description
@@ -726,15 +727,15 @@ cons_msg       = _("Your nation has achieved 10000 culture points!")
 settings =
   { "type",       "pct", "cancelling", "bonus"
     "National",   50,    "Inactive",   "None"
-    "NationalIC", 50,    "Inactive",   "None"
-    "IN",         0,     "Inactive",   "None"
-    "INIC",       0,     "Inactive",   "None"
-    "Ally",       50,    "Inactive",   "None"
-    "AllyIC",     50,    "Inactive",   "None"
+    "NationalIC", 100,   "Inactive",   "None"
+    "IN",         0,     "Cancel",     "None"
+    "INIC",       0,     "Cancel",     "None"
+    "Ally",       50,    "Cancel",     "None"
+    "AllyIC",     100,   "Cancel",     "None"
     "Enemy",      0,     "Cancel",     "None"
     "EnemyIC",    0,     "Cancel",     "None"
-    "Team",       50,    "Inactive",   "None"
-    "TeamIC",     50,    "Inactive",   "None"
+    "Team",       50,    "Cancel",     "None"
+    "TeamIC",     100,   "Cancel",     "None"
   }
 
 [playercolors]
@@ -814,7 +815,6 @@ set =
       "foggedborders", "ENABLED"
       "restrictinfra", "ENABLED"
       "unreachableprotects", "DISABLED"
-      "airliftingstyle", "TO_ALLIES|DEST_UNLIMITED"
       "onsetbarbs", 120
       "occupychance", 100
       "razechance", 10
@@ -822,6 +822,10 @@ set =
       "diplbulbcost", 50
       "techlossforgiveness", 50
       "techlossrestore", 50
+      "team_pooled_research", "DISABLED"
       "revolentype", "RANDQUICK"
-      "revolen", 5
+      "revolen", 3
     }
+
+[tileset]
+prefered="amplio_earth"

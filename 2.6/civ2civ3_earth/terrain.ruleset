@@ -665,7 +665,7 @@ defense_bonus        = 100
 food                 = 0
 shield               = 1
 trade                = 0
-resources            = "Gold", "Iron"
+resources            = "Gold", "Iron", "Iron"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
@@ -1498,7 +1498,8 @@ conflicts      = "Airstrip", "Airbase"
 flags          = "NativeTile"
 helptext       = _("\
 Fortresses are more permanent forts; construction on them can only begin \
-once the underlying fort is complete; and cannot be built on River tiles.\
+once the underlying fort is complete. Forts on River tiles cannot be \
+upgraded to Fortresses.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1588,8 +1589,8 @@ conflicts      = "Fort", "Fortress"
 flags          = "Refuel"
 helptext       = _("\
 Airbases are more permanent airstrips; construction on them can only \
-begin once the underlying airstrip is complete; and cannot be built on \
-River tiles.\
+begin once the underlying airstrip is complete. Airstrips on River tiles \
+cannot be upgraded to Airbases.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1616,7 +1617,7 @@ reqs           =
     { "type", "name", "range", "present"
       "Tech", "Radio", "Player", TRUE
       "TerrainClass", "Oceanic", "Local", TRUE
-      "UnitFlag", "Settlers", "Local", TRUE
+      "UnitFlag", "Airbase", "Local", TRUE
       "CityTile", "Center", "Local", FALSE
     }
 rmreqs         =
@@ -1660,14 +1661,13 @@ build_time     = 3
 removal_time   = 0
 native_to      = "Sea"
 conflicts      = "Oil Platform", "Buoy"
-flags          = "ShowFlag"
 ; /* xgettext:no-c-format */
 helptext       = _("\
-Naval Mines may be built in the ocean by Transports (or by worker units \
-on a sea-going vessel). They provide some defense (+50%) against other \
-sea units (except against submarines, same as Deep Oceans), but they \
-cause damage (-4 hit points) to all adjacent units, and reduce their \
-vision range.\
+Naval Mines may be built in shallow ocean by Transports (or by worker \
+units on a sea-going vessel). Every boat that ends the turn on shallow \
+ocean, adjacent to a mine, receives some damage (-4 hit points), gets \
+some extra defense (+50%) against other sea units (except against  \
+submarines, same as Deep Oceans), and its vision range is reduced. 
 ")
 
 [extra_ruins]
@@ -1935,10 +1935,9 @@ removal_time   = 0
 helptext       = _("\
 Strategic resource, required in a city to build the wonder Apollo \
 Program. Cities with available Aluminum build Carrier, AEGIS Cruiser, \
-Cruise Missile, Stealth Fighter and Stealth Bomber units with one extra \
-veteran level.\
+Cruise Missile, Fighter and Bomber units with one extra veteran level.\
 "), _("\
-With the discovery of Advanced Flight, Aluminum produces 2 extra shields \
+With the discovery of Industrialization, Aluminum produces 2 extra shields \
 in the tile.\
 ")
 
@@ -2036,10 +2035,9 @@ buildable      = FALSE
 removal_time   = 0
 helptext       = _("\
 Strategic resource, required in a city to build the wonder Manhattan \
-Project. Cities with available Uranium build Armor and Submarine units \
-with one extra veteran level. Cities with an Airport and available \
-Uranium can launch Nuclear weapons (with double range after the discovery \
-of Rocketry).\
+Project. Cities with available Uranium build Armor and Submarine \
+units with one extra veteran level. Uranium also doubles the bonus \
+of Nuclear Plants to the production of the city./
 "), _("\
 With discovery of Nuclear Fission, Uranium produces 2 extra shields in \
 the tile.\
@@ -2097,6 +2095,7 @@ vision_main_sq = 5
 [base_naval_mine]
 extra          = "Naval Mine"
 gui_type       = "Fortress"
+border_sq      = -1
 
 [base_ruins]
 extra          = "Ruins"

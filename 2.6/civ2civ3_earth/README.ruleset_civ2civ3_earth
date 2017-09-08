@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 12-Jul-2017)
+Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 08-Sep-2017)
 ============================================================
 
 civ2civ3_earth is a fork of the ruleset civ2civ3 (included in freeciv v2.6). This "earth" pack introduces some of the changes planned for future versions of civ2civ3, allowing players to test them before they are available in the next freeciv releases. It also includes a world map scenario, adapted to be played with these rules.
@@ -31,7 +31,7 @@ CORE CHANGES:
 -------------
 - No "Rapture Grow" (celebration only causes additional Trade per tile, same as civ3). Foodbox readjusted to keep a constant city growth.
 - Settlers cost 2 population (as in civ3). This way, the number of tiles worked in the original city are reduced by 2, equal to the number of tiles worked in the newly created city.
-- Trade routes spread some bonuses of the special resources. Removed the one time revenues, halved the ongoing revenues, and no extra revenues from trade routes between different continents. It is not possible to create trade routes with foreign cities unless they are allies (or from the same team). Each city can support a maximum of 2 trade routes. 
+- Allowed 1 trade route per city (2 after the discovery of The Corporation). Trade routes spread the bonuses of special resources. Removed the one time revenues, and halved the ongoing revenues. It is not possible to create trade routes with foreign cities unless they are allies (or on your team).
 - Every unit pays some kind of upkeep cost. Under some governments, this upkeep is changed from Shields to Gold (similar to civ3).
 - A city can support as many units (with upkeep of Food) as its population size (min 4, max 20). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
 - Increased by one the number of veterancy levels, with effects: 100% (green), 125% (regular), 150% (veteran), 175% (hardened) and 200% (elite). Engineers only 3 levels: 100% (beginner), 125% (seasoned), and 150% (senior). Units lose one veteran level when upgraded.
@@ -42,6 +42,7 @@ CORE CHANGES:
 - The cost of each tech is equal to the number of steps needed to get the tech (Tech Cost = Base Cost * Number of Parents). It is a linear formula more similar to civ2, and it fits better the new reduced bonuses from Trade and Science.
 - Tech upkeep assigned to cities: some Science is required from each city to maintain a given technological level. The upkeep grows from 0 during the middle ages, up to 10 research points per city when the whole tech tree was researched.
 - No holes allowed in tech tree. To acquire a tech you must know its prerequisites, and you cannot lose a tech that another depends on.
+- The 6th citizen in each city is the first unhappy one (was 5th).
 - Enabled risk of plague at cities with population greater than 4. Chances reduced by the buildings Aqueduct, Sewer System, Hospital, and the wonder Cure for Cancer.
 - Added other random disasters: Earthquake (city on Hills), Fire (city larger than 8), Flood (city near Rivers), and Nuclear Accident (city with Nuclear Plant).
 - Enabled culture points, produced in each city by wonders, and by scientific or religious buildings.
@@ -57,17 +58,17 @@ OPTIONAL RULES:
 - Every player starts with 1 free tech, 1 Settler, 1 Worker, 1 Explorer, and 1 Diplomat.
 - Minimum distance between cities set to 3.
 - Initial national border equal to city radius (2 tiles).
-- Restricted the use of infrastructure (Roads, Railroads, and Rivers) for enemy units.
+- Restricted the use of infrastructure (roads, railroads, and rivers) for enemy units.
 - Unreachable units do not protect reachable ones.
 - Occupy chance set to 100%: Units automatically move to the target tile if the attack is successful and ZoC rules allow the movement.
-- When you get a new tech by treaty, conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points.
+- When you get a new tech by treaty, conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points. Teams do not share the research pool.
 - If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then one random technology is lost, and only half of its value is restored to the research pool.
-- Airports allow to airlift one unit per source city each turn, with no limit of units for the target city. Airlifting is allowed to allied cities.
+- Random period of anarchy when changing government (1 to 3 turns). The max number of turns is reduced depending on how many times any player has changed to this type of government before.
 
 
 FOODBOX:
 --------
-- FoodBox size uniformed to even the population wasted when you build Settlers at larger cities (similar to civ3).
+- Foodbox size uniformed to even the population wasted when you build Settlers at larger cities (similar to civ3).
 - Granary size is fixed to 10 Food for every city size.
 - Cities with Pop <= 4 receive this granary effect for free, so they can create Settlers at best rate even without Granary. (This free granary effect helps the AI to build Settlers optimally).
 
@@ -114,8 +115,8 @@ TERRAIN:
 
 - Added new resources, up to 3 per terrain: Incense (+3 trade on desert), Deer (+2 food on forest, while Pheasant now +1 food and +1 trade), Marble (+1 production and +1 trade on hills), Ivory (now on jungle, with 1 less trade), Seals (same bonuses as Ivory, but on glacier), Shellfish (+1 food and +1 trade on oceans and lakes), Salt (+1 production and +1 trade on coastal ocean), Horses (+2 production on plains, while Buffalo now +1 food and +1 production), Sugar (+2 food and +2 trade on swamp).
 - There are now 6 resources on Grassland, with 3 different effects: Cattle or Corn (+1 food), Wool or Cotton (+1 production), Tea or Tobacco (+2 trade).
-- There are also 4 extra strategic resources that can be used when certain tech is researched by the player (+2 production with the required tech): Niter (on plains or desert with Gunpowder), Rubber (on jungle, swamp or forest with Chemistry), Aluminum (on hills or tundra with Advanced Flight), Uranium (on mountains or glacier with Nuclear Fission).
-- Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in the tile, and in cities linked by trade route.
+- There are also 4 extra strategic resources that can be used when certain tech is researched by the player (+2 production with the required tech): Niter (on plains or desert with Gunpowder), Rubber (on jungle, swamp or forest with Chemistry), Aluminum (on hills or tundra with Industrialization), Uranium (on mountains or glacier with Nuclear Fission).
+- Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in cities linked by trade route.
 - Food resources (Seals, Oasis, Pheasant, Deer, Cattle, Corn, Fruit, Fish, Whales, Wheat, Buffalo, Sugar, Game): +1 unit free of upkeep in cities linked by trade route.
 - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in cities linked by trade route.
 - Recover resources (Horses, Ivory, Wood, Coal/Peat, Oil): halved effect of HP recover buildings in a city without the resource required by the unit (infantry units require a Hospital, wooded units require Lumber).
@@ -192,7 +193,6 @@ SDI Defense       -        -        -       +100%
 - Every city with Pop>8 receives an additional +50% defense bonus against both land and sea units.
 - Effect of City Walls reduced from 200% to 100%, and cost reduced from 60 to 30.
 - Great Wall wonder gives an additional +50% defense bonus against land units, and prevents the loss of population when a defending unit loses.
-- Buildings with bonus to defense are visible by others (middle click on the city), and it is not possible to sabotage them.
 
 Total Defense = (UNIT DEFENSE) * (100+TERRAIN)/100 * (100+RIVER)/100 * (100+CITY+BASE)/100 * (100+FORTIFIED)/100 * (100+VETERAN)/100
 (Same as classic rules).
@@ -215,7 +215,7 @@ EXAMPLE: Riflemen in a size 9 city, with Walls, on Hills, will get a total defen
 GOVERNMENTS:
 ------------
                   Anarch   Tribal   Despot   Monarc   Fundam   Republ   Democr   Federat  Commun   Fascism
-Tax\Lux\Sci Rate  0        60       60       70       70       80       90       90       80       90
+Tax\Lux\Sci Rate  0        60       60       70       70       80       90       90       80       80
 Output per tile # -1(if>2) -1(if>2) -1(if>2) 0        0        +1Trade  +1Trade  0        0        0
 Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) 0       (+1Trade)(+1Trade)(+1Trade) 0        0
                                                                                 
@@ -227,10 +227,10 @@ Martial Law      +1        0       +1       +1        0        0        0       
 Civil war         99%      45%      50%      35%      30%      20%      15%      10%      25%      40%
 Empire Size       0        /12      /10      /14      /18      /16      /32      /24      /28      /20
 Bribe\Incite      x1       x2       x1       x1       x2       x2       x2\(No)  x2\(No)  x2       x2
-Veteran                   +50%(Mil)                                             +Spies   +Spies    +25%(Mil)
+Veteran                   +50%(land)                                            +Spies   +Spies    +25%(land)
 Special          +NoUpkeep+Content +75%Gold +50%Gold +Tithes  -Revolt  -Revolt  +Luxury  +NoUpkeep +NoUpkeep
                  -50%Lux           (Palace) (Palace) -50%Sci           -Senate  -Senate  (Cost=1)  (Cost=1)
-                 -NoTaxes                            +Fanatic          +Partisan         +Partisan -Nationality
+                 -NoTaxes                            +Fanatic          +Partisan         +Partisan -National
                                                                                 
 Base Corruption   0%       30%      20%      10%      15%      25%      5%       0%       30%      20%
 Base Waste        30%      0%       10%      20%      15%      5%       25%      30%      0%       10%
@@ -253,13 +253,13 @@ Waste by distance is doubled (+2% per tile of distance to capital) until Trade i
 - The output bonus of Palace (under Despotism and Monarchy) switched from Production to Gold.
 - The bonus "+1 Trade" under Republic and Democracy does not affect oceanic tiles.
 - Republic gets "Revolution when unhappy" effect. Federation gets "Has senate" effect. Democracy gets both effects.
-- Tribal gets +1 content citizen in every city (but no martial law). Federation gets +2 Luxuries in every city.
-- Tribal and Fascism governments increase the chance of all military units getting the next veteran level after a battle.
-- Spies built under Communism or Federation will start at the first veteran level.
-- Under Communism or Democracy, Partisans appear around conquered cities if Guerilla Warfare has been researched by the player.
-- Under Communism or Fascism you do not pay upkeep for buildings that cost 1 Gold. Communism cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).
-- Under Fascism, citizens of enemy nationality cause extra unhappiness in the city (one unhappy face for each 4 enemy citizens).
-- Under Fundamentalism you receive extra Gold from tithes (buildings that produce happiness), but -50% to Science.
+- Tribal gets +1 content citizen in every city (but no martial law). Federation gets +2 Luxuries in every city. Communism cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).
+- Tribal and Fascism increase the chance of ground units getting the next veteran level after a battle.
+- Spies built under Federation or Communism will start at the first veteran level.
+- Under Democracy or Communism, Partisans appear around conquered cities if Guerilla Warfare has been researched by the player.
+- Under Fascism or Communism, you do not pay upkeep for buildings that cost 1 Gold.
+- Under Fascism, citizens of enemy nationality cause extra unhappiness in the city (one unhappy face for each 2 enemy citizens).
+- Under Fundamentalism, you receive extra Gold from tithes (buildings that produce happiness), but -50% to Science.
 
 TIP: There is some hurry to get Monarchy or Republic (or to build Pyramids), in order to avoid the initial penalty to output per tile. However, the Corruption and Waste are evened for all governments, so there are no big differences, and every government could be used at any technological age. The choice depends on the role of your civilization.
 
@@ -285,12 +285,8 @@ Special effects:
 - Physics: Wheeled units and naval units recover 2 extra HPs per turn, except on Mountains, Glacier or Deep Ocean.
 - Electricity: Allows irrigation without adjacent water, increases city vision radius, and improves the effect of Amphitheatres.
 - Refining: Allows to upgrade mines to oil wells (+2 production) on Desert, Tundra and Glacier.
-- Trade: Decreases one-time the waste of Production caused by distance to capital.
-- The Corporation: Decreases one-time the corruption of Trade caused by distance to capital.
-- Conscription: Enables new Mobilization policy, that can be adjusted to get, each step:
-+1 unit free of upkeep per city, -1 unit free of military unhappiness per city, -1 unit that can impose martial law per city.
-- Radio: Gives 3 extra culture per turn. Enables new Propaganda policy, that can be adjusted to get, each step:
-+1 empire size, -1 unhappy face for each 4 enemy citizens, -1 culture per turn
+- Trade: Allows 1 trade route per city. Decreases one-time the waste of Production caused by distance to capital.
+- The Corporation: Allows 2 trade routes per city. Decreases one-time the corruption of Trade caused by distance to capital.
 - Labor Union: Engineers are built with one extra veteran level.
 
 The techs, buildings, wonders and units are the same as civ2, but some requirements have been changed to improve a bit the historical accuracy, to encourage the use of every military unit, and to avoid units or wonders becoming obsolete too soon. The following is a list of some inaccuracies from classic tech tree that were addressed in the new tree:
@@ -307,12 +303,11 @@ In the new tree, you are forced to research most of the ancient techs before you
 BUILDINGS:
 ----------
 - Added Ecclesiastical Palace (available with Theology), that acts as a second center of government that lowers corruption and waste.
-- Added Hospital (available with Medicine), that reduces -30% the chances of plague in the city (old effect of Medicine), and required by Barracks to recover damaged infantry units.
+- Added Hospital (available with Medicine), that reduces -30% the chances of plague in the city (old effect of Medicine), and required by Barracks to recover damaged Land units.
 - The effect of Barracks to recover damaged units is halved when the resources required by the unit are not available in the city. Naval units recover +25% HPs at cities with a Harbour (full recover with a Port) and the resource required by the unit.
 - Aqueduct is cheaper near rivers or lakes. Sewer System is needed to grow larger than pop 16 (instead of 12). Each one reduces the chances of illness by -30%.
 - Courthouse: Makes 1 citizen content, increases (+100%) the cost to incite the city to revolt, and halves any kind of waste (Trade, Production or Food).
-Added new effect: Food wasted by distance to Palace = -1% Food each 2 tiles.
-For example, cities at distance 20 of the Palace lose -10% Food (-5% with Courthouse), so they lose -1 Food when their output reaches 10 Food per turn (20 Food per turn with Courthouse), noticeable when city reaches size 5 or so (around city size 10 with Courthouse).
+Added new effect: Food wasted by distance to Palace = -1% Food each 2 tiles. For example, cities at distance 10 of the Palace lose -5% Food, so they lose -1 Food when their output reaches 20 Food per turn (noticeable with 10 Food per turn due to rounding effects).
 - Granary halves the waste of Food caused by distance to Palace. Together with a Courthouse, it eliminates completely the waste of Food.
 - Police Station: Makes 2 citizens content, and reduces unhappiness caused by 1 military unit.
 - Science bonus by buildings (Library, University and Research Lab) restored to civ2 values (+50%).
@@ -324,12 +319,12 @@ For example, cities at distance 20 of the Palace lose -10% Food (-5% with Courth
 Industrialization->Factory; Automobile->Highways; Plastics->Mfg Plant; Mass Production->Offshore platforms. 
 - Adjusted the Pollution of all Power Plants, and increased building cost of Nuclear Plants:
 
-               Cost  Upkeep  Production   Pollution(+Recycle)
-Power plant    130   4       +25%/+50%    100%(50%)
-Hydro plant    180   4       +25%/+50%    50% (25%)
-(+Hoover Dam)  (=)  (=)         (=)       25% (0%)
-Nuclear plant  240   2       +25%/+50%    50% (25%)
-Solar plant    320   4       +25%/+50%    25% (0%)
+               Cost  Upkeep  Production  Pollution(+Recycle)
+Power plant    130   4       +25%/+50%   100%(50%)
+Hydro plant    180   4       +25%/+50%   50% (25%)
+(+Hoover Dam)  (=)  (=)         (=)      25% (0%)
+Nuclear plant  240   2       +25%/+50%   50% (25%)
+Solar plant    320   4       +25%/+50%   25% (0%)
 
 
 UNITS:
@@ -366,7 +361,7 @@ Halved the attack so it is harder to bombard ground enemies successfully. Increa
 - Increased fuel of all Air units by one, in order to allow battles for air control. All Air unit lose 10% of HPs, like helicopters, when they end out of a city or airbase.
 - Helicopters can carry 1 military Land unit, and can only be attacked by Fighters (with no extra attack bonuses), and by Missiles. Carriers can also transport military Land units.
 - Cruise Missile no longer cause unhappiness, range increased to 16, and allowed to attack Air units.
-- Nuclear weapons can be built with Nuclear Fission, but you need Rocketry, or a city with an Airport and available Uranium, to move them.
+- Nuclear weapons can be built with Nuclear Fission, but they have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
 - Reduced a bit some vision ranges. Most air and naval units see 2 tiles in horizontal/vertical, and 1 tile in diagonal (same as Explorers), except AEGIS cruiser and Stealth Fighter/Bomber that can see 2 tiles in diagonal too.
 - Readjusted many costs so units with better stats are always more expensive. At the same time, modern units always get better ratio Att/Cost or Def/Cost.
 
@@ -434,6 +429,7 @@ Readjusted effects for most wonders. Restored all civ2 costs.
 - Replaced effects that give a percentage bonus to Science output, by additional Science in the central city tile. This way, they do not multiply the effect of other wonders like Colossus, and it is not an advantage to build them all in the same city.
 - Wonders become obsolete by techs researched by the owner (not affected by the researches of other players).
 - Some wonders require certain building, or resource, in the city to be built.
+- The bonuses to Science, Gold or Luxury are produced by the citizens (same as the bonuses to Trade or Shields), so they can be increased by other city improvements (same as the output of specialists).
 
 FULL LIST OF WONDERS
 (#) = Global effect, "Name", Cost, Requirements, Obsolescence, Effect
@@ -442,13 +438,13 @@ FULL LIST OF WONDERS
 +1 Production per worked tile in the city (already producing Shields). Disables tile penalty under Despotism/Tribal governments.
 - "Colossus" 200. Obsolete by Automobile (Super Highways):
 +1 Trade per worked tile in the city (already producing Trade).
-- "Copernicus' Observatory" 300. Obsolete by Computers (Research Lab):
+- "Copernicus' Observatory" 300. Obsolete by Rocketry:
 +1 Science per worked tile in the city.
 
 - "Hanging Gardens" 200. Obsolete by Electricity (that increases Amphitheatre effect):
 +1 Content in every city. +4 Luxury in the city where it is built.
 - "Mausoleum of Mausolos" 200. Obsolete by Communism (Police Station):
-+1 Content in every city with Walls, and +1 extra content in every city with Courthouse. +100% cost to incite your cities to revolt.
++1 Content in every city with Walls, and +1 extra content in every city with Courthouse. Your cities are immune to incite actions.
 - "Temple of Artemis" 200. Requires Temple. Obsolete by Theology (that increases Cathedral effect):
 +2 Content in every city with Temple.
 - "Michelangelo's Chapel" 400. Requires Cathedral:
@@ -460,18 +456,18 @@ FULL LIST OF WONDERS
 +2 Luxuries in every city. -10% chance of illness.
 
 - (#)"Shakespeare's Theatre" 300:
-Entertainer specialist output = 3 for every nation. +1 Luxury in all your cities, +6 Luxury where it is built.
++1 Luxury in all your cities, +6 Luxury where it is built. Entertainer specialist output = 3 for every nation.
+- (#)"Darwin's Voyage" 300:
++1 Science in all your cities. Scientist specialist output = 3 for every nation.
 - (#)"A.Smith's Trading Co" 400. Requires Stock Exchange:
-Taxman specialist output = 3 for every nation. Free upkeep for buildings that cost 1 Gold (or 2 under Communism or Fascism), in your cities with Stock Exchange.
-- (#)"Darwin's Voyage" 400:
-Scientist specialist output = 3 for every nation. +1 Science in all your cities.
++2 Gold in your cities with Stock Exchange. +1 trade route where it is built. Taxman specialist output = 3 for every nation.
 
-- "Great Library" 300. Requires Library. Obsolete by Steam Engine (that enables wonder with similar effect):
-+1 Science in every city with Library. +4 Science where it is built.
+- "Great Library" 300. Requires Library. Obsolete by Computers (Research Lab):
++1 Science in your cities with Library. +4 Science where it is built.
 - "Isaac Newton's College" 400. Requires University:
-+2 Science in every city with University. +6 Science where it is built.
++2 Science in your cities with University. +6 Science where it is built.
 - "Internet" 600. Requires Research Lab:
-+3 Science in every city with Research Lab. Gives an immediate technology advance. Reveals all cities in the map for the owner.
++3 Science in your cities with Research Lab. The owner gets every advance achieved by 2 other teams. Reveals all cities in the map for every nation.
 
 - "Lighthouse" 200. Requires adjacent sea. Obsolete by Engineering (Destroyer):
 +1 Move, and built veteran, for Galley and Sea units.
@@ -483,7 +479,7 @@ Scientist specialist output = 3 for every nation. +1 Science in all your cities.
 - "Statue of Zeus" 200. Obsolete by Conscription (that enables wonder with similar effect):
 +1 Military content in every city, +2 free Shields (or Gold) per city for upkeep of units.
 - "King Richard's Crusade" 300. Obsolete by Radio:
-Disables unhappiness caused by empire size (for up to 100 cities). +50% chance of veteran after a battle, for Land (and Big Land) units.
+Disables unhappiness caused by empire size (up to 100 cities). +50% chance of veteran after a battle, for Land (and Big Land) units.
 - "Women's Suffrage" 600:
 +1 Military content in every city (cumulative to Police Stations). Under Democracy it also halves the unhappiness caused by military units.
 
@@ -491,100 +487,97 @@ Disables unhappiness caused by empire size (for up to 100 cities). +50% chance o
 +50% Defense bonus against Land (and Big Land) units in every city of the same continent, and no loss of population due to attacks.
 - "Leonardo's Workshop" 400. Obsolete by Combustion:
 Upgrades one obsolete unit per game turn.
-- "Hoover Dam" 600. Requires Factory. and adjacent River:
-Gives to every Hydro Plant the same effect as Solar Plants (-25% pollution caused by production).
+- "Eiffel Tower" 300. Continental range:
+Enables appearance of Partisans in cities of the same continent, no matter your government, and -25% pollution caused by population.
+- "Hoover Dam" 600. Requires Hydro Plant (and adjacent River):
+Gives to every Hydro Plant the same effect as Solar Plants (-25% pollution caused by production). Doubles the bonus to production of a Hydro Plant in the city.
 - (#)"Manhattan Project" 600. Requires Uranium:
 Enables Nuclear units for every nation.
 - (#)"Apollo Program" 600. Requires Aluminum:
 Enables space race for every nation. Makes entire map permanently visible for the owner.
 
 - "Marco Polo's Embassy" 200. Obsolete by The Corporation (Freight):
-Embassy with all players, and +1 move for Caravan and Diplomat units.
-- "Eiffel Tower" 300. Continental range:
-+20 to AI love for the owner. Enables appearance of Partisans in cities of the same continent, no matter your government, and -25% pollution caused by population.
+Embassy with all players. +1 trade route where it is built.
 - "Statue of Liberty" 400:
-Disables Has Senate effect. Any government available. No Anarchy periods when government changes.
-- (#)"United Nations" 600. Requires Police Station:
-Embassy with all players for every nation. Revolution when unhappy effect for every nation. Diplomats and Spies are built veteran in your cities with a Police Station.
-
+Any government available. No Anarchy periods when government changes. Disables Has Senate effect. +1 Move for Merchants and Diplomats.
+- (#)"United Nations" 600:
+Embassy with all players for every nation. Revolution when unhappy effect for every nation. Diplomat and Spy built veteran in the city.
 Special "Cold War" effect: if Manhattan Project and United Nations were built, every nation with nuclear power receives the "Has Senate" effect, until the Apollo Program is finished. 
 
 
-SINCE PREVIOUS VERSION:
------------------------
-- Added Fort and Airstrip bases, required before you can build Fortress or Airbase, respectively. Fortresses give more protection against land and sea units, while airbases are better against air units and missiles.
-- The bases no longer protect full stacks from being killed when one unit is defeated, and do not affect the national borders.
-- Introduced Maglev, available with Superconductors, that allows unlimited movement for land units (except Big Land and Merchant classes).
-- A boost to Federation (+2 Luxury per city, so it is easier to celebrate), and Fundamentalism (-50% to science, instead of total science output halved).
-- Construction requires Iron Working instead of Currency. This way, Iron Working is a prerequisite to build Frigates and Ironclads.
-- Increased fuel of all Air units by one, in order to allow battles for air control. All Air units lose 10% of HPs, like helicopters, when they end out of city or airbase.
-- Cruise Missile allowed to attack Air units, and increased range to 16 (greater than movement of Stealth Fighters).
-- Mountains receive +2 Production from mines, same as Hills. The tech Refining allows to upgrade the mines placed on Desert, Tundra, and Glacier to Oil Wells (+2 Production).
-- Deep ocean tiles must be mined in order to take advantage of the production bonus from Offshore Platforms (buoys are no longer needed).
-- Readjusted effects of global warming and nuclear winter. Ocean can no longer change to Deep ocean.
-- Readjusted terrain transformations. Designed so all useful alterations can be finished in 1 or 2 steps, and all effects from global warming can be reversibly with terraforming.
-- Doubled costs of all spaceship parts, so it is harder to achieve a space victory.
+SINCE CIV2CIV3 v2.5:
+--------------------
+- New Fort and Airstrip bases, which must be built before Fortress and Airbase, respectively. Fortresses give more protection against land and sea units, while airbases are better against air units and missiles.
+- The bases no longer prevent a whole unit stack from being lost when one defender dies, and they do not affect the national borders.
+- Added Maglev (with Superconductors), which give infinite movement to land units (except Big Land and Merchant classes).
+- Mountains get +2 Production from mines, same as Hills. The tech Refining allows to upgrade the mines placed on Desert, Tundra, and Glacier to Oil Wells (+2 Production).
+- Deep Ocean tiles have to be mined in order to get the production bonus from Offshore Platforms.
+- Adjusted effects of climate change. Ocean can no longer become Deep Ocean.
+- Adjusted terrain transformations (available with Fusion Power). Designed so that all useful alterations can be finished in 1 or 2 steps, and all global warming effects can be reversed.
+- The 50% science loss from Fundamentalism, and the 50% luxury loss from Anarchy, are now additive with other bonuses, rather than multiplicative.
+- Construction now requires Iron Working, rather than Currency (so that Iron Working is a prerequisite for Frigates and Ironclads).
+- Spaceship part cost doubled, so it is harder to achieve a space victory.
+- Airplanes can spend an extra turn in the air, allowing more air-to-air battles. They lose 10% of hitpoints every turn when in the air, like Helicopters.
+- Cruise Missiles can target airplanes, and have an increased range of 16 (greater than the movement of Stealth Fighters).
 
-- Enabled tired attack, so units require at least one remaining movement point to attack without penalties.
-- Enabled Happy Borders (units do not cause unhappiness inside national borders).
-- Artillery (Big Land class) may kill citizens after a successful attack, but the rest of land units may not.
-- Trireme replaced by Galley, that can no longer navigate rivers, and become obsolete by Caravels.
+- Enabled tired attack, so units that attack with less than one movement point have reduced attack strength.
+- Big Land class units may kill citizens when attacking a city, but the rest of land units may not.
 - Caravans and Freights no longer require roads to move. Removed the one time trade revenues. They can help allies to build wonder. Cost reduced from 50 to 30.
-- Units can establish embassies or investigate cities directly from boats without disembarking. Explorers can also perform those two actions, same as Diplomats. Cost of Explorers restored to 30.
-- Increased vision range of Explorers and Partisans. Partisan no longer obsoletes the Explorer.
-- Added Ecclesiastical Palace small wonder that lowers corruption and waste, as if it was a second capital.
-- Earth scenario: Added Natural Wonders, which give +3 luxuries in the tile where they are placed, and increase a bit the risk of natural disasters. Marked with a text label, and a flag icon.
-
-- Pollution and Fallout are possible in forests and jungles again.
-- Disabled the minimum food output in the city tile. It only affects cities on Desert, that now will lose the food if they are mined.
-- Roads are built automatically in every city, even on rivers without bridge building. It allows big land units to attack cities on non-native terrain.
 - Units with cost of population do not pay upkeep of Shields or Gold: Settlers, Migrants and Fanatics.
 - Carriers can transport units of Land class (same units as Helicopters).
-- Deep ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food.
-- Airlifting allows one unit per source city each turn, with no limit of units for the target city. Airlifting is allowed to allied cities.
+- Establish Embassy and Investigate City actions can be done directly from a boat. Explorers can also perform those two actions, like Diplomats. Cost of Explorers restored to 30.
+- Increased vision range of Explorers and Partisans. Partisan no longer obsoletes the Explorer.
+- New building Ecclesiastical Palace (available with Theology), which acts as a second center of government.
+- Great Wonders are now only obsoleted when the owner learns a certain technology, not when any player does.
+- City center tiles are no longer guaranteed a minimum of 1 food (this only affects Desert tiles, and only if a mine is built on them). City centers get automatic roads, even on rivers without knowledge of Bridge Building.
+
+
+SINCE CIV2CIV3 v2.6:
+--------------------
+- Disabled Tech Leakage: technologies cost the same even if already discovered by other nations, and Embassies no longer affect the research costs. Tech cost factor reduced from x3 to x2.
 - When you get a new tech by treaty, conquest, or diplomatic mission, half of its cost is subtracted from your research pool.
 - You do not lose a technology due to negative research pool unless the negative points are greater than half the cost of your current research.
-- Buildings with bonus to defense are visible by others (middle click on the city), and it is not possible to sabotage them.
-- Tribal gets +1 content per city, instead of martial law.
 - Enabled culture points, produced in each city by wonders, and by scientific or religious buildings. Enabled achievements, that may give extra culture.
 - National culture increases the cost to bribe your units or incite your cities (up to +100%), and reduces the chances of civil war (up to -50%). The culture of each city increases its resistance against actions of enemy agents (up to +50%).
 - Immunity against bribe actions (under Republic or Democracy) replaced by increased costs (+100%). Most governments (except Despotism and Monarchy) get these increased costs against bribe and incite actions too.
 - Effect of Courthouse against incite actions fixed to +100%. Replaced the lower cost of empty cities, by an additional +100% when not empty.
 
-- Tech Explosives allows new terrain improvements: Naval Mines that damage adjacent sea units, and Canals to join oceans sepparated by no more than 2 land tiles.
+- Tech Explosives allows new terrain improvements: Naval Mines that damage adjacent sea units, and Canals to join oceans separated by no more than 2 land tiles.
 - Tech Medicine allows non wheeled land units to recover 2 HPs per turn, even without resting. Physics allow the same for wheeled and naval units.
 - Tech Labor Union allows cities to build engineers with one extra veteran level.
-- Added new policies: Mobilization (available with Conscription) and Propaganda (available with Radio).
-- Added new building: Hospital (available with Medicine), that reduces -30% the chances of plague in the city (old effect of Medicine), and required by Barracks to recover damaged infantry units.
-- Added new government: Fascism (available with Tactics, which requires Leadership and Conscription). Veteran bonus of Tribal and Fascism affects to all unit classes.
+- Added new building: Hospital (available with Medicine), that reduces -30% the chances of plague in the city (old effect of Medicine), and required by Barracks to recover damaged Land units.
+- Added new government: Fascism (available with Tactics, which requires Leadership and Conscription).
 - Halved the chances of civil war for every government. Switched empire size of Tribal (now 12) and Monarchy (now 14), Fundamentalism (now 18) and Fascism (now 20).
-- Effect of "A.Smith's Trading Co" is summed to equivalent effect of Communism or Fascism governments.
-- Readjusted effect of wonders "Statue of Zeus", "King Richard's Crusade" (now obsolete by Radio), "Mausoleum of Mausolos" (now obsolete by Communism), "Great Library" (now obsolete by Steam Engine), "Isaac Newton's College", "Internet", "Marco Polo's Embassy" (now obsolete by The Corporation), and "United Nations".
-- The following wonders now affect only to cities located on the same continent: "Great Wall" (now obsolete by Flight), "Sun Tzu's War Academy", "Eiffel Tower" (now enables appearance of Partisans), and "J.S. Bach's Cathedral".
+- Tribal gets +1 content per city, instead of martial law. Federation gets +2 Luxury per city.
 - Appearance of Partisans in conquered cities requires the knowledge of Guerrilla Warfare by the owner.
-- Disabled Tech Leakage: technologies cost the same even if already discovered by other nations, and Embassies no longer affect the research costs.
+- Readjusted effect of wonders "Statue of Zeus" (+2 gold/shield for upkeep of units), "King Richard's Crusade" (bonus to empire size and veteran chance, obsolete by Radio), "Mausoleum of Mausolos" (obsolete by Communism), "Copernicus' Observatory" (obsolete by Rocketry), "Great Library" (+1 Science per Library for the owner, obsolete by Computers), "Isaac Newton's College" (+2 Science per University for the owner), "Internet" (+3 Science per Research Lab for the owner, and tech parasite effect), "A.Smith's Trading Co" (+2 Gold per Stock Exchange for the owner, +1 trade route in the city), "Statue of Liberty" (+1 move for Merchants and Diplomats), "Marco Polo's Embassy" (free embassies, +1 trade route in the city, obsolete by The Corporation), "United Nations" (veteran Diplomats in the city, free embassies for every player), "Hoover Dam" (requires Hydro Plant, double bonus to production).
+- The following wonders now affect only to cities located on the same continent: "Great Wall" (now obsolete by Flight), "Sun Tzu's War Academy", "Eiffel Tower" (now enables appearance of Partisans), and "J.S. Bach's Cathedral".
+
+- Increased by one the number of veterancy levels, with effects: 100%, 125%, 150%, 175% and 200%. Engineers up to 150%.
 - All military infantry units can build fortresses. All worker units can build airbases, and can remove any terrain improvement.
+- Trireme replaced by Galley, that can no longer navigate rivers, and become obsolete by Caravels.
 - Enabled ZOC for Sea units in Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.
 - Defense bonus +50% in Deep Ocean (or Ocean with a Naval Mine) against sea units (except against submarines). Reduced a bit the cost of several naval units. Submarine defense changed to 4 (was 5), and doubled against air attacks.
+- Nuclear weapons have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
+- Buildings with bonus to defense are visible by others (middle click on the city).
+- Reduced a bit some vision ranges. Most air and naval units see 2 tiles in horizontal/vertical, and 1 tile in diagonal (same as Explorers), except AEGIS cruiser and Stealth Fighter/Bomber that can see 2 tiles in diagonal too.
 
 - Added new barbarian nation that controls hostile animal units, placed randomly at the start of the game.
-- Enabled national trade routes again (without min distance), that spread the effects of bonus resources, though with halved revenues. It is not possible to create trade routes with foreign cities unless they are allies or they are from the same team.
+- Enabled national trade routes again (without min distance), that spread the effects of bonus resources, though with halved revenues. It is not possible to create trade routes with foreign cities unless they are allies or on the same team. Each city can establish 1 trade route (2 after the discovery of The Corporation). 
+- Forest and Jungle can be mined to get Lumber (+1 production). Forests can no longer be transformed to Grassland directly (now Forest to Plains, and Plains to Grassland).
 - Added new resources, up to 3 per terrain: Incense (+3 trade on desert), Deer (+2 food on forest, while Pheasant now +1 food and +1 trade), Marble (+1 production and +1 trade on hills), Ivory (now on jungle, with 1 less trade), Seals (same bonuses as Ivory, but on glacier), Shellfish (+1 food and +1 trade on oceans and lakes), Salt (+1 production and +1 trade on coastal ocean), Horses (+2 production on plains, while Buffalo now +1 food and +1 production), Sugar (+2 food and +2 trade on swamp).
 - There are now 6 resources on Grassland, with 3 different effects: Cattle or Corn (+1 food), Wool or Cotton (+1 production), Tea or Tobacco (+2 trade).
-- There are also 4 extra strategic resources that can be used when certain tech is researched by the player (+2 production with the required tech): Niter (on plains or desert with Gunpowder), Rubber (on jungle, swamp or forest with Chemistry), Aluminum (on hills or tundra with Advanced Flight), Uranium (on mountains or glacier with Nuclear Fission).
-- Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in the tile, and in cities linked by trade route.
+- There are also 4 extra strategic resources that can be used when certain tech is researched by the player (+2 production with the required tech): Niter (on plains or desert with Gunpowder), Rubber (on jungle, swamp or forest with Chemistry), Aluminum (on hills or tundra with Industrialization), Uranium (on mountains or glacier with Nuclear Fission).
+- Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in cities linked by trade route.
 - Food resources (Seals, Oasis, Pheasant, Deer, Cattle, Corn, Fruit, Fish, Whales, Wheat, Buffalo, Sugar, Game): +1 unit free of upkeep in cities linked by trade route.
 - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in cities linked by trade route.
-- Recover resources (Horses, Ivory, Wood, Coal/Peat, Oil): halved effect of HP recover buildings in a city without the resource required by the unit (infantry units require a Hospital, wooded units require Lumber).
+- Recover resources (Hospital, Wood, Coal/Peat, Oil): halved effect of HP recover buildings in a city without the resource required by the unit (land units require a Hospital, wooded units require Lumber).
 - Strategic resources (Horses, Ivory; Niter, Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city.
-- All resources affect a bit the chances of plague, so they can be seen in the city UI. Increased risk for resources traded from other cities.
+- All resources affect a bit the chances of plague, so they can be seen in the city UI. Resources traded from other cities increase the risk of plague.
+- Wonder Apollo Program requires Aluminum available in the city. Manhattan Project requires Uranium. The bonus to production of Nuclear Plants is doubled in cities with available Uranium.
+- Deep ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food. Naval units recover +25% HPs at cities with a Harbour and the resource required by the unit.
+- Earth scenario: Added Natural Wonders, which give +3 luxuries in the tile where they are placed, and increase a bit the risk of natural disasters. Marked with a text label, and a flag icon.
 
-- Wonder Manhattan Project requires Uranium available in the city. Apollo Program requires Aluminum.
-- Cities with an Airport and available Uranium can launch Nuclear weapons (with double range after the discovery of Rocketry). In the rest of cases, Rocketry is needed to enable the movement of Nuclear units (no longer affected by Advanced Flight).
-- Forest and Jungle can be mined to get Lumber (+1 production). Forests can no longer be transformed to Grassland directly (now Forest to Plains, and Plains to Grassland).
-- Naval units recover +25% HPs at cities with a Harbour and the resource required by the unit.
-- Reduced a bit some vision ranges. Most air and naval units see 2 tiles in horizontal/vertical, and 1 tile in diagonal (same as Explorers), except AEGIS cruiser and Stealth Fighter/Bomber that can see 2 tiles in diagonal too.
-- Increased by one the number of veterancy levels, with effects: 100%, 125%, 150%, 175% and 200%. Engineers up to 150%.
 
 THANKS:
 -------

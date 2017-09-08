@@ -78,14 +78,6 @@ req2     = "Machine Tools"
 flags    = ""
 graphic     = "a.advanced_flight"
 graphic_alt = "-"
-helptext = _("\
-Aluminum resources produce 2 extra shields in the tile where they are \
-placed.\
-"), _("\
-Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
-Missile, Stealth Fighter and Stealth Bomber units with one extra \
-veteran level.\
-")
 cost     = 570
 
 [advance_alphabet]
@@ -248,11 +240,6 @@ req2     = "Metallurgy"
 flags    = ""
 graphic     = "a.conscription"
 graphic_alt = "-"
-helptext = _("\
-Enables new Mobilization policy, which can be adjusted to reduce the \
-upkeep costs of your armies, but increasing the unhappiness caused by \
-your military units, and reducing the effect of martial law.\
-")
 cost     = 260
 
 [advance_construction]
@@ -438,6 +425,13 @@ req1     = "Railroad"
 req2     = "Banking"
 graphic     = "a.industrialization"
 graphic_alt = "-"
+helptext = _("\
+Aluminum resources produce 2 extra shields in the tile where they are \
+placed.\
+"), _("\
+Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
+Missile, Fighter and Bomber units with one extra veteran level.\
+")
 cost     = 380
 
 [advance_invention]
@@ -648,9 +642,8 @@ Uranium resources produce 2 extra shields in the tile where they are \
 placed.\
 "), _("\
 Cities with available Uranium build Armor and Submarine units with \
-one extra veteran level. Cities with an Airport and available Uranium \
-can launch Nuclear weapons (with double range after the discovery of \
-Rocketry).\
+one extra veteran level. Uranium also doubles the bonus of Nuclear \
+Plants to the production of the city./
 ")
 cost     = 530
 
@@ -729,12 +722,6 @@ graphic_alt = "-"
 helptext = _("\
 Allows Settlers, Migrants, Workers and Engineers to build airstrips, \
 airbases and buoys. Allows Transports to build buoys.\
-"), _("\
-Enables new Propaganda policy, which can be adjusted to use the \
-broadcasting media for cultural and scientific dissemination that \
-produces up to 3 extra culture per turn; or for nationalist propaganda \
-that reduces the unhappiness caused by the empire size, but increases \
-the unhappiness caused by enemy citizens in your cities.\
 ")
 cost     = 540
 
@@ -807,9 +794,9 @@ flags    = ""
 graphic     = "a.rocketry"
 graphic_alt = "-"
 helptext = _("\
-Rocketry enables movement of Nuclear weapons where it was not possible, \
-or doubles the movement where it was already possible (from cities with \
-an Airport and available Uranium).\
+Enables the movement of Nuclear weapons where it was not possible, \
+or doubles the movement where it was already possible (from cities \
+with an Airport).\
 ")
 cost     = 590
 
@@ -897,6 +884,8 @@ flags    = ""
 graphic     = "a.the_corporation"
 graphic_alt = "-"
 helptext = _("\
+Allows establishing up to 2 trade routes from each city.\
+"), _("\
 Halves the corruption of trade related to distance from the capital \
 (or eliminates it for Federation governments).\
 ")
@@ -947,6 +936,8 @@ flags    = ""
 graphic     = "a.trade"
 graphic_alt = "-"
 helptext = _("\
+Allows establishing up to 1 trade route from each city.\
+"), _("\
 Halves the waste of production related to distance from the capital.\
 ")
 cost     = 40
