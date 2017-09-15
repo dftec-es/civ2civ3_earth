@@ -3340,7 +3340,7 @@ reqs    =
       "OutputType", "Luxury", "Local"
     }
 
-; Tiles with farmland don't get Super Highways trade bonus
+; Tiles with farmland don't get Super Highways + road trade bonus
 [effect_super_highways]
 type    = "Output_Inc_Tile"
 value   = 1
@@ -3350,6 +3350,20 @@ reqs    =
       "Building", "Super Highways", "City", TRUE
       "OutputType", "Trade", "Local", TRUE
       "Extra", "Farmland", "Local", FALSE
+      "CityTile", "Center", "Local", FALSE
+    }
+
+; City center tiles do get the Super Highways + road trade bonus, even
+; if they are already receiving a (possibly 'automatic') farmland bonus
+[effect_super_highways_city_center_1]
+type    = "Output_Inc_Tile"
+value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "Extra", "Road", "Local", TRUE
+      "Building", "Super Highways", "City", TRUE
+      "OutputType", "Trade", "Local", TRUE
+      "CityTile", "Center", "Local", TRUE
     }
 
 [effect_super_highways_1]
@@ -5812,6 +5826,20 @@ reqs    =
       "OutputType", "Shield", "Local"
     }
 
+; Desert with river (and no Oasis) gets 1 extra food
+; ("Nile floods" effect)
+[effect_desert_river_food]
+type    = "Output_Inc_Tile"
+value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "Terrain", "Desert", "Local", TRUE
+      "Extra", "River", "Local", TRUE
+      "OutputType", "Food", "Local", TRUE
+      "Resource", "Oasis", "Local", FALSE
+    }
+
+; Make Mine extra do something
 [effect_mine]
 type    = "Mining_Pct"
 value   = 100
@@ -5836,6 +5864,7 @@ reqs    =
       "Extra", "Lumber", "Local"
     }
 
+; Make Irrigation extra do something
 [effect_irrigation]
 type    = "Irrigation_Pct"
 value   = 100
@@ -5845,6 +5874,7 @@ reqs    =
       "CityTile", "Center", "Local", FALSE
     }
 
+; Simulate presence of irrigation extra in city centers
 [effect_irrigation_1]
 type    = "Irrigation_Pct"
 value   = 100
@@ -5853,18 +5883,7 @@ reqs    =
       "CityTile", "Center", "Local", TRUE
       "TerrainAlter", "CanIrrigate", "Local", TRUE
       "Extra", "Mine", "Local", FALSE
-      "Extra", "Oil Well", "Local", FALSE
-    }
-
-; Desert with river (and no Oasis) gets 1 extra food
-[effect_irrigation_2]
-type    = "Irrigation_Pct"
-value   = 100
-reqs    =
-    { "type", "name", "range", "present"
-      "Terrain", "Desert", "Local", TRUE
-      "Extra", "River", "Local", TRUE
-      "Resource", "Oasis", "Local", FALSE
+      ; Oil Well also prevents irrigation, but requires Mine so not needed here
     }
 
 ; "Sea" nreq is for Transports, which are only supposed to clean pollution

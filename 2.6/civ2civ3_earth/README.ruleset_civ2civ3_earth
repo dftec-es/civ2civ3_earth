@@ -104,7 +104,7 @@ TERRAIN:
 - Jungles receive 1 extra Production (1/1/0). Forest and Jungle can be mined to get +1 Production (Lumber).
 - Tundras can be mined for +1 Production (instead of irrigated) and receive +1 Trade when roaded (up to 1/1/1).
 - Swamps can be irrigated for +1 Food (to 2/0/0). Reduced Food bonus by 1 to Spice (on Swamp).
-- Deserts with a river receive 1 extra Food (to boost growth at terrains like Nile flood), unless they have an Oasis.
+- Deserts with a river receive 1 extra Food from irrigation (to boost growth at terrains like Nile flood), unless they have an Oasis.
 - Hills receive 1 Production for free, and +2 from mines, same as civ3, (was 0 and +3). Mountains receive +2 Production from mines too (was +1).
 - Cities can not be placed on Mountains (nor Glaciers). Mountains give extra vision range. Ground units starting the turn on unroaded Mountains receive a -1 penalty to movement (this way it is not so good for cavalry to end the turn on Mountains).
 - The discovery of Refining allows to upgrade the mines placed on Desert, Tundra and Glacier to Oil Wells (+2 Production).
@@ -312,7 +312,7 @@ Added new effect: Food wasted by distance to Palace = -1% Food each 2 tiles. For
 - Police Station: Makes 2 citizens content, and reduces unhappiness caused by 1 military unit.
 - Science bonus by buildings (Library, University and Research Lab) restored to civ2 values (+50%).
 - Production bonus by Factory and Mfg Plant reduced to +25% each (was +50%), so the Power Plants are as important as the Factories. Mfg Plants allows the construction of 2 units per turn. 
-- Super Highways double the effect of Stock Exchange (+50% to Gold/Luxuries), and they produce extra Trade at tiles with roads but without farmlands.
+- Super Highways double the effect of Stock Exchange (+50% to Gold/Luxuries), and they produce extra Trade at tiles with roads but without farmlands (the city center tile can still have both farmland and Super Highways bonuses).
 - Doubled costs of all Spaceship parts. All them require Library, University, Research Lab and Factory present in the city in order to be built. 
 - Reduced by one the gold upkeep of Aqueduct, Colosseum (renamed to Amphitheatre), University, Bank, Stock Exchange, Port Facility, SDI Defense, Factory and Mfg Plant.
 - Pollution caused by population is increased by buildings instead of by techs:
