@@ -67,7 +67,7 @@ move_fragments = 6
 ; How many move_fragments IgTer unit movement costs
 igter_cost = 2
 
-; Whether diagonal movement has increased cost 
+; Whether diagonal movement has increased cost (no effect with hex topology)
 ; The cost increase is more accurate with larger values for move_fragments
 pythagorean_diagonal = FALSE
 
@@ -83,13 +83,13 @@ ocean_resources = FALSE
 ;
 ; Notes:
 ;
-; name                 = translatable name as seen by user; if "unused", it is
-;                        not used, but is included for conversion and/or the
-;                        editor.
-; rule_name            = (optional) name for savegames, rulesets etc; if not
-;                        present, 'name' is used. Since the name used in
-;                        savegames must not change, use this when renaming a
-;                        terrain after a ruleset has been released.
+; name                 = translatable name as seen by user
+; rule_name            = (optional) internal name for savegames, rulesets etc;
+;                        if not present, "name" is used for this purpose too.
+;                        Since the name used in savegames must not change, if
+;                        you want to rename an item after a ruleset has been
+;                        released, you should set "rule_name" to the original
+;                        value of "name".
 ; graphic              = preferred graphic; Tilespec [tile_*] section
 ;                        with 'tag' matching this will be used.
 ; graphic_alt          = alternate graphic. When no tilespec 'tag' matching
@@ -109,39 +109,44 @@ ocean_resources = FALSE
 ; road_shield_incr_pct = percent of road shield_incr applied to this terrain
 ; road_trade_incr_pct  = percent of road trade_incr applied to this terrain
 ; base_time            = time to build bases; if 0, cannot build any bases.
-;                        Nonzero values only affect bases with build_time 0.
+;                        Nonzero values only affect extras with build_time 0.
 ; road_time            = time to build roads; if 0, cannot build any roads.
-;                        Nonzero values only affect roads with build_time 0.
-; irrigation_result    = result of irrigation; one of:
+;                        Nonzero values only affect extras with build_time 0.
+; irrigation_result    = result of 'irrigate' activity; one of:
 ;                        "no"  -- cannot irrigate
-;                        "yes" -- can irrigate
-;                        terrain section -- irrigation changes to that terrain
-; irrigation_food_incr = increment to food if tile is irrigated
-; irrigation_time      = time to irrigate; if 0, cannot irrigate
+;                        "yes" -- can build extra
+;                        terrain rule_name -- irrigation changes to that
+;                          terrain
+; irrigation_food_incr = increment to food if tile is 100% irrigated
+;                        (actual bonus controlled by Irrigation_Pct effect)
+; irrigation_time      = time for 'irrigate' activity; if 0, cannot irrigate
 ;                        Nonzero values only affect extras with build_time 0.
-; mining_result        = result of mining; one of:
+;                        Such extras can modify time with build_time_factor.
+; mining_result        = result of 'mine' activity; one of:
 ;                        "no"  -- cannot mine
-;                        "yes" -- can mine
-;                        terrain section -- mining changes to that terrain
-; mining_shield_incr   = increment to shields if tile is mined
-; mining_time          = time to mine; if 0, cannot mine
+;                        "yes" -- can build extra
+;                        terrain rule_name -- mining changes to that terrain
+; mining_shield_incr   = increment to shields if tile is 100% mined
+;                        (actual bonus controlled by Mining_Pct effect)
+; mining_time          = time for 'mine' activity; if 0, cannot mine
 ;                        Nonzero values only affect extras with build_time 0.
+;                        Such extras can modify time with build_time_factor.
 ; transform_result     = result of transformation; one of:
 ;                        "no"  -- cannot transform
-;                        terrain section -- transformation changes to that
+;                        terrain rule_name -- transformation changes to that
 ;                          terrain
 ; transform_time       = time to transform; if 0, cannot transform
 ; pillage_time         = time to pillage extra from the tile (0 = impossible)
 ;                        Nonzero values only affect extras with removal_time 0.
-; clean_pollution_time = time to clean pollution (0 = impossible)
+; clean_pollution_time = time for 'clean pollution' activity (0 = impossible)
 ;                        Nonzero values only affect extras with removal_time 0.
-; clean_fallout_time   = time to clean fallout (0 = impossible)
+; clean_fallout_time   = time for 'clean fallout' activity (0 = impossible)
 ;                        Nonzero values only affect extras with removal_time 0.
 ; animal               = unit type that can appear as animal on the terrain
 ; warmer_wetter_result = result of global warming for wet terrains; one of:
 ;                        "no"  -- no change; does not count for warming
 ;                        "yes" -- no change; counts for warming
-;                        terrain section -- warming changes to that terrain
+;                        terrain rule_name -- warming changes to that terrain
 ; warmer_drier_result  = result of global warming for dry terrains;
 ;                        see warmer_wetter_result
 ; cooler_wetter_result = result of nuclear winter for wet terrains;
@@ -847,13 +852,12 @@ else.\
 ;
 ; Notes:
 ;
-; name                 = name as seen by user; if "unused", it is not used,
-;                        but is included for conversion and/or the editor.
+; name                 = name as seen by user
 ; graphic              = tag specifying preferred graphic
-; graphic_alt	       = tag for alternate garphic if preferred graphic is not 
-;		         present; especially if preferred graphic is non-standard, 
-;		         this should be a standard tag.  Otherwise can use eg "-" 
-;		         for no alternate graphic.
+; graphic_alt          = tag for alternate graphic if preferred graphic is not
+;                        present; especially if preferred graphic is non-standard,
+;                        this should be a standard tag.  Otherwise can use eg "-"
+;                        for no alternate graphic.
 ; identifier           = single-character identifier used in savegames.  This
 ;                        must be unique for each resource, and changing it will
 ;                        break savegame compatibility.
@@ -1128,15 +1132,18 @@ ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
 ; Extra types:
 ;
 ; name                    = translatable name as seen by user
-; rule_name               = (optional) name for savegames, rulesets etc; if not
-;                           present, 'name' is used. Since the name used in
-;                           savegames must not change, use this when renaming
-;                           an extra after a ruleset has been released.
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
 ; category                = How UI should categorize this extra. One of
 ;                           "Infra", "Natural", "Nuisance", or "Bonus"
 ; causes                  = events that can create extra type.
 ;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
-;                           "Base", or "Road"
+;                           "Base", or "Road" (last two require a corresponding
+;                           [base_*] or [road_*] section)
 ; rmcauses                = events that can remove extra type.
 ;                           "CleanPollution", "CleanFallout", or "Pillage"
 ; graphic                 = tag specifying preferred graphic
@@ -1227,6 +1234,28 @@ build_time     = 0
 removal_time   = 0
 conflicts      = "Mine", "Oil Well"
 hidden_by      = "Farmland"
+helptext       = _("\
+Building an irrigation system on a suitable tile causes it to \
+produce some extra food each turn. Most tiles yield one extra food; \
+a desert with a river will yield two, if it is not already benefiting \
+from an oasis.\
+"), _("\
+Without knowledge of Electricity, irrigation requires a nearby source \
+of water: an ocean, lake, or river tile, or another tile with an \
+irrigation system, must share an edge (not just a corner) with the \
+target tile. However, once irrigated, land remains so even if the \
+water source is removed. Once Electricity is known, any suitable \
+tile may be irrigated without a water source.\
+"), _("\
+Building irrigation on a tile with a mine or oil well will destroy it.\
+"), _("\
+City center tiles get their terrain's irrigation bonus automatically, \
+if there is no conflicting mine or oil well on the tile; however, \
+this does not make cities count as a water source for further \
+irrigation. Irrigation can be built on the city tile simply to allow \
+building further irrigation elsewhere, but will not give the tile any \
+further bonus.\
+")
 
 [extra_mine]
 name           = _("Mine")
@@ -1241,10 +1270,10 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "Wood", "Local", FALSE
-      "TerrainClass", "Oceanic", "Local", FALSE
-      "UnitClass", "Sea", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "TerrainFlag", "Wood", "Local", FALSE, TRUE
+      "TerrainClass", "Oceanic", "Local", FALSE, TRUE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1254,6 +1283,14 @@ build_time     = 0
 removal_time   = 0
 conflicts      = "Irrigation", "Farmland"
 hidden_by      = "Oil Well"
+helptext       = _("\
+Mines can be built on some types of terrain, which increases the \
+number of production points produced by that tile. Hills and Mountains \
+get an extra 2 production points per tile; other terrains get 1 extra \
+production point.\
+"), _("\
+Building a mine on an irrigated tile will destroy the irrigation.\
+")
 
 [extra_lumber]
 name           = _("Lumber")
@@ -1268,9 +1305,9 @@ act_gfx_alt2   = "unit.plant"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "Wood", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "TerrainFlag", "Wood", "Local", TRUE, TRUE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1293,11 +1330,11 @@ act_gfx_alt2   = "unit.plant"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Refining", "Player", TRUE
-      "TerrainFlag", "Oil", "Local", TRUE
-      "Extra", "Mine", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Refining", "Player", TRUE, FALSE
+      "TerrainFlag", "Oil", "Local", TRUE, TRUE
+      "Extra", "Mine", "Local", TRUE, FALSE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1306,6 +1343,10 @@ rmreqs         =
 build_time     = 0
 removal_time   = 0
 conflicts      = "Irrigation", "Farmland"
+helptext       = _("\
+Once Refining is known, mines on Desert and Glacier tiles can be \
+upgraded to oil wells for an extra production point.\
+")
 
 [extra_oil_platform]
 name           = _("Oil Platform")
@@ -1331,6 +1372,13 @@ rmreqs         =
 build_time     = 0
 removal_time   = 0
 conflicts      = "Buoy", "Naval Mine"
+helptext       = _("\
+Oil platforms allow cities with Offshore Platforms to get an extra \
+production point from Deep Ocean tiles.\
+"), _("\
+Oil platforms can be built by Workers and similar units on board ships, \
+or directly by Transport units.\
+")
 
 [extra_pollution]
 name           = _("Pollution")
@@ -1345,11 +1393,52 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "unit.pollution"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "NoPollution", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "TerrainFlag", "NoPollution", "Local", FALSE, TRUE
     }
 removal_time   = 0
 flags          = "GlobalWarming"
+helptext       = _("\
+Pollution appears on tiles around cities with high production or \
+population, or when a Mfg. Plant suffers an industrial accident. \
+It halves all output from its tile, and contributes to the risk of \
+global warming.\
+"), _("\
+The pollution can only be cleared by dispatching Workers, Migrants, \
+Settlers, Engineers, or a Transport with the \"clean pollution\" order.\
+"), _("\
+Pollution from production is likely to start becoming important as \
+your civilization becomes more industrialized, giving you buildings \
+such as Factory and Power Plant which boost production. Replacing a \
+Power Plant with cleaner forms of energy -- a Hydro Plant / Hoover \
+Dam, Nuclear Plant, or Solar Plant -- will reduce pollution from \
+production, as will a Recycling Center.\
+"), _("\
+The city's population starts adding to pollution with the Factory, \
+Super Highways, Offshore Platform, and Mfg. Plant buildings; each \
+building causes the population to add more to pollution. A Mass \
+Transit will counteract the pollution from two buildings in a city, \
+and the Eiffel Tower wonder will counteract the pollution from one \
+building in all the owner's cities.\
+"), _("\
+The contribution of these factors can be seen in the city dialog; once \
+it exceeds a threshold, the excess is the percent chance of pollution \
+appearing each turn.\
+"), _("\
+When an unused tile becomes polluted, there is the temptation to avoid \
+the effort of cleaning it; but the spread of pollution has far more \
+terrible results than the immediate economic impact -- every polluted \
+tile increases the chance of global warming. Each time global warming \
+advances, the entire world loses coastal land to the sea and to jungles \
+and swamps, and inland tiles are lost to desert. This tends to \
+devastate cities and leads to global impoverishment.\
+"), _("\
+The risk of global warming is cumulative; the longer polluted tiles \
+are left uncleaned, the higher the risk becomes, and the risk can \
+linger for some time even after all pollution has been cleaned. If a \
+long time passes with an elevated risk of warming, its effects will be \
+all the more severe when it does occur.\
+")
 
 [extra_hut]
 name           = _("Minor Tribe Village")
@@ -1408,6 +1497,16 @@ rmreqs         =
 build_time     = 0
 removal_time   = 0
 conflicts      = "Mine", "Oil Well"
+; /* xgettext:no-c-format */
+helptext       = _("\
+Once Refrigeration is known, irrigation systems can be upgraded to \
+farmland by irrigating them a second time; if the city working the tile \
+has a Supermarket, a farmland tile provides 50% more food.\
+"), _("\
+Farmland on a tile prevents any trade bonus from Super Highways.\
+"), _("\
+Like irrigation, farmland is incompatible with mines and oil wells.\
+")
 
 [extra_fallout]
 name           = _("Fallout")
@@ -1422,11 +1521,23 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "unit.fallout"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "NoPollution", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "TerrainFlag", "NoPollution", "Local", FALSE, TRUE
     }
 removal_time   = 0
 flags          = "NuclearWinter"
+helptext       = _("\
+Nuclear fallout can appear on tiles when a Nuclear unit is \
+detonated, or when a city's Nuclear Plant has an accident. It halves \
+all output from its tile.\
+"), _("\
+Every tile with nuclear fallout also increases the risk of global \
+nuclear winter. If nuclear winter occurs, land across the globe \
+changes into desert, tundra, and ice, and lakes and oceans freeze.\
+"), _("\
+Settlers, Workers, Migrants, Engineers, and Transport units can all \
+clean up nuclear fallout.\
+")
 
 [extra_fort]
 name           = _("Fort")
@@ -1441,12 +1552,12 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Construction", "Player", TRUE
-      "TerrainClass", "Land", "Local", TRUE
-      "UnitFlag", "Fortress", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Construction", "Player", TRUE, FALSE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "Fortress", "Local", TRUE, FALSE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1478,14 +1589,14 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Extra", "Fort", "Local", TRUE
-      "Tech", "Construction", "Player", TRUE
-      "TerrainClass", "Land", "Local", TRUE
-      "UnitFlag", "Fortress", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
-      "CityTile", "Center", "Local", FALSE
-      "Extra", "River", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Extra", "Fort", "Local", TRUE, FALSE
+      "Tech", "Construction", "Player", TRUE, FALSE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "Fortress", "Local", TRUE, FALSE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "CityTile", "Center", "Local", FALSE, TRUE
+      "Extra", "River", "Local", FALSE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1526,11 +1637,11 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Radio", "Player", TRUE
-      "TerrainClass", "Land", "Local", TRUE
-      "UnitFlag", "Airbase", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Radio", "Player", TRUE, FALSE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "Airbase", "Local", TRUE, FALSE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1544,10 +1655,10 @@ hidden_by      = "Airbase"
 flags          = "Refuel"
 helptext       = _("\
 Airstrips are rapidly-built runways allowing air units to land, refuel, \
-and recover; an aircraft remaining on an airstrip for a whole turn \
-without moving recovers a tenth of its hit points (that is, the amount \
-it loses each turn while airborne). However, air units on an airstrip \
-are vulnerable to attack by land units.\
+and recover outside cities; an aircraft remaining on an airstrip for a \
+whole turn without moving recovers a tenth of its hit points (that is, \
+the same amount it loses each turn while airborne). However, air units on \
+an airstrip are vulnerable to attack by land units.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1570,13 +1681,13 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Extra", "Airstrip", "Local", TRUE
-      "Tech", "Radio", "Player", TRUE
-      "TerrainClass", "Land", "Local", TRUE
-      "UnitFlag", "Airbase", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
-      "Extra", "River", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Extra", "Airstrip", "Local", TRUE, FALSE
+      "Tech", "Radio", "Player", TRUE, FALSE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "Airbase", "Local", TRUE, FALSE
+      "CityTile", "Center", "Local", FALSE, TRUE
+      "Extra", "River", "Local", FALSE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1596,9 +1707,9 @@ cannot be upgraded to Airbases.\
 _("\
 Compared to an airstrip, units in an airbase receive extra defense (+50%) \
 against all units (in total, their defense against air units and missiles \
-is doubled), and do not count as aggressive if near a friendly city. \
-Also, air units recover more hit points (a third per turn, the same as in a \
-city without an Airport).\
+is doubled), do not count as aggressive if near a friendly city, and can \
+see further afield. Also, air units recover more hit points (a third per \
+turn, the same as in a city without an Airport).\
 ")
 
 [extra_buoy]
@@ -1614,11 +1725,11 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Radio", "Player", TRUE
-      "TerrainClass", "Oceanic", "Local", TRUE
-      "UnitFlag", "Airbase", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Radio", "Player", TRUE, FALSE
+      "TerrainClass", "Oceanic", "Local", TRUE, FALSE
+      "UnitFlag", "Airbase", "Local", TRUE, FALSE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1646,12 +1757,12 @@ act_gfx_alt2   = "unit.fortress"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Explosives", "Player", TRUE
-      "TerrainClass", "Oceanic", "Local", TRUE
-      "Terrain", "Deep Ocean", "Local", FALSE
-      "UnitFlag", "Settlers", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Explosives", "Player", TRUE, FALSE
+      "TerrainClass", "Oceanic", "Local", TRUE, FALSE
+      "Terrain", "Deep Ocean", "Local", FALSE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1683,9 +1794,9 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "TerrainClass", "Land", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "TerrainClass", "Land", "Local", TRUE, FALSE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 buildable      = FALSE
 removal_time   = 0
@@ -1708,10 +1819,10 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "UnitFlag", "Settlers", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
-      "TerrainClass", "Land", "Local", TRUE
+    { "type", "name", "range", "present", "quiet"
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1746,12 +1857,12 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Railroad", "Player", TRUE
-      "Extra", "Road", "Local", TRUE
-      "UnitFlag", "Settlers", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
-      "TerrainClass", "Land", "Local", TRUE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Railroad", "Player", TRUE, FALSE
+      "Extra", "Road", "Local", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1788,12 +1899,12 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Superconductors", "Player", TRUE
-      "Extra", "Railroad", "Local", TRUE
-      "UnitFlag", "Settlers", "Local", TRUE
-      "UnitClass", "Sea", "Local", FALSE
-      "TerrainClass", "Land", "Local", TRUE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Superconductors", "Player", TRUE, FALSE
+      "Extra", "Railroad", "Local", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1862,14 +1973,14 @@ act_gfx_alt2   = "unit.road"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Explosives", "Player", TRUE
-      "TerrainClass", "Oceanic", "Local", FALSE
-      "Terrain", "Glacier", "Local", FALSE
-      "Terrain", "Hills", "Local", FALSE
-      "Terrain", "Mountains", "Local", FALSE
-      "TerrainClass", "Oceanic", "CAdjacent", TRUE
-      "UnitFlag", "Settlers", "Local", TRUE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Explosives", "Player", TRUE, FALSE
+      "TerrainClass", "Oceanic", "Local", FALSE, TRUE
+      "Terrain", "Glacier", "Local", FALSE, FALSE
+      "Terrain", "Hills", "Local", FALSE, FALSE
+      "Terrain", "Mountains", "Local", FALSE, FALSE
+      "TerrainClass", "Oceanic", "CAdjacent", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1889,7 +2000,7 @@ through an island is two tiles, from one coast tile to the other. \
 [extra_wonder]
 name           = _("Wonder")
 category       = "Natural"
-;causes         = ""
+causes         = "Base"
 ;rmcauses       = ""
 graphic        = "base.wonder"
 graphic_alt    = "base.buoy"
@@ -2048,15 +2159,24 @@ the tile.\
 ; Base types:
 ;
 ; extra                   = name of the extra this base section is part of
+;                           (must have "Base" in its causes)
 ; gui_type                = How gui should handle this base.
 ;                           Value can be "Fortress", "Airbase", or "Other"
 ; border_sq               = Base will claim land ownership up to this radius,
-;                           -1 to disable. If enabled, base cannot exist in city tile.
-; vision_main_sq          = Base will have main layer vision to this radius
+;                           -1 to disable. If enabled, base cannot exist in
+;                           city tile.
+;                           Base (and border) ownership will change hands if
+;                           an enemy unit occupies the tile.
+; vision_main_sq          = Base will have main layer vision to this radius.
+;                           Vision initially provided to owner of unit that
+;                           built base; base will not then change hands unless
+;                           it also claims territory, or tile has another such
+;                           base or city, or another base is built (tile only
+;                           tracks one owner for all bases).
 ; vision_invis_sq         = Base will have invisible layer vision to this radius
 ; flags
-;   - "NoAggressive"      = Units inside are not considered aggressive if there`s
-;                           friendly city within 3 tiles
+;   - "NoAggressive"      = Units inside are not considered aggressive if
+;                           there`s friendly city within 3 tiles
 ;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
 ;   - "ParadropFrom"      = Paradrop can be initiated from base
@@ -2110,6 +2230,7 @@ gui_type       = "Other"
 ; Road types:
 ;
 ; extra                   = name of the extra this road section is part of
+;                           (must have "Road" in its causes)
 ; first_reqs              = additional requirements to build the first part of
 ;                           the road, when none of the adjacent tiles have any
 ;                           integrating roads (see effects.ruleset and
@@ -2143,7 +2264,10 @@ gui_type       = "Other"
 ;                           to, if any: "Road", "Railroad", "River, or "None".
 ;                           Used for UI and loading old savegames
 ; integrates              = list of road types that are suitable next steps
-;                           for travel from this road type
+;                           for travel from this road type; such steps are
+;                           possible for units native to both roads and don`t
+;                           get cost from underlying terrain; graphics are
+;                           drawn accordingly
 ; flags
 ;   - "RequiresBridge"    = Technology with "Bridge" flag needed to build this
 ;                           road on the same tile as another road with

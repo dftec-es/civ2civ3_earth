@@ -109,21 +109,23 @@ veteran_move_bonus = 0, 0, 0, 0, 0
 ;
 ; ** Fields **
 ;
-; name          = translatable name as seen by user
-; rule_name     = (optional) name for savegames, rulesets etc; if not
-;                 present, 'name' is used. Since the name used in savegames
-;                 must not change, use this when renaming a unit class after a
-;                 ruleset has been released.
-; min_speed     = Minimum speed after damage and effects (whole movement points)
-; hp_loss_pct   = Hitpoints lost each turn if unit not in city or native base
-; non_native_def_pct = Defense power percentage applying when defending on
-;                      non-native terrain (such as ship in harbour)
-; hut_behavior  = What happens to huts when unit enters tile:
-;                 "Normal", "Nothing" or "Frighten"
-; flags         = List of unit class flags (from the following list; you
-;                 cannot add custom unit class flags)
-; helptext      = optional help text string; should escape all raw newlines
-;                 so that xgettext parsing works
+; name                = translatable name as seen by user
+; rule_name           = (optional) internal name for savegames, rulesets etc;
+;                       if not present, "name" is used for this purpose too.
+;                       Since the name used in savegames must not change, if
+;                       you want to rename an item after a ruleset has been
+;                       released, you should set "rule_name" to the original
+;                       value of "name".
+; min_speed           = Minimum speed after damage and effects (whole movement points)
+; hp_loss_pct         = Hitpoints lost each turn if unit not in city or native base
+; non_native_def_pct  = Defense power percentage applying when defending on
+;                       non-native terrain (such as ship in harbour)
+; hut_behavior        = What happens to huts when unit enters tile:
+;                       "Normal", "Nothing", or "Frighten"
+; flags               = List of unit class flags (from the following list; you
+;                       cannot add custom unit class flags)
+; helptext            = optional help text string; should escape all raw newlines
+;                       so that xgettext parsing works
 ;
 ; ** Unit class Flags **
 ;
@@ -264,15 +266,16 @@ flags         = "Unreachable", "DoesntOccupyTile"
 ; ** Fields **
 ;
 ; name          = translatable name as seen by user
-; rule_name     = (optional) name for savegames, rulesets etc; if not
-;                 present, 'name' is used. Since the name used in savegames
-;                 must not change, use this when renaming a unit after a
-;                 ruleset has been released.
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
 ; graphic       = tag specifying preferred graphic
-; graphic_alt	= tag for alternate graphic if preferred graphic is not
-;		  present; especially if preferred graphic is non-standard,
-;		  this should be a standard tag.  Otherwise can use eg "-"
-;		  for no alternate graphic.
+; graphic_alt   = tag for alternate graphic if preferred graphic is not
+;                 present; especially if preferred graphic is non-standard,
+;                 this should be a standard tag.  Otherwise can use eg "-"
+;                 for no alternate graphic.
 ; tech_req      = required advance, names from techs.ruleset, or special:
 ;                 "None" => available from start
 ; impr_req	= required city improvement, names from buildings.ruleset
@@ -1622,9 +1625,10 @@ A Helicopter's attack against units on land is a bombard attack; against \
 units on water it has a regular attack.\
 "), _("\
 Helicopters can also transport one military land unit; while most troops \
-must load or unload in a city or airbase units specializing in mobility \
-(Paratroopers, Alpine Troops, Marines, Partisans, and Fanatics) can \
-embark or disembark at any time.\
+must load or unload in a city, airstrip, or airbase (and not in the field \
+or onboard a Carrier), units specializing in mobility (Paratroopers, \
+Alpine Troops, Marines, Partisans, and Fanatics) can embark or disembark \
+at any time.\
 "), _("\
 Unlike other aircraft, Helicopters are not required to return to a city, \
 base, or Carrier to refuel after a set number of turns; however, care \
@@ -2106,7 +2110,9 @@ roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The Carrier is a mobile airport.\
 "), _("\
-It can transport aircraft and military land units (not wheeled).\
+It can transport aircraft and military land units (not wheeled), \
+although land units cannot always be transferred to and from Helicopters \
+while onboard (see Helicopter help).\
 "), _("\
 TIP: Guard Carriers with a handful of fast-moving ships and a \
 battleship, as losing a fully-equipped Carrier is VERY painful \
@@ -2238,11 +2244,8 @@ On impact, the blast will destroy any unit in an area 3 tiles wide \
 Any city within the blast area loses half its population, and \
 land tiles within the blast area are subject to nuclear fallout. \
 "), _("\
-Similar to pollution and global warming, the risk of global nuclear \
-winter increases with fallout. If nuclear winter occurs, terrain \
-across the globe changes into desert, tundra, and ice. Settlers, \
-Migrants, Workers, and Engineers and (for fallout on water) \
-Transports can clean up nuclear fallout.\
+Nuclear fallout reduces tile output and increases the risk of global \
+nuclear winter; see the help on Fallout.\
 "), _("\
 TIP: You may be involved in a situation where you've invaded an \
 enemy country en masse, but the enemy cities are too strong. \

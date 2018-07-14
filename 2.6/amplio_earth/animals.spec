@@ -37,6 +37,8 @@ tiles = { "row", "column", "tag"
   0,  8, "u.hippo1"     ;
   0,  9, "u.rhino1"     ;
   0, 10, "u.elephant1"  ;
+  0, 11, "u.kraken1"    ;
+  0, 12, "u.storm1"     ;
   2,  0, "u.wolf"       ; [Bd]
   2,  1, "u.leopard"    ; [SP]
   2,  2, "u.tiger"      ; [Bd]
@@ -46,6 +48,7 @@ tiles = { "row", "column", "tag"
   2,  6, "u.crocodile"  ; [SP]
   2,  7, "u.gorilla"    ; [Bd]
   2,  8, "u.panther"    ; [SP]
-  2,  9, "u.storm"      ; [Bd]
+  2, 11, "u.kraken"     ; [Bd]
+  2, 12, "u.storm"      ; [Bd]
 
 }

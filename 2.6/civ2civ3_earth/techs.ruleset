@@ -33,15 +33,22 @@ options="+Freeciv-2.6-ruleset"
 ; Notes:
 ;
 ; name          = translatable name as seen by user
-; rule_name     = (optional) name for savegames, rulesets etc; if not
-;                 present, 'name' is used. Since the name used in savegames
-;                 must not change, use this when renaming a tech after a
-;                 ruleset has been released.
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
 ; req1, req2    = advances required before researching this one
-; root_req      = tech required before acquiring this tech, by any
-;     means, inherited by all techs that require this tech in turn unless
-;     "None" is given here explicitly; and you can make a tech available
-;     only through the init_tech of a nation by making it root_req itself.
+; root_req      = tech required before acquiring this tech, by any means.
+;                 All techs with any direct or indirect dependency on this
+;                 one will *also* have this root_req, as well as their own
+;                 and any others they inherit.
+;                 Giving "None" explicitly here prevents a tech from
+;                 inheriting root_reqs in this way, and stops root_req
+;                 inheritance through that tech.
+;                 Specifying a tech's root_req as itself means that the tech
+;                 can only be acquired by special means (nation's init_techs,
+;                 scripting, etc).
 ; flags         = special flag strings
 ; graphic       = icon for technology
 ; graphic_alt   = alternate icon
@@ -578,8 +585,8 @@ flags    = ""
 graphic     = "a.miniaturization"
 graphic_alt = "-"
 helptext = _("\
-Allows Settlers, Migrants, Workers, Engineers and Transports to build \
-oil platforms on deep ocean, required to get the bonus from \
+Allows Settlers, Migrants, Workers, Engineers, and Transports to build \
+oil platforms on Deep Ocean, required to get the bonus from \
 Offshore Platforms.\
 ")
 cost     = 480
@@ -759,8 +766,9 @@ flags    = ""
 graphic     = "a.refining"
 graphic_alt = "-"
 helptext = _("\
-Allows Settlers, Migrants, Workers and Engineers to upgrade mines to \
-oil wells on desert, tundra and glacier.\
+Allows Settlers, Migrants, Workers and Engineers to upgrade \
+mines to oil wells on Desert and Glacier tiles, for an extra production \
+point.\
 ")
 cost     = 400
 
