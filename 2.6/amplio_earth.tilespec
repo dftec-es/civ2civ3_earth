@@ -109,7 +109,7 @@ files =
   "amplio_earth/veterancy.spec",
   "misc/flags.spec",
   "amplio_earth/misc/buildings-large.spec",
-;  "amplio_earth/misc/wonders-large.spec",
+  "misc/wonders-large.spec",
   "misc/space.spec",
   "misc/techs.spec",
   "misc/treaty.spec",
