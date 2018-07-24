@@ -2704,8 +2704,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable", "Partia
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Snakes can move on any land tile except Tundra, Glacier or Mountains.\
 ")
 
 [unit_crocodile]
@@ -2737,8 +2735,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Crocodiles can move on Swamp or Jungle.\
 ")
 
 [unit_gorilla]
@@ -2770,8 +2766,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable", "IgTer"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Gorillas can move on Swamp or Jungle.\
 ")
 
 [unit_wolf]
@@ -2803,8 +2797,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Wolves can move on Tundra, Plains, Grassland, Forest, Hills or Mountains.\
 ")
 
 [unit_leopard]
@@ -2836,8 +2828,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Leopards can move on any land tile except Tundra, Glacier or Mountains.\
 ")
 
 [unit_panther]
@@ -2869,8 +2859,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Panthers can move on any land tile except Tundra, Glacier or Mountains.\
 ")
 
 [unit_tiger]
@@ -2902,8 +2890,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Tigers can move on Swamp, Plains, Grassland, Jungle or Forest.\
 ")
 
 [unit_lion]
@@ -2935,8 +2921,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Lions can move on Desert, Plains, Grassland or Hills.\
 ")
 
 [unit_bear]
@@ -2968,8 +2952,6 @@ flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
-"), _("\
-Bears can move on Glacier, Tundra, Forest, Hills or Mountains.\
 ")
 
 [unit_storm]
