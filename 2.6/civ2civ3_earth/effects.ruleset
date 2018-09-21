@@ -1880,42 +1880,6 @@ reqs    =
 ;      "Gov", "Democracy", "Player", FALSE
     }
 
-; Bribe and Incite costs are inceased the same
-[effect_bribe_cost_1]
-type    = "Unit_Bribe_Cost_Pct"
-value   = 100
-reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Anarchy", "Player", FALSE
-;      "Gov", "Tribal", "Player", FALSE
-      "Gov", "Despotism", "Player", FALSE
-      "Gov", "Monarchy", "Player", FALSE
-;      "Gov", "Fascism", "Player", FALSE
-;      "Gov", "Communism", "Player", FALSE
-;      "Gov", "Fundamentalism", "Player", FALSE
-;      "Gov", "Federation", "Player", FALSE
-;      "Gov", "Republic", "Player", FALSE
-;      "Gov", "Democracy", "Player", FALSE
-    }
-
-; Democracy and Federation are immune (see game.ruleset)
-[effect_incite_cost_1]
-type    = "Incite_Cost_Pct"
-value   = 100
-reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Anarchy", "Player", FALSE
-;      "Gov", "Tribal", "Player", FALSE
-      "Gov", "Despotism", "Player", FALSE
-      "Gov", "Monarchy", "Player", FALSE
-;      "Gov", "Fascism", "Player", FALSE
-;      "Gov", "Communism", "Player", FALSE
-;      "Gov", "Fundamentalism", "Player", FALSE
-;      "Gov", "Federation", "Player", FALSE
-;      "Gov", "Republic", "Player", FALSE
-;      "Gov", "Democracy", "Player", FALSE
-    }
-
 [effect_content_tribal]
 type    = "Make_Content"
 value   = 1
@@ -2491,14 +2455,8 @@ reqs    =
       "Building", "Courthouse", "City"
     }
 
-[effect_courthouse_incite]
-type    = "Incite_Cost_Pct"
-value   = 100
-reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Courthouse", "City", TRUE
-    }
-
+; any city with Courthouse immune to incite (see game.ruleset)
+; any non empty city gets +100% incite cost
 [effect_incite_cost_not_empty]
 type    = "Incite_Cost_Pct"
 value   = 100
@@ -6011,10 +5969,10 @@ reqs    =
       "Extra", "Pollution", "Local"
     }
 
-; Cost to bribe: +10% for each 1000 culture points of the player
+; Cost to bribe: +50% for each 1000 culture points of the player
 [effect_culture_bribe_1]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "1000", "Player"
@@ -6022,7 +5980,7 @@ reqs    =
 
 [effect_culture_bribe_2]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "2000", "Player"
@@ -6030,7 +5988,7 @@ reqs    =
 
 [effect_culture_bribe_3]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "3000", "Player"
@@ -6038,7 +5996,7 @@ reqs    =
 
 [effect_culture_bribe_4]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "4000", "Player"
@@ -6046,7 +6004,7 @@ reqs    =
 
 [effect_culture_bribe_5]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "5000", "Player"
@@ -6054,7 +6012,7 @@ reqs    =
 
 [effect_culture_bribe_6]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "6000", "Player"
@@ -6062,7 +6020,7 @@ reqs    =
 
 [effect_culture_bribe_7]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "7000", "Player"
@@ -6070,7 +6028,7 @@ reqs    =
 
 [effect_culture_bribe_8]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "8000", "Player"
@@ -6078,25 +6036,25 @@ reqs    =
 
 [effect_culture_bribe_9]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "9000", "Player"
     }
 
-; 10 * 10 = +100%
+; 50 * 10 = +500%
 [effect_culture_bribe_10]
 type    = "Unit_Bribe_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "10000", "Player"
     }
 
-; Cost to incite: +10% for each 1000 culture points of the player 
+; Cost to incite: +50% for each 1000 culture points of the player 
 [effect_culture_incite_1]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "1000", "Player"
@@ -6104,7 +6062,7 @@ reqs    =
 
 [effect_culture_incite_2]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "2000", "Player"
@@ -6112,7 +6070,7 @@ reqs    =
 
 [effect_culture_incite_3]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "3000", "Player"
@@ -6120,7 +6078,7 @@ reqs    =
 
 [effect_culture_incite_4]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "4000", "Player"
@@ -6128,7 +6086,7 @@ reqs    =
 
 [effect_culture_incite_5]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "5000", "Player"
@@ -6136,7 +6094,7 @@ reqs    =
 
 [effect_culture_incite_6]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "6000", "Player"
@@ -6144,7 +6102,7 @@ reqs    =
 
 [effect_culture_incite_7]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "7000", "Player"
@@ -6152,7 +6110,7 @@ reqs    =
 
 [effect_culture_incite_8]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "8000", "Player"
@@ -6160,16 +6118,16 @@ reqs    =
 
 [effect_culture_incite_9]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "9000", "Player"
     }
 
-; 10 * 10 = +100%
+; 50 * 10 = +500%
 [effect_culture_incite_10]
 type    = "Incite_Cost_Pct"
-value   = 10
+value   = 50
 reqs    =
     { "type", "name", "range"
       "MinCulture", "10000", "Player"

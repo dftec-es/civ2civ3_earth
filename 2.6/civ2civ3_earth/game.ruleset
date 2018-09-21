@@ -370,8 +370,7 @@ actor_reqs    =
     }
 target_reqs  =
     { "type",   "name", "range", "present"
-      "Gov", "Federation", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
+      "Building", "Courthouse", "City", FALSE
       "Building", "Palace", "City", FALSE
       "Building", "Ecclesiastical Palace", "City", FALSE
       "Building", "Mausoleum of Mausolos", "Player", FALSE

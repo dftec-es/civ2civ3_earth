@@ -440,12 +440,11 @@ Halves all kinds of waste in a city (corruption, production waste, and \
 food waste). In your capital, corruption and production waste is \
 eliminated. A Granary together with a Courthouse in a city will \
 eliminate food waste.\
-"),
-; /* xgettext:no-c-format */
-_("\
+"), _("\
 Also makes one unhappy citizen content (unless that citizen is unhappy \
-about military activity), and increases (+100%) the cost of the city \
-to be incited to revolt.\
+about military activity).\
+"), _("\
+A city with a Courthouse cannot be incited to revolt.\
 ")
 
 [building_factory]
@@ -560,7 +559,7 @@ A Hospital is used to treat the ill, and sometimes for medical \
 research. A city with a Hospital is less likely to suffer from \
 plagues (by 30% of the base chance).\
 "), _("\
-The effect of Barracks to restore hit points is halved for infantry \
+The effect of Barracks to restore hit points is halved for land \
 units when there is no Hospital present in the city.\
 ")
 
@@ -1478,9 +1477,9 @@ sound_alt	= "w_generic"
 helptext	= _("\
 This stunning technological achievement makes one content citizen \
 happy in each of your cities (2 extra luxury per city). It further \
-reduces the risk of plague in the city (by 10% of the base chance); \
-together with an Aqueduct, a Sewer System, and an Hospital, it \
-entirely eliminates the risk of plague.\
+reduces the risk of plague in all your cities (by 10% of the base \
+chance); together with an Aqueduct, a Sewer System, and an Hospital, \
+it entirely eliminates the risk of plague.\
 ")
 
 [building_darwins_voyage]

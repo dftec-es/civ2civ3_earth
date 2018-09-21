@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 15-Jul-2018)
+Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 08-Ago-2018)
 ============================================================
 
 civ2civ3_earth is a fork of the ruleset civ2civ3 (included in freeciv v2.6). This "earth" pack introduces some of the changes planned for future versions of civ2civ3, allowing players to test them before they are available in the next freeciv releases. It also includes a world map scenario, adapted to be played with these rules.
@@ -46,8 +46,8 @@ CORE CHANGES:
 - Enabled risk of plague at cities with population greater than 4. Chances reduced by the buildings Aqueduct, Sewer System, Hospital, and the wonder Cure for Cancer.
 - Added other random disasters: Earthquake (city on Hills), Fire (city larger than 8), Flood (city near Rivers), and Nuclear Accident (city with Nuclear Plant).
 - Enabled culture points, produced in each city by wonders, and by scientific or religious buildings.
-The culture accumulated by your nation increases the cost to bribe your units or incite your cities (up to +100%), and reduces the chances of civil war (up to -50%).
 The culture accumulated by each city increases its resistance against actions of enemy agents (up to +50%).
+The culture accumulated by your nation reduces the chances of civil war (up to -50%), and increases the cost to bribe your units or incite your cities (up to +500%).
 - Enabled achievements, that may give extra culture: Metropolis (city size 20), Multicultural (2 nationalities), Literate (100% literacy), Land Ahoy (2nd continent), Entire Map Known, Spaceship Launch.
 - Added new barbarian nation that controls hostile animal units (with low attack, up to 2), placed randomly at the start of the game. Storms placed on oceans can sink even Ironclads, so avoid ending the turn near them.
 - Increased "AI Love" effect for AI players, in order to reduce the amount of wars between them.
@@ -218,20 +218,20 @@ GOVERNMENTS:
 Tax\Lux\Sci Rate  0        60       60       70       70       80       90       90       80       80
 Output per tile # -1(if>2) -1(if>2) -1(if>2) 0        0        +1Trade  +1Trade  0        0        0
 Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) 0       (+1Trade)(+1Trade)(+1Trade) 0        0
-                                                                                
+
 Unit Upkeep       Shield   Shield   Gold     Gold     Gold(x2) Shield   Gold(x2) Gold(x2) Shield   Gold(x2)
 Free Units        2\2      2\2      2\2      3\3      2\2      1\1      1\1      2\2      3\3      3\3
 Mil Unhappiness   0        0        0       -1       -1       -1       -2       -1       -1        0
 Martial Law      +1        0       +1       +1        0        0        0        0       +2       +2
-                                                                                
+
 Civil war         99%      45%      50%      35%      30%      20%      15%      10%      25%      40%
 Empire Size       0        /12      /10      /14      /18      /16      /32      /24      /28      /20
-Bribe\Incite      x1       x2       x1       x1       x2       x2       x2\(No)  x2\(No)  x2       x2
+
 Veteran                   +50%(land)                                            +Spies   +Spies    +25%(land)
 Special          +NoUpkeep+Content +75%Gold +50%Gold +Tithes  -Revolt  -Revolt  +Luxury  +NoUpkeep +NoUpkeep
                  -50%Lux           (Palace) (Palace) -50%Sci           -Senate  -Senate  (Cost=1)  (Cost=1)
                  -NoTaxes                            +Fanatic          +Partisan         +Partisan -National
-                                                                                
+
 Base Corruption   0%       30%      20%      10%      15%      25%      5%       0%       30%      20%
 Base Waste        30%      0%       10%      20%      15%      5%       25%      30%      0%       10%
 by Distance *    +1%      +1%      +1%      +1%      +1%      +1%      +1%      +0%      +0%      +1%
@@ -248,7 +248,6 @@ Waste by distance is doubled (+2% per tile of distance to capital) until Trade i
 - "Free Units": Means units free of Gold\Shield upkeep and also free of military unhappiness. By default 2 free units per city.
 - "Mil Unhappiness": Most governments are affected by military unhappiness due to units out of cities/fortresses (same as Republic in classic ruleset).
 - "Martial Law": Max 3 units can apply martial law (was max 20 for Despotism and Anarchy).
-- "Bribe\Incite": The cost to bribe your units or incite your cities are increased under some governments. Democracy and Federation are immune to incite actions.
 
 - The output bonus of Palace (under Despotism and Monarchy) switched from Production to Gold.
 - The bonus "+1 Trade" under Republic and Democracy does not affect oceanic tiles.
@@ -306,7 +305,7 @@ BUILDINGS:
 - Added Hospital (available with Medicine), that reduces -30% the chances of plague in the city (old effect of Medicine), and required by Barracks to recover damaged Land units.
 - The effect of Barracks to recover damaged units is halved when the resources required by the unit are not available in the city. Naval units recover +25% HPs at cities with a Harbour (full recover with a Port) and the resource required by the unit.
 - Aqueduct is cheaper near rivers or lakes. Sewer System is needed to grow larger than pop 16 (instead of 12). Each one reduces the chances of illness by -30%.
-- Courthouse: Makes 1 citizen content, increases (+100%) the cost to incite the city to revolt, and halves any kind of waste (Trade, Production or Food).
+- Courthouse: Makes 1 citizen content, makes the city immune to incite actions, and halves any kind of waste (Trade, Production or Food).
 Added new effect: Food wasted by distance to Palace = -1% Food each 2 tiles. For example, cities at distance 10 of the Palace lose -5% Food, so they lose -1 Food when their output reaches 20 Food per turn (noticeable with 10 Food per turn due to rounding effects).
 - Granary halves the waste of Food caused by distance to Palace. Together with a Courthouse, it eliminates completely the waste of Food.
 - Police Station: Makes 2 citizens content, and reduces unhappiness caused by 1 military unit.
@@ -538,9 +537,9 @@ SINCE CIV2CIV3 v2.6:
 - When you get a new tech by treaty, conquest, or diplomatic mission, half of its cost is subtracted from your research pool.
 - You do not lose a technology due to negative research pool unless the negative points are greater than half the cost of your current research.
 - Enabled culture points, produced in each city by wonders, and by scientific or religious buildings. Enabled achievements, that may give extra culture.
-- National culture increases the cost to bribe your units or incite your cities (up to +100%), and reduces the chances of civil war (up to -50%). The culture of each city increases its resistance against actions of enemy agents (up to +50%).
-- Immunity against bribe actions (under Republic or Democracy) replaced by increased costs (+100%). Most governments (except Despotism and Monarchy) get these increased costs against bribe and incite actions too.
-- Effect of Courthouse against incite actions fixed to +100%. Replaced the lower cost of empty cities, by an additional +100% when not empty.
+- The culture accumulated by each city increases its resistance against actions of enemy agents (up to +50%).
+- The culture accumulated by your nation reduces the chances of civil war (up to -50%), and increases the cost to bribe your units or incite your cities (up to +500%).
+- Governments no longer get immunity against bribe or incite actions. Cities with a Courthouse or a Palace are now immune to incite actions.
 
 - Tech Explosives allows new terrain improvements: Naval Mines that damage adjacent sea units, and Canals to join oceans separated by no more than 2 land tiles.
 - Tech Medicine allows non wheeled land units to recover 2 HPs per turn, even without resting. Physics allow the same for wheeled and naval units.

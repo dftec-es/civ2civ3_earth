@@ -2551,9 +2551,7 @@ although the unit disappears after the action is complete.\
 "), _("\
  - \"Establish Embassy\": This action always succeeds, and gives \
 permanent contact with the city's owner, as well as intelligence \
-on their tax rates and technology. Each player you have an embassy \
-with that knows a technology reduces that technology's research \
-cost to you.\
+on their tax rates and technology.\
 "), _("\
  - \"Investigate City\": Your unit attempts to report detailed \
 information about the city: its status, what buildings and units are \
@@ -2751,7 +2749,7 @@ sound_fight_alt = "f_generic"
 build_cost    = 10
 pop_cost      = 0
 attack        = 1
-defense       = 1
+defense       = 2
 hitpoints     = 10
 firepower     = 1
 move_rate     = 1
@@ -2762,7 +2760,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable", "IgTer"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -2785,8 +2783,8 @@ attack        = 1
 defense       = 1
 hitpoints     = 10
 firepower     = 1
-move_rate     = 2
-vision_radius_sq = 2
+move_rate     = 1
+vision_radius_sq = 6
 transport_cap = 0
 fuel          = 0
 uk_happy      = 0
@@ -2816,8 +2814,8 @@ attack        = 2
 defense       = 1
 hitpoints     = 10
 firepower     = 1
-move_rate     = 2
-vision_radius_sq = 2
+move_rate     = 1
+vision_radius_sq = 6
 transport_cap = 0
 fuel          = 0
 uk_happy      = 0
@@ -2847,8 +2845,8 @@ attack        = 2
 defense       = 1
 hitpoints     = 10
 firepower     = 1
-move_rate     = 2
-vision_radius_sq = 2
+move_rate     = 1
+vision_radius_sq = 6
 transport_cap = 0
 fuel          = 0
 uk_happy      = 0
@@ -2878,8 +2876,8 @@ attack        = 2
 defense       = 1
 hitpoints     = 10
 firepower     = 1
-move_rate     = 2
-vision_radius_sq = 2
+move_rate     = 1
+vision_radius_sq = 6
 transport_cap = 0
 fuel          = 0
 uk_happy      = 0
@@ -2909,8 +2907,8 @@ attack        = 2
 defense       = 1
 hitpoints     = 10
 firepower     = 1
-move_rate     = 2
-vision_radius_sq = 2
+move_rate     = 1
+vision_radius_sq = 6
 transport_cap = 0
 fuel          = 0
 uk_happy      = 0
