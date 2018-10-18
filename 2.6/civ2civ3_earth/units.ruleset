@@ -67,7 +67,7 @@ Uranium: One more veteran level when produced at cities with Uranium.\
     _("Fortress"), _("Can build Forts and Fortresses.")
     _("Airbase"), _("Can build Airstrips and Airbases.")
     _("Transform")
-    _("AirAttacker"), _("Very bad at attacking AEGIS.")
+    _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
     _("Submarine"), _("Attack value halved when attacking Destroyer.")
     _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
@@ -1997,13 +1997,13 @@ uk_food       = 1
 uk_gold       = 1
 bonuses       =
    { "flag", "type", "value"
-     "AirAttacker", "DefenseMultiplier", 4
+     "AirAttacker", "DefenseMultiplier", 1
    }
 flags         = "BadCityDefender", "Iron", "Oil", "Aluminum"
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The AEGIS Cruiser is equipped with an advanced defensive missile \
-system, giving it quintuple defense against all air attacks.\
+system, giving it double defense against all air attacks.\
 ")
 
 [unit_battleship]
@@ -2698,7 +2698,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable", "Partial_Invis", "IgZOC"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
+                "Partial_Invis", "IgZOC"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -2965,7 +2966,7 @@ sound_fight   = "f_storm"
 sound_fight_alt = "f_generic"
 build_cost    = 10
 pop_cost      = 0
-attack        = 9
+attack        = 0
 defense       = 9
 hitpoints     = 10
 firepower     = 1
@@ -2977,8 +2978,9 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable", "IgZOC", "NoVeteran"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
+                "IgZOC", "NoVeteran"
 roles         = ""
 helptext      = _("\
-Storms can move only on Deep Oceans, but can attack Oceans too.\
+Watch out for wild animals in the beginning of the game.\
 ")

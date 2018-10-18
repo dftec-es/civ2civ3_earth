@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 08-Ago-2018)
+Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 11-Oct-2018)
 ============================================================
 
 civ2civ3_earth is a fork of the ruleset civ2civ3 (included in freeciv v2.6). This "earth" pack introduces some of the changes planned for future versions of civ2civ3, allowing players to test them before they are available in the next freeciv releases. It also includes a world map scenario, adapted to be played with these rules.
@@ -42,14 +42,13 @@ CORE CHANGES:
 - The cost of each tech is equal to the number of steps needed to get the tech (Tech Cost = Base Cost * Number of Parents). It is a linear formula more similar to civ2, and it fits better the new reduced bonuses from Trade and Science.
 - Tech upkeep assigned to cities: some Science is required from each city to maintain a given technological level. The upkeep grows from 0 during the middle ages, up to 10 research points per city when the whole tech tree was researched.
 - No holes allowed in tech tree. To acquire a tech you must know its prerequisites, and you cannot lose a tech that another depends on.
-- The 6th citizen in each city is the first unhappy one (was 5th).
 - Enabled risk of plague at cities with population greater than 4. Chances reduced by the buildings Aqueduct, Sewer System, Hospital, and the wonder Cure for Cancer.
 - Added other random disasters: Earthquake (city on Hills), Fire (city larger than 8), Flood (city near Rivers), and Nuclear Accident (city with Nuclear Plant).
 - Enabled culture points, produced in each city by wonders, and by scientific or religious buildings.
 The culture accumulated by each city increases its resistance against actions of enemy agents (up to +50%).
 The culture accumulated by your nation reduces the chances of civil war (up to -50%), and increases the cost to bribe your units or incite your cities (up to +500%).
 - Enabled achievements, that may give extra culture: Metropolis (city size 20), Multicultural (2 nationalities), Literate (100% literacy), Land Ahoy (2nd continent), Entire Map Known, Spaceship Launch.
-- Added new barbarian nation that controls hostile animal units (with low attack, up to 2), placed randomly at the start of the game. Storms placed on oceans can sink even Ironclads, so avoid ending the turn near them.
+- Added new barbarian nation that controls hostile animal units (with low attack, up to 2), placed randomly at the start of the game. Storms (placed on oceans) can block the movement, but can not attack.
 - Increased "AI Love" effect for AI players, in order to reduce the amount of wars between them.
 
 
@@ -403,7 +402,7 @@ Frigate        *3    2    4    1    20  *40  *No Cargo
 Ironclad        4   *3    4    1   *20  *50
 Destroyer       4    4    6    1    30   60  *(x2 def anti-submarine)
 Cruiser         6    6    5   *1    30   80  
-AEGIS Cruiser   8    8    5   *1    30   100 *(x5 def anti-air)
+AEGIS Cruiser   8    8    5   *1    30   100 *(x2 def anti-air)
 Battleship      12   12   4   *1   *30   160 
 Submarine       12  *4    5   *1   *20  *70  *(x2 def anti-air), Cargo 8, Invis
                          
@@ -441,18 +440,18 @@ FULL LIST OF WONDERS
 +1 Science per worked tile in the city.
 
 - "Hanging Gardens" 200. Obsolete by Electricity (that increases Amphitheatre effect):
-+1 Content in every city. +4 Luxury in the city where it is built.
++1 Content in all your cities. +4 Luxury in the city where it is built.
 - "Mausoleum of Mausolos" 200. Obsolete by Communism (Police Station):
-+1 Content in every city with Walls, and +1 extra content in every city with Courthouse. Your cities are immune to incite actions.
++1 Content in your cities with Walls, and +1 extra content in your cities with Courthouse. Your cities are immune to incite actions.
 - "Temple of Artemis" 200. Requires Temple. Obsolete by Theology (that increases Cathedral effect):
-+2 Content in every city with Temple.
++2 Content in your cities with Temple.
 - "Michelangelo's Chapel" 400. Requires Cathedral:
-+3 Content in every city with Cathedral.
++3 Content in your cities with Cathedral.
 
-- "J.S. Bach's Cathedral" 400. Continental range:
-+2 Luxuries in every city of the same continent.
+- "J.S. Bach's Cathedral" 400:
++2 Luxuries in all your cities.
 - "Cure For Cancer" 600:
-+2 Luxuries in every city. -10% chance of illness.
++2 Luxuries in all your cities. -10% chance of illness.
 
 - (#)"Shakespeare's Theatre" 300:
 +1 Luxury in all your cities, +6 Luxury where it is built. Entertainer specialist output = 3 for every nation.
@@ -472,8 +471,8 @@ FULL LIST OF WONDERS
 +1 Move, and built veteran, for Galley and Sea units.
 - "Magellan's Expedition" 400. Requires adjacent sea. Obsolete by Nuclear Power (that increases even more the movement of Sea units):
 +1 Move, and +50% chance of veteran after a battle, for Sea units (No galleys).
-- "Sun Tzu's War Academy" 300. Continental range. Obsolete by Mobile Warfare (Barracks III):
-+1 Veteran level (cumulative to Barracks), for Land (and Big Land) units produced in cities of the same continent.
+- "Sun Tzu's War Academy" 300. Obsolete by Mobile Warfare (Barracks III):
++1 Veteran level (cumulative to Barracks), for Land (and Big Land) units.
 
 - "Statue of Zeus" 200. Obsolete by Conscription (that enables wonder with similar effect):
 +1 Military content in every city, +2 free Shields (or Gold) per city for upkeep of units.
@@ -482,12 +481,12 @@ Disables unhappiness caused by empire size (up to 100 cities). +50% chance of ve
 - "Women's Suffrage" 600:
 +1 Military content in every city (cumulative to Police Stations). Under Democracy it also halves the unhappiness caused by military units.
 
-- "Great Wall" 300. Continental range. Obsolete by Flight:
-+50% Defense bonus against Land (and Big Land) units in every city of the same continent, and no loss of population due to attacks.
+- "Great Wall" 300. Obsolete by Flight:
++50% Defense bonus against Land (and Big Land) units in all your cities, and no loss of population due to attacks.
 - "Leonardo's Workshop" 400. Obsolete by Combustion:
 Upgrades one obsolete unit per game turn.
-- "Eiffel Tower" 300. Continental range:
-Enables appearance of Partisans in cities of the same continent, no matter your government, and -25% pollution caused by population.
+- "Eiffel Tower" 300:
+Enables appearance of Partisans in all your cities, no matter your government, and -25% pollution caused by population.
 - "Hoover Dam" 600. Requires Hydro Plant (and adjacent River):
 Gives to every Hydro Plant the same effect as Solar Plants (-25% pollution caused by production). Doubles the bonus to production of a Hydro Plant in the city.
 - (#)"Manhattan Project" 600. Requires Uranium:
@@ -540,6 +539,7 @@ SINCE CIV2CIV3 v2.6:
 - The culture accumulated by each city increases its resistance against actions of enemy agents (up to +50%).
 - The culture accumulated by your nation reduces the chances of civil war (up to -50%), and increases the cost to bribe your units or incite your cities (up to +500%).
 - Governments no longer get immunity against bribe or incite actions. Cities with a Courthouse or a Palace are now immune to incite actions.
+- The 5th citizen in each city is the first unhappy one (was 6th).
 
 - Tech Explosives allows new terrain improvements: Naval Mines that damage adjacent sea units, and Canals to join oceans separated by no more than 2 land tiles.
 - Tech Medicine allows non wheeled land units to recover 2 HPs per turn, even without resting. Physics allow the same for wheeled and naval units.
@@ -550,7 +550,8 @@ SINCE CIV2CIV3 v2.6:
 - Tribal gets +1 content per city, instead of martial law. Federation gets +2 Luxury per city.
 - Appearance of Partisans in conquered cities requires the knowledge of Guerrilla Warfare by the owner.
 - Readjusted effect of wonders "Statue of Zeus" (+2 gold/shield for upkeep of units), "King Richard's Crusade" (bonus to empire size and veteran chance, obsolete by Radio), "Mausoleum of Mausolos" (obsolete by Communism), "Copernicus' Observatory" (obsolete by Rocketry), "Great Library" (+1 Science per Library for the owner, obsolete by Computers), "Isaac Newton's College" (+2 Science per University for the owner), "Internet" (+3 Science per Research Lab for the owner, and tech parasite effect), "A.Smith's Trading Co" (+2 Gold per Stock Exchange for the owner, +1 trade route in the city), "Statue of Liberty" (+1 move for Merchants and Diplomats), "Marco Polo's Embassy" (free embassies, +1 trade route in the city, obsolete by The Corporation), "United Nations" (veteran Diplomats in the city, free embassies for every player), "Hoover Dam" (requires Hydro Plant, double bonus to production).
-- The following wonders now affect only to cities located on the same continent: "Great Wall" (now obsolete by Flight), "Sun Tzu's War Academy", "Eiffel Tower" (now enables appearance of Partisans), and "J.S. Bach's Cathedral".
+- The effects of wonders are no longer restricted to the continent where they are built. It affects to: "Great Wall" (now obsolete by Flight), "Sun Tzu's War Academy", "Eiffel Tower" (now enables appearance of Partisans), and "J.S. Bach's Cathedral".
+- Building Mass Transit neutralizes all the pollution generated by the population (was 50%).
 
 - Increased by one the number of veterancy levels, with effects: 100%, 125%, 150%, 175% and 200%. Engineers up to 150%.
 - All military infantry units can build fortresses. All worker units can build airbases, and can remove any terrain improvement.
@@ -560,8 +561,9 @@ SINCE CIV2CIV3 v2.6:
 - Nuclear weapons have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
 - Buildings with bonus to defense are visible by others (middle click on the city).
 - Reduced a bit some vision ranges. Most air and naval units see 2 tiles in horizontal/vertical, and 1 tile in diagonal (same as Explorers), except AEGIS cruiser and Stealth Fighter/Bomber that can see 2 tiles in diagonal too.
+- AEGIS cruiser doubles its defense against air attacks (was x5).
 
-- Added new barbarian nation that controls hostile animal units, placed randomly at the start of the game.
+- Added new barbarian nation that controls hostile animal units, placed randomly at the start of the game. Storms can block the movement, but can not attack.
 - Enabled national trade routes again (without min distance), that spread the effects of bonus resources, though with halved revenues. It is not possible to create trade routes with foreign cities unless they are allies or on the same team. Each city can establish 1 trade route (2 after the discovery of The Corporation). 
 - Forest and Jungle can be mined to get Lumber (+1 production). Forests can no longer be transformed to Grassland directly (now Forest to Plains, and Plains to Grassland).
 - Added new resources, up to 3 per terrain: Incense (+3 trade on desert), Deer (+2 food on forest, while Pheasant now +1 food and +1 trade), Marble (+1 production and +1 trade on hills), Ivory (now on jungle, with 1 less trade), Seals (same bonuses as Ivory, but on glacier), Shellfish (+1 food and +1 trade on oceans and lakes), Salt (+1 production and +1 trade on coastal ocean), Horses (+2 production on plains, while Buffalo now +1 food and +1 production), Sugar (+2 food and +2 trade on swamp).

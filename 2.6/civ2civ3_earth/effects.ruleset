@@ -245,7 +245,7 @@ reqs    =
 
 [effect_unhappysize]
 type    = "City_Unhappy_Size"
-value   = 5
+value   = 4
 
 ; Barbarian effects
 
@@ -2718,7 +2718,7 @@ reqs    =
 ; Counteracts population pollution from any 2 other buildings
 [effect_mass_transit]
 type    = "Pollu_Pop_Pct"
-value   = -50
+value   = -100
 reqs    =
     { "type", "name", "range"
       "Building", "Mass Transit", "City"
@@ -3578,7 +3578,6 @@ value   = -25
 reqs    =
     { "type", "name", "range"
       "Building", "Eiffel Tower", "Player"
-      "Building", "Eiffel Tower", "Continent"
     }
 
 [effect_eiffel_tower_2]
@@ -3587,7 +3586,6 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present"
       "Building", "Eiffel Tower", "Player"
-      "Building", "Eiffel Tower", "Continent"
       "Gov", "Democracy", "Player", FALSE
       "Gov", "Communism", "Player", FALSE
       "Tech", "Guerilla Warfare", "Player", TRUE
@@ -3638,7 +3636,6 @@ value   = 50
 reqs    =
     { "type", "name", "range", "present"
       "Building", "Great Wall", "Player", TRUE
-      "Building", "Great Wall", "Continent", TRUE
       "CityTile", "Center", "Local", TRUE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
@@ -3658,7 +3655,6 @@ value   = 1
 reqs    =
     { "type", "name", "range"
       "Building", "Great Wall", "Player"
-      "Building", "Great Wall", "Continent", TRUE
     }
 
 [effect_great_wall_culture]
@@ -3740,7 +3736,6 @@ value   = 2
 reqs    =
     { "type", "name", "range"
       "Building", "J.S. Bach's Cathedral", "Player"
-      "Building", "J.S. Bach's Cathedral", "Continent"
       "CityTile", "Center", "Local"
       "OutputType", "Luxury", "Local"
     }
@@ -4209,7 +4204,6 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present"
       "Building", "Sun Tzu's War Academy", "Player", TRUE
-      "Building", "Sun Tzu's War Academy", "Continent", TRUE
       "UnitClass", "Land", "Local", TRUE
       "UnitFlag", "NonMil", "Local", FALSE
       "UnitFlag", "NoVeteran", "Local", FALSE
@@ -4221,7 +4215,6 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present"
       "Building", "Sun Tzu's War Academy", "Player", TRUE
-      "Building", "Sun Tzu's War Academy", "Continent", TRUE
       "UnitClass", "Big Land", "Local", TRUE
       "UnitFlag", "NonMil", "Local", FALSE
       "UnitFlag", "NoVeteran", "Local", FALSE
