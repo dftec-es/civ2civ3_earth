@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 11-Oct-2018)
+Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 09-May-2021)
 ============================================================
 
 civ2civ3_earth is a fork of the ruleset civ2civ3 (included in freeciv v2.6). This "earth" pack introduces some of the changes planned for future versions of civ2civ3, allowing players to test them before they are available in the next freeciv releases. It also includes a world map scenario, adapted to be played with these rules.
@@ -60,7 +60,6 @@ OPTIONAL RULES:
 - Restricted the use of infrastructure (roads, railroads, and rivers) for enemy units.
 - Unreachable units do not protect reachable ones.
 - Occupy chance set to 100%: Units automatically move to the target tile if the attack is successful and ZoC rules allow the movement.
-- When you get a new tech by treaty, conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points. Teams do not share the research pool.
 - If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then one random technology is lost, and only half of its value is restored to the research pool.
 - Random period of anarchy when changing government (1 to 3 turns). The max number of turns is reduced depending on how many times any player has changed to this type of government before.
 
@@ -578,6 +577,24 @@ SINCE CIV2CIV3 v2.6:
 - Wonder Apollo Program requires Aluminum available in the city. Manhattan Project requires Uranium. The bonus to production of Nuclear Plants is doubled in cities with available Uranium.
 - Deep ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food. Naval units recover +25% HPs at cities with a Harbour and the resource required by the unit.
 - Earth scenario: Added Natural Wonders, which give +3 luxuries in the tile where they are placed, and increase a bit the risk of natural disasters. Marked with a text label, and a flag icon.
+
+
+LATEST CHANGES:
+---------------
+# Disabled the following server option that was negatively affecting the AI: When you got a new tech by treaty, conquest, or diplomatic mission, half of its cost was subtracted from your research pool.
+
+# Fixed bug from civ2civ3_earth v2018_10
+Due to recent changes in Freeciv, the way strategic resources were implemented in this ruleset stopped working properly: they were removed from the map when a unit entered the tile.
+The workaround have been to use a LUA script to place the strategic resources: now they are no longer removed by units, but they do not appear in the map until the end of the first turn, and they might be placed in the same tile than other special resources.
+The optimal solution will not be available until Freeciv v3.0.
+
+Savegames affected by this bug (where strategic resources disappeared) could be fixed by editing the file /civ2civ3_earth/script.lua:
+1) Install this civ2civ3_earth version (that includes this readme). In linux, usually located at: /home/username/.freeciv/2.6/civ2civ3_earth/
+2) Open the file script.lua with any text editor
+2) Search for the line: 'if turn == 1 then' (located at the end of the file, inside the function named 'place_extra_resources')
+3) Replace the number '1' by the number of the next turn in your savegame. If your savegame is from turn 77, the edited line should look like this: 'if turn == 78 then'
+4) Load the savegame, press end turn, and the strategic resources should be randomly placed in the map again
+5) Edit the file again, restoring the turn number to 1 again, so it can work when you start a new game
 
 
 THANKS:

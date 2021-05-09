@@ -2023,7 +2023,7 @@ risk of natural disaster, which will reduce the population.\
 [extra_aluminum]
 name           = _("Aluminum")
 category       = "Natural"
-causes         = "Hut"
+;causes         = "Hut"
 ;rmcauses       = ""
 graphic        = "tx.aluminum"
 graphic_alt    = "tx.village"
@@ -2055,7 +2055,7 @@ in the tile.\
 [extra_niter]
 name           = _("Niter")
 category       = "Natural"
-causes         = "Hut"
+;causes         = "Hut"
 ;rmcauses       = ""
 graphic        = "tx.niter"
 graphic_alt    = "tx.village"
@@ -2089,7 +2089,7 @@ the tile.\
 [extra_rubber]
 name           = _("Rubber")
 category       = "Natural"
-causes         = "Hut"
+;causes         = "Hut"
 ;rmcauses       = ""
 graphic        = "tx.rubber"
 graphic_alt    = "tx.village"
@@ -2125,7 +2125,7 @@ the tile.\
 [extra_uranium]
 name           = _("Uranium")
 category       = "Natural"
-causes         = "Hut"
+;causes         = "Hut"
 ;rmcauses       = ""
 graphic        = "tx.uranium"
 graphic_alt    = "tx.village"

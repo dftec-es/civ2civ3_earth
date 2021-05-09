@@ -353,3 +353,38 @@ function place_map_labels()
 end
 
 signal.connect("map_generated", "place_map_labels")
+
+-- Add random extra resources to the map.
+function place_extra_resources(turn, year)
+
+  if turn == 1 then
+    for place in whole_map_iterate() do
+      local terr = place.terrain
+      local tname = terr:rule_name()
+
+      if random(1, 100) <= 2 then
+        if tname == "Desert" then
+          place:create_extra("Niter")
+        elseif tname == "Plains" then
+          place:create_extra("Niter")
+        elseif tname == "Swamp" then
+          place:create_extra("Rubber")
+        elseif tname == "Jungle" then
+          place:create_extra("Rubber")
+        elseif tname == "Forest" then
+          place:create_extra("Rubber")
+        elseif tname == "Tundra" then
+          place:create_extra("Aluminum")
+        elseif tname == "Hills" then
+          place:create_extra("Aluminum")
+        elseif tname == "Glacier" then
+          place:create_extra("Uranium")
+        elseif tname == "Mountains" then
+          place:create_extra("Uranium")
+        end
+      end
+    end
+  end
+end
+
+signal.connect("turn_started", "place_extra_resources")

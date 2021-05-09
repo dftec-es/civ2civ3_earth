@@ -808,7 +808,7 @@ set =
       "temperature", 60
       "flatpoles", 0
       "startunits", "cwsx"
-      "huts", 30
+;      "huts", 30
       "citymindist", 3
       "trademindist", 3
       "techlevel", 1
@@ -819,8 +819,8 @@ set =
       "onsetbarbs", 120
       "occupychance", 100
       "razechance", 10
-      "conquercost", 50
-      "diplbulbcost", 50
+;      "conquercost", 50
+;      "diplbulbcost", 50
       "techlossforgiveness", 50
       "techlossrestore", 50
       "revolentype", "RANDQUICK"
