@@ -11,6 +11,8 @@ artists = "
     Vincent Croisier <vincent.croisier@advalvas.be>[VC] (ruins)
     GriffonSpade [GS] (fortresses and airbases)
     Pesloco and Fulger [PF] (naval mine)
+    Sveinung Kvilhaugsvik [SK]
+    Lexxie [Lx]
 "
 
 [file]
@@ -28,12 +30,11 @@ tiles = { "row", "column", "tag"
 ;[HH][GS]
  0,  0, "base.wonder_mg"
  0,  1, "base.airstrip_mg"
- 0,  2, "base.airstrip1_mg"
- 0,  3, "base.airbase_mg"
+ 0,  2, "base.airbase_mg"
  0,  4, "base.outpost_bg"
- 0,  5, "base.outpost1_bg"
- 0,  6, "base.fortress1_bg"
- 0,  7, "base.fortress_bg"
+ 0,  5, "base.fortress_bg"
+;[Lx]
+ 0,  6, "base.castle_bg"
 
 ;[VC]
  0,  9, "base.ruins_mg"
@@ -41,12 +42,14 @@ tiles = { "row", "column", "tag"
  1,  0, "base.buoy_mg"
 ;[PF]
  1,  1, "base.naval_mine_bg"
+; [SK]
+ 1,  2, "extra.transport_hub_mg"
 
 ;[HH][GS]
  1,  4, "base.outpost_mg"
- 1,  5, "base.outpost1_mg"
- 1,  6, "base.fortress1_mg"
- 1,  7, "base.fortress_mg"
+ 1,  5, "base.fortress_mg"
+ 1,  6, "base.castle_mg"
+
  ;[HH]
  1,  8, "cd.occupied",
       "city.european_occupied_0",
@@ -64,5 +67,4 @@ tiles = { "row", "column", "tag"
 ;blank defaults
  1,  0, "cd.city",
       "cd.city_wall"
-
 }

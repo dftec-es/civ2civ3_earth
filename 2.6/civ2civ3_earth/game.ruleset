@@ -25,24 +25,29 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-;version = ""
+version = "2.6_2021"
 
 ; Summary of the ruleset
 summary = _("\
-Gameplay more similar to civ3, keeping the combat system from civ2. \
-Aimed to be played on earth scenarios.\
+You are playing a custom version of civ2civ3 rules, from the same author:\
 \n\n\
-The differences from the classic ruleset are listed in \
+It includes new features, tries to improve balance, and is more suitable \
+for playing on Earth maps, or similar scenarios.\
+\n\n\
+The differences from the former default ruleset, 'classic', are listed in \
 README.ruleset_civ2civ3_earth.\
 ")
 
 ; Detailed description
-; When updating this, update also desciption_file in [ruledit] section to match
+; When updating this, update also description_file in [ruledit] section to match
 description = *civ2civ3_earth/README.ruleset_civ2civ3_earth*
 
 [options]
 global_init_techs=""
 global_init_buildings="Palace"
+
+[tileset]
+preferred = "amplio_earth"
 
 [civstyle]
 ; Value added to city pollution
@@ -258,6 +263,7 @@ ui_name_help_wonder = _("Help %sbuild Wonder%s")
 ; satisfied.
 ;
 ; */ <-- avoid gettext warnings
+
 [actionenabler_sabotage_city]
 action = "Sabotage City"
 actor_reqs    =
@@ -468,7 +474,7 @@ tech_cost_style = "Classic+"
 ; Base research cost. Used in tech cost styles where tech cost is generated.
 ; In other words: used everywhere unless the cost of *all* techs are
 ; specified and the tech cost style is "Experimental+" or "Classic+".
-base_tech_cost   = 20
+base_tech_cost   = 10
 
 ; Technology leak from other civilizations
 ; "None"           - No reduction of the technology cost.
@@ -481,7 +487,7 @@ base_tech_cost   = 20
 ; "Normal Players" - Technology cost is reduced depending on the number of
 ;                    normal players (human and AI) which already know the
 ;                    tech.
-tech_leakage = "None"
+tech_leakage = "Embassies"
 
 ; Method of paying tech upkeep
 ; "None"   - no upkeep
@@ -504,7 +510,7 @@ free_tech_method = "Cheapest"
 victory_min_points = 20000
 
 ; How big lead relative to second best player is needed for victory
-victory_lead_pct   = 200
+victory_lead_pct   = 100
 
 ; How much each culture point affects the migration
 ; from/to the city. Each culture point count as this many permilles
@@ -636,7 +642,7 @@ effects        = "ReducePopDestroy", "Fallout"
 name           = _("Spaceship Launch")
 type           = "Spaceship"
 unique         = FALSE
-culture        = 1000
+culture        = 5000
 first_msg      = _("You're the first one to launch a spaceship towards Alpha Centauri!");
 cons_msg       = _("You have launched a spaceship towards Alpha Centauri!")
 
@@ -654,9 +660,8 @@ name           = _("Land Ahoy")
 type           = "Land_Ahoy"
 unique         = FALSE
 value          = 2
-culture        = 100
-first_msg      = _("As the first people in history, your people sight a foreign shore!")
-cons_msg       = _("You sight your first foreign shore!")
+first_msg      = _("Your people were the first in history to sight a foreign shore!")
+cons_msg       = _("You sighted your first foreign shore!")
 
 [achievement_literate]
 name           = _("Literate")
@@ -674,9 +679,9 @@ name           = _("Multicultural")
 type           = "Multicultural"
 unique         = FALSE
 value          = 2
-culture        = 100
-first_msg      = _("You're the first nation with a city containing 2 different nationalities!")
-cons_msg       = _("One of your cities has 2 different nationalities!")
+culture        = 1000
+first_msg      = _("You're the first nation to have citizens of multiple nationalities!")
+cons_msg       = _("Your nation now has citizens of multiple nationalities!")
 
 [achievement_metropolis]
 name           = _("Metropolis")
@@ -731,12 +736,12 @@ settings =
     "NationalIC", 100,   "Inactive",   "None"
     "IN",         0,     "Cancel",     "None"
     "INIC",       0,     "Cancel",     "None"
-    "Ally",       50,    "Cancel",     "None"
-    "AllyIC",     100,   "Cancel",     "None"
+    "Ally",       25,    "Cancel",     "None"
+    "AllyIC",     50,    "Cancel",     "None"
     "Enemy",      0,     "Cancel",     "None"
     "EnemyIC",    0,     "Cancel",     "None"
-    "Team",       50,    "Cancel",     "None"
-    "TeamIC",     100,   "Cancel",     "None"
+    "Team",       25,    "Cancel",     "None"
+    "TeamIC",     50,    "Cancel",     "None"
   }
 
 [playercolors]
@@ -819,13 +824,13 @@ set =
       "onsetbarbs", 120
       "occupychance", 100
       "razechance", 10
-;      "conquercost", 50
-;      "diplbulbcost", 50
+      "team_pooled_research", "DISABLED"
+      "trading_tech", "DISABLED"
+      "conquercost", 50
+      "diplbulbcost", 50
       "techlossforgiveness", 50
       "techlossrestore", 50
       "revolentype", "RANDQUICK"
       "revolen", 3
+      "victories", "SPACERACE"
     }
-
-[tileset]
-prefered="amplio_earth"

@@ -28,19 +28,19 @@ flags =
   { "name", "helptxt"
     _("Wood"), _("\
 Wood: Halved effect of buildings to recover HPs in cities without \
-Lumber.\
+Lumber (terrain improvement).\
 ")
     _("Coal"), _("\
 Coal: Halved effect of buildings to recover HPs in cities without \
-Coal or Peat.\
+Coal or Peat (terrain resource).\
 ")
     _("Oil"), _("\
 Oil: Halved effect of buildings to recover HPs in cities without \
-Oil.\
+Oil (terrain resource).\
 ")
     _("Hospital"), _("\
 Hospital: Halved effect of buildings to recover HPs in cities without \
-Hospital.\
+Hospital (city building).\
 ")
     _("Horses"), _("\
 Horses: One more veteran level when produced at cities with Horses.\
@@ -496,7 +496,7 @@ uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity",
-                "Cities", "Airbase", "Fortress"
+                "Cities", "Airbase", "Fortress", "Hospital"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -541,7 +541,7 @@ uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity",
-                "Capturable", "Airbase", "Fortress"
+                "Capturable", "Airbase", "Fortress", "Hospital"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -551,8 +551,11 @@ veteran_move_bonus = 0
 roles         = "Settlers"
 helptext      = _("\
 Migrants can be used to transfer population to other cities, but \
-may not found new cities. They can also perform some of the same \
-terrain alterations as Workers.\
+may not found new cities. They can also perform the same terrain \
+alterations as Workers.\
+"), _("\
+TIP: Migrants can be a good alternative to Workers in overpopulated \
+cities, as they benefit from free food upkeep.\
 ")
 
 [unit_worker]
@@ -581,7 +584,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase",
-                "Fortress"
+                "Fortress", "Hospital"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -647,7 +650,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Transform",
-                "Airbase", "Fortress"
+                "Airbase", "Fortress", "Hospital"
 veteran_names = _("beginner"), _("seasoned"), _("senior")
 veteran_raise_chance      = 50, 33, 0
 veteran_work_raise_chance = 2, 1, 0
@@ -672,7 +675,7 @@ for more details.\
 name          = _("Warriors")
 class         = "Land"
 tech_req      = "None"
-obsolete_by   = "Musketeers"
+obsolete_by   = "Pikemen"
 graphic       = "u.warriors"
 graphic_alt   = "-"
 sound_move    = "m_warriors"
@@ -957,9 +960,10 @@ roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
+They do not cause unhappiness due to military activity.\
+"), _("\
 Fundamentalist nations can maintain Fanatic units without having to \
-pay any upkeep nor causing military unhappiness. Instead, each unit \
-reduces the population by 1.\
+pay any upkeep. Instead, each unit reduces the population by 1.\
 ")
 
 [unit_partisan]
@@ -1169,7 +1173,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horses", "Hospital"
+flags         = "Capturer", "Horses", "Wood"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
 Chariots are horse-pulled war wagons. They have a stronger attack than \
@@ -1242,6 +1246,8 @@ roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Crusaders are highly disciplined mounted warriors driven by a higher \
 cause.\
+"), _("\
+They do not cause unhappiness due to military activity.\
 ")
 
 [unit_knights]
@@ -1532,7 +1538,7 @@ move_rate     = 10
 vision_radius_sq = 6
 transport_cap = 0
 fuel          = 2
-uk_happy      = 0
+uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -1657,7 +1663,7 @@ move_rate     = 14
 vision_radius_sq = 8
 transport_cap = 0
 fuel          = 2
-uk_happy      = 0
+uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -1824,7 +1830,7 @@ move_rate     = 4
 vision_radius_sq = 2
 transport_cap = 4
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -2100,7 +2106,7 @@ move_rate     = 5
 vision_radius_sq = 6
 transport_cap = 8
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -2140,7 +2146,7 @@ move_rate     = 5
 vision_radius_sq = 6
 transport_cap = 8
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -2281,7 +2287,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 flags         = "Partial_Invis", "Diplomat", "IgZOC", "NonMil", "HasNoZOC",
-                "Cant_Pillage"
+                "Cant_Pillage", "Hospital"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
   _("?diplomatic_rank:attaché"),
@@ -2327,7 +2333,9 @@ The actions available to Diplomats in a city are:\
 "), _("\
  - \"Establish Embassy\": This action always succeeds, and gives \
 permanent contact with the city's owner, as well as intelligence \
-on their tax rates and technology.\
+on their tax rates and technology. Each player you have an embassy \
+with that knows a technology reduces that technology's research \
+cost to you.\
 "), _("\
  - \"Investigate City\": Your unit attempts to report detailed \
 information about the city: its status, what buildings and units are \
@@ -2352,9 +2360,8 @@ call it home, but reducing its size by 1. Units in other cities \
 remain in the enemy's control, but units outside cities are lost to \
 both players. The exact sum depends on the status of the city and \
 that of the civilization that owns it. It is not possible to incite \
-a rebellion in a capital, or in any city governed by a Federation or \
-Democracy. Incitement may be attempted in peacetime, but will cause a \
-diplomatic incident.\
+a rebellion in a capital, or in any city with Courthouse. Incitement \
+may be attempted in peacetime, but will cause a diplomatic incident.\
 "), _("\
 In some game strategies, hordes of Diplomats can be used to wreak \
 havoc on the enemy.  Little wonder that Diplomats are often \
@@ -2362,6 +2369,18 @@ viewed with suspicion and fear!\
 "), _("\
 Diplomats built under Communist or Federation governments will \
 start at the first veteran level (secretary).\
+"),
+; /* xgettext:no-c-format */
+_("\
+The cost to bribe units or incite cities increases +50% for each 1000 \
+culture points accumulated by the target player, up to +500% (as if \
+the distance to the capital was 6 times lower) when the player reaches \
+10000 culture points.\
+"),
+; /* xgettext:no-c-format */
+_("\
+A city gets +5% resistance against enemy agents for each 100 culture \
+points, up to +50% when the city reaches 1000 culture points.\
 ")
 
 [unit_spy]
@@ -2390,7 +2409,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 flags         = "Partial_Invis", "Diplomat", "IgZOC", "NonMil", "HasNoZOC",
-                "Cant_Pillage", "Spy"
+                "Cant_Pillage", "Spy", "Hospital"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2459,7 +2478,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC", "Capturable"
+flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC",
+                "Capturable", "Hospital"
 roles         = ""
 helptext      = _("\
 A Caravan carries goods or material for trading with other nations, \
@@ -2471,7 +2491,8 @@ railroads that accompany them.\
 Caravans can establish trade routes with your own cities or those of \
 allied nations (or from the same team) by traveling to them. The \
 route's ongoing revenue is doubled if the two cities involved are on \
-different continents.\
+different continents, and halved if the two cities are from different \
+players.\
 "), _("\
 A Caravan sent to one of your own cities that is building a wonder \
 can add 30 shields towards its production. If your city is not \
@@ -2507,7 +2528,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC", "Capturable"
+flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC",
+                "Capturable", "Hospital"
 roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed. \
@@ -2540,7 +2562,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify",
-                "Cant_Pillage"
+                "Cant_Pillage", "Hospital"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for mapping \
@@ -2551,7 +2573,9 @@ although the unit disappears after the action is complete.\
 "), _("\
  - \"Establish Embassy\": This action always succeeds, and gives \
 permanent contact with the city's owner, as well as intelligence \
-on their tax rates and technology.\
+on their tax rates and technology. Each player you have an embassy \
+with that knows a technology reduces that technology's research \
+cost to you.\
 "), _("\
  - \"Investigate City\": Your unit attempts to report detailed \
 information about the city: its status, what buildings and units are \
@@ -2583,8 +2607,9 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy", 
-                "Undisbandable", "Unbribable", "GameLoss", "Unique"
+flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy",
+                "Undisbandable", "Unbribable", "GameLoss", "Unique",
+                "Hospital"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0
@@ -2623,8 +2648,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "Unbribable",
-                "Undisbandable", "SuperSpy", "NoHome", "NoBuild"
+flags         = "IgZOC", "NonMil", "Unbribable", "Undisbandable",
+                "SuperSpy", "NoHome", "NoBuild", "Hospital"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_raise_chance = 0

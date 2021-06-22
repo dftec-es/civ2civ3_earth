@@ -468,6 +468,10 @@ helptext             = _("\
 Deserts are regions of extreme dryness, making agriculture and trade \
 very difficult.\
 "), _("\
+Deserts can be irrigated for a small amount of extra food, but without \
+an oasis or river, bare desert cannot be further improved with \
+farmland.\
+"), _("\
 Rivers bring fertile soil to deserts; on a desert river not already \
 benefiting from an oasis, building irrigation will yield two extra food \
 resources rather than the usual one.\
@@ -636,7 +640,7 @@ mining_result        = "yes"
 mining_shield_incr   = 1
 mining_time          = 10
 transform_result     = "Forest"
-transform_time       = 24
+transform_time       = 36
 pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
@@ -719,7 +723,7 @@ defense_bonus        = 0
 food                 = 1
 shield               = 1
 trade                = 0
-resources            = "Wheat", "Buffalo", "Horses"
+resources            = "Buffalo", "Wheat", "Horses"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 100
@@ -1091,7 +1095,7 @@ trade       = 4
 [resource_wool]
 name        = _("Wool")
 graphic     = "ts.wool"
-graphic_alt = "-"
+graphic_alt = "ts.grassland_resources"
 identifier  = "W"
 shield      = 1
 
@@ -1344,8 +1348,8 @@ build_time     = 0
 removal_time   = 0
 conflicts      = "Irrigation", "Farmland"
 helptext       = _("\
-Once Refining is known, mines on Desert and Glacier tiles can be \
-upgraded to oil wells for an extra production point.\
+Once Refining is known, mines on Desert, Tundra and Glacier tiles can \
+be upgraded to oil wells for an extra production point.\
 ")
 
 [extra_oil_platform]
@@ -1501,7 +1505,9 @@ conflicts      = "Mine", "Oil Well"
 helptext       = _("\
 Once Refrigeration is known, irrigation systems can be upgraded to \
 farmland by irrigating them a second time; if the city working the tile \
-has a Supermarket, a farmland tile provides 50% more food.\
+has a Supermarket, a farmland tile provides 50% more food. (Hence, \
+farmland is only useful on tiles which with irrigation yield 2 or more \
+food.)\
 "), _("\
 Farmland on a tile prevents any trade bonus from Super Highways.\
 "), _("\
@@ -1556,7 +1562,6 @@ reqs           =
       "Tech", "Construction", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Fortress", "Local", TRUE, FALSE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1594,7 +1599,6 @@ reqs           =
       "Tech", "Construction", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Fortress", "Local", TRUE, FALSE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
       "CityTile", "Center", "Local", FALSE, TRUE
       "Extra", "River", "Local", FALSE, FALSE
     }
@@ -1618,7 +1622,7 @@ Compared to a fort, units in a fortress receive extra defense (+50%) \
 against all units (in total, their defense against land units and boats \
 is doubled), and do not count as aggressive if near a friendly city. \
 Any kind of land unit remaining in a fortress for a whole turn without \
-moving recovers a quarter of its hit points.\
+moving recovers a third of its hit points.\
 "), _("\
 With Astronomy, fortresses gain watchtowers from which units can see \
 further afield.\
@@ -2010,7 +2014,6 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
-removal_time   = 0
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Natural wonders produce 3 extra luxuries in the tile where they are \
@@ -2023,7 +2026,7 @@ risk of natural disaster, which will reduce the population.\
 [extra_aluminum]
 name           = _("Aluminum")
 category       = "Natural"
-;causes         = "Hut"
+;causes         = ""
 ;rmcauses       = ""
 graphic        = "tx.aluminum"
 graphic_alt    = "tx.village"
@@ -2032,7 +2035,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs  =
+reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Aluminum", "Local", TRUE
       "Resource", "Game", "Local", FALSE
@@ -2042,7 +2045,6 @@ reqs  =
       "Resource", "Marble", "Local", FALSE
     }
 buildable      = FALSE
-removal_time   = 0
 helptext       = _("\
 Strategic resource, required in a city to build the wonder Apollo \
 Program. Cities with available Aluminum build Carrier, AEGIS Cruiser, \
@@ -2055,7 +2057,7 @@ in the tile.\
 [extra_niter]
 name           = _("Niter")
 category       = "Natural"
-;causes         = "Hut"
+;causes         = ""
 ;rmcauses       = ""
 graphic        = "tx.niter"
 graphic_alt    = "tx.village"
@@ -2064,7 +2066,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs  =
+reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Niter", "Local", TRUE
       "Resource", "Wheat", "Local", FALSE
@@ -2075,21 +2077,20 @@ reqs  =
       "Resource", "Incense", "Local", FALSE
     }
 buildable      = FALSE
-removal_time   = 0
 helptext       = _("\
 Strategic resource. Cities without available Niter build gunpowder \
 based units with one less veteran level: Musketeers, Riflemen, Alpine \
 Troops, Dragoons, Cavalry, Cannon, Artillery, Galleon, Frigate and \
 Ironclad.\
 "), _("\
-With the discovery of Gunpowder, Aluminum produces 2 extra shields in \
+With the discovery of Gunpowder, Niter produces 2 extra shields in \
 the tile.\
 ")
 
 [extra_rubber]
 name           = _("Rubber")
 category       = "Natural"
-;causes         = "Hut"
+;causes         = ""
 ;rmcauses       = ""
 graphic        = "tx.rubber"
 graphic_alt    = "tx.village"
@@ -2098,7 +2099,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs  =
+reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Rubber", "Local", TRUE
       "Resource", "Peat", "Local", FALSE
@@ -2112,7 +2113,6 @@ reqs  =
       "Resource", "Deer", "Local", FALSE
     }
 buildable      = FALSE
-removal_time   = 0
 helptext       = _("\
 Strategic resource. Cities with available Rubber build Marines, \
 Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
@@ -2125,7 +2125,7 @@ the tile.\
 [extra_uranium]
 name           = _("Uranium")
 category       = "Natural"
-;causes         = "Hut"
+;causes         = ""
 ;rmcauses       = ""
 graphic        = "tx.uranium"
 graphic_alt    = "tx.village"
@@ -2134,7 +2134,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs  =
+reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Uranium", "Local", TRUE
       "Resource", "Iron", "Local", FALSE
@@ -2143,14 +2143,12 @@ reqs  =
       "Resource", "Oil", "Local", FALSE
     }
 buildable      = FALSE
-removal_time   = 0
 helptext       = _("\
-Strategic resource, required in a city to build the wonder Manhattan \
-Project. Cities with available Uranium build Armor and Submarine \
-units with one extra veteran level. Uranium also doubles the bonus \
-of Nuclear Plants to the production of the city./
+Strategic resource, required in a city to build a Nuclear Plant or \
+the wonder Manhattan Project. Cities with available Uranium build \
+Armor and Submarine units with one extra veteran level.\
 "), _("\
-With discovery of Nuclear Fission, Uranium produces 2 extra shields in \
+With discovery of Atomic Theory, Uranium produces 2 extra shields in \
 the tile.\
 ")
 
@@ -2224,6 +2222,7 @@ gui_type       = "Other"
 [base_wonder]
 extra          = "Wonder"
 gui_type       = "Other"
+; Implemented as Base to be placed on scenarios on a different layer than Specials
 
 ; /* <-- avoid gettext warnings
 ;

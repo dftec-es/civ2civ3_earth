@@ -5,7 +5,6 @@ options = "+Freeciv-2.6-spec"
 artists = "
     Peter Arbor <peter.arbor@gmail.com>
     Bardo
-
 "
 
 [file]

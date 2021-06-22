@@ -19,10 +19,11 @@ Terrains based on Amplio:
 Units:
 - added animals.
 - alternative gfx for some units from Amplio2XU.
+- fixed some white pixels that should be transparent in Trireme, Explorer, Horsemen and Dragoons.
 
 Extras:
-- added canals and extra bases (by GriffonSpade).
-- gfx for Hospital (by ngunjaca), Ecclesiastical Palace, and Fascism.
+- added canals and extra bases.
+- gfx for Hospital, Ecclesiastical Palace, and Fascism.
 
 
 Result:

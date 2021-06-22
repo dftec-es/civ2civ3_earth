@@ -56,7 +56,7 @@ aggressive_default = 50
 
 ; Please keep [ruledit] section in sync with these includes
 *include "default/nationlist.ruleset"
-; Two barbarian nations, Land and Sea barbarians, needed
+; This ruleset uses model of 3 separate barbarian nations
 *include "nation/barbarian.ruleset"
 *include "nation/pirate.ruleset"
 *include "nation/animals.ruleset"

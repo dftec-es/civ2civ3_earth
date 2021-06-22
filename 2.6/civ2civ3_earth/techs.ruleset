@@ -122,6 +122,14 @@ req2     = "Refrigeration"
 flags    = ""
 graphic     = "a.atomic_theory"
 graphic_alt = "-"
+helptext = _("\
+Uranium resources produce 2 extra shields in the tile where they are \
+located.\
+"), _("\
+Uranium is required in a city to build a Nuclear Plant or the wonder \
+Manhattan Project. Cities with available Uranium build Armor and \
+Submarine units with one extra veteran level.\
+")
 cost     = 370
 
 [advance_automobile]
@@ -179,7 +187,7 @@ graphic     = "a.chemistry"
 graphic_alt = "-"
 helptext = _("\
 Rubber resources produce 2 extra shields in the tile where they are \
-placed.\
+located.\
 "), _("\
 Cities with available Rubber build Marines, Paratroopers, Helicopter, \
 Mech. Inf. and Howitzer units with one extra veteran level.\
@@ -229,6 +237,10 @@ req2     = "Industrialization"
 flags    = ""
 graphic     = "a.communism"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 420
 
 [advance_computers]
@@ -238,6 +250,11 @@ req2     = "Radio"
 flags    = ""
 graphic     = "a.computers"
 graphic_alt = "-"
+helptext = _("\
+If the Internet wonder have been built by any player, all cities on \
+the map are continuously visible, despite fog-of-war, to every player \
+with knowledge of Computers.\
+")
 cost     = 560
 
 [advance_conscription]
@@ -278,6 +295,10 @@ req2     = "Invention"
 flags    = ""
 graphic     = "a.democracy"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 190
 
 [advance_economics]
@@ -287,6 +308,10 @@ req2     = "University"
 flags    = ""
 graphic     = "a.economics"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 170
 
 [advance_electricity]
@@ -376,8 +401,16 @@ req2     = "Labor Union"
 flags    = ""
 graphic     = "a.fusion_power"
 graphic_alt = "-"
-helptext = _("Makes it possible for Engineers to transform terrains.")
-cost     = 770
+helptext = _("\
+Makes it possible for Engineers to transform terrains.\
+"),
+; /* xgettext:no-c-format */
+_("\
+It also reduces the pollution from shield production by a further 25% \
+in your cities with Nuclear Plants, making them equivalent to Solar \
+Plants.\
+")
+;cost     = 770
 
 [advance_genetic_engineering]
 name     = _("Genetic Engineering")
@@ -386,6 +419,12 @@ req2     = "The Corporation"
 flags    = ""
 graphic     = "a.genetic_engineering"
 graphic_alt = "-"
+; /* xgettext:no-c-format */
+helptext = _("\
+If the Cure For Cancer wonder have been built by any player, the risk \
+of plague is reduced (by 10% of the base chance) in every city of \
+every player with knowledge of Genetic Engineering.\
+")
 cost     = 450
 
 [advance_guerilla_warfare]
@@ -405,11 +444,11 @@ graphic     = "a.gunpowder"
 graphic_alt = "-"
 helptext = _("\
 Niter resources produce 2 extra shields in the tile where they are \
-placed.\
+located.\
 "), _("\
 Cities without available Niter build gunpowder based units with one \
 less veteran level: Musketeers, Riflemen, Alpine Troops, Dragoons, \
-Cavalry, Cannon, Artillery, Galleon, Frigate and Ironclad.\
+Cavalry, Cannon, Artillery, Galleon, Frigate and Ironclad.
 ")
 cost     = 170
 
@@ -421,8 +460,9 @@ flags    = ""
 graphic     = "a.horseback_riding"
 graphic_alt = "-"
 helptext = _("\
-Cities with available Horses build units that require this resource \
-with one more veteran level.\
+Cities with available Horses (resource) build horse based units with \
+one more veteran level: Horsemen, Chariot, Crusaders, Knights, Dragoons, \
+and Cavalry.\
 ")
 cost     = 10
 
@@ -434,7 +474,7 @@ graphic     = "a.industrialization"
 graphic_alt = "-"
 helptext = _("\
 Aluminum resources produce 2 extra shields in the tile where they are \
-placed.\
+located.\
 "), _("\
 Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
 Missile, Fighter and Bomber units with one extra veteran level.\
@@ -563,7 +603,7 @@ flags    = ""
 graphic     = "a.medicine"
 graphic_alt = "-"
 helptext = _("\
-Land units (not wheeled) recover 2 extra HPs per turn, even without \
+Non wheeled ground units recover 2 extra HPs per turn, even without \
 resting. Except on Mountains, Glacier or Deep Ocean.\
 ")
 cost     = 120
@@ -575,7 +615,11 @@ req2     = "Mathematics"
 flags    = ""
 graphic     = "a.metallurgy"
 graphic_alt = "-"
-cost     = 190
+helptext = _("\
+Galleon, Frigate and Ironclad are built with one more veteran level \
+at cities with both Iron and Niter resources.\
+")
+;cost     = 190
 
 [advance_miniaturization]
 name     = _("Miniaturization")
@@ -607,6 +651,10 @@ req2     = "Code of Laws"
 flags    = ""
 graphic     = "a.monarchy"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 40
 
 [advance_monotheism]
@@ -644,14 +692,6 @@ req2     = "Atomic Theory"
 flags    = ""
 graphic     = "a.nuclear_fission"
 graphic_alt = "-"
-helptext = _("\
-Uranium resources produce 2 extra shields in the tile where they are \
-placed.\
-"), _("\
-Cities with available Uranium build Armor and Submarine units with \
-one extra veteran level. Uranium also doubles the bonus of Nuclear \
-Plants to the production of the city./
-")
 cost     = 530
 
 [advance_nuclear_power]
@@ -683,7 +723,7 @@ flags    = ""
 graphic     = "a.physics"
 graphic_alt = "-"
 helptext = _("\
-Wheeled units and naval units recover 2 extra HPs per turn. Except on \
+Wheeled ground units and naval units recover 2 extra HPs per turn. Except on \
 Mountains, Glacier or Deep Ocean.\
 ")
 cost     = 130
@@ -705,8 +745,8 @@ flags    = ""
 graphic     = "a.polytheism"
 graphic_alt = "-"
 helptext = _("\
-Cities with available Ivory build Elephant units with one more veteran \
-level.\
+Cities with available Ivory (resource) build Elephant units with one \
+more veteran level.\
 ")
 cost     = 30
 
@@ -766,8 +806,8 @@ flags    = ""
 graphic     = "a.refining"
 graphic_alt = "-"
 helptext = _("\
-Allows Settlers, Migrants, Workers and Engineers to upgrade \
-mines to oil wells on Desert and Glacier tiles, for an extra production \
+Allows Settlers, Migrants, Workers and Engineers to upgrade mines to \
+oil wells on Desert, Tundra and Glacier tiles, for an extra production \
 point.\
 ")
 cost     = 400
@@ -876,12 +916,17 @@ with maglev.\
 cost     = 700
 
 [advance_tactics]
-name     = _("Tactics")
+name     = _("Military Tactics")
+rule_name   = _("Tactics")
 req1     = "Conscription"
 req2     = "Leadership"
 flags    = ""
 graphic     = "a.tactics"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 290
 
 [advance_the_corporation]
@@ -901,11 +946,15 @@ cost     = 400
 
 [advance_the_republic]
 name     = _("The Republic")
-req1     = "Code of Laws"
-req2     = "Literacy"
+req1     = "Literacy"
+req2     = "None"
 flags    = ""
 graphic     = "a.the_republic"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 50
 
 [advance_the_wheel]
@@ -924,7 +973,12 @@ req2     = "Monotheism"
 flags    = ""
 graphic     = "a.theology"
 graphic_alt = "-"
-helptext = _("Improves the effect of Cathedrals.")
+helptext = _("
+Improves the effect of Cathedrals.\
+"), _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 140
 
 [advance_theory_of_gravity]
@@ -966,6 +1020,10 @@ req2     = "None"
 flags    = ""
 graphic     = "a.warrior_code"
 graphic_alt = "-"
+helptext = _("\
+Increases by 2 the number of cities that your nation can support \
+before the size of the empire causes extra unhappiness in your citizens.\
+")
 cost     = 10
 
 [advance_writing]

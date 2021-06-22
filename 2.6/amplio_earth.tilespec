@@ -9,11 +9,11 @@ name = "amplio_earth"
 priority = 30
 
 ; There`s no separate versioning in tilesets part of main freeciv distribution
-;version = ""
+version = "2.6_2021"
 
 ; Summary and full description of the tileset.
-;summary = ""
-;description = ""
+summary = _("Large isometric tileset based on Amplio.")
+description = *amplio_earth/README.tileset_civ2civ3_earth*
 
 ; TODO: add more overall information fields on tiles, 
 ; eg, authors, colors, etc.
@@ -267,15 +267,16 @@ styles =
       "tx.oil_mine",     "Single1"
       "tx.oil_rig",      "Single1"
       "tx.lumber",       "Single1"
-      "tx.saltpeter",    "Single1"
+      "tx.niter",        "Single1"
       "tx.rubber",       "Single1"
       "tx.aluminum",     "Single1"
       "tx.uranium",      "Single1"
       "tx.pollution",    "Single2"
       "tx.fallout",      "Single2"
-      "tx.village",      "Single1"
+      "tx.village",      "Single2"
       "base.outpost",    "3Layer"
       "base.fortress",   "3Layer"
+      "base.castle",     "3Layer"
       "base.airstrip",   "3Layer"
       "base.airbase",    "3Layer"
       "base.buoy",       "3layer"

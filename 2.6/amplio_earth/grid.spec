@@ -10,6 +10,7 @@ artists = "
     Jason Dorje Short <jdorje@freeciv.org>
     Hogne Håskjold    <hogne@freeciv.org>
     Eleazar / J. W. Bjerk <www.jwbjerk.com>
+    Bardo (thin grid.main)
 "
 
 [file]

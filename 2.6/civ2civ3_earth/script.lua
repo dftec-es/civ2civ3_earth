@@ -189,7 +189,7 @@ function place_map_labels()
       selected_deep = selected_deep - 1
       if selected_deep == 0 then
         place:create_extra("Wonder")
-        if random(1, 100) <= 50 then
+        if surrounded_by(place, "Deep Ocean") then
           place:set_label(_("Deep Trench"))
         else
           place:set_label(_("Thermal Vent"))
@@ -199,7 +199,9 @@ function place_map_labels()
       selected_ocean = selected_ocean - 1
       if selected_ocean == 0 then
         place:create_extra("Wonder")
-        if surrounded_by(place, "Ocean") then
+        if adjacent_to(place, "Glacier") then
+          place:set_label(_("Glacier Bay"))
+        elseif surrounded_by(place, "Ocean") then
           place:set_label(_("Atoll Chain"))
         elseif adjacent_to(place, "Deep Ocean") then
           place:set_label(_("Great Barrier Reef"))
@@ -242,7 +244,7 @@ function place_map_labels()
         elseif not adjacent_to(place, "Glacier") then
           place:set_label(_("Frozen Lake"))
         elseif adjacent_to(place, "Ocean") then
-          place:set_label(_("Glacier Bay"))
+          place:set_label(_("Ice Shelf"))
         else
           place:set_label(_("Advancing Glacier"))
         end
@@ -357,7 +359,7 @@ signal.connect("map_generated", "place_map_labels")
 -- Add random extra resources to the map.
 function place_extra_resources(turn, year)
 
-  if turn == 1 then
+  if turn == 0 then
     for place in whole_map_iterate() do
       local terr = place.terrain
       local tname = terr:rule_name()
