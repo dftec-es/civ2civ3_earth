@@ -14,11 +14,12 @@ In linux it uses to be: /home/username/.freeciv/
 * Launch Freeciv, start a new game, select the ruleset civ2civ3_earth, and load the tileset amplio_earth when asked.
 
 The installed files and folders should look like this:
->/.freeciv/2.6/amplio_earth/
+```sh
+/.freeciv/2.6/amplio_earth/
 /.freeciv/2.6/civ2civ3_earth/
 /.freeciv/2.6/scenarios/
 /.freeciv/2.6/amplio_earth.tilespec
 /.freeciv/2.6/civ2civ3_earth.serv
-
+```
 where /2.6/ should match the Frecciv version that you had installed.
 
