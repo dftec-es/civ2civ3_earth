@@ -12,7 +12,8 @@
 
 [datafile]
 description="Civ2Civ3 governments data for Freeciv"
-options="+Freeciv-2.6-ruleset"
+options="+Freeciv-3.0-ruleset web-compatible"
+format_version=10
 
 [governments]
 during_revolution="Anarchy"
@@ -21,12 +22,12 @@ during_revolution="Anarchy"
 ;
 ; Below: The individual government types, one per section.
 ;
-; The actual tag used (the * in [government_*]) does not matter, except 
-; it must be unique within this file, and it may be used in debug 
+; The actual tag used (the * in [government_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
 ; output when reading this file.
 ;
 ; For the "official" rulesets, the order of these sections should not
-; be changed because that would break backward compatability with 
+; be changed because that would break backward compatibility with
 ; savegames.  (In particular, if Fundamentalism is added to default
 ; ruleset, should be added at end.)
 ;
@@ -45,8 +46,13 @@ during_revolution="Anarchy"
 ;                otherwise may be "-"
 ; ai_better    = AI will not consider this government for use if the
 ;                government listed here is available
-; ruler_titles = ruler titles by nation, "-" is default, and non-matched
-;                nations are ignored
+; ruler_male_title   = The default male ruler title for the government type.
+;                      It's a format string where name of the ruler is marked
+;                      by '%s'.
+;                      Individual nations may override this by their
+;                      own title.
+; ruler_female_title = The default female ruler title for the government type.
+;                      See above ruler_male_title.
 ; helptext     = optional help text string; should escape all raw newlines
 ;                so that xgettext parsing works
 ;

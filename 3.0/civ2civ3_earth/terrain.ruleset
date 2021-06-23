@@ -12,7 +12,8 @@
 
 [datafile]
 description="Civ2Civ3 tile_type data for Freeciv"
-options="+Freeciv-2.6-ruleset"
+options="+Freeciv-3.0-ruleset web-compatible"
+format_version=10
 
 [control]
 ; Names for custom terrain flags. There can be up to 8 of these.
@@ -32,6 +33,23 @@ flags =
     _("NoPollution"), _("No Pollution nor Fallout appear here.")
 ; Max = 8
 ;    _("Low Land"), _("Terrain suitable for canal digging.")
+  }
+
+; Names for custom extra flags. There can be up to 8 of these.
+; name          = rule name; In some circumstances user may see this
+;                 as part of some sentences, so try to make it descriptive
+;                 and sensible.
+; helptxt       = displayed in the help for extra types with this flag
+;                 (optional)
+extra_flags =
+  { "name", "helptxt"
+    _("ParadropFrom"), _("Units can paradrop from this tile.")
+    _("DiplomatDefense"),
+        ; /* xgettext:no-c-format */
+        _("Diplomatic units get a 25% defense bonus in diplomatic fights.")
+    _("IrrigationSource")
+    _("AllowsFarmlandOnDesert")
+    _("Coal Peat Oil")
   }
 
 [parameters]
@@ -164,7 +182,7 @@ ocean_resources = FALSE
 ;                        actual chance of river generation is controlled
 ;                        separately).
 ;   - UnsafeCoast      = This terrain does not provide a safe voyage for
-;                        units with flag "Trireme"
+;                        units with flag "CoastStrict"
 ;   - FreshWater       = This terrain is used for small bodies of water.
 ;                        If this becomes adjacent to non-FreshWater terrain,
 ;                        the whole contiguous FreshWater area will be flooded
@@ -849,274 +867,206 @@ Tundra are broad, cold regions, fit for some agriculture and little \
 else.\
 ")
 
-; The individual resource types, one per section.
-; Roughly sorted by identifier.
+; /* <-- avoid gettext warnings
+;
+; Resource types:
+;
 ; The actual tag used (the * in [resource_*]) must be unique for each resource,
 ; and may be used in debug output when reading this file.
 ;
 ; Notes:
 ;
-; name                 = name as seen by user
-; graphic              = tag specifying preferred graphic
-; graphic_alt          = tag for alternate graphic if preferred graphic is not
-;                        present; especially if preferred graphic is non-standard,
-;                        this should be a standard tag.  Otherwise can use eg "-"
-;                        for no alternate graphic.
-; identifier           = single-character identifier used in savegames.  This
+; extra                = name of the extra this resource section is part of
+;                        (must have "Resource" in its causes)
+; identifier           = single-character identifier used in old savegames. This
 ;                        must be unique for each resource, and changing it will
-;                        break savegame compatibility.
+;                        break loading those old savegames.
 ; food                 = increased food production
 ; shield               = increased shield production
 ; trade                = increased trade production
+;
+; */ <-- avoid gettext warnings
 
 [resource_gold]
-name        = _("Gold")
-graphic     = "ts.gold"
-graphic_alt = "-"
+extra       = "Gold"
 identifier  = "$"
 trade       = 6
 
 [resource_iron]
-name        = _("Iron")
-graphic     = "ts.iron"
-graphic_alt = "-"
+extra       = "Iron"
 identifier  = "/"
 shield      = 3
 
 [resource_peat]
-name        = _("Peat")
-graphic     = "ts.peat"
-graphic_alt = "-"
+extra       = "Peat"
 identifier  = "a"
 shield      = 4
 
 [resource_buffalo]
-name        = _("Buffalo")
-graphic     = "ts.buffalo"
-graphic_alt = "-"
+extra       = "Buffalo"
 identifier  = "b"
 food        = 1
 shield      = 1
 
 [resource_coal]
-name        = _("Coal")
-graphic     = "ts.coal"
-graphic_alt = "-"
+extra       = "Coal"
 identifier  = "c"
 shield      = 2
 
 [resource_corn]
-name        = _("Corn")
-graphic     = "ts.corn"
-graphic_alt = "ts.grassland_resources"
+extra       = "Corn"
 identifier  = "C"
 food        = 1
 
 [resource_deer]
-name        = _("Deer")
-graphic     = "ts.deer"
-graphic_alt = "ts.grassland_resources"
+extra       = "Deer"
 identifier  = "d"
 food        = 2
 
 [resource_game]
-name        = _("?animals:Game")
-graphic     = "ts.tundra_game"
-graphic_alt = "-"
+extra       = "Game"
 identifier  = "e"
 food        = 2
 shield      = 1
 
 [resource_fruit]
-name        = _("Fruit")
-graphic     = "ts.fruit"
-graphic_alt = "-"
+extra       = "Fruit"
 identifier  = "f"
 food        = 3
 
 [resource_gems]
-name        = _("Gems")
-graphic     = "ts.gems"
-graphic_alt = "-"
+extra       = "Gems"
 identifier  = "g"
 trade       = 4
 
 [resource_horses]
-name        = _("Horses")
-graphic     = "ts.horses"
-graphic_alt = "ts.grassland_resources"
+extra       = "Horses"
 identifier  = "h"
 shield      = 2
 
 [resource_icy_ivory]
-name        = _("Seals")
-graphic     = "ts.seals"
-graphic_alt = "ts.arctic_ivory"
+extra       = "Seals"
 identifier  = "i"
 food        = 1
 shield      = 1
 trade       = 3
 
 [resource_ivory]
-name        = _("Ivory")
-graphic     = "ts.ivory"
-graphic_alt = "ts.grassland_resources"
+extra       = "Ivory"
 identifier  = "I"
 food        = 1
 shield      = 1
 trade       = 3
 
 [resource_wheat]
-name        = _("Wheat")
-graphic     = "ts.wheat"
-graphic_alt = "-"
+extra       = "Wheat"
 identifier  = "j"
 food        = 2
 
 [resource_cattle]
-name        = _("Cattle")
-graphic     = "ts.cattle"
-graphic_alt = "ts.grassland_resources"
+extra       = "Cattle"
 identifier  = "k"
 food        = 1
 
 [resource_cotton]
-name        = _("Cotton")
-graphic     = "ts.cotton"
-graphic_alt = "ts.grassland_resources"
+extra       = "Cotton"
 identifier  = "K"
 shield      = 1
 
 [resource_salt]
-name        = _("Salt")
-graphic     = "ts.salt"
-graphic_alt = "ts.grassland_resources"
+extra       = "Salt"
 identifier  = "l"
 shield      = 1
 trade       = 1
 
 [resource_marble]
-name        = _("Marble")
-graphic     = "ts.marble"
-graphic_alt = "ts.grassland_resources"
+extra       = "Marble"
 identifier  = "m"
 shield      = 1
 trade       = 1
 
 [resource_incense]
-name        = _("Incense")
-graphic     = "ts.incense"
-graphic_alt = "ts.grassland_resources"
+extra       = "Incense"
 identifier  = "n"
 trade       = 3
 
 [resource_oasis]
-name        = _("Oasis")
-graphic     = "ts.oasis"
-graphic_alt = "-"
+extra       = "Oasis"
 identifier  = "o"
 food        = 3
 
 [resource_pheasant]
-name        = _("Pheasant")
-graphic     = "ts.pheasant"
-graphic_alt = "-"
+extra       = "Pheasant"
 identifier  = "p"
 food        = 1
 trade       = 1
 
 [resource_tobacco]
-name        = _("Tobacco")
-graphic     = "ts.tobacco"
-graphic_alt = "ts.grassland_resources"
+extra       = "Tobacco"
 identifier  = "q"
 trade       = 2
 
 [resource_bonus]
-name        = _("Resources")
-graphic     = "ts.grassland_resources"
-graphic_alt = "-"
+extra       = "Resources"
 identifier  = "r"
 shield      = 1
 
 [resource_silk]
-name        = _("Silk")
-graphic     = "ts.silk"
-graphic_alt = "-"
+extra       = "Silk"
 identifier  = "s"
 trade       = 3
 
 [resource_sugar]
-name        = _("Sugar")
-graphic     = "ts.sugar"
-graphic_alt = "ts.grassland_resources"
+extra       = "Sugar"
 identifier  = "S"
 food        = 2
 trade       = 2
 
 [resource_spice]
-name        = _("Spice")
-graphic     = "ts.spice"
-graphic_alt = "-"
+extra       = "Spice"
 identifier  = "t"
 food        = 1
 trade       = 4
 
 [resource_tea]
-name        = _("Tea")
-graphic     = "ts.tea"
-graphic_alt = "ts.grassland_resources"
+extra       = "Tea"
 identifier  = "T"
 trade       = 2
 
 [resource_furs]
-name        = _("Furs")
-graphic     = "ts.furs"
-graphic_alt = "-"
+extra       = "Furs"
 identifier  = "u"
 food        = 1
 trade       = 3
 
 [resource_whales]
-name        = _("Whales")
-graphic     = "ts.whales"
-graphic_alt = "-"
+extra       = "Whales"
 identifier  = "v"
 food        = 1
 shield      = 1
 
 [resource_wine]
-name        = _("Wine")
-graphic     = "ts.wine"
-graphic_alt = "-"
+extra       = "Wine"
 identifier  = "w"
 trade       = 4
 
 [resource_wool]
-name        = _("Wool")
-graphic     = "ts.wool"
-graphic_alt = "ts.grassland_resources"
+extra       = "Wool"
 identifier  = "W"
 shield      = 1
 
 [resource_oil]
-name        = _("Oil")
-graphic     = "ts.oil"
-graphic_alt = "-"
+extra       = "Oil"
 identifier  = "x"
 shield      = 3 ; glacier used to have 4
 
 [resource_fish]
-name        = _("Fish")
-graphic     = "ts.fish"
-graphic_alt = "-"
+extra       = "Fish"
 identifier  = "y"
 food        = 2
 
 [resource_shellfish]
-name        = _("Shellfish")
-graphic     = "ts.shellfish"
-graphic_alt = "ts.grassland_resources"
+extra       = "Shellfish"
 identifier  = "z"
 food        = 1
 trade       = 1
@@ -1124,7 +1074,11 @@ trade       = 1
 [extraui]
 
 ; Player visible names of the base gui types.
+
+; ui_name_base_fortress refers to all bases that have gui_type "Fortress"
 ui_name_base_fortress = _("?gui_type:Build Fort/Fortress/Buoy")
+
+; ui_name_base_airbase refers to all bases that have gui_type "Airbase"
 ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
 
 ; /* <-- avoid gettext warnings
@@ -1143,13 +1097,16 @@ ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
 ;                           ruleset has been released, you should set
 ;                           "rule_name" to the original value of "name".
 ; category                = How UI should categorize this extra. One of
-;                           "Infra", "Natural", "Nuisance", or "Bonus"
+;                           "Infra", "Natural", "Nuisance", "Resource",
+;                           or "Bonus"
 ; causes                  = events that can create extra type.
 ;                           "Irrigation", "Mine", "Hut", "Pollution", "Fallout",
-;                           "Base", or "Road" (last two require a corresponding
-;                           [base_*] or [road_*] section)
+;                           "Appear", "Resource", "Base", or "Road"
+;                           (the last three require a corresponding
+;                           [resource_*] / [base_*] / [road_*] section)
 ; rmcauses                = events that can remove extra type.
-;                           "CleanPollution", "CleanFallout", or "Pillage"
+;                           "CleanPollution", "CleanFallout", "Pillage", or
+;                           "Disappear"
 ; graphic                 = tag specifying preferred graphic
 ; graphic_alt             = tag for alternate graphic if preferred graphic is
 ;                           not present. Can use eg "-" for no alternate
@@ -1166,7 +1123,20 @@ ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
 ; reqs                    = requirements to build the extra (see effects.ruleset
 ;                           and README.effects for help on requirements)
 ; rmreqs                  = requirements to remove the extra
-; buildable               = Can extra be built? Defaults to TRUE
+; appearance_reqs         = spontaneous appearance requirements
+; disappearance_reqs      = spontaneous disappearance requirements
+; visibility_req          = Tech a player needs to have to see the extra
+;                           This affects visibility only, for all the rules
+;                           extra is still there even if player can't see it.
+; buildable               = Can extra be built? Defaults to TRUE if extra has
+;                           any causes indicating it can result from worker
+;                           activity.
+;                           If extra is not buildable, it can appear in game
+;                           only if placed in the editor, it's placed by
+;                           map generator, or on city tile if the extra
+;                           also has "AlwaysOnCityCenter" flag set.
+; generated               = Can map generator place the extra? Applicable
+;                           for Hut, Resource, and River extras.
 ; build_time              = how long it takes a unit to build this extra.
 ;                           Value of 0 (default) means that terrain- and
 ;                           build activity specific time is used instead.
@@ -1181,6 +1151,17 @@ ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
 ;                           multiplied by this value (default 1)
 ; defense_bonus           = Percent added to defense when tile has the extra
 ;                           (default none)
+; unit_seen               = How opponents see units inside this extra
+;                           "Normal" - Units are seen normally (default)
+;                           "Hidden" - Units are hidden from opponents
+; appearance_chance       = If extra has cause "Appear" and other requirements
+;                           for its appearance are fulfilled, this tells how big
+;                           chance it has to appear each turn. The chance is 1/10000
+;                           times this value.
+; disappearance_chance    = If extra has rmcause "Disappear" and other requirements
+;                           for its disappearance are fulfilled, this tells how big
+;                           chance it has to disappear each turn. The chance is 1/10000
+;                           times this value.
 ; native_to               = List of unit classes that are considered to
 ;                           be inside the extra when they are on same tile
 ; conflicts               = List of extras that cannot be on the same tile.
@@ -1213,6 +1194,7 @@ ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
 ;                           on the default "Fortification" defense layer multiplied
 ;                           by the 1 + sum of bonuses from the extras on the
 ;                           "Natural" layer.
+;   - "NoStackDeath"      = Units inside do not die all at once when attacked
 ; helptext                = optional help text string; should escape all raw
 ;                           newlines so that xgettext parsing works
 ;
@@ -1238,6 +1220,7 @@ build_time     = 0
 removal_time   = 0
 conflicts      = "Mine", "Oil Well"
 hidden_by      = "Farmland"
+flags          = "IrrigationSource"
 helptext       = _("\
 Building an irrigation system on a suitable tile causes it to \
 produce some extra food each turn. Most tiles yield one extra food; \
@@ -1573,7 +1556,7 @@ removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 hidden_by      = "Fortress"
-flags          = "NativeTile"
+flags          = "NativeTile", "DiplomatDefense"
 ; /* xgettext:no-c-format */
 helptext       = _("\
 Forts are rapidly-built fortifications providing some defense (+50%) \
@@ -1610,7 +1593,7 @@ build_time     = 2
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
-flags          = "NativeTile"
+flags          = "NativeTile", "DiplomatDefense"
 helptext       = _("\
 Fortresses are more permanent forts; construction on them can only begin \
 once the underlying fort is complete. Forts on River tiles cannot be \
@@ -1656,7 +1639,7 @@ removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress"
 hidden_by      = "Airbase"
-flags          = "Refuel"
+flags          = "Refuel", "ParadropFrom"
 helptext       = _("\
 Airstrips are rapidly-built runways allowing air units to land, refuel, \
 and recover outside cities; an aircraft remaining on an airstrip for a \
@@ -1701,7 +1684,7 @@ build_time     = 2
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress"
-flags          = "Refuel"
+flags          = "Refuel", "ParadropFrom"
 helptext       = _("\
 Airbases are more permanent airstrips; construction on them can only \
 begin once the underlying airstrip is complete. Airstrips on River tiles \
@@ -1788,10 +1771,10 @@ submarines, same as Deep Oceans), and its vision range is reduced.
 [extra_ruins]
 name           = _("Ruins")
 category       = "Bonus"
-causes         = "Base"
+;causes         = ""
 rmcauses       = "Pillage"
-graphic        = "base.ruins"
-graphic_alt    = "-"
+graphic        = "extra.ruins"
+graphic_alt    = "base.ruins"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
@@ -1947,7 +1930,7 @@ rmact_gfx_alt  = "-"
 buildable      = FALSE
 native_to      = "Land", "Small Land", "Merchant", "Trireme"
 defense_bonus  = 25
-flags          = "NativeTile"
+flags          = "NativeTile", "IrrigationSource", "AllowsFarmlandOnDesert"
 ; /* xgettext:no-c-format */
 helptext       = _("\
 Any land terrain type may have a River on it. A River adds 1 \
@@ -2026,8 +2009,8 @@ risk of natural disaster, which will reduce the population.\
 [extra_aluminum]
 name           = _("Aluminum")
 category       = "Natural"
-;causes         = ""
-;rmcauses       = ""
+causes         = "Appear"
+;rmcauses       = "Disappear"
 graphic        = "tx.aluminum"
 graphic_alt    = "tx.village"
 activity_gfx   = "None"
@@ -2038,27 +2021,33 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Aluminum", "Local", TRUE
-      "Resource", "Game", "Local", FALSE
-      "Resource", "Furs", "Local", FALSE
-      "Resource", "Coal", "Local", FALSE
-      "Resource", "Wine", "Local", FALSE
-      "Resource", "Marble", "Local", FALSE
+      "Extra", "Game", "Local", FALSE
+      "Extra", "Furs", "Local", FALSE
+      "Extra", "Coal", "Local", FALSE
+      "Extra", "Wine", "Local", FALSE
+      "Extra", "Marble", "Local", FALSE
     }
-buildable      = FALSE
-helptext       = _("\
+appearance_reqs      =
+    { "type", "name", "range", "present"
+      "MinYear", "-3999", "World", FALSE
+    }
+visibility_req       = "Industrialization"
+buildable            = FALSE
+appearance_chance    = 200
+helptext             = _("\
 Strategic resource, required in a city to build the wonder Apollo \
 Program. Cities with available Aluminum build Carrier, AEGIS Cruiser, \
 Cruise Missile, Fighter and Bomber units with one extra veteran level.\
 "), _("\
-With the discovery of Industrialization, Aluminum produces 2 extra shields \
-in the tile.\
+With the discovery of Industrialization, Aluminum becomes visible on \
+the map, and it produces 2 extra shields in the tile.\
 ")
 
 [extra_niter]
 name           = _("Niter")
 category       = "Natural"
-;causes         = ""
-;rmcauses       = ""
+causes         = "Appear"
+;rmcauses       = "Disappear"
 graphic        = "tx.niter"
 graphic_alt    = "tx.village"
 activity_gfx   = "None"
@@ -2069,29 +2058,35 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Niter", "Local", TRUE
-      "Resource", "Wheat", "Local", FALSE
-      "Resource", "Buffalo", "Local", FALSE
-      "Resource", "Horses", "Local", FALSE
-      "Resource", "Oasis", "Local", FALSE
-      "Resource", "Oil", "Local", FALSE
-      "Resource", "Incense", "Local", FALSE
+      "Extra", "Wheat", "Local", FALSE
+      "Extra", "Buffalo", "Local", FALSE
+      "Extra", "Horses", "Local", FALSE
+      "Extra", "Oasis", "Local", FALSE
+      "Extra", "Oil", "Local", FALSE
+      "Extra", "Incense", "Local", FALSE
     }
-buildable      = FALSE
-helptext       = _("\
+appearance_reqs      =
+    { "type", "name", "range", "present"
+      "MinYear", "-3999", "World", FALSE
+    }
+;visibility_req       = "Gunpowder"
+buildable            = FALSE
+appearance_chance    = 200
+helptext             = _("\
 Strategic resource. Cities without available Niter build gunpowder \
 based units with one less veteran level: Musketeers, Riflemen, Alpine \
 Troops, Dragoons, Cavalry, Cannon, Artillery, Galleon, Frigate and \
 Ironclad.\
 "), _("\
-With the discovery of Gunpowder, Niter produces 2 extra shields in \
-the tile.\
+With the discovery of Gunpowder, Niter (visible on the map from the \
+beginning) produces 2 extra shields in the tile.\
 ")
 
 [extra_rubber]
 name           = _("Rubber")
 category       = "Natural"
-;causes         = ""
-;rmcauses       = ""
+causes         = "Appear"
+;rmcauses       = "Disappear"
 graphic        = "tx.rubber"
 graphic_alt    = "tx.village"
 activity_gfx   = "None"
@@ -2102,31 +2097,37 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Rubber", "Local", TRUE
-      "Resource", "Peat", "Local", FALSE
-      "Resource", "Spice", "Local", FALSE
-      "Resource", "Sugar", "Local", FALSE
-      "Resource", "Gems", "Local", FALSE
-      "Resource", "Fruit", "Local", FALSE
-      "Resource", "Ivory", "Local", FALSE
-      "Resource", "Pheasant", "Local", FALSE
-      "Resource", "Silk", "Local", FALSE
-      "Resource", "Deer", "Local", FALSE
+      "Extra", "Peat", "Local", FALSE
+      "Extra", "Spice", "Local", FALSE
+      "Extra", "Sugar", "Local", FALSE
+      "Extra", "Gems", "Local", FALSE
+      "Extra", "Fruit", "Local", FALSE
+      "Extra", "Ivory", "Local", FALSE
+      "Extra", "Pheasant", "Local", FALSE
+      "Extra", "Silk", "Local", FALSE
+      "Extra", "Deer", "Local", FALSE
     }
-buildable      = FALSE
-helptext       = _("\
+appearance_reqs      =
+    { "type", "name", "range", "present"
+      "MinYear", "-3999", "World", FALSE
+    }
+visibility_req       = "Chemistry"
+buildable            = FALSE
+appearance_chance    = 200
+helptext             = _("\
 Strategic resource. Cities with available Rubber build Marines, \
 Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
 veteran level.\
 "), _("\
-With the discovery of Chemistry, Rubber produces 2 extra shields in \
-the tile.\
+With the discovery of Chemistry, Rubber becomes visible on the map, \
+and it produces 2 extra shields in the tile.\
 ")
 
 [extra_uranium]
 name           = _("Uranium")
 category       = "Natural"
-;causes         = ""
-;rmcauses       = ""
+causes         = "Appear"
+;rmcauses       = "Disappear"
 graphic        = "tx.uranium"
 graphic_alt    = "tx.village"
 activity_gfx   = "None"
@@ -2137,20 +2138,472 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present"
       "TerrainFlag", "Uranium", "Local", TRUE
-      "Resource", "Iron", "Local", FALSE
-      "Resource", "Gold", "Local", FALSE
-      "Resource", "Seals", "Local", FALSE
-      "Resource", "Oil", "Local", FALSE
+      "Extra", "Iron", "Local", FALSE
+      "Extra", "Gold", "Local", FALSE
+      "Extra", "Seals", "Local", FALSE
+      "Extra", "Oil", "Local", FALSE
     }
-buildable      = FALSE
-helptext       = _("\
+appearance_reqs      =
+    { "type", "name", "range", "present"
+      "MinYear", "-3999", "World", FALSE
+    }
+visibility_req       = "Atomic Theory"
+buildable            = FALSE
+appearance_chance    = 200
+helptext             = _("\
 Strategic resource, required in a city to build a Nuclear Plant or \
 the wonder Manhattan Project. Cities with available Uranium build \
 Armor and Submarine units with one extra veteran level.\
 "), _("\
-With discovery of Atomic Theory, Uranium produces 2 extra shields in \
-the tile.\
+With discovery of Atomic Theory, Uranium becomes visible on the map, \
+and it produces 2 extra shields in the tile.\
 ")
+
+[extra_gold]
+name           = _("Gold")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.gold"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_iron]
+name           = _("Iron")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.iron"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_peat]
+name           = _("Peat")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.peat"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+flags          = "Coal Peat Oil"
+
+[extra_buffalo]
+name           = _("Buffalo")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.buffalo"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_coal]
+name           = _("Coal")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.coal"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+flags          = "Coal Peat Oil"
+
+[extra_corn]
+name           = _("Corn")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.corn"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_deer]
+name           = _("Deer")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.deer"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_game]
+name           = _("?animals:Game")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.tundra_game"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_fruit]
+name           = _("Fruit")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.fruit"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_gems]
+name           = _("Gems")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.gems"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_horses]
+name           = _("Horses")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.horses"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_icy_ivory]
+name           = _("Seals")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.seals"
+graphic_alt    = "ts.arctic_ivory"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_ivory]
+name           = _("Ivory")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.ivory"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_wheat]
+name           = _("Wheat")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.wheat"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_cattle]
+name           = _("Cattle")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.cattle"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_cotton]
+name           = _("Cotton")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.cotton"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_salt]
+name           = _("Salt")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.salt"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_marble]
+name           = _("Marble")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.marble"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_incense]
+name           = _("Incense")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.incense"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_oasis]
+name           = _("Oasis")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.oasis"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+flags          = "AllowsFarmlandOnDesert"
+
+[extra_pheasant]
+name           = _("Pheasant")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.pheasant"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_tobacco]
+name           = _("Tobacco")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.tobacco"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_bonus]
+name           = _("Resources")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.grassland_resources"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_silk]
+name           = _("Silk")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.silk"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_sugar]
+name           = _("Sugar")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.sugar"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_spice]
+name           = _("Spice")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.spice"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_tea]
+name           = _("Tea")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.tea"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_furs]
+name           = _("Furs")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.furs"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_whales]
+name           = _("Whales")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.whales"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_wine]
+name           = _("Wine")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.wine"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_wool]
+name           = _("Wool")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.wool"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_oil]
+name           = _("Oil")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.oil"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+flags          = "Coal Peat Oil"
+
+[extra_fish]
+name           = _("Fish")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.fish"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+
+[extra_shellfish]
+name           = _("Shellfish")
+category       = "Resource"
+causes         = "Resource"
+;rmcauses       = ""
+graphic        = "ts.shellfish"
+graphic_alt    = "ts.grassland_resources"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -2160,6 +2613,7 @@ the tile.\
 ;                           (must have "Base" in its causes)
 ; gui_type                = How gui should handle this base.
 ;                           Value can be "Fortress", "Airbase", or "Other"
+;                           See also [extraui] section
 ; border_sq               = Base will claim land ownership up to this radius,
 ;                           -1 to disable. If enabled, base cannot exist in
 ;                           city tile.
@@ -2175,9 +2629,7 @@ the tile.\
 ; flags
 ;   - "NoAggressive"      = Units inside are not considered aggressive if
 ;                           there`s friendly city within 3 tiles
-;   - "NoStackDeath"      = Units inside do not die all at once when attacked
-;   - "DiplomatDefense"   = Diplomats inside get bonus to diplomatic defense
-;   - "ParadropFrom"      = Paradrop can be initiated from base
+
 ;
 ; */ <-- avoid gettext warnings
 
@@ -2185,25 +2637,23 @@ the tile.\
 extra          = "Fort"
 gui_type       = "Fortress"
 border_sq      = -1
-flags          = "DiplomatDefense"
 
 [base_fortress]
 extra          = "Fortress"
 gui_type       = "Fortress"
 border_sq      = -1
-flags          = "NoAggressive", "DiplomatDefense"
+flags          = "NoAggressive"
 
 [base_airstrip]
 extra          = "Airstrip"
 gui_type       = "Airbase"
 border_sq      = -1
-flags          = "ParadropFrom"
 
 [base_airbase]
 extra          = "Airbase"
 gui_type       = "Airbase"
 border_sq      = -1
-flags          = "NoAggressive", "ParadropFrom"
+flags          = "NoAggressive"
 
 [base_buoy]
 extra          = "Buoy"
@@ -2214,10 +2664,6 @@ vision_main_sq = 5
 extra          = "Naval Mine"
 gui_type       = "Fortress"
 border_sq      = -1
-
-[base_ruins]
-extra          = "Ruins"
-gui_type       = "Other"
 
 [base_wonder]
 extra          = "Wonder"
@@ -2260,7 +2706,7 @@ gui_type       = "Other"
 ;   In summary, output bonuses from roads are given by the formula:
 ;   (base_prod + roads.incr_const + roads.incr*terrain.incr_pct) * roads.bonus
 ; compat_special          = what kind of pre-2.5 special this road corresponds
-;                           to, if any: "Road", "Railroad", "River, or "None".
+;                           to, if any: "Road", "Railroad", "River", or "None".
 ;                           Used for UI and loading old savegames
 ; integrates              = list of road types that are suitable next steps
 ;                           for travel from this road type; such steps are

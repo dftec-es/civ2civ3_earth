@@ -1,6 +1,6 @@
 [spec]
 
-options = "+Freeciv-2.6-spec"
+options = "+Freeciv-3.0-spec"
 
 artists = "
     Peter Arbor <peter.arbor@gmail.com>

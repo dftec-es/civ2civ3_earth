@@ -12,15 +12,16 @@
 
 [datafile]
 description="Civ2Civ3 buildings data for Freeciv"
-options="+Freeciv-2.6-ruleset"
+options="+Freeciv-3.0-ruleset web-compatible"
+format_version=10
 
 ; /* <-- avoid gettext warnings
 ;
 ; Below: The individual buildings, one per section.
 ; (Buildings = City Improvements and Wonders)
 ;
-; The actual tag used (the * in [building_*]) does not matter, except 
-; it must be unique within this file, and it may be used in debug 
+; The actual tag used (the * in [building_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
 ; output when reading this file.
 ;
 ; Notes:
@@ -54,6 +55,9 @@ options="+Freeciv-2.6-ruleset"
 ; "Gold"             = Not a real building; production turned into gold
 ;                      indefinitely (capitalization/coinage).
 ;                      Genus should be "Special".
+; "DisasterProof"    = Disasters never destroy this building. Is meaningful
+;                      only for genus "Improvement" buildings as others are
+;                      automatically disaster proof.
 ;
 ; */ <-- avoid gettext warnings
 
@@ -729,6 +733,7 @@ reqs	=
     { "type", "name", "range"
       "Tech", "Nuclear Power", "Player"
       "Building", "Factory", "City"
+      "Extra", "Uranium", "Traderoute"
     }
 graphic	= "b.nuclear_plant"
 graphic_alt	= "-"
@@ -934,6 +939,7 @@ reqs	=
     { "type", "name", "range"
       "Tech", "Refining", "Player"
       "Building", "Factory", "City"
+      "ExtraFlag", "Coal Peat Oil", "Traderoute"
     }
 graphic	= "b.power_plant"
 graphic_alt	= "-"
@@ -1847,7 +1853,8 @@ sound_alt	= "w_generic"
 helptext	= _("\
 The city where it is built can establish one extra trade route.\
 "), _("\
-The player who owns it gets an embassy with all players.\
+The player who owns it gets an embassy with all other players with \
+whom the owner has had contact.\
 "), _("\
 TIP: if you're behind in research, this can help you catch up, by \
 reducing the cost of technologies that other players already know.\

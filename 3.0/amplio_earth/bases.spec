@@ -1,7 +1,7 @@
 [spec]
 
 ; Format and options of this spec file:
-options = "+Freeciv-2.6-spec"
+options = "+Freeciv-3.0-spec"
 
 [info]
 
@@ -37,7 +37,7 @@ tiles = { "row", "column", "tag"
  0,  6, "base.castle_bg"
 
 ;[VC]
- 0,  9, "base.ruins_mg"
+ 0,  9, "extra.ruins_mg"
 ;[El]
  1,  0, "base.buoy_mg"
 ;[PF]

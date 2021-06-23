@@ -11,7 +11,8 @@
 
 [datafile]
 description="Civ2Civ3 effects data for Freeciv"
-options="+Freeciv-2.6-ruleset"
+options="+Freeciv-3.0-ruleset web-compatible"
+format_version=10
 
 ; /* <-- avoid gettext warnings
 ;
@@ -30,7 +31,7 @@ options="+Freeciv-2.6-ruleset"
 
 ; "Away" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 
-; 3 - 1 = 2
+; 2 - 1 = 1
 [effect_ai_hard_tech_cost]
 type    = "Tech_Cost_Factor"
 value   = -1
@@ -125,10 +126,10 @@ reqs    =
       "AI", "Hard", "Player"
     }
 
-; 3 - 2 = 1
+; 2 - 1 = 1
 [effect_ai_cheat_tech_cost]
 type    = "Tech_Cost_Factor"
-value   = -2
+value   = -1
 reqs    =
     { "type", "name", "range"
       "AI", "Cheating", "Player"
@@ -254,7 +255,7 @@ reqs    =
 ; Barbarian no waste by distance
 [effect_barb2]
 type    = "Output_Waste_By_Distance"
-value   = -2
+value   = -200
 reqs    =
     { "type", "name", "range"
       "NationGroup", "Barbarian", "Player"
@@ -584,6 +585,10 @@ reqs    =
       "Tech", "The Corporation", "Player"
     }
 
+[effect_conquest_tech]
+type    = "Conquest_Tech_Pct"
+value   = 100
+
 ; Base vision range - radius of vision is sqrt(5) = 2.24
 [effect_city_vision]
 type    = "City_Vision_Radius_Sq"
@@ -747,18 +752,9 @@ reqs    =
       "Extra", "Naval Mine", "Adjacent", FALSE
     }
 
-; Base -1% food each 1 tile
+; Base -0.5% food each 1 tile
 [effect_food_waste_distance]
 type    = "Output_Waste_By_Distance"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-    }
-
-; Total -1% food each 2 tiles
-[effect_food_waste_distance_1]
-type    = "Output_Waste_Pct"
 value   = 50
 reqs    =
     { "type", "name", "range"
@@ -768,7 +764,7 @@ reqs    =
 ; base -1% trade each tile
 [effect_corruption_distance]
 type    = "Output_Waste_By_Distance"
-value   = 1
+value   = 100
 reqs    =
     { "type", "name", "range"
       "OutputType", "Trade", "Local"
@@ -777,7 +773,7 @@ reqs    =
 ; 1 + 1 => -2% each tile without advanced tech / govs
 [effect_corruption_distance_ancient]
 type    = "Output_Waste_By_Distance"
-value   = 1
+value   = 100
 reqs    =
     { "type", "name", "range", "present"
       "OutputType", "Trade", "Local", TRUE
@@ -787,7 +783,7 @@ reqs    =
 
 [effect_corruption_distance_ancient_communism]
 type    = "Output_Waste_By_Distance"
-value   = 1
+value   = 100
 reqs    =
     { "type", "name", "range", "present"
       "OutputType", "Trade", "Local", TRUE
@@ -798,21 +794,21 @@ reqs    =
 ; Total = 0 for Communism with tech Communism, -1% for Communism alone
 [effect_corruption_distance_communism]
 type    = "Output_Waste_By_Distance"
-value   = -1
+value   = -100
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Communism", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Communism", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 ; Total = 0 for Federation with tech The Corporation, -1% for Federation alone
 [effect_corruption_distance_federation]
 type    = "Output_Waste_By_Distance"
-value   = -1
+value   = -100
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Federation", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Federation", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 ; Corruption + waste = 30% for all govs
@@ -821,96 +817,96 @@ reqs    =
 ;type    = "Output_Waste"
 ;value   = 0
 ;reqs    =
-;    { "type", "name", "range"
-;      "Gov", "Anarchy", "Player"
-;      "OutputType", "Trade", "Local"
+;    { "type", "name", "range", "quiet"
+;      "Gov", "Anarchy", "Player", TRUE
+;      "OutputType", "Trade", "Local", FALSE
 ;    }
 
 [effect_corruption_tribal]
 type    = "Output_Waste"
 value   = 30
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Tribal", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Tribal", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 [effect_corruption_despotism]
 type    = "Output_Waste"
 value   = 20
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Despotism", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Despotism", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 [effect_corruption_monarchy]
 type    = "Output_Waste"
 value   = 10
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Monarchy", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Monarchy", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 [effect_corruption_fascism]
 type    = "Output_Waste"
 value   = 20
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fascism", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fascism", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 [effect_corruption_communism]
 type    = "Output_Waste"
 value   = 30
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Communism", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Communism", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 [effect_corruption_fundamentalism]
 type    = "Output_Waste"
 value   = 15
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fundamentalism", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fundamentalism", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 ;[effect_corruption_federation]
 ;type    = "Output_Waste"
 ;value   = 0
 ;reqs    =
-;    { "type", "name", "range"
-;      "Gov", "Federation", "Player"
-;      "OutputType", "Trade", "Local"
+;    { "type", "name", "range", "quiet"
+;      "Gov", "Federation", "Player", TRUE
+;      "OutputType", "Trade", "Local", FALSE
 ;    }
 
 [effect_corruption_republic]
 type    = "Output_Waste"
 value   = 25
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Republic", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Republic", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 [effect_corruption_democracy]
 type    = "Output_Waste"
 value   = 5
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Democracy", "Player"
-      "OutputType", "Trade", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Democracy", "Player", TRUE
+      "OutputType", "Trade", "Local", FALSE
     }
 
 ; base -1% shields each tile
 [effect_waste_distance]
 type    = "Output_Waste_By_Distance"
-value   = 1
+value   = 100
 reqs    =
     { "type", "name", "range"
       "OutputType", "Shield", "Local"
@@ -919,7 +915,7 @@ reqs    =
 ; 1 + 1 => -2% each tile without Trade or advanced govs
 [effect_waste_distance_ancient]
 type    = "Output_Waste_By_Distance"
-value   = 1
+value   = 100
 reqs    =
     { "type", "name", "range", "present"
       "OutputType", "Shield", "Local", TRUE
@@ -931,143 +927,143 @@ reqs    =
 ; 1 - 1 = 0% with Communism
 [effect_waste_distance_communism]
 type    = "Output_Waste_By_Distance"
-value   = -1
+value   = -100
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Communism", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Communism", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 ; 1 - 1 = 0% with Federation
 [effect_waste_distance_federation]
 type    = "Output_Waste_By_Distance"
-value   = -1
+value   = -100
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Federation", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Federation", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_waste_anarchy]
 type    = "Output_Waste"
 value   = 30
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 ;[effect_waste_tribal]
 ;type    = "Output_Waste"
 ;value   = 0
 ;reqs    =
-;    { "type", "name", "range"
-;      "Gov", "Tribal", "Player"
-;      "OutputType", "Shield", "Local"
+;    { "type", "name", "range", "quiet"
+;      "Gov", "Tribal", "Player", TRUE
+;      "OutputType", "Shield", "Local", FALSE
 ;    }
 
 [effect_waste_despotism]
 type    = "Output_Waste"
 value   = 10
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Despotism", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Despotism", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_waste_monarchy]
 type    = "Output_Waste"
 value   = 20
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Monarchy", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Monarchy", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_waste_fascism]
 type    = "Output_Waste"
 value   = 10
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fascism", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fascism", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 ;[effect_waste_communism]
 ;type    = "Output_Waste"
 ;value   = 0
 ;reqs    =
-;    { "type", "name", "range"
-;      "Gov", "Communism", "Player"
-;      "OutputType", "Shield", "Local"
+;    { "type", "name", "range", "quiet"
+;      "Gov", "Communism", "Player", TRUE
+;      "OutputType", "Shield", "Local", FALSE
 ;    }
 
 [effect_waste_fundamentalism]
 type    = "Output_Waste"
 value   = 15
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fundamentalism", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fundamentalism", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_waste_federation]
 type    = "Output_Waste"
 value   = 30
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Federation", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Federation", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_waste_republic]
 type    = "Output_Waste"
 value   = 5
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Republic", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Republic", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_waste_democracy]
 type    = "Output_Waste"
 value   = 25
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Democracy", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Democracy", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_tech_upkeep_anarchy]
 type    = "Tech_Upkeep_Free"
 value   = 99
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
     }
 
 [effect_building_upkeep_anarchy]
 type    = "Upkeep_Free"
 value   = 99
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
     }
 
 [effect_building_upkeep_fascism]
 type    = "Upkeep_Free"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fascism", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fascism", "Player", TRUE
     }
 
 [effect_building_upkeep_communism]
 type    = "Upkeep_Free"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Communism", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Communism", "Player", TRUE
     }
 
 ; Govs with 1 gold upkeep
@@ -1231,90 +1227,90 @@ reqs    =
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_upkeep_free_units_tribal]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 3
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Tribal", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Tribal", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_upkeep_free_units_despotism]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Despotism", "Player"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Despotism", "Player", TRUE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_upkeep_free_units_monarchy]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 3
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Monarchy", "Player"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Monarchy", "Player", TRUE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_upkeep_free_units_fascism]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 6
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fascism", "Player"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fascism", "Player", TRUE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_upkeep_free_units_communism]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 3
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Communism", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Communism", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_upkeep_free_units_fundamentalism]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 4
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fundamentalism", "Player"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fundamentalism", "Player", TRUE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_upkeep_free_units_federation]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 4
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Federation", "Player"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Federation", "Player", TRUE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_upkeep_free_units_republic]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Republic", "Player"
-      "OutputType", "Shield", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Republic", "Player", TRUE
+      "OutputType", "Shield", "Local", FALSE
     }
 
 [effect_upkeep_free_units_democracy]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Democracy", "Player"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Democracy", "Player", TRUE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 ; Any city can support up to four units...
@@ -1718,8 +1714,8 @@ reqs    =
 type    = "Max_Rates"
 value   = 100
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
     }
 
 [effect_max_rates_tribal]
@@ -1798,40 +1794,40 @@ reqs    =
 type    = "Martial_Law_Each"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
     }
 
 [effect_martial_law_each_despotism]
 type    = "Martial_Law_Each"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Despotism", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Despotism", "Player", TRUE
     }
 
 [effect_martial_law_each_monarchy]
 type    = "Martial_Law_Each"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Monarchy", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Monarchy", "Player", TRUE
     }
 
 [effect_martial_law_each_fascism]
 type    = "Martial_Law_Each"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fascism", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fascism", "Player", TRUE
     }
 
 [effect_martial_law_each_communism]
 type    = "Martial_Law_Each"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Communism", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Communism", "Player", TRUE
     }
 
 [effect_martial_law_max]
@@ -1856,120 +1852,129 @@ reqs    =
 type    = "Output_Penalty_Tile"
 value   = 2
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Anarchy", "Player", TRUE
-      "Building", "Pyramids", "Player", FALSE
-      "Tech", "Railroad", "World", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Anarchy", "Player", TRUE, TRUE
+      "Building", "Pyramids", "Player", FALSE, FALSE
+      "Tech", "Railroad", "World", FALSE, FALSE
+      "OutputType", "Gold", "Local", FALSE, TRUE
+      "OutputType", "Luxury", "Local", FALSE, TRUE
+      "OutputType", "Science", "Local", FALSE, TRUE
     }
 
 [effect_gov_tile_penalty_tribal]
 type    = "Output_Penalty_Tile"
 value   = 2
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Tribal", "Player", TRUE
-      "Building", "Pyramids", "Player", FALSE
-      "Tech", "Railroad", "World", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Tribal", "Player", TRUE, TRUE
+      "Building", "Pyramids", "Player", FALSE, FALSE
+      "Tech", "Railroad", "World", FALSE, FALSE
+      "OutputType", "Gold", "Local", FALSE, TRUE
+      "OutputType", "Luxury", "Local", FALSE, TRUE
+      "OutputType", "Science", "Local", FALSE, TRUE
     }
 
 [effect_gov_tile_penalty_despotism]
 type    = "Output_Penalty_Tile"
 value   = 2
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Despotism", "Player", TRUE
-      "Building", "Pyramids", "Player", FALSE
-      "Tech", "Railroad", "World", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Despotism", "Player", TRUE, TRUE
+      "Building", "Pyramids", "Player", FALSE, FALSE
+      "Tech", "Railroad", "World", FALSE, FALSE
+      "OutputType", "Gold", "Local", FALSE, TRUE
+      "OutputType", "Luxury", "Local", FALSE, TRUE
+      "OutputType", "Science", "Local", FALSE, TRUE
     }
 
 [effect_gov_tile_bonus_republic]
 type    = "Output_Inc_Tile"
 value   = 1
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Republic", "Player", TRUE
-      "OutputType", "Trade", "Local", TRUE
-      "TerrainClass", "Oceanic", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Republic", "Player", TRUE, TRUE
+      "OutputType", "Trade", "Local", TRUE, FALSE
+      "TerrainClass", "Oceanic", "Local", FALSE, FALSE
     }
 
 [effect_gov_tile_bonus_democracy]
 type    = "Output_Inc_Tile"
 value   = 1
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Democracy", "Player", TRUE
-      "OutputType", "Trade", "Local", TRUE
-      "TerrainClass", "Oceanic", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Democracy", "Player", TRUE, TRUE
+      "OutputType", "Trade", "Local", TRUE, FALSE
+      "TerrainClass", "Oceanic", "Local", FALSE, FALSE
     }
 
 [effect_gov_tile_bonus_celebrate]
 type    = "Output_Inc_Tile_Celebrate"
 value   = 1
 reqs    =
-    { "type", "name", "range", "present"
-      "OutputType", "Trade", "Local", TRUE
-      "Gov", "Anarchy", "Player", FALSE
-      "Gov", "Tribal", "Player", FALSE
-      "Gov", "Despotism", "Player", FALSE
-;      "Gov", "Monarchy", "Player", FALSE
-      "Gov", "Fascism", "Player", FALSE
-      "Gov", "Communism", "Player", FALSE
-      "Gov", "Fundamentalism", "Player", FALSE
-;      "Gov", "Federation", "Player", FALSE
-;      "Gov", "Republic", "Player", FALSE
-;      "Gov", "Democracy", "Player", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "OutputType", "Trade", "Local", TRUE, TRUE
+      "Gov", "Anarchy", "Player", FALSE, FALSE
+      "Gov", "Tribal", "Player", FALSE, FALSE
+      "Gov", "Despotism", "Player", FALSE, FALSE
+;      "Gov", "Monarchy", "Player", FALSE, FALSE
+      "Gov", "Fascism", "Player", FALSE, FALSE
+      "Gov", "Communism", "Player", FALSE, FALSE
+      "Gov", "Fundamentalism", "Player", FALSE, FALSE
+;      "Gov", "Federation", "Player", FALSE, FALSE
+;      "Gov", "Republic", "Player", FALSE, FALSE
+;      "Gov", "Democracy", "Player", FALSE, FALSE
     }
 
 [effect_content_tribal]
 type    = "Make_Content"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Tribal", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Tribal", "Player", TRUE
     }
 
 [effect_combat_tribal]
 type    = "Veteran_Combat"
 value   = 50
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Tribal", "Player", TRUE
-      "UnitClass", "Land", "Local", TRUE
-      "UnitFlag", "NonMil", "Local", FALSE
-      "UnitFlag", "NoVeteran", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Tribal", "Player", TRUE, TRUE
+      "UnitClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "NonMil", "Local", FALSE, FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE, FALSE
     }
 
 [effect_combat_tribal_1]
 type    = "Veteran_Combat"
 value   = 50
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Tribal", "Player", TRUE
-      "UnitClass", "Big Land", "Local", TRUE
-      "UnitFlag", "NonMil", "Local", FALSE
-      "UnitFlag", "NoVeteran", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Tribal", "Player", TRUE, TRUE
+      "UnitClass", "Big Land", "Local", TRUE, FALSE
+      "UnitFlag", "NonMil", "Local", FALSE, FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE, FALSE
     }
 
 [effect_combat_fascism]
 type    = "Veteran_Combat"
 value   = 25
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Fascism", "Player", TRUE
-      "UnitClass", "Land", "Local", TRUE
-      "UnitFlag", "NonMil", "Local", FALSE
-      "UnitFlag", "NoVeteran", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Fascism", "Player", TRUE, TRUE
+      "UnitClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "NonMil", "Local", FALSE, FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE, FALSE
     }
 
 [effect_combat_fascism_1]
 type    = "Veteran_Combat"
 value   = 25
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Fascism", "Player", TRUE
-      "UnitClass", "Big Land", "Local", TRUE
-      "UnitFlag", "NonMil", "Local", FALSE
-      "UnitFlag", "NoVeteran", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Fascism", "Player", TRUE, TRUE
+      "UnitClass", "Big Land", "Local", TRUE, FALSE
+      "UnitFlag", "NonMil", "Local", FALSE, FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE, FALSE
     }
 
 [effect_nationality_fascism]
@@ -2076,36 +2081,36 @@ reqs    =
 type    = "Output_Add_Tile"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Federation", "Player"
-      "CityTile", "Center", "Local"
-      "OutputType", "Luxury", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Federation", "Player", TRUE
+      "CityTile", "Center", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
     }
 
 [effect_bad_lux_anarchy]
 type    = "Output_Bonus"
 value   = -50
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Anarchy", "Player"
-      "OutputType", "Luxury", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Anarchy", "Player", TRUE
+      "OutputType", "Luxury", "Local", FALSE
     }
 
 [effect_bad_sci_fundamentalism]
 type    = "Output_Bonus"
 value   = -50
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Fundamentalism", "Player"
-      "OutputType", "Science", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Fundamentalism", "Player", TRUE
+      "OutputType", "Science", "Local", FALSE
     }
 
 [effect_tithes_fundamentalism]
 type    = "Happiness_To_Gold" 
 value   = 1 
 reqs    = 
-    { "type", "name", "range" 
-      "Gov", "Fundamentalism", "Player" 
+    { "type", "name", "range", "quiet"
+      "Gov", "Fundamentalism", "Player", TRUE
     }
 
 [effect_fanatics_fundamentalism]
@@ -2491,10 +2496,9 @@ reqs    =
       "OutputType", "Shield", "local"
     }
 
-; effect always has value>=50, so this halves food waste
 [effect_courthouse_2]
 type    = "Output_Waste_Pct"
-value   = 25
+value   = 50
 reqs    =
     { "type", "name", "range"
       "Building", "Courthouse", "City"
@@ -2519,6 +2523,14 @@ reqs    =
       "MaxUnitsOnTile", "0", "Local", FALSE
     }
 
+[effect_diplomat_defense_extra]
+type    = "Spy_Resistant"
+value	= 25
+reqs	=
+    { "type",      "name",            "range"
+      "ExtraFlag", "DiplomatDefense", "Local"
+    }
+
 [effect_factory]
 type    = "Output_Bonus"
 value   = 25
@@ -2536,10 +2548,9 @@ reqs    =
       "Building", "Factory", "City"
     }
 
-; effect always has value>=50, so this halves food waste
 [effect_granary]
 type    = "Output_Waste_Pct"
-value   = 25
+value   = 50
 reqs    =
     { "type", "name", "range"
       "Building", "Granary", "City"
@@ -2915,6 +2926,14 @@ reqs    =
       "Building", "Palace", "City"
     }
 
+[effect_palace_2_sabotage]
+type    = "Building_Saboteur_Resistant"
+value   = 50
+reqs    =
+    { "type", "name", "range"
+      "Building", "Palace", "City"
+    }
+
 [effect_palace_3]
 type    = "Capital_City"
 value   = 1
@@ -2935,20 +2954,20 @@ reqs    =
 type    = "Output_Bonus"
 value   = 75
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Despotism", "Player"
-      "Building", "Palace", "City"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Despotism", "Player", TRUE
+      "Building", "Palace", "City", FALSE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_palace_monarchy]
 type    = "Output_Bonus"
 value   = 50
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Monarchy", "Player"
-      "Building", "Palace", "City"
-      "OutputType", "Gold", "Local"
+    { "type", "name", "range", "quiet"
+      "Gov", "Monarchy", "Player", TRUE
+      "Building", "Palace", "City", FALSE
+      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_palace_culture]
@@ -2988,6 +3007,15 @@ reqs    =
       "Building", "Palace", "City", FALSE
     }
 
+[effect_ecclesiastical_palace_2_sabotage]
+type    = "Building_Saboteur_Resistant"
+value   = 50
+reqs    =
+    { "type", "name", "range", "present"
+      "Building", "Ecclesiastical Palace", "City", TRUE
+      "Building", "Palace", "City", FALSE
+    }
+
 [effect_ecclesiastical_palace_gov_center]
 type    = "Gov_Center"
 value   = 1
@@ -3001,22 +3029,22 @@ reqs    =
 type    = "Output_Bonus"
 value   = 75
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Despotism", "Player", TRUE
-      "Building", "Ecclesiastical Palace", "City", TRUE
-      "OutputType", "Gold", "Local", TRUE
-      "Building", "Palace", "City", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Despotism", "Player", TRUE, TRUE
+      "Building", "Ecclesiastical Palace", "City", TRUE, FALSE
+      "OutputType", "Gold", "Local", TRUE, FALSE
+      "Building", "Palace", "City", FALSE, FALSE
     }
 
 [effect_ecclesiastical_palace_monarchy]
 type    = "Output_Bonus"
 value   = 50
 reqs    =
-    { "type", "name", "range", "present"
-      "Gov", "Monarchy", "Player", TRUE
-      "Building", "Ecclesiastical Palace", "City", TRUE
-      "OutputType", "Gold", "Local", TRUE
-      "Building", "Palace", "City", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Monarchy", "Player", TRUE, TRUE
+      "Building", "Ecclesiastical Palace", "City", TRUE, FALSE
+      "OutputType", "Gold", "Local", TRUE, FALSE
+      "Building", "Palace", "City", FALSE, FALSE
     }
 
 [effect_ecclesiastical_palace_culture]
@@ -3128,35 +3156,7 @@ reqs    =
       "Building", "Nuclear Plant", "City", FALSE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Resource", "Coal", "Traderoute", TRUE
-    }
-
-[effect_power_plant_peat]
-type    = "Output_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Factory", "City", TRUE
-      "Building", "Power Plant", "City", TRUE
-      "OutputType", "Shield", "Local", TRUE
-      "Building", "Nuclear Plant", "City", FALSE
-      "Building", "Hydro Plant", "City", FALSE
-      "Building", "Solar Plant", "City", FALSE
-      "Resource", "Peat", "Traderoute", TRUE
-    }
-
-[effect_power_plant_oil]
-type    = "Output_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Factory", "City", TRUE
-      "Building", "Power Plant", "City", TRUE
-      "OutputType", "Shield", "Local", TRUE
-      "Building", "Nuclear Plant", "City", FALSE
-      "Building", "Hydro Plant", "City", FALSE
-      "Building", "Solar Plant", "City", FALSE
-      "Resource", "Oil", "Traderoute", TRUE
+      "ExtraFlag", "Coal Peat Oil", "Traderoute", TRUE
     }
 
 [effect_power_plant_1]
@@ -3170,35 +3170,7 @@ reqs    =
       "Building", "Nuclear Plant", "City", FALSE
       "Building", "Hydro Plant", "City", FALSE
       "Building", "Solar Plant", "City", FALSE
-      "Resource", "Coal", "Traderoute", TRUE
-    }
-
-[effect_power_plant_1_peat]
-type    = "Output_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Mfg. Plant", "City", TRUE
-      "Building", "Power Plant", "City", TRUE
-      "OutputType", "Shield", "Local", TRUE
-      "Building", "Nuclear Plant", "City", FALSE
-      "Building", "Hydro Plant", "City", FALSE
-      "Building", "Solar Plant", "City", FALSE
-      "Resource", "Peat", "Traderoute", TRUE
-    }
-
-[effect_power_plant_1_oil]
-type    = "Output_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Mfg. Plant", "City", TRUE
-      "Building", "Power Plant", "City", TRUE
-      "OutputType", "Shield", "Local", TRUE
-      "Building", "Nuclear Plant", "City", FALSE
-      "Building", "Hydro Plant", "City", FALSE
-      "Building", "Solar Plant", "City", FALSE
-      "Resource", "Oil", "Traderoute", TRUE
+      "ExtraFlag", "Coal Peat Oil", "Traderoute", TRUE
     }
 
 ; Recycling Center gives a lesser additional bonus with plants
@@ -4518,6 +4490,29 @@ reqs    =
 type    = "Trade_Revenue_Bonus"
 value   = -1000
 
+;Total = 25%
+[effect_railroad_trade_revenue_reduce]
+type    = "Trade_Revenue_Bonus"
+value   = -1000
+reqs    =
+    { "type", "name", "range"
+      "Tech", "Railroad", "Player"
+    }
+
+[effect_enter_marketplace_bonus_reduction]
+type	= "Trade_Revenue_Bonus"
+value	= -1585
+reqs	=
+    { "type", "name", "range"
+      "Action", "Enter Marketplace", "Local"
+    }
+
+; Fudge factor to more closely approximate Civ2 behavior. (Civ2 is
+; really very different -- this just fakes it a little better)
+[effect_bonus_fudge_factor]
+type	= "Trade_Revenue_Bonus"
+value	= 1585
+
 [effect_calendar_base]
 type    = "Turn_Years"
 value   = 50
@@ -4588,7 +4583,7 @@ value   = 2
 
 [effect_tech_cost_base]
 type    = "Tech_Cost_Factor"
-value   = 3
+value   = 2
 
 ; Cities can always work tiles
 [effect_tile_workable]
@@ -4658,8 +4653,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Incense", "Traderoute", TRUE
-      "Resource", "Incense", "City", FALSE
+      "Extra", "Incense", "Traderoute", TRUE
+      "Extra", "Incense", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4669,8 +4664,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Silk", "Traderoute", TRUE
-      "Resource", "Silk", "City", FALSE
+      "Extra", "Silk", "Traderoute", TRUE
+      "Extra", "Silk", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4680,8 +4675,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Tea", "Traderoute", TRUE
-      "Resource", "Tea", "City", FALSE
+      "Extra", "Tea", "Traderoute", TRUE
+      "Extra", "Tea", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4691,8 +4686,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Tobacco", "Traderoute", TRUE
-      "Resource", "Tobacco", "City", FALSE
+      "Extra", "Tobacco", "Traderoute", TRUE
+      "Extra", "Tobacco", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4702,8 +4697,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wine", "Traderoute", TRUE
-      "Resource", "Wine", "City", FALSE
+      "Extra", "Wine", "Traderoute", TRUE
+      "Extra", "Wine", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4713,8 +4708,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Gems", "Traderoute", TRUE
-      "Resource", "Gems", "City", FALSE
+      "Extra", "Gems", "Traderoute", TRUE
+      "Extra", "Gems", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4724,8 +4719,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Gold", "Traderoute", TRUE
-      "Resource", "Gold", "City", FALSE
+      "Extra", "Gold", "Traderoute", TRUE
+      "Extra", "Gold", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4735,8 +4730,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Shellfish", "Traderoute", TRUE
-      "Resource", "Shellfish", "City", FALSE
+      "Extra", "Shellfish", "Traderoute", TRUE
+      "Extra", "Shellfish", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4746,8 +4741,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Spice", "Traderoute", TRUE
-      "Resource", "Spice", "City", FALSE
+      "Extra", "Spice", "Traderoute", TRUE
+      "Extra", "Spice", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4757,8 +4752,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Furs", "Traderoute", TRUE
-      "Resource", "Furs", "City", FALSE
+      "Extra", "Furs", "Traderoute", TRUE
+      "Extra", "Furs", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Luxury", "Local", TRUE
     }
@@ -4768,8 +4763,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Seals", "Traderoute", TRUE
-      "Resource", "Seals", "City", FALSE
+      "Extra", "Seals", "Traderoute", TRUE
+      "Extra", "Seals", "City", FALSE
     }
 
 [effect_goods_food_traded_1]
@@ -4777,8 +4772,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Oasis", "Traderoute", TRUE
-      "Resource", "Oasis", "City", FALSE
+      "Extra", "Oasis", "Traderoute", TRUE
+      "Extra", "Oasis", "City", FALSE
     }
 
 [effect_goods_food_traded_2]
@@ -4786,8 +4781,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Pheasant", "Traderoute", TRUE
-      "Resource", "Pheasant", "City", FALSE
+      "Extra", "Pheasant", "Traderoute", TRUE
+      "Extra", "Pheasant", "City", FALSE
     }
 
 [effect_goods_food_traded_3]
@@ -4795,8 +4790,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Deer", "Traderoute", TRUE
-      "Resource", "Deer", "City", FALSE
+      "Extra", "Deer", "Traderoute", TRUE
+      "Extra", "Deer", "City", FALSE
     }
 
 [effect_goods_food_traded_4]
@@ -4804,8 +4799,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Cattle", "Traderoute", TRUE
-      "Resource", "Cattle", "City", FALSE
+      "Extra", "Cattle", "Traderoute", TRUE
+      "Extra", "Cattle", "City", FALSE
     }
 
 [effect_goods_food_traded_5]
@@ -4813,8 +4808,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Corn", "Traderoute", TRUE
-      "Resource", "Corn", "City", FALSE
+      "Extra", "Corn", "Traderoute", TRUE
+      "Extra", "Corn", "City", FALSE
     }
 
 [effect_goods_food_traded_6]
@@ -4822,8 +4817,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Fruit", "Traderoute", TRUE
-      "Resource", "Fruit", "City", FALSE
+      "Extra", "Fruit", "Traderoute", TRUE
+      "Extra", "Fruit", "City", FALSE
     }
 
 [effect_goods_food_traded_7]
@@ -4831,8 +4826,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Fish", "Traderoute", TRUE
-      "Resource", "Fish", "City", FALSE
+      "Extra", "Fish", "Traderoute", TRUE
+      "Extra", "Fish", "City", FALSE
     }
 
 [effect_goods_food_traded_8]
@@ -4840,8 +4835,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Whales", "Traderoute", TRUE
-      "Resource", "Whales", "City", FALSE
+      "Extra", "Whales", "Traderoute", TRUE
+      "Extra", "Whales", "City", FALSE
     }
 
 [effect_goods_food_traded_9]
@@ -4849,8 +4844,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wheat", "Traderoute", TRUE
-      "Resource", "Wheat", "City", FALSE
+      "Extra", "Wheat", "Traderoute", TRUE
+      "Extra", "Wheat", "City", FALSE
     }
 
 [effect_goods_food_traded_10]
@@ -4858,8 +4853,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Buffalo", "Traderoute", TRUE
-      "Resource", "Buffalo", "City", FALSE
+      "Extra", "Buffalo", "Traderoute", TRUE
+      "Extra", "Buffalo", "City", FALSE
     }
 
 [effect_goods_food_traded_11]
@@ -4867,8 +4862,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Sugar", "Traderoute", TRUE
-      "Resource", "Sugar", "City", FALSE
+      "Extra", "Sugar", "Traderoute", TRUE
+      "Extra", "Sugar", "City", FALSE
     }
 
 [effect_goods_food_traded_12]
@@ -4876,8 +4871,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Game", "Traderoute", TRUE
-      "Resource", "Game", "City", FALSE
+      "Extra", "Game", "Traderoute", TRUE
+      "Extra", "Game", "City", FALSE
     }
 
 ; Additive with above:
@@ -4887,8 +4882,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Seals", "Traderoute", TRUE
-      "Resource", "Seals", "City", FALSE
+      "Extra", "Seals", "Traderoute", TRUE
+      "Extra", "Seals", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4899,8 +4894,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Oasis", "Traderoute", TRUE
-      "Resource", "Oasis", "City", FALSE
+      "Extra", "Oasis", "Traderoute", TRUE
+      "Extra", "Oasis", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4911,8 +4906,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Pheasant", "Traderoute", TRUE
-      "Resource", "Pheasant", "City", FALSE
+      "Extra", "Pheasant", "Traderoute", TRUE
+      "Extra", "Pheasant", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4923,8 +4918,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Deer", "Traderoute", TRUE
-      "Resource", "Deer", "City", FALSE
+      "Extra", "Deer", "Traderoute", TRUE
+      "Extra", "Deer", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4935,8 +4930,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Cattle", "Traderoute", TRUE
-      "Resource", "Cattle", "City", FALSE
+      "Extra", "Cattle", "Traderoute", TRUE
+      "Extra", "Cattle", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4947,8 +4942,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Corn", "Traderoute", TRUE
-      "Resource", "Corn", "City", FALSE
+      "Extra", "Corn", "Traderoute", TRUE
+      "Extra", "Corn", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4959,8 +4954,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Fruit", "Traderoute", TRUE
-      "Resource", "Fruit", "City", FALSE
+      "Extra", "Fruit", "Traderoute", TRUE
+      "Extra", "Fruit", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4971,8 +4966,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Fish", "Traderoute", TRUE
-      "Resource", "Fish", "City", FALSE
+      "Extra", "Fish", "Traderoute", TRUE
+      "Extra", "Fish", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4983,8 +4978,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Whales", "Traderoute", TRUE
-      "Resource", "Whales", "City", FALSE
+      "Extra", "Whales", "Traderoute", TRUE
+      "Extra", "Whales", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -4995,8 +4990,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wheat", "Traderoute", TRUE
-      "Resource", "Wheat", "City", FALSE
+      "Extra", "Wheat", "Traderoute", TRUE
+      "Extra", "Wheat", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -5007,8 +5002,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Buffalo", "Traderoute", TRUE
-      "Resource", "Buffalo", "City", FALSE
+      "Extra", "Buffalo", "Traderoute", TRUE
+      "Extra", "Buffalo", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -5019,8 +5014,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Sugar", "Traderoute", TRUE
-      "Resource", "Sugar", "City", FALSE
+      "Extra", "Sugar", "Traderoute", TRUE
+      "Extra", "Sugar", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -5031,8 +5026,8 @@ type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Game", "Traderoute", TRUE
-      "Resource", "Game", "City", FALSE
+      "Extra", "Game", "Traderoute", TRUE
+      "Extra", "Game", "City", FALSE
       "OutputType", "Gold", "Local", TRUE
       "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -5043,8 +5038,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Oil", "Traderoute", TRUE
-      "Resource", "Oil", "City", FALSE
+      "Extra", "Oil", "Traderoute", TRUE
+      "Extra", "Oil", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5054,8 +5049,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wool", "Traderoute", TRUE
-      "Resource", "Wool", "City", FALSE
+      "Extra", "Wool", "Traderoute", TRUE
+      "Extra", "Wool", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5065,8 +5060,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Cotton", "Traderoute", TRUE
-      "Resource", "Cotton", "City", FALSE
+      "Extra", "Cotton", "Traderoute", TRUE
+      "Extra", "Cotton", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5076,8 +5071,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Coal", "Traderoute", TRUE
-      "Resource", "Coal", "City", FALSE
+      "Extra", "Coal", "Traderoute", TRUE
+      "Extra", "Coal", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5087,8 +5082,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Marble", "Traderoute", TRUE
-      "Resource", "Marble", "City", FALSE
+      "Extra", "Marble", "Traderoute", TRUE
+      "Extra", "Marble", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5098,8 +5093,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Ivory", "Traderoute", TRUE
-      "Resource", "Ivory", "City", FALSE
+      "Extra", "Ivory", "Traderoute", TRUE
+      "Extra", "Ivory", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5109,8 +5104,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Iron", "Traderoute", TRUE
-      "Resource", "Iron", "City", FALSE
+      "Extra", "Iron", "Traderoute", TRUE
+      "Extra", "Iron", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5120,8 +5115,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Salt", "Traderoute", TRUE
-      "Resource", "Salt", "City", FALSE
+      "Extra", "Salt", "Traderoute", TRUE
+      "Extra", "Salt", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5131,8 +5126,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Horses", "Traderoute", TRUE
-      "Resource", "Horses", "City", FALSE
+      "Extra", "Horses", "Traderoute", TRUE
+      "Extra", "Horses", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5142,8 +5137,8 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Peat", "Traderoute", TRUE
-      "Resource", "Peat", "City", FALSE
+      "Extra", "Peat", "Traderoute", TRUE
+      "Extra", "Peat", "City", FALSE
       "CityTile", "Center", "Local", TRUE
       "OutputType", "Shield", "Local", TRUE
     }
@@ -5166,8 +5161,8 @@ reqs    =
     { "type", "name", "range", "present"
       "CityTile", "Center", "Local", TRUE
       "UnitFlag", "Coal", "Local", TRUE
-      "Resource", "Coal", "Traderoute", FALSE
-      "Resource", "Peat", "Traderoute", FALSE
+      "Extra", "Coal", "Traderoute", FALSE
+      "Extra", "Peat", "Traderoute", FALSE
     }
 
 [effect_goods_regen_2]
@@ -5177,7 +5172,7 @@ reqs    =
     { "type", "name", "range", "present"
       "CityTile", "Center", "Local", TRUE
       "UnitFlag", "Oil", "Local", TRUE
-      "Resource", "Oil", "Traderoute", FALSE
+      "Extra", "Oil", "Traderoute", FALSE
     }
 
 ; Strategic resources increase the veteran level of related units
@@ -5187,7 +5182,7 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present"
       "UnitFlag", "Horses", "Local", TRUE
-      "Resource", "Horses", "Traderoute", TRUE
+      "Extra", "Horses", "Traderoute", TRUE
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
@@ -5197,7 +5192,7 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present"
       "UnitFlag", "Ivory", "Local", TRUE
-      "Resource", "Ivory", "Traderoute", TRUE
+      "Extra", "Ivory", "Traderoute", TRUE
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
@@ -5217,7 +5212,7 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "UnitFlag", "Iron", "Local", TRUE
-      "Resource", "Iron", "Traderoute", FALSE
+      "Extra", "Iron", "Traderoute", FALSE
       "Tech", "Iron Working", "Player", TRUE
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
@@ -5372,7 +5367,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Incense", "City"
+      "Extra", "Incense", "City"
     }
 
 [effect_goods_luxury_health_silk]
@@ -5380,7 +5375,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Silk", "City"
+      "Extra", "Silk", "City"
     }
 
 [effect_goods_luxury_health_tea]
@@ -5388,7 +5383,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Tea", "City"
+      "Extra", "Tea", "City"
     }
 
 [effect_goods_luxury_health_tobacco]
@@ -5396,7 +5391,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Tobacco", "City"
+      "Extra", "Tobacco", "City"
     }
 
 [effect_goods_luxury_health_wine]
@@ -5404,7 +5399,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Wine", "City"
+      "Extra", "Wine", "City"
     }
 
 [effect_goods_luxury_health_gems]
@@ -5412,7 +5407,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Gems", "City"
+      "Extra", "Gems", "City"
     }
 
 [effect_goods_luxury_health_gold]
@@ -5420,7 +5415,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Gold", "City"
+      "Extra", "Gold", "City"
     }
 
 [effect_goods_luxury_health_shellfish]
@@ -5428,7 +5423,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Shellfish", "City"
+      "Extra", "Shellfish", "City"
     }
 
 [effect_goods_luxury_health_spice]
@@ -5436,7 +5431,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Spice", "City"
+      "Extra", "Spice", "City"
     }
 
 [effect_goods_luxury_health_furs]
@@ -5444,7 +5439,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Furs", "City"
+      "Extra", "Furs", "City"
     }
 
 [effect_goods_food_health_seals]
@@ -5452,7 +5447,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Seals", "City"
+      "Extra", "Seals", "City"
     }
 
 [effect_goods_food_health_oasis]
@@ -5460,7 +5455,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Oasis", "City"
+      "Extra", "Oasis", "City"
     }
 
 [effect_goods_food_health_pheasant]
@@ -5468,7 +5463,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Pheasant", "City"
+      "Extra", "Pheasant", "City"
     }
 
 [effect_goods_food_health_deer]
@@ -5476,7 +5471,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Deer", "City"
+      "Extra", "Deer", "City"
     }
 
 [effect_goods_food_health_cattle]
@@ -5484,7 +5479,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Cattle", "City"
+      "Extra", "Cattle", "City"
     }
 
 [effect_goods_food_health_corn]
@@ -5492,7 +5487,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Corn", "City"
+      "Extra", "Corn", "City"
     }
 
 [effect_goods_food_health_fruit]
@@ -5500,7 +5495,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Fruit", "City"
+      "Extra", "Fruit", "City"
     }
 
 [effect_goods_food_health_fish]
@@ -5508,7 +5503,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Fish", "City"
+      "Extra", "Fish", "City"
     }
 
 [effect_goods_food_health_whales]
@@ -5516,7 +5511,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Whales", "City"
+      "Extra", "Whales", "City"
     }
 
 [effect_goods_food_health_wheat]
@@ -5524,7 +5519,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Wheat", "City"
+      "Extra", "Wheat", "City"
     }
 
 [effect_goods_food_health_buffalo]
@@ -5532,7 +5527,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Buffalo", "City"
+      "Extra", "Buffalo", "City"
     }
 
 [effect_goods_food_health_sugar]
@@ -5540,7 +5535,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Sugar", "City"
+      "Extra", "Sugar", "City"
     }
 
 [effect_goods_food_health_game]
@@ -5548,7 +5543,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Game", "City"
+      "Extra", "Game", "City"
     }
 
 [effect_goods_shield_health_oil]
@@ -5556,7 +5551,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Oil", "City"
+      "Extra", "Oil", "City"
     }
 
 [effect_goods_shield_health_wool]
@@ -5564,7 +5559,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Wool", "City"
+      "Extra", "Wool", "City"
     }
 
 [effect_goods_shield_health_cotton]
@@ -5572,7 +5567,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Cotton", "City"
+      "Extra", "Cotton", "City"
     }
 
 [effect_goods_shield_health_coal]
@@ -5580,7 +5575,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Coal", "City"
+      "Extra", "Coal", "City"
     }
 
 [effect_goods_shield_health_marble]
@@ -5588,7 +5583,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Marble", "City"
+      "Extra", "Marble", "City"
     }
 
 [effect_goods_shield_health_ivory]
@@ -5596,7 +5591,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Ivory", "City"
+      "Extra", "Ivory", "City"
     }
 
 [effect_goods_shield_health_iron]
@@ -5604,7 +5599,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Iron", "City"
+      "Extra", "Iron", "City"
     }
 
 [effect_goods_shield_health_salt]
@@ -5612,7 +5607,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Salt", "City"
+      "Extra", "Salt", "City"
     }
 
 [effect_goods_shield_health_horses]
@@ -5620,7 +5615,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Horses", "City"
+      "Extra", "Horses", "City"
     }
 
 [effect_goods_shield_health_peat]
@@ -5628,7 +5623,7 @@ type    = "Health_Pct"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Resource", "Peat", "City"
+      "Extra", "Peat", "City"
     }
 
 [effect_goods_extra_health_0]
@@ -5673,8 +5668,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Incense", "Traderoute", TRUE
-      "Resource", "Incense", "City", FALSE
+      "Extra", "Incense", "Traderoute", TRUE
+      "Extra", "Incense", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_silk]
@@ -5682,8 +5677,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Silk", "Traderoute", TRUE
-      "Resource", "Silk", "City", FALSE
+      "Extra", "Silk", "Traderoute", TRUE
+      "Extra", "Silk", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_tea]
@@ -5691,8 +5686,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Tea", "Traderoute", TRUE
-      "Resource", "Tea", "City", FALSE
+      "Extra", "Tea", "Traderoute", TRUE
+      "Extra", "Tea", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_tobacco]
@@ -5700,8 +5695,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Tobacco", "Traderoute", TRUE
-      "Resource", "Tobacco", "City", FALSE
+      "Extra", "Tobacco", "Traderoute", TRUE
+      "Extra", "Tobacco", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_wine]
@@ -5709,8 +5704,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wine", "Traderoute", TRUE
-      "Resource", "Wine", "City", FALSE
+      "Extra", "Wine", "Traderoute", TRUE
+      "Extra", "Wine", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_gems]
@@ -5718,8 +5713,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Gems", "Traderoute", TRUE
-      "Resource", "Gems", "City", FALSE
+      "Extra", "Gems", "Traderoute", TRUE
+      "Extra", "Gems", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_gold]
@@ -5727,8 +5722,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Gold", "Traderoute", TRUE
-      "Resource", "Gold", "City", FALSE
+      "Extra", "Gold", "Traderoute", TRUE
+      "Extra", "Gold", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_shellfish]
@@ -5736,8 +5731,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Shellfish", "Traderoute", TRUE
-      "Resource", "Shellfish", "City", FALSE
+      "Extra", "Shellfish", "Traderoute", TRUE
+      "Extra", "Shellfish", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_spice]
@@ -5745,8 +5740,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Spice", "Traderoute", TRUE
-      "Resource", "Spice", "City", FALSE
+      "Extra", "Spice", "Traderoute", TRUE
+      "Extra", "Spice", "City", FALSE
     }
 
 [effect_goods_luxury_health_neg_furs]
@@ -5754,8 +5749,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Furs", "Traderoute", TRUE
-      "Resource", "Furs", "City", FALSE
+      "Extra", "Furs", "Traderoute", TRUE
+      "Extra", "Furs", "City", FALSE
     }
 
 [effect_goods_food_health_neg_seals]
@@ -5763,8 +5758,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Seals", "Traderoute", TRUE
-      "Resource", "Seals", "City", FALSE
+      "Extra", "Seals", "Traderoute", TRUE
+      "Extra", "Seals", "City", FALSE
     }
 
 [effect_goods_food_health_neg_oasis]
@@ -5772,8 +5767,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Oasis", "Traderoute", TRUE
-      "Resource", "Oasis", "City", FALSE
+      "Extra", "Oasis", "Traderoute", TRUE
+      "Extra", "Oasis", "City", FALSE
     }
 
 [effect_goods_food_health_neg_pheasant]
@@ -5781,8 +5776,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Pheasant", "Traderoute", TRUE
-      "Resource", "Pheasant", "City", FALSE
+      "Extra", "Pheasant", "Traderoute", TRUE
+      "Extra", "Pheasant", "City", FALSE
     }
 
 [effect_goods_food_health_neg_deer]
@@ -5790,8 +5785,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Deer", "Traderoute", TRUE
-      "Resource", "Deer", "City", FALSE
+      "Extra", "Deer", "Traderoute", TRUE
+      "Extra", "Deer", "City", FALSE
     }
 
 [effect_goods_food_health_neg_cattle]
@@ -5799,8 +5794,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Cattle", "Traderoute", TRUE
-      "Resource", "Cattle", "City", FALSE
+      "Extra", "Cattle", "Traderoute", TRUE
+      "Extra", "Cattle", "City", FALSE
     }
 
 [effect_goods_food_health_neg_corn]
@@ -5808,8 +5803,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Corn", "Traderoute", TRUE
-      "Resource", "Corn", "City", FALSE
+      "Extra", "Corn", "Traderoute", TRUE
+      "Extra", "Corn", "City", FALSE
     }
 
 [effect_goods_food_health_neg_fruit]
@@ -5817,8 +5812,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Fruit", "Traderoute", TRUE
-      "Resource", "Fruit", "City", FALSE
+      "Extra", "Fruit", "Traderoute", TRUE
+      "Extra", "Fruit", "City", FALSE
     }
 
 [effect_goods_food_health_neg_fish]
@@ -5826,8 +5821,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Fish", "Traderoute", TRUE
-      "Resource", "Fish", "City", FALSE
+      "Extra", "Fish", "Traderoute", TRUE
+      "Extra", "Fish", "City", FALSE
     }
 
 [effect_goods_food_health_neg_whales]
@@ -5835,8 +5830,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Whales", "Traderoute", TRUE
-      "Resource", "Whales", "City", FALSE
+      "Extra", "Whales", "Traderoute", TRUE
+      "Extra", "Whales", "City", FALSE
     }
 
 [effect_goods_food_health_neg_wheat]
@@ -5844,8 +5839,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wheat", "Traderoute", TRUE
-      "Resource", "Wheat", "City", FALSE
+      "Extra", "Wheat", "Traderoute", TRUE
+      "Extra", "Wheat", "City", FALSE
     }
 
 [effect_goods_food_health_neg_buffalo]
@@ -5853,8 +5848,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Buffalo", "Traderoute", TRUE
-      "Resource", "Buffalo", "City", FALSE
+      "Extra", "Buffalo", "Traderoute", TRUE
+      "Extra", "Buffalo", "City", FALSE
     }
 
 [effect_goods_food_health_neg_sugar]
@@ -5862,8 +5857,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Sugar", "Traderoute", TRUE
-      "Resource", "Sugar", "City", FALSE
+      "Extra", "Sugar", "Traderoute", TRUE
+      "Extra", "Sugar", "City", FALSE
     }
 
 [effect_goods_food_health_neg_game]
@@ -5871,8 +5866,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Game", "Traderoute", TRUE
-      "Resource", "Game", "City", FALSE
+      "Extra", "Game", "Traderoute", TRUE
+      "Extra", "Game", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_oil]
@@ -5880,8 +5875,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Oil", "Traderoute", TRUE
-      "Resource", "Oil", "City", FALSE
+      "Extra", "Oil", "Traderoute", TRUE
+      "Extra", "Oil", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_wool]
@@ -5889,8 +5884,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Wool", "Traderoute", TRUE
-      "Resource", "Wool", "City", FALSE
+      "Extra", "Wool", "Traderoute", TRUE
+      "Extra", "Wool", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_cotton]
@@ -5898,8 +5893,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Cotton", "Traderoute", TRUE
-      "Resource", "Cotton", "City", FALSE
+      "Extra", "Cotton", "Traderoute", TRUE
+      "Extra", "Cotton", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_coal]
@@ -5907,8 +5902,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Coal", "Traderoute", TRUE
-      "Resource", "Coal", "City", FALSE
+      "Extra", "Coal", "Traderoute", TRUE
+      "Extra", "Coal", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_marble]
@@ -5916,8 +5911,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Marble", "Traderoute", TRUE
-      "Resource", "Marble", "City", FALSE
+      "Extra", "Marble", "Traderoute", TRUE
+      "Extra", "Marble", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_ivory]
@@ -5925,8 +5920,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Ivory", "Traderoute", TRUE
-      "Resource", "Ivory", "City", FALSE
+      "Extra", "Ivory", "Traderoute", TRUE
+      "Extra", "Ivory", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_iron]
@@ -5934,8 +5929,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Iron", "Traderoute", TRUE
-      "Resource", "Iron", "City", FALSE
+      "Extra", "Iron", "Traderoute", TRUE
+      "Extra", "Iron", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_salt]
@@ -5943,8 +5938,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Salt", "Traderoute", TRUE
-      "Resource", "Salt", "City", FALSE
+      "Extra", "Salt", "Traderoute", TRUE
+      "Extra", "Salt", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_horses]
@@ -5952,8 +5947,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Horses", "Traderoute", TRUE
-      "Resource", "Horses", "City", FALSE
+      "Extra", "Horses", "Traderoute", TRUE
+      "Extra", "Horses", "City", FALSE
     }
 
 [effect_goods_shield_health_neg_peat]
@@ -5961,8 +5956,8 @@ type    = "Health_Pct"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Resource", "Peat", "Traderoute", TRUE
-      "Resource", "Peat", "City", FALSE
+      "Extra", "Peat", "Traderoute", TRUE
+      "Extra", "Peat", "City", FALSE
     }
 
 [effect_goods_extra_health_neg_0]
@@ -6033,7 +6028,7 @@ reqs    =
       "Terrain", "Desert", "Local", TRUE
       "Extra", "River", "Local", TRUE
       "OutputType", "Food", "Local", TRUE
-      "Resource", "Oasis", "Local", FALSE
+      "Extra", "Oasis", "Local", FALSE
     }
 
 ; Make Mine extra do something
@@ -6102,21 +6097,12 @@ reqs    =
       "UnitClass", "Sea", "Local", FALSE
     }
 
-[effect_irrigate_src_river]
+[effect_irrigate_src_extra]
 type    = "Irrig_Possible"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Extra", "River", "CAdjacent", TRUE
-      "UnitClass", "Sea", "Local", FALSE
-    }
-
-[effect_irrigate_src_irrigation]
-type    = "Irrig_Possible"
-value   = 1
-reqs    =
-    { "type", "name", "range", "present"
-      "Extra", "Irrigation", "CAdjacent", TRUE
+      "ExtraFlag", "IrrigationSource", "CAdjacent", TRUE
       "UnitClass", "Sea", "Local", FALSE
     }
 
@@ -6126,16 +6112,15 @@ reqs    =
 ; (Note that it is still possible to end up with farmland on such terrain
 ; through climate change.)
 ; Deserts with food bonuses _are_ allowed farmland (hence exceptions).
-; -4 counterbalances all the above positive Irrig_Possible effects
+; -3 counterbalances all the above positive Irrig_Possible effects
 [effect_no_desert_farmland]
 type    = "Irrig_Possible"
-value   = -4
+value   = -3
 reqs    =
     { "type", "name", "range", "present"
       "Terrain", "Desert", "Local", TRUE
       "Extra", "Irrigation", "Local", TRUE
-      "Resource", "Oasis", "Local", FALSE
-      "Extra", "River", "Local", FALSE
+      "ExtraFlag", "AllowsFarmlandOnDesert", "Local", FALSE
     }
 
 [effect_mining]
@@ -6185,27 +6170,133 @@ reqs    =
 type    = "Output_Tile_Punish_Pct"
 value   = 50
 reqs    =
-    { "type", "name", "range", "present"
-      "Extra", "Pollution", "Local", TRUE
-      "Extra", "Fallout", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Extra", "Pollution", "Local", TRUE, FALSE
+      "Extra", "Fallout", "Local", FALSE, FALSE
+      "OutputType", "Gold", "Local", FALSE, TRUE
+      "OutputType", "Luxury", "Local", FALSE, TRUE
+      "OutputType", "Science", "Local", FALSE, TRUE
     }
 
 [effect_fallout]
 type    = "Output_Tile_Punish_Pct"
 value   = 50
 reqs    =
-    { "type", "name", "range", "present"
-      "Extra", "Fallout", "Local", TRUE
-      "Extra", "Pollution", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Extra", "Fallout", "Local", TRUE, FALSE
+      "Extra", "Pollution", "Local", FALSE, FALSE
+      "OutputType", "Gold", "Local", FALSE, TRUE
+      "OutputType", "Luxury", "Local", FALSE, TRUE
+      "OutputType", "Science", "Local", FALSE, TRUE
     }
 
 [effect_pollution_fallout]
 type    = "Output_Tile_Punish_Pct"
 value   = 75
 reqs    =
-    { "type", "name", "range"
-      "Extra", "Fallout", "Local"
-      "Extra", "Pollution", "Local"
+    { "type", "name", "range", "present", "quiet"
+      "Extra", "Fallout", "Local", TRUE, FALSE
+      "Extra", "Pollution", "Local", TRUE, FALSE
+      "OutputType", "Gold", "Local", FALSE, TRUE
+      "OutputType", "Luxury", "Local", FALSE, TRUE
+      "OutputType", "Science", "Local", FALSE, TRUE
+    }
+
+[effect_incident_caught_steal_tech]
+type	= "Casus_Belli_Caught"
+value	= 1
+reqs	=
+    { "type",    "name",       "range", "present"
+      "Action",  "Steal Tech", "Local", TRUE
+      "DiplRel", "War",        "Local", FALSE
+    }
+
+[effect_incident_success_steal_tech]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type",    "name",       "range", "present"
+      "Action",  "Steal Tech", "Local", TRUE
+      "DiplRel", "War",        "Local", FALSE
+    }
+
+[effect_incident_caught_steal_tech_esc]
+type	= "Casus_Belli_Caught"
+value	= 1
+reqs	=
+    { "type",    "name",                       "range", "present"
+      "Action",  "Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                        "Local", FALSE
+    }
+
+[effect_incident_success_steal_tech_esc]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type",    "name",                       "range", "present"
+      "Action",  "Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                        "Local", FALSE
+    }
+
+[effect_incident_caught_tgt_steal_tech]
+type	= "Casus_Belli_Caught"
+value	= 1
+reqs	=
+    { "type",    "name",                                "range", "present"
+      "Action",  "Targeted Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                                 "Local", FALSE
+    }
+
+[effect_incident_success_tgt_steal_tech]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type",    "name",                                "range", "present"
+      "Action",  "Targeted Steal Tech Escape Expected", "Local", TRUE
+      "DiplRel", "War",                                 "Local", FALSE
+    }
+
+[effect_incident_success_bribe_unit]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Bribe Unit", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_incite]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Incite City", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_incite_esc]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Incite City Escape", "Local", TRUE
+      "DiplRel", "War", "Local", FALSE
+    }
+
+[effect_incident_success_explode_nuke]
+type	= "Casus_Belli_Success"
+value	= 1
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Explode Nuclear", "Local", TRUE
+    }
+
+[effect_tgt_sabotage_city_half_chance]
+type	= "Action_Odds_Pct"
+value	= -50
+reqs	=
+    { "type", "name", "range", "present"
+      "Action", "Targeted Sabotage City Escape", "Local", TRUE
     }
 
 ; Cost to bribe: +50% for each 1000 culture points of the player
@@ -6452,6 +6543,15 @@ value   = 5
 reqs    =
     { "type", "name", "range"
       "MinCulture", "1000", "City"
+    }
+
+; Double (+100%) buy cost for Great Wonders
+[effect_great_wonder_buy_cost]
+type    = "Building_Buy_Cost_Pct"
+value   = 100
+reqs    =
+    { "type", "name", "range"
+      "BuildingGenus", "GreatWonder", "Local"
     }
 
 ;[effect_illegal_action_move_cost_base]
