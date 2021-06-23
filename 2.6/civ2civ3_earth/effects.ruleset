@@ -30,7 +30,7 @@ options="+Freeciv-2.6-ruleset"
 
 ; "Away" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 
-; 3 - 1 = 2
+; 2 - 1 = 1
 [effect_ai_hard_tech_cost]
 type    = "Tech_Cost_Factor"
 value   = -1
@@ -125,10 +125,10 @@ reqs    =
       "AI", "Hard", "Player"
     }
 
-; 3 - 2 = 1
+; 2 - 1 = 1
 [effect_ai_cheat_tech_cost]
 type    = "Tech_Cost_Factor"
-value   = -2
+value   = -1
 reqs    =
     { "type", "name", "range"
       "AI", "Cheating", "Player"
@@ -4588,7 +4588,7 @@ value   = 2
 
 [effect_tech_cost_base]
 type    = "Tech_Cost_Factor"
-value   = 3
+value   = 2
 
 ; Cities can always work tiles
 [effect_tile_workable]
