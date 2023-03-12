@@ -14,7 +14,7 @@ artists = "
     Vegard Stolpnessaeter
     GriffonSpade
     Marko Lindqvist (maglev)
-    Bardo (cattle, wool, tea, shellfish, incense, uranium, clam, teapot)
+    Bardo (cattle, wool, tea, shellfish, incense, uranium, clam)
     Hutzli for FreeCol (corn, cotton, lumber, sugar, tobacco)
     Bluecarrot16 (horse, turkey), Patvanmackelberg (marble)
     
@@ -105,7 +105,7 @@ tiles = { "row", "column", "tag"
 
 ; 12, 2, "ts.turkey"
 ; 12, 4, "ts.clam"
-; 12, 6, "ts.teapot"
+ 12, 6, "ts.salt"
 
 ; Extras:
  0,  8, "tx.oil_mine", "tx.oil_rig"
@@ -121,7 +121,8 @@ tiles = { "row", "column", "tag"
  9,  8, "tx.rubber"
  10, 8, "tx.niter"
  11, 8, "tx.aluminum"
- 12, 8, "ts.salt"
+ 12, 8, "tx.bombardment"
+ 13, 9, "tx.storm"
 
 ;roads
  13, 0, "road.road_isolated"

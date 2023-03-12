@@ -29,15 +29,15 @@ pixel_border = 1
 tiles = { "row", "column", "tag"
 ;[HH][GS]
  0,  0, "base.wonder_mg"
- 0,  1, "base.airstrip_mg"
- 0,  2, "base.airbase_mg"
+ 0,  1, "base.airstrip_bg"
+ 0,  2, "base.airbase_bg"
  0,  4, "base.outpost_bg"
  0,  5, "base.fortress_bg"
 ;[Lx]
  0,  6, "base.castle_bg"
 
 ;[VC]
- 0,  9, "base.ruins_mg"
+ 0,  9, "base.ruins_bg"
 ;[El]
  1,  0, "base.buoy_mg"
 ;[PF]
@@ -65,6 +65,6 @@ tiles = { "row", "column", "tag"
 ;[HH]
  1,  9, "city.disorder"
 ;blank defaults
- 1,  0, "cd.city",
+ 0,  8, "cd.city",
       "cd.city_wall"
 }

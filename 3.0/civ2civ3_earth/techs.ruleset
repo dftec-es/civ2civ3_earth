@@ -147,7 +147,7 @@ req2     = "Mathematics"
 flags    = ""
 graphic     = "a.astronomy"
 graphic_alt = "-"
-helptext = _("Increases units' vision when in fortresses.")
+helptext = _("Increases vision radius of cities and fortresses.")
 ;cost     = 60
 
 [advance_atomic_theory]
@@ -158,8 +158,8 @@ flags    = ""
 graphic     = "a.atomic_theory"
 graphic_alt = "-"
 helptext = _("\
-Uranium resources become visible on the map, and they produce 2 extra \
-shields in the tile where they are located.\
+Uranium resources produce 2 extra shields in the tile where they are \
+located.\
 "), _("\
 Uranium is required in a city to build a Nuclear Plant or the wonder \
 Manhattan Project. Cities with available Uranium build Armor and \
@@ -221,8 +221,8 @@ flags    = ""
 graphic     = "a.chemistry"
 graphic_alt = "-"
 helptext = _("\
-Rubber resources become visible on the map, and they produce 2 extra \
-shields in the tile where they are located.\
+Rubber resources produce 2 extra shields in the tile where they are \
+located.\
 "), _("\
 Cities with available Rubber build Marines, Paratroopers, Helicopter, \
 Mech. Inf. and Howitzer units with one extra veteran level.\
@@ -358,7 +358,7 @@ graphic     = "a.electricity"
 graphic_alt = "-"
 helptext = _("\
 Allows irrigation without an adjacent water source, improves the \
-effect of Amphitheaters, and increases city vision radius.\
+effect of Amphitheaters, and grants you vision inside your borders.\
 ")
 ;cost     = 300
 
@@ -418,6 +418,12 @@ req2     = "Monarchy"
 flags    = ""
 graphic     = "a.feudalism"
 graphic_alt = "-"
+helptext = _("\
+Allows Settlers, Migrants, Workers and Engineers to upgrade fortresses \
+to castles when they are inside your national borders, not adjacent to \
+other castles or cities, and not on terrains where cities can not be \
+built (Mountains or Glaciers).\
+")
 ;cost     = 80
 
 [advance_flight]
@@ -483,7 +489,7 @@ located.\
 "), _("\
 Cities without available Niter build gunpowder based units with one \
 less veteran level: Musketeers, Riflemen, Alpine Troops, Dragoons, \
-Cavalry, Cannon, Artillery, Galleon, Frigate and Ironclad.
+Cavalry, Cannon, Galleon, Frigate and Ironclad.
 ")
 ;cost     = 170
 
@@ -508,8 +514,8 @@ req2     = "Banking"
 graphic     = "a.industrialization"
 graphic_alt = "-"
 helptext = _("\
-Aluminum resources become visible on the map, and they produce 2 extra \
-shields in the tile where they are located.\
+Aluminum resources produce 2 extra shields in the tile where they are \
+located.\
 "), _("\
 Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
 Missile, Fighter and Bomber units with one extra veteran level.\
@@ -651,8 +657,9 @@ flags    = ""
 graphic     = "a.metallurgy"
 graphic_alt = "-"
 helptext = _("\
-Galleon, Frigate and Ironclad are built with one more veteran level \
-at cities with both Iron and Niter resources.\
+Galleon, Frigate and Ironclad are built veteran at cities with Iron \
+and Niter resources (with one less veteran level for each one of \
+these resources missing).\
 ")
 ;cost     = 190
 
@@ -844,6 +851,10 @@ helptext = _("\
 Allows Settlers, Migrants, Workers and Engineers to upgrade mines to \
 oil wells on Desert, Tundra and Glacier tiles, for an extra production \
 point.\
+"), _("\
+Allows cities to use Oil resource as an alternative to Iron in order to \
+build veteran units: units that require Oil are built with one less \
+veteran level, unless there are Oil or Iron resources in the city.\
 ")
 ;cost     = 400
 
@@ -973,9 +984,6 @@ graphic     = "a.the_corporation"
 graphic_alt = "-"
 helptext = _("\
 Allows establishing up to 2 trade routes from each city.\
-"), _("\
-Halves the corruption of trade related to distance from the capital \
-(or eliminates it for Federation governments).\
 ")
 ;cost     = 400
 
@@ -1034,8 +1042,6 @@ graphic     = "a.trade"
 graphic_alt = "-"
 helptext = _("\
 Allows establishing up to 1 trade route from each city.\
-"), _("\
-Halves the waste of production related to distance from the capital.\
 ")
 ;cost     = 40
 

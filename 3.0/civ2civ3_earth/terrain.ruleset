@@ -23,10 +23,6 @@ format_version=10
 ; helptxt       = displayed in the help for terrains with this flag (optional)
 flags =
   { "name", "helptxt"
-    _("Niter")
-    _("Rubber")
-    _("Aluminum")
-    _("Uranium")
     _("Wood"), _("Can be mined to produce Lumber.")
     _("Oil"), _("Mine can be upgraded to Oil Well.")
     _("Sea"), _("Allows cities to build Harbors and coastal wonders.")
@@ -49,7 +45,7 @@ extra_flags =
         _("Diplomatic units get a 25% defense bonus in diplomatic fights.")
     _("IrrigationSource")
     _("AllowsFarmlandOnDesert")
-    _("Coal Peat Oil")
+    _("Coal_Peat_Oil")
   }
 
 [parameters]
@@ -293,7 +289,7 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "no"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "no"
-native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Galley"
+native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Sub"
 flags                = "NoCities", "NoBarbs", "NoPollution", "FreshWater", "NoZoc", "NoFortify"
 property_ocean_depth = 0
 color.r              = 46
@@ -336,7 +332,7 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "no"
-native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Galley", "Storm"
+native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Sub"
 flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea"
 property_ocean_depth = 35
 color.r              = 0
@@ -375,12 +371,12 @@ transform_time       = 0
 pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
-animal               = "Storm"
+animal               = "None"
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-native_to            = "Sea", "Air", "Missile", "Helicopter", "Storm"
+native_to            = "Sea", "Air", "Missile", "Helicopter", "Sub"
 flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoFortify", "Sea"
 property_ocean_depth = 70
 color.r              = 0
@@ -393,7 +389,7 @@ seaworthy units (not including Galleys) can travel on them.\
 ; /* xgettext:no-c-format */
 _("\
 Units in Deep Ocean receive a +50% defense bonus against sea units \
-(except against submarines).\
+(but not against submarines).\
 ")
 
 [terrain_glacier]
@@ -411,7 +407,7 @@ resources            = "Seals", "Oil"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
-base_time            = 1
+base_time            = 2
 road_time            = 4
 irrigation_result    = "no"
 irrigation_food_incr = 0
@@ -430,7 +426,7 @@ warmer_drier_result  = "Tundra"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "NoBarbs", "NoCities", "CanHaveRiver", "Oil", "Frozen", "Uranium"
+flags                = "NoBarbs", "NoCities", "CanHaveRiver", "Oil", "Frozen"
 property_frozen      = 100
 color.r              = 232
 color.g              = 232
@@ -475,7 +471,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Tundra"
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "CanHaveRiver", "Oil", "Niter"
+flags                = "CanHaveRiver", "Oil"
 property_dry         = 100
 property_tropical    = 50
 property_temperate   = 20
@@ -510,7 +506,7 @@ resources            = "Pheasant", "Silk", "Deer"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
-base_time            = 1
+base_time            = 2
 road_time            = 4
 irrigation_result    = "Plains"
 irrigation_food_incr = 0
@@ -529,7 +525,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "Wood", "Rubber"
+flags                = "Starter", "CanHaveRiver", "Wood"
 property_cold        = 20
 property_wet         = 20
 property_foliage     = 50
@@ -601,7 +597,7 @@ resources            = "Coal", "Wine", "Marble"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
-base_time            = 1
+base_time            = 2
 road_time            = 4
 irrigation_result    = "yes"
 irrigation_food_incr = 1
@@ -620,7 +616,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "Aluminum"
+flags                = "Starter", "CanHaveRiver"
 property_green       = 50
 property_mountainous = 30
 color.r              = 24
@@ -649,7 +645,7 @@ resources            = "Gems", "Fruit", "Ivory"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
-base_time            = 1
+base_time            = 2
 road_time            = 4
 irrigation_result    = "Swamp"
 irrigation_food_incr = 0
@@ -669,7 +665,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "Forest"
 native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter"
-flags                = "CanHaveRiver", "Wood", "Rubber"
+flags                = "CanHaveRiver", "Wood"
 property_foliage     = 50
 property_tropical    = 50
 property_wet         = 50
@@ -696,7 +692,7 @@ resources            = "Gold", "Iron", "Iron"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
-base_time            = 1
+base_time            = 3
 road_time            = 6
 irrigation_result    = "no"
 irrigation_food_incr = 0
@@ -715,7 +711,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
 native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter"
-flags                = "NoCities", "CanHaveRiver", "Uranium"
+flags                = "NoCities", "CanHaveRiver"
 property_mountainous = 70
 color.r              = 129
 color.g              = 127
@@ -750,9 +746,9 @@ road_time            = 2
 irrigation_result    = "yes"
 irrigation_food_incr = 1
 irrigation_time      = 5
-mining_result        = "Grassland"
+mining_result        = "Forest"
 mining_shield_incr   = 0
-mining_time          = 24
+mining_time          = 10
 transform_result     = "Hills"
 transform_time       = 24
 pillage_time         = 1
@@ -764,7 +760,7 @@ warmer_drier_result  = "Desert"
 cooler_wetter_result = "Desert"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "Niter"
+flags                = "Starter", "CanHaveRiver"
 property_green       = 50
 property_temperate   = 50
 color.r              = 122
@@ -790,7 +786,7 @@ resources            = "Peat", "Spice", "Sugar"
 road_food_incr_pct   = 0
 road_shield_incr_pct = 0
 road_trade_incr_pct  = 0
-base_time            = 1
+base_time            = 2
 road_time            = 4
 irrigation_result    = "yes"
 irrigation_food_incr = 1
@@ -809,7 +805,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter"
-flags                = "CanHaveRiver", "Rubber"
+flags                = "CanHaveRiver"
 property_wet         = 100
 property_tropical    = 10
 property_temperate   = 10
@@ -857,7 +853,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "NoBarbs", "CanHaveRiver", "Oil", "Aluminum"
+flags                = "NoBarbs", "CanHaveRiver", "Oil"
 property_cold        = 50
 color.r              = 188
 color.g              = 188
@@ -942,7 +938,8 @@ trade       = 4
 [resource_horses]
 extra       = "Horses"
 identifier  = "h"
-shield      = 2
+shield      = 1
+trade       = 2
 
 [resource_icy_ivory]
 extra       = "Seals"
@@ -988,7 +985,7 @@ trade       = 1
 [resource_incense]
 extra       = "Incense"
 identifier  = "n"
-trade       = 3
+trade       = 4
 
 [resource_oasis]
 extra       = "Oasis"
@@ -1076,10 +1073,10 @@ trade       = 1
 ; Player visible names of the base gui types.
 
 ; ui_name_base_fortress refers to all bases that have gui_type "Fortress"
-ui_name_base_fortress = _("?gui_type:Build Fort/Fortress/Buoy")
+ui_name_base_fortress = _("?gui_type:Build Fortress/Naval Mine")
 
 ; ui_name_base_airbase refers to all bases that have gui_type "Airbase"
-ui_name_base_airbase = _("?gui_type:Build Airstrip/Airbase")
+ui_name_base_airbase = _("?gui_type:Build Airbase/Buoy")
 
 ; /* <-- avoid gettext warnings
 ;
@@ -1551,7 +1548,8 @@ rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
-build_time     = 2
+build_time     = 0
+build_time_factor = 2
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
@@ -1583,21 +1581,21 @@ reqs           =
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Fortress", "Local", TRUE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
-      "Extra", "River", "Local", FALSE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
-build_time     = 2
+build_time     = 0
+build_time_factor = 2
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
+hidden_by      = "Castle"
 flags          = "NativeTile", "DiplomatDefense"
 helptext       = _("\
 Fortresses are more permanent forts; construction on them can only begin \
-once the underlying fort is complete. Forts on River tiles cannot be \
-upgraded to Fortresses.\
+once the underlying fort is complete.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1609,6 +1607,52 @@ moving recovers a third of its hit points.\
 "), _("\
 With Astronomy, fortresses gain watchtowers from which units can see \
 further afield.\
+")
+
+[extra_castle]
+name           = _("Castle")
+category       = "Infra"
+causes         = "Base"
+rmcauses       = "Pillage"
+graphic        = "base.castle"
+graphic_alt    = "base.fortress"
+activity_gfx   = "unit.castle"
+act_gfx_alt    = "unit.fortress"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+reqs           =
+    { "type", "name", "range", "present", "quiet"
+      "Extra", "Fortress", "Local", TRUE, FALSE
+      "Tech", "Feudalism", "Player", TRUE, FALSE
+      "UnitFlag", "Fortress", "Local", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "UnitState", "OnDomesticTile", "Local", TRUE, FALSE
+      "Extra", "Castle", "Adjacent", FALSE, FALSE
+      "CityTile", "Center", "Adjacent", FALSE, FALSE
+      "TerrainFlag", "NoCities", "Local", FALSE, TRUE
+    }
+rmreqs         =
+    { "type", "name", "range", "present"
+      "UnitFlag", "Cant_Pillage", "Local", FALSE
+    }
+build_time     = 0
+build_time_factor = 2
+removal_time   = 0
+;unit_seen      = "Hidden"
+native_to      = "Land", "Small Land", "Big Land"
+conflicts      = "Airstrip", "Airbase"
+flags          = "NativeTile", "DiplomatDefense", "NoStackDeath"
+helptext       = _("\
+Castles are fortresses with some degree of autonomy; construction on them \
+can only begin once the underlying fortress is complete.\
+"), _("\
+Fortresses can be upgraded to castles when they are inside your national \
+borders, not adjacent to other castles or cities, and not on terrains \
+where cities can not be built (mountains or glaciers).\
+"), _("\
+Castles, like cities, protect full stacks from dying when one unit is \
+defeated, hide units inside from opponents, and claim ownership of the tile.\
 ")
 
 [extra_airstrip]
@@ -1627,17 +1671,18 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
-      "UnitFlag", "Airbase", "Local", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
-build_time     = 2
+build_time     = 0
+build_time_factor = 2
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
-conflicts      = "Fort", "Fortress"
+conflicts      = "Fort", "Fortress", "Castle"
 hidden_by      = "Airbase"
 flags          = "Refuel", "ParadropFrom"
 helptext       = _("\
@@ -1672,23 +1717,22 @@ reqs           =
       "Extra", "Airstrip", "Local", TRUE, FALSE
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
-      "UnitFlag", "Airbase", "Local", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
-      "Extra", "River", "Local", FALSE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
-build_time     = 2
+build_time     = 0
+build_time_factor = 2
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
-conflicts      = "Fort", "Fortress"
+conflicts      = "Fort", "Fortress", "Castle"
 flags          = "Refuel", "ParadropFrom"
 helptext       = _("\
 Airbases are more permanent airstrips; construction on them can only \
-begin once the underlying airstrip is complete. Airstrips on River tiles \
-cannot be upgraded to Airbases.\
+begin once the underlying airstrip is complete.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1715,7 +1759,7 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Oceanic", "Local", TRUE, FALSE
-      "UnitFlag", "Airbase", "Local", TRUE, FALSE
+      "UnitFlag", "Settlers", "Local", TRUE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1728,7 +1772,7 @@ conflicts      = "Oil Platform", "Naval Mine"
 flags          = "ShowFlag"
 helptext       = _("\
 Buoys may be built in the ocean by Transports (or by worker units on a \
-sea-going vessel). They increase the vision range of the owner.\
+sea-going vessel) to allow their owner to see the surrounding tiles.\
 ")
 
 [extra_naval_mine]
@@ -1737,7 +1781,7 @@ category       = "Infra"
 causes         = "Base"
 rmcauses       = "Pillage"
 graphic        = "base.naval_mine"
-graphic_alt    = "base.buoy"
+graphic_alt    = "tx.village"
 activity_gfx   = "unit.naval_mine"
 act_gfx_alt    = "unit.buoy"
 act_gfx_alt2   = "unit.fortress"
@@ -1749,6 +1793,7 @@ reqs           =
       "TerrainClass", "Oceanic", "Local", TRUE, FALSE
       "Terrain", "Deep Ocean", "Local", FALSE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "Extra", "Naval Mine", "Adjacent", FALSE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1759,13 +1804,16 @@ build_time     = 3
 removal_time   = 0
 native_to      = "Sea"
 conflicts      = "Oil Platform", "Buoy"
-; /* xgettext:no-c-format */
 helptext       = _("\
-Naval Mines may be built in shallow ocean by Transports (or by worker \
-units on a sea-going vessel). Every boat that ends the turn on shallow \
-ocean, adjacent to a mine, receives some damage (-4 hit points), gets \
-some extra defense (+50%) against other sea units (except against  \
-submarines, same as Deep Oceans), and its vision range is reduced. 
+Naval mines may be built in shallow ocean by Transports (or by worker \
+units on a sea-going vessel), but not adjacent to other naval mines.\
+"),
+; /* xgettext:no-c-format */
+_("\
+Every naval unit that ends the turn in shallow ocean adjacent to a naval \
+mine (or on the same tile) takes a bit of damage (-4 hit points), and \
+at the same time it gets the same defense as if it were in Deep Ocean \
+(+50% against other sea units, but not against submarines).\
 ")
 
 [extra_ruins]
@@ -1785,12 +1833,17 @@ reqs           =
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
+rmreqs         =
+    { "type", "name", "range", "present"
+      "UnitFlag", "Cant_Pillage", "Local", FALSE
+    }
 buildable      = FALSE
 removal_time   = 0
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Ruins mark the former site of a city that was destroyed or abandoned. \
-They have no effect on gameplay.\
+They have no effect on gameplay other than giving 1 trade bonus for the \
+tile with the ruins.\
 ")
 
 [extra_road]
@@ -1865,7 +1918,7 @@ Once you learn the Railroad technology, you may upgrade your roads \
 to railroads. Units travel considerably faster along railroads than \
 along roads.\
 "), _("\
-A railroad also increases any shield resources produced by a tile. \
+A railroad also increases any shield resources produced by a tile by half. \
 A tile whose road is upgraded to a railroad retains any trade bonus \
 from the road as well.\
 "), _("\
@@ -1928,7 +1981,7 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
-native_to      = "Land", "Small Land", "Merchant", "Trireme"
+native_to      = "Land", "Small Land", "Merchant"
 defense_bonus  = 25
 flags          = "NativeTile", "IrrigationSource", "AllowsFarmlandOnDesert"
 ; /* xgettext:no-c-format */
@@ -1937,11 +1990,12 @@ Any land terrain type may have a River on it. A River adds 1 \
 trade to the resources produced by that tile. It also increases a \
 tile's defense factor by 25%.\
 "), _("\
-Land units may move along rivers for faster travel (but not diagonally).\
+Land units may move along rivers for faster travel (but not diagonally). \
+Fast land unit ending its turn in rivers without a road will start its \
+next turn with one fewer movement point.\
 "), _("\
 Roads and railroads can only be built on River tiles if your \
-civilization has learned Bridge Building technology. Fortresses and \
-Airbases cannot be built on River tiles.\
+civilization has learned Bridge Building technology.\
 "), _("\
 Cities built on or next to rivers incur a small risk of flooding, \
 which will destroy stored food.\
@@ -1975,13 +2029,13 @@ rmreqs         =
     }
 build_time     = 9
 removal_time   = 0
-native_to      = "Galley", "Trireme", "Sea"
+native_to      = "Trireme", "Sea", "Sub"
 flags          = "NativeTile"
 helptext          = _("\
 Canals allow ships to travel through land tiles. Canals can be built \
 on low land tiles only, and not far inland. Every canal tile must be \
 cardinally adjacent to oceanic tile, so the maximum length of canal \
-through an island is two tiles, from one coast tile to the other. \
+through an island is two tiles, from one coast tile to the other.\
 ")
 
 [extra_wonder]
@@ -2000,163 +2054,160 @@ buildable      = FALSE
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Natural wonders produce 3 extra luxuries in the tile where they are \
-placed.\
+located.\
 "), _("\
 A city with a natural wonder within its workable area incur a small \
 risk of natural disaster, which will reduce the population.\
 ")
 
-[extra_aluminum]
-name           = _("Aluminum")
-category       = "Natural"
+; Average number = Ocean tiles/50
+; stable number when (Average*5000/10000) = (Ocean tiles*100/10000)
+[extra_storm]
+name           = _("Storm")
+category       = "Nuisance"
 causes         = "Appear"
-;rmcauses       = "Disappear"
-graphic        = "tx.aluminum"
+rmcauses       = "Disappear"
+graphic        = "tx.storm"
 graphic_alt    = "tx.village"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs           =
+appearance_reqs =
     { "type", "name", "range", "present"
-      "TerrainFlag", "Aluminum", "Local", TRUE
-      "Extra", "Game", "Local", FALSE
-      "Extra", "Furs", "Local", FALSE
-      "Extra", "Coal", "Local", FALSE
-      "Extra", "Wine", "Local", FALSE
-      "Extra", "Marble", "Local", FALSE
+      "Terrain", "Deep Ocean", "Local", TRUE
     }
-appearance_reqs      =
-    { "type", "name", "range", "present"
-      "MinYear", "-3999", "World", FALSE
-    }
-visibility_req       = "Industrialization"
-buildable            = FALSE
-appearance_chance    = 200
-helptext             = _("\
+buildable      = FALSE
+;unit_seen      = "Hidden"
+appearance_chance = 100
+disappearance_chance = 5000
+helptext       = _("\
+Storms appear and disappear randomly on Deep Ocean tiles. \
+Every naval unit that ends the turn adjacent to a storm (or on the \
+same tile) takes a bit of damage (-4 hit points).\
+")
+
+[extra_bombardment]
+name           = _("Bombardment")
+category       = "Nuisance"
+;causes         = "Appear"
+rmcauses       = "Disappear"
+graphic        = "tx.bombardment"
+graphic_alt    = "tx.fallout"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+buildable      = FALSE
+disappearance_chance = 10000
+helptext       = _("\
+Appears on a tile when a unit bombards from it. It prevents other \
+units in a stack to bombard from the same tile until the next turn.\
+")
+
+; Strategic resources are added to the map by lua script (chance 200/10000)
+
+[extra_aluminum]
+name           = _("Aluminum")
+category       = "Natural"
+;causes         = "Appear"
+;rmcauses       = "Disappear"
+graphic        = "tx.aluminum"
+graphic_alt    = "base.buoy"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+;visibility_req = "Industrialization"
+buildable      = FALSE
+conflicts      = "Niter", "Rubber", "Uranium"
+flags          = "TerrChangeRemoves"
+helptext       = _("\
 Strategic resource, required in a city to build the wonder Apollo \
 Program. Cities with available Aluminum build Carrier, AEGIS Cruiser, \
 Cruise Missile, Fighter and Bomber units with one extra veteran level.\
 "), _("\
-With the discovery of Industrialization, Aluminum becomes visible on \
-the map, and it produces 2 extra shields in the tile.\
+With the discovery of Industrialization, Aluminum produces 2 extra shields \
+in the tile (hills or tundra).\
 ")
 
 [extra_niter]
 name           = _("Niter")
 category       = "Natural"
-causes         = "Appear"
+;causes         = "Appear"
 ;rmcauses       = "Disappear"
 graphic        = "tx.niter"
-graphic_alt    = "tx.village"
+graphic_alt    = "base.buoy"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "Niter", "Local", TRUE
-      "Extra", "Wheat", "Local", FALSE
-      "Extra", "Buffalo", "Local", FALSE
-      "Extra", "Horses", "Local", FALSE
-      "Extra", "Oasis", "Local", FALSE
-      "Extra", "Oil", "Local", FALSE
-      "Extra", "Incense", "Local", FALSE
-    }
-appearance_reqs      =
-    { "type", "name", "range", "present"
-      "MinYear", "-3999", "World", FALSE
-    }
-;visibility_req       = "Gunpowder"
-buildable            = FALSE
-appearance_chance    = 200
-helptext             = _("\
+;visibility_req = "Gunpowder"
+buildable      = FALSE
+conflicts      = "Aluminum", "Rubber", "Uranium"
+flags          = "TerrChangeRemoves"
+helptext       = _("\
 Strategic resource. Cities without available Niter build gunpowder \
 based units with one less veteran level: Musketeers, Riflemen, Alpine \
 Troops, Dragoons, Cavalry, Cannon, Artillery, Galleon, Frigate and \
 Ironclad.\
 "), _("\
-With the discovery of Gunpowder, Niter (visible on the map from the \
-beginning) produces 2 extra shields in the tile.\
+With the discovery of Gunpowder, Niter produces 2 extra shields in \
+the tile (plains or desert).\
 ")
 
 [extra_rubber]
 name           = _("Rubber")
 category       = "Natural"
-causes         = "Appear"
+;causes         = "Appear"
 ;rmcauses       = "Disappear"
 graphic        = "tx.rubber"
-graphic_alt    = "tx.village"
+graphic_alt    = "base.buoy"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "Rubber", "Local", TRUE
-      "Extra", "Peat", "Local", FALSE
-      "Extra", "Spice", "Local", FALSE
-      "Extra", "Sugar", "Local", FALSE
-      "Extra", "Gems", "Local", FALSE
-      "Extra", "Fruit", "Local", FALSE
-      "Extra", "Ivory", "Local", FALSE
-      "Extra", "Pheasant", "Local", FALSE
-      "Extra", "Silk", "Local", FALSE
-      "Extra", "Deer", "Local", FALSE
-    }
-appearance_reqs      =
-    { "type", "name", "range", "present"
-      "MinYear", "-3999", "World", FALSE
-    }
-visibility_req       = "Chemistry"
-buildable            = FALSE
-appearance_chance    = 200
-helptext             = _("\
+;visibility_req = "Chemistry"
+buildable      = FALSE
+conflicts      = "Aluminum", "Niter", "Uranium"
+flags          = "TerrChangeRemoves"
+helptext       = _("\
 Strategic resource. Cities with available Rubber build Marines, \
 Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
 veteran level.\
 "), _("\
-With the discovery of Chemistry, Rubber becomes visible on the map, \
-and it produces 2 extra shields in the tile.\
+With the discovery of Chemistry, Rubber produces 2 extra shields in \
+the tile (jungle, swamp or forest).\
 ")
 
 [extra_uranium]
 name           = _("Uranium")
 category       = "Natural"
-causes         = "Appear"
+;causes         = "Appear"
 ;rmcauses       = "Disappear"
 graphic        = "tx.uranium"
-graphic_alt    = "tx.village"
+graphic_alt    = "base.buoy"
 activity_gfx   = "None"
 act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-reqs           =
-    { "type", "name", "range", "present"
-      "TerrainFlag", "Uranium", "Local", TRUE
-      "Extra", "Iron", "Local", FALSE
-      "Extra", "Gold", "Local", FALSE
-      "Extra", "Seals", "Local", FALSE
-      "Extra", "Oil", "Local", FALSE
-    }
-appearance_reqs      =
-    { "type", "name", "range", "present"
-      "MinYear", "-3999", "World", FALSE
-    }
-visibility_req       = "Atomic Theory"
-buildable            = FALSE
-appearance_chance    = 200
-helptext             = _("\
+;visibility_req = "Atomic Theory"
+buildable      = FALSE
+conflicts      = "Aluminum", "Niter", "Rubber"
+flags          = "TerrChangeRemoves"
+helptext       = _("\
 Strategic resource, required in a city to build a Nuclear Plant or \
 the wonder Manhattan Project. Cities with available Uranium build \
 Armor and Submarine units with one extra veteran level.\
 "), _("\
-With discovery of Atomic Theory, Uranium becomes visible on the map, \
-and it produces 2 extra shields in the tile.\
+With discovery of Atomic Theory, Uranium produces 2 extra shields in \
+the tile (mountains or glacier).\
 ")
 
 [extra_gold]
@@ -2197,7 +2248,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-flags          = "Coal Peat Oil"
+flags          = "Coal_Peat_Oil"
 
 [extra_buffalo]
 name           = _("Buffalo")
@@ -2224,7 +2275,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-flags          = "Coal Peat Oil"
+flags          = "Coal_Peat_Oil"
 
 [extra_corn]
 name           = _("Corn")
@@ -2577,7 +2628,7 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-flags          = "Coal Peat Oil"
+flags          = "Coal_Peat_Oil"
 
 [extra_fish]
 name           = _("Fish")
@@ -2629,7 +2680,6 @@ rmact_gfx_alt  = "-"
 ; flags
 ;   - "NoAggressive"      = Units inside are not considered aggressive if
 ;                           there`s friendly city within 3 tiles
-
 ;
 ; */ <-- avoid gettext warnings
 
@@ -2642,6 +2692,13 @@ border_sq      = -1
 extra          = "Fortress"
 gui_type       = "Fortress"
 border_sq      = -1
+flags          = "NoAggressive"
+
+[base_castle]
+extra          = "Castle"
+gui_type       = "Fortress"
+border_sq      = 0
+vision_main_sq = 5
 flags          = "NoAggressive"
 
 [base_airstrip]
@@ -2657,7 +2714,7 @@ flags          = "NoAggressive"
 
 [base_buoy]
 extra          = "Buoy"
-gui_type       = "Fortress"
+gui_type       = "Airbase"
 vision_main_sq = 5
 
 [base_naval_mine]

@@ -51,7 +51,7 @@ preferred = "amplio_earth"
 
 [civstyle]
 ; Value added to city pollution
-base_pollution   = -20
+base_pollution   = -30
 
 ; Cost in luxuries of making one citizen happier
 happy_cost       = 2
@@ -660,6 +660,7 @@ name           = _("Land Ahoy")
 type           = "Land_Ahoy"
 unique         = FALSE
 value          = 2
+culture        = 100
 first_msg      = _("Your people were the first in history to sight a foreign shore!")
 cons_msg       = _("You sighted your first foreign shore!")
 
@@ -732,16 +733,16 @@ cons_msg       = _("Your nation has achieved 10000 culture points!")
 [trade]
 settings =
   { "type",       "pct", "cancelling", "bonus"
-    "National",   50,    "Inactive",   "None"
-    "NationalIC", 100,   "Inactive",   "None"
+    "National",   100,   "Inactive",   "None"
+    "NationalIC", 200,   "Inactive",   "None"
     "IN",         0,     "Cancel",     "None"
     "INIC",       0,     "Cancel",     "None"
-    "Ally",       25,    "Cancel",     "None"
-    "AllyIC",     50,    "Cancel",     "None"
+    "Ally",       50,    "Cancel",     "None"
+    "AllyIC",     100,   "Cancel",     "None"
     "Enemy",      0,     "Cancel",     "None"
     "EnemyIC",    0,     "Cancel",     "None"
-    "Team",       25,    "Cancel",     "None"
-    "TeamIC",     50,    "Cancel",     "None"
+    "Team",       50,    "Cancel",     "None"
+    "TeamIC",     100,   "Cancel",     "None"
   }
 
 [playercolors]
@@ -812,6 +813,7 @@ set =
       "tinyisles", "ENABLED"
       "temperature", 60
       "flatpoles", 0
+      "separatepoles", "DISABLED"
       "startunits", "cwsx"
 ;      "huts", 30
       "citymindist", 3

@@ -410,7 +410,7 @@ It also reduces the pollution from shield production by a further 25% \
 in your cities with Nuclear Plants, making them equivalent to Solar \
 Plants.\
 ")
-;cost     = 770
+cost     = 770
 
 [advance_genetic_engineering]
 name     = _("Genetic Engineering")
@@ -448,7 +448,7 @@ located.\
 "), _("\
 Cities without available Niter build gunpowder based units with one \
 less veteran level: Musketeers, Riflemen, Alpine Troops, Dragoons, \
-Cavalry, Cannon, Artillery, Galleon, Frigate and Ironclad.
+Cavalry, Cannon, Galleon, Frigate and Ironclad.
 ")
 cost     = 170
 
@@ -616,10 +616,11 @@ flags    = ""
 graphic     = "a.metallurgy"
 graphic_alt = "-"
 helptext = _("\
-Galleon, Frigate and Ironclad are built with one more veteran level \
-at cities with both Iron and Niter resources.\
+Galleon, Frigate and Ironclad are built veteran at cities with Iron \
+and Niter resources (with one less veteran level for each one of \
+these resources missing).\
 ")
-;cost     = 190
+cost     = 190
 
 [advance_miniaturization]
 name     = _("Miniaturization")
@@ -809,6 +810,10 @@ helptext = _("\
 Allows Settlers, Migrants, Workers and Engineers to upgrade mines to \
 oil wells on Desert, Tundra and Glacier tiles, for an extra production \
 point.\
+"), _("\
+Allows cities to use Oil resource as an alternative to Iron in order to \
+build veteran units: units that require Oil are built with one less \
+veteran level, unless there are Oil or Iron resources in the city.\
 ")
 cost     = 400
 
@@ -938,9 +943,6 @@ graphic     = "a.the_corporation"
 graphic_alt = "-"
 helptext = _("\
 Allows establishing up to 2 trade routes from each city.\
-"), _("\
-Halves the corruption of trade related to distance from the capital \
-(or eliminates it for Federation governments).\
 ")
 cost     = 400
 
@@ -999,8 +1001,6 @@ graphic     = "a.trade"
 graphic_alt = "-"
 helptext = _("\
 Allows establishing up to 1 trade route from each city.\
-"), _("\
-Halves the waste of production related to distance from the capital.\
 ")
 cost     = 40
 

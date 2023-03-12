@@ -72,7 +72,7 @@ Anarchy is simply the absence of any recognizable government.\
 ; /* xgettext:no-c-format */
 _("\
 * Buildings and technologies do not require any upkeep.\n\
-* Each worked tile that gives more than 2 Food, Shield, or Trade will\
+* Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
 * Each city can support up to 2 units for free; further units each cost\
@@ -82,11 +82,10 @@ _("\
  will each force 1 unhappy citizen to become content.\n\
 * You have no control over tax rates. All trade income is\
  converted to luxuries.\n\
-* Luxury output is decreased by half of the base production.\n\
-* Conventional corruption increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 30%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\
+* There is no base level of conventional corruption, but it increases\
+ by 2% for each tile of distance from the capital.\n\
+* Base production waste is 30%. This increases by 2% for each tile of\
+ distance from the capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -115,7 +114,7 @@ Compared to Despotism, a Tribal economy is more shield-oriented. Its\
 _("\
 * Increases by half the chance of land units getting the next veteran level\
  after a battle.\n\
-* Each worked tile that gives more than 2 Food, Shield, or Trade will\
+* Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
 * Each city gets 1 extra content citizen.\n\
@@ -124,10 +123,9 @@ _("\
 * Unlike later governments, military units do not cause unhappiness even\
  when deployed aggressively.\n\
 * Base corruption is 30% (the highest under any government). This\
- increases with distance from the capital (half as fast with knowledge\
- of The Corporation).\n\
-* There is no base level of production waste, but an increasing amount\
- with distance from the capital (half as fast with knowledge of Trade).\
+ increases by 2% for each tile of distance from the capital.\n\
+* There is no base level of production waste, but it increases\
+ by 2% for each tile of distance from the capital.\n\
 ")
 
 ;------------------------------------------------------------------------
@@ -143,7 +141,7 @@ ruler_male_title = _("Chief %s")
 ruler_female_title = _("?female:Chief %s")
 
 helptext = _("\
-Under Despotism, you are the absolute ruler of your people.  Your\
+Under Despotism, you are the absolute ruler of your people. Your\
  control over your citizens is maintained largely by martial law.\
 "), _("\
 Compared to Tribalism, a Despotic economy is more trade-oriented.\
@@ -151,8 +149,8 @@ Compared to Tribalism, a Despotic economy is more trade-oriented.\
 ; /* xgettext:no-c-format */
 _("\
 * Your centers of government (cities with Palace and Ecclesiastical\
- Palace) get a +75% bonus to gold production.\n\
-* Each worked tile that gives more than 2 Food, Shield, or Trade will\
+ Palace) get a +75% bonus to luxury production.\n\
+* Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
 * Each city can support up to 2 units for free; further units each cost\
@@ -161,10 +159,10 @@ _("\
  when deployed aggressively.\n\
 * Military units impose martial law. Up to 3 military units inside a city\
  will each force 1 unhappy citizen to become content.\n\
-* Base corruption is 20%. This increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 10%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\
+* Base corruption is 20%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 10%. This increases by 2% for each tile of\
+ distance from the capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -189,7 +187,7 @@ Monarchy gives low unit upkeep costs.\
 ; /* xgettext:no-c-format */
 _("\
 * Your centers of government (cities with Palace and Ecclesiastical\
- Palace) get a +50% bonus to gold production.\n\
+ Palace) get a +50% bonus to luxury production.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
 * Each city can support up to 3 units for free (the maximum possible);\
@@ -198,10 +196,10 @@ _("\
  each further unit causes 1 unhappy citizen.\n\
 * Military units impose martial law. Up to 3 military units inside a city\
  will each force 1 unhappy citizen to become content.\n\
-* Base corruption is 10%. This increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 20%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\
+* Base corruption is 10%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 20%. This increases by 2% for each tile of\
+ distance from the capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -219,8 +217,8 @@ ruler_female_title = _("?female:Comrade %s")
 
 helptext = _("\
 A Communist government is based on the ideal that all people are\
- equal.  All goods are owned by the state, rather than by private\
- citizens.  Communism gives a balance between military and commercial\
+ equal. All goods are owned by the state, rather than by private\
+ citizens. Communism gives a balance between military and commercial\
  styles of government.\
 "), _("\
 Communism is a good government for maximizing shield production, and\
@@ -228,7 +226,7 @@ Communism is a good government for maximizing shield production, and\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* City improvements which would normally have an upkeep of 1 gold are\
+* City improvements which would normally have an upkeep of 1 or 2 gold are\
  free of upkeep.\n\
 * Cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).\n\
 * Each city can support up to 3 units for free (the maximum possible);\
@@ -270,22 +268,18 @@ Improvements that normally convert unhappy citizens to content\
  of people they would convert.\
 "), _("\
 Fundamentalism is a good government for maximizing gold, and its Fanatics\
- are useful in wartime, but it has a penalty to technological\
- progress.\
+ are useful in wartime.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Science output is decreased by half of the base production (A\
- Fundamentalist city with a Library produces as much science as a\
- city under another government does alone.)\n\
 * Each city can support up to 2 units for free; further units each cost\
  2 gold per turn (except for Fanatics).\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
  each further unit causes 1 unhappy citizen.\n\
-* Base corruption is 15%. This increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 15%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\
+* Base corruption is 15%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 15%. This increases by 2% for each tile of\
+ distance from the capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -303,7 +297,7 @@ ruler_female_title = _("?female:Consul %s")
 
 helptext = _("\
 Federalism is a system in which the power to govern is shared between\
- national and provincial governments. \
+ national and provincial governments.\
  This decentralization minimizes the corruption and waste caused by distance\
  to capital, and avoids separatist movements.\
 "),
@@ -316,12 +310,9 @@ _("\
  2 gold per turn.\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
  each further unit causes 1 unhappy citizen.\n\
-* There is no base level of corruption, but an increasing amount\
- with distance from the capital (half as much as with most other\
- governments). Knowledge of The Corporation eliminates this corruption.\n\
+* There is no corruption.\n\
 * Base production waste is 30%, but is not affected by distance to the\
  capital.\n\
-* Has a senate that may prevent declaration of war.\
 ")
 
 ;------------------------------------------------------------------------
@@ -341,25 +332,24 @@ helptext = _("\
 Under a Republican government, citizens hold an election to select a\
  representative who will govern them; since elected leaders must\
  remain popular to remain in control, citizens are given a greater\
- degree of freedom.  Citizens under the Republic become unhappy\
+ degree of freedom. Citizens under the Republic become unhappy\
  easily, but the self-sufficiency of your citizens allows high levels\
  of trade.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Cities produce an extra trade point for every worked land tile (no \
-oceanic) that is already producing trade.\n\
-* Celebrating cities produce a further trade point for every worked tile\
- (land or water) which is already producing trade. (Cities below size 3\
- will not celebrate.)\n\
+* Cities produce one extra trade point for every tile with an irrigation.\n\
+* Celebrating cities produce one extra trade point for every tile which is\
+ already producing trade. (Cities below size 3 will not celebrate.)\n\
 * Each city can support one unit for free; further units each cost\
  1 shield per turn.\n\
 * Each city tolerates a single aggressively deployed military unit;\
  each further unit causes 1 unhappy citizen.\n\
-* Base corruption is 25%. This increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 5%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\
+* Base corruption is 25%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 5%. This increases by 2% for each tile of\
+ distance from the capital.\
+* Has a senate that may prevent declaration of war.\
 ")
 
 ;------------------------------------------------------------------------
@@ -383,19 +373,17 @@ Under Democracy, citizens govern directly by voting on issues.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Cities produce an extra trade point for every worked land tile (no \
-oceanic) that is already producing trade.\n\
-* Celebrating cities produce a further trade point for every worked tile\
- (land or water) which is already producing trade. (Cities below size 3\
- will not celebrate.)\n\
+* Cities produce one extra trade point for every tile with irrigation.\n\
+* Celebrating cities produce one extra trade point for every tile which is\
+ already producing trade. (Cities below size 3 will not celebrate.)\n\
 * Each city can support one unit for free; further units each cost\
  2 gold per turn.\n\
 * Each city tolerates a single aggressively deployed military unit;\
  each further unit causes 2 unhappy citizens.\n\
-* Base corruption is 5%. This increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 25%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\n\
+* Base corruption is 5%. This increases by 1% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 25%. This increases by 1% for each tile of\
+ distance from the capital.\n\
 * Has a senate that may prevent declaration of war.\
 ")
 
@@ -421,21 +409,22 @@ Fascism is better suited for militaristic nations.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Increases by a quarter the chance of land units getting the next\
+* Increases by a quarter the chance of any unit getting the next\
  veteran level after a battle.\n\
-* City improvements which would normally have an upkeep of 1 gold are\
+* City improvements which would normally have an upkeep of 1 or 2 gold are\
  free of upkeep.\n\
-* Citizens of enemy nationality cause extra unhappiness in the city.\n\
+* Each 2 citizens of enemy nationality in a city cause 1 extra unhappy\
+ citizen.\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 shield per turn.\n\
 * Military units do not cause unhappiness even when deployed aggressively.\n\
 * Military units impose martial law. Up to 3 military units inside a city\
  will each force 2 unhappy citizens to become content (the maximum\
  possible).\n\
-* Base corruption is 20%. This increases with distance from the capital\
- (half as fast with knowledge of The Corporation).\n\
-* Base production waste is 10%. This increases with distance from the\
- capital (half as fast with knowledge of Trade).\
+* Base corruption is 15%. This increases by 1% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 15%. This increases by 1% for each tile of\
+ distance from the capital.\n\
 ")
 
 ; /* <-- avoid gettext warnings

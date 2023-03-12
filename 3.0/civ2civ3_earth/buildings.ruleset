@@ -80,12 +80,9 @@ sound		= "b_airport"
 sound_alt	= "b_generic"
 helptext	= _("\
 Allows a city to produce veteran air units (including helicopters and \
-missiles).\
+missiles). \
 Also, damaged air units (again, including helicopters) which stay in \
 town for one full turn without moving are completely restored.\
-"), _("\
-The effect to restore hit points is halved if the resources required \
-by the unit are not available in the city.\
 "), _("\
 Two cities with Airports can airlift one unit per turn (including \
 aircraft). Airlifting instantly transports the unit from one city \
@@ -98,15 +95,15 @@ carry cargo.\
 name		= _("Aqueduct")
 genus		= "Improvement"
 reqs	=
-    { "type", "name", "range", "present"
-      "Tech", "Construction", "Player", TRUE
-      "Extra", "River", "Adjacent", FALSE
-      "Terrain", "Lake", "Adjacent", FALSE
+    { "type", "name", "range"
+      "Tech", "Construction", "Player"
     }
 graphic	= "b.aqueduct"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
+    { "type", "name", "range", "present"
+      "Extra", "River", "Adjacent", TRUE
+      "Terrain", "Lake", "Adjacent", TRUE
     }
 build_cost	= 60
 upkeep		= 1
@@ -114,14 +111,16 @@ sabotage	= 100
 sound		= "b_aqueduct"
 sound_alt	= "b_generic"
 helptext	= _("\
-Allows a city to grow larger than size 8. (A Sewer System is required \
-for a city to grow larger than size 16.)\
+Increases by 4 the size limit of a city, which is 8 by default, \
+allowing the city to grow up to size 12. Together with a Hospital, it \
+increases the size limit by 8, allowing a city to grow up to size 16. \
+A Sewer System is required for a city to grow larger than size 16.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-These larger cities enjoy increased defense (+50%) against both land and \
-sea units; however, such large settlements have a small risk of fire, \
-which can destroy buildings in the city.\
+Cities larger than size 8 enjoy increased defense (+50%) against both \
+land and sea units; however, such large settlements have a small risk \
+of fire, which can destroy buildings in the city.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -137,12 +136,12 @@ name		= _("Aqueduct, Lake")
 genus		= "Improvement"
 reqs	=
     { "type", "name", "range"
-      "Terrain", "Lake", "Adjacent"
     }
 graphic	= "b.aqueduct"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
+    { "type", "name", "range", "present"
+      "Terrain", "Lake", "Adjacent", FALSE
     }
 build_cost	= 20
 upkeep		= 0
@@ -150,14 +149,16 @@ sabotage	= 100
 sound		= "b_aqueduct"
 sound_alt	= "b_generic"
 helptext	= _("\
-Allows a city to grow larger than size 8. (A Sewer System is required \
-for a city to grow larger than size 16.)\
+Increases by 4 the size limit of a city, which is 8 by default, \
+allowing the city to grow up to size 12. Together with a Hospital, it \
+increases the size limit by 8, allowing a city to grow up to size 16. \
+A Sewer System is required for a city to grow larger than size 16.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-These larger cities enjoy increased defense (+50%) against both land and \
-sea units; however, such large settlements have a small risk of fire, \
-which can destroy buildings in the city.\
+Cities larger than size 8 enjoy increased defense (+50%) against both \
+land and sea units; however, such large settlements have a small risk \
+of fire, which can destroy buildings in the city.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -172,14 +173,14 @@ are cheap to build and maintain.\
 name		= _("Aqueduct, River")
 genus		= "Improvement"
 reqs	=
-    { "type", "name", "range", "present"
-      "Extra", "River", "Adjacent", TRUE
-      "Terrain", "Lake", "Adjacent", FALSE
+    { "type", "name", "range"
     }
 graphic	= "b.aqueduct"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
+    { "type", "name", "range", "present"
+      "Extra", "River", "Adjacent", FALSE
+      "Terrain", "Lake", "Adjacent", TRUE
     }
 build_cost	= 20
 upkeep		= 0
@@ -187,14 +188,16 @@ sabotage	= 100
 sound		= "b_aqueduct"
 sound_alt	= "b_generic"
 helptext	= _("\
-Allows a city to grow larger than size 8. (A Sewer System is required \
-for a city to grow larger than size 16.)\
+Increases by 4 the size limit of a city, which is 8 by default, \
+allowing the city to grow up to size 12. Together with a Hospital, it \
+increases the size limit by 8, allowing a city to grow up to size 16. \
+A Sewer System is required for a city to grow larger than size 16.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-These larger cities enjoy increased defense (+50%) against both land and \
-sea units; however, such large settlements have a small risk of fire, \
-which can destroy buildings in the city.\
+Cities larger than size 8 enjoy increased defense (+50%) against both \
+land and sea units; however, such large settlements have a small risk \
+of fire, which can destroy buildings in the city.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -234,7 +237,6 @@ name		= _("Barracks")
 genus		= "Improvement"
 reqs	=
     { "type", "name", "range"
-
     }
 graphic	= "b.barracks_i"
 graphic_alt	= "-"
@@ -257,9 +259,6 @@ are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn \
 without moving are completely restored.\
-"), _("\
-The effect to restore hit points is halved if the resources required \
-by the unit are not available in the city.\
 ")
 
 [building_barracks_ii]
@@ -289,9 +288,6 @@ are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn \
 without moving are completely restored.\
-"), _("\
-The effect to restore hit points is halved if the resources required \
-by the unit are not available in the city.\
 ")
 
 [building_barracks_iii]
@@ -319,9 +315,6 @@ are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn \
 without moving are completely restored.\
-"), _("\
-The effect to restore hit points is halved if the resources required \
-by the unit are not available in the city.\
 ")
 
 [building_cathedral]
@@ -543,8 +536,7 @@ with a Supermarket, it gives one extra food on Deep Ocean tiles too. \
 The city needs to be coastal to build this improvement.\
 "), _("\
 Also, damaged sea units which stay in town for one full turn without \
-moving recover half of its hit points (if the resources required by \
-the unit are available in the city).\
+moving recover half of its hit points.\
 ")
 
 [building_hospital]
@@ -570,12 +562,12 @@ A Hospital is used to treat the ill, and sometimes for medical \
 research. A city with a Hospital is less likely to suffer from \
 plagues (by 30% of the base chance).\
 "), _("\
+Together with an Aqueduct, it increases the size limit of a city by 8. \
+Together with a Sewer System, it allows a city to grow without a size \
+limit.\
+"), _("\
 Also, damaged land units (non wheeled) which stay in town for one \
 full turn without moving recover half of its hit points.\
-"), _("\
-The effect of Barracks to restore hit points is halved for land units \
-(non wheeled) when there is no Hospital present in the city (same rate \
-as in a city with Hospital and no Barracks).\
 ")
 
 [building_hydro_plant]
@@ -733,12 +725,12 @@ reqs	=
     { "type", "name", "range"
       "Tech", "Nuclear Power", "Player"
       "Building", "Factory", "City"
-      "Extra", "Uranium", "Traderoute"
     }
 graphic	= "b.nuclear_plant"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
+    { "type", "name", "range", "present"
+      "Extra", "Uranium", "Traderoute", FALSE
     }
 build_cost	= 240
 upkeep		= 2
@@ -771,7 +763,7 @@ can lead to fallout and reduce the city's population.\
 In each city, only one Power Plant, Hydro Plant, Nuclear Plant, or \
 Solar Plant can take effect at any one time.\
 "), _("\
-The bonus to production is cancelled if there is no Uranium resource \
+The Nuclear Plant becomes obsolete when there is no Uranium resource \
 available in the city.\
 ")
 
@@ -838,8 +830,8 @@ by rebuilding it in another city.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Under Despotism the city containing the palace gains a +75% \
-gold bonus, and under Monarchy a +50% gold bonus.\
+Under Despotism the city containing the palace gains a +75% bonus to \
+luxury production, and under Monarchy a +50% bonus to luxury production.\
 ")
 
 [building_ecclesiastical_palace]
@@ -875,8 +867,8 @@ stationed in the city, or sabotage your buildings.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Under Despotism the city containing the palace gains a +75% \
-gold bonus, and under Monarchy a +50% gold bonus.\
+Under Despotism the city containing the palace gains a +75% bonus to \
+luxury production, and under Monarchy a +50% bonus to luxury production.\
 "), _("\
 The city has no other benefits of the primary capital.\
 ")
@@ -925,9 +917,6 @@ sound_alt	= "b_generic"
 helptext	= _("\
 Allows a city to build veteran sea units. Also, damaged sea units which \
 stay in town for one full turn without moving are completely restored.\
-"), _("\
-The effect to restore hit points is halved if the resources required \
-by the unit are not available in the city.\
 ")
 ; Includes Galleys, but not worth mentioning explicitly as unlikely
 ; to happen
@@ -939,12 +928,12 @@ reqs	=
     { "type", "name", "range"
       "Tech", "Refining", "Player"
       "Building", "Factory", "City"
-      "ExtraFlag", "Coal Peat Oil", "Traderoute"
     }
 graphic	= "b.power_plant"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
+    { "type", "name", "range", "present"
+      "ExtraFlag", "Coal_Peat_Oil", "Traderoute", FALSE
     }
 build_cost	= 130
 upkeep		= 4
@@ -965,8 +954,8 @@ pollution.\
 In each city, only one Power Plant, Hydro Plant, Nuclear Plant, or \
 Solar Plant can take effect at any one time.\
 "), _("\
-The bonus to production is cancelled if there is no Coal, Peat, nor \
-Oil resource available in the city.\
+The Power Plant becomes obsolete when there is no Coal, Peat, nor Oil \
+resources available in the city.\
 ")
 
 [building_recycling_center]
@@ -1093,8 +1082,17 @@ sound		= "b_sewer_system"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-Together with an Aqueduct, allows a city to grow larger than size 16, \
-and further reduces the chance of a plague (by 30% of the base chance).\
+Increases the size limit of a city by 8, and further reduces the chance \
+of a plague (by 30% of the base chance). Together with a Hospital, \
+it allows a city to grow without a size limit.\
+"), _("\
+A Sewer System is required for a city to grow larger than size 16: up \
+to size 20 with an Aqueduct, or unlimited with a Hospital.\
+"),
+; /* xgettext:no-c-format */
+_("\
+Cities larger than size 16 enjoy increased defense (+50%) against both \
+air and missile units.\
 ")
 
 [building_solar_plant]
@@ -1272,16 +1270,14 @@ upkeep		= 3
 sabotage	= 100
 sound		= "b_super_highways"
 sound_alt	= "b_generic"
-helptext	= _("\
-Each tile around the city with roads, and without farmlands, that \
-is already generating some trade, produces one extra trade resource. \
-The same applies to the city center tile (even if it is receiving a\
-farmland bonus).\
-"),
 ; /* xgettext:no-c-format */
-_("\
-Also doubles the effect of any Stock Exchange in the city (increasing \
+helptext	= _("\
+Doubles the effect of any Stock Exchange in the city (increasing \
 luxury and tax output by an additional 50%).\
+"), _("\
+Each tile with roads, but no mines (nor lumber mills or oil wells) \
+and no farmlands, produces one additional trade resource, even \
+if the tile did not produce any trade.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1423,9 +1419,6 @@ sound_alt	= "w_generic"
 helptext	= _("\
 Citizens produce 1 extra gold in all your cities. The city where it is \
 built can establish one extra trade route.\
-"), _("\
-Upon completion of this wonder, tax collector specialists' gold output \
-increases to 3 permanently for every nation.\
 ")
 
 [building_colossus]
@@ -1470,8 +1463,9 @@ sabotage	= 0
 sound		= "w_copernicus_observatory"
 sound_alt	= "w_generic"
 helptext	= _("\
-Each Scientist specialist, and each tile worked by the city where \
-this wonder is built, produces one extra science point.\
+Each tile worked by the city where this wonder is built produces \
+1 extra science point, and each Scientist specialist produces \
+2 extra science points.\
 ")
 
 [building_cure_for_cancer]
@@ -1492,13 +1486,14 @@ sabotage	= 0
 sound		= "w_cure_for_cancer"
 sound_alt	= "w_generic"
 helptext	= _("\
-Citizens produce 2 extra luxury points in all your cities with Hospital.\
+Citizens produce 1 extra luxury point in all your cities, or a total \
+of 2 luxury points in your cities with Hospital.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 It further reduces the risk of plague (by 10% of the base chance) in \
 every city of every player with knowledge of Genetic Engineering. \
-Together with an Aqueduct, a Sewer System, and an Hospital, it entirely \
+Together with an Aqueduct, a Sewer System, and a Hospital, it entirely \
 eliminates the risk of plague.\
 ")
 
@@ -1524,9 +1519,6 @@ Charles Darwin's voyage sparked the discovery of the evolution \
 of the species, which inspired greater confidence in science. \
 "), _("\
 Citizens produce 1 extra science point in all your cities.\
-"), _("\
-Upon completion of this wonder, scientist specialists' science output \
-increases to 3 permanently for every nation.\
 ")
 
 [building_eiffel_tower]
@@ -1564,7 +1556,6 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Literacy", "Player"
-      "Building", "Library", "City"
     }
 graphic	= "b.great_library"
 graphic_alt	= "-"
@@ -1579,7 +1570,7 @@ sound		= "w_great_library"
 sound_alt	= "w_generic"
 helptext	= _("\
 Citizens produce 1 extra science point in all your cities with Library, \
-or a total of 4 science points in the city where this wonder is located.\
+and an additional 3 science points in the city where this wonder is located.\
 ")
 
 [building_great_wall]
@@ -1641,7 +1632,6 @@ reqs	=
     { "type", "name", "range"
       "Tech", "Electronics", "Player"
       "Extra", "River", "Adjacent"
-      "Building", "Hydro Plant", "City"
     }
 graphic	= "b.hoover_dam"
 graphic_alt	= "-"
@@ -1667,7 +1657,6 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Theory of Gravity", "Player"
-      "Building", "University", "City"
     }
 graphic	= "b.isaac_newtons_college"
 graphic_alt	= "-"
@@ -1680,12 +1669,8 @@ sabotage	= 0
 sound		= "w_isaac_newtons_college"
 sound_alt	= "w_generic"
 helptext	= _("\
-Citizens produce 1 extra science point in all your cities with \
-University, or a total of 4 science points in the city where this \
-wonder is located.\
-"), _("\
-In cities larger than size 8 where there is no Factory, the effect of \
-this wonder is doubled.\
+Citizens produce 1 extra science point in your cities with University, \
+and an additional 6 science points in the city where this wonder is located.\
 ")
 
 [building_js_bachs_cathedral]
@@ -1706,9 +1691,9 @@ sabotage	= 0
 sound		= "w_js_bachs_cathedral"
 sound_alt	= "w_generic"
 helptext	= _("\
-Makes 1 unhappy citizen content in every city, and a total of 2 unhappy \
-citizen content in cities of the same continent where this wonder is \
-built; however, it does not affect citizens made unhappy by aggression.\
+Makes 2 unhappy citizen content in every city of the same continent \
+where this wonder is built; however, it does not affect citizens made \
+unhappy by aggression.\
 ")
 
 [building_king_richards_crusade]
@@ -1730,11 +1715,11 @@ sabotage	= 0
 sound		= "w_king_richards_crusade"
 sound_alt	= "w_generic"
 helptext	= _("\
-Increases by 24 the base number of cities that your empire can support \
-before the size of the empire starts causing extra unhappiness in your \
-citizens. Since the empire size value may vary from 12 (when Chivalry is \
-discovered), up to 24 when all governments have been discovered, this \
-wonder may prevent up to 1 or 2 unhappy citizens per city.\
+Increases by 20 the base number of cities that your empire can support \
+before the size of the empire starts to cause additional unhappy citizens. \
+As the empire size threshold can vary from 8 (when this wonder is \
+available), up to 20 when all the governments have been discovered, \
+this wonder may prevent 3, 2, or at least 1 unhappy citizen per city.\
 "), _("\
 The chance of a land unit getting the next veteran level after a battle \
 increases by half.\
@@ -1774,7 +1759,7 @@ graphic	= "b.lighthouse"
 graphic_alt	= "-"
 obsolete_by	=
     { "type", "name", "range", "survives"
-      "Tech", "Engineering", "Player", FALSE
+      "Tech", "Navigation", "Player", FALSE
     }
 build_cost	= 200
 upkeep		= 0
@@ -1782,8 +1767,8 @@ sabotage	= 0
 sound		= "w_lighthouse"
 sound_alt	= "w_generic"
 helptext	= _("\
-Gives all your naval units 1 additional movement point. Galley and \
-Caravel units are built veteran in all your cities.\
+Gives all your sea units 1 additional movement point. Sea units \
+are built veteran in all your cities.\
 ")
 
 [building_magellans_expedition]
@@ -1850,14 +1835,11 @@ upkeep		= 0
 sabotage	= 0
 sound		= "w_marco_polos_embassy"
 sound_alt	= "w_generic"
+; /* xgettext:no-c-format */
 helptext	= _("\
+Increases the trade income of all your trade routes by 25%.\
+"), _("\
 The city where it is built can establish one extra trade route.\
-"), _("\
-The player who owns it gets an embassy with all other players with \
-whom the owner has had contact.\
-"), _("\
-TIP: if you're behind in research, this can help you catch up, by \
-reducing the cost of technologies that other players already know.\
 ")
 
 [building_michelangelos_chapel]
@@ -1866,7 +1848,6 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Monotheism", "Player"
-      "Building", "Cathedral", "City"
     }
 graphic	= "b.michelangelos_chapel"
 graphic_alt	= "-"
@@ -1879,8 +1860,8 @@ sabotage	= 0
 sound		= "w_michelangelos_chapel"
 sound_alt	= "w_generic"
 helptext	= _("\
-Doubles the base effect of Cathedrals. This makes 3 additional unhappy \
-citizens content in each city with a Cathedral; however, it does \
+Makes 1 unhappy citizen content in all your cities, and a total of 2 \
+unhappy citizens content in your cities with Cathedral. However, it does \
 not affect citizens made unhappy by aggression.\
 ")
 
@@ -1930,7 +1911,7 @@ helptext	= _("\
 Neutralizes the unhappiness caused by one aggressively deployed \
 military unit per city.\
 "), _("\
-Each city also avoids 2 shields or 2 gold of upkeep for units.\
+Each city also gets 2 free shields or 2 free gold to pay the upkeep of units.\
 ")
 
 [building_temple_of_artemis]
@@ -1939,7 +1920,6 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Mysticism", "Player"
-      "Building", "Temple", "City"
     }
 graphic         = "b.temple_of_artemis"
 graphic_alt     = "b.oracle"
@@ -1947,7 +1927,7 @@ obsolete_by	=
     { "type", "name", "range", "survives"
       "Tech", "Theology", "Player", FALSE
     }
-build_cost	= 200
+build_cost	= 300
 upkeep		= 0
 sabotage	= 0
 sound		= "w_oracle"
@@ -2001,9 +1981,10 @@ sabotage	= 0
 sound		= "w_seti_program"
 sound_alt	= "w_generic"
 helptext	= _("\
-Technology upkeep is reduced by 3 bulbs in each of your cities.\
+Technology upkeep is reduced by 2 bulbs in each of your cities, or by \
+a total of 4 bulbs in your cities with Research Lab.\
 "), _("\
-All cities on the map are continuously visible, despite fog-of-war, \
+All cities on the map will be continuously visible, despite fog-of-war, \
 to every player with knowledge of Computers.\
 ")
 
@@ -2020,20 +2001,14 @@ graphic_alt	= "-"
 obsolete_by	=
     { "type", "name", "range"
     }
-build_cost	= 400
+build_cost	= 300
 upkeep		= 0
 sabotage	= 0
 sound		= "w_shakespeares_theatre"
 sound_alt	= "w_generic"
 helptext	= _("\
-Citizens produce 1 extra luxury point in all your cities, or a total \
-of 4 luxury points in the city where this wonder is located.\
-"), _("\
-In cities with Amphitheater, where there is no Stock Exchange, the \
-effect of this wonder is doubled.\
-"), _("\
-Upon completion of this wonder, entertainer specialists' luxury \
-output increases to 3 permanently for every nation.\
+Citizens produce 1 extra luxury point in your cities with Amphitheater, \
+and an additional 6 luxury points in the city where this wonder is located.\
 ")
 
 [building_statue_of_liberty]
@@ -2048,7 +2023,7 @@ graphic_alt	= "-"
 obsolete_by	=
     { "type", "name", "range"
     }
-build_cost	= 300
+build_cost	= 400
 upkeep		= 0
 sabotage	= 0
 sound		= "w_statue_of_liberty"
@@ -2057,7 +2032,7 @@ helptext	= _("\
 Allows you to choose any government, including those that have not yet \
 been researched by your civilization, and without the transition \
 period of Anarchy. It also allows unprovoked declaration of war \
-regardless of any senate instituted by a Democracy or Federation \
+regardless of any senate instituted by a Democracy or Republic \
 government or by the United Nations.\
 ")
 
@@ -2112,9 +2087,10 @@ Also, if any player's city is in disorder for more than two turns in \
 a row, that player's government falls (even for governments other than \
 Republic and Democracy).\
 "), _("\
-Every player gets an embassy with every other player.\
+Every player gets in contact with every other player.\
 "), _("\
-All your Diplomat and Spy units get 1 additional movement point.\
+The city where it is built produces Diplomats and Spies with an \
+additional veteran level.\
 ")
 
 [building_womens_suffrage]
@@ -2135,14 +2111,11 @@ sabotage	= 0
 sound		= "w_womens_suffrage"
 sound_alt	= "w_generic"
 helptext	= _("\
-Neutralizes the unhappiness caused by one aggressively deployed \
-military unit per city.\
-"), _("\
-Under Democracy, it additionally halves the unhappiness caused by \
-military units (reducing it to the same level as a Republic).\
+Neutralizes the unhappiness caused by 2 aggressively deployed \
+military units per city.\
 "), _("\
 Revolution when unhappy is delayed 1 turn for every nation under \
-Democracy or Republic governments.\
+Republic or Democracy governments.\
 ")
 
 [building_capitalization]

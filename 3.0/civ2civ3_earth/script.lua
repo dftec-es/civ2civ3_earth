@@ -17,12 +17,23 @@
 
 -- Place Ruins at the location of the destroyed city.
 function city_destroyed_callback(city, loser, destroyer)
-  city.tile:create_extra("Ruins", NIL)
+  city.tile:create_extra("Ruins")
   -- continue processing
   return false
 end
 
 signal.connect("city_destroyed", "city_destroyed_callback")
+
+-- Place Bombardment marker when a unit bombard from that tile.
+function action_started_callback(action, actor, target)
+  if action:rule_name() == "Bombard"
+     and not actor.tile:has_extra("Bombardment") then
+     actor.tile:create_extra("Bombardment")
+  end
+  return false
+end
+
+signal.connect("action_started_unit_units", "action_started_callback")
 
 -- Check if there is certain terrain in ANY CAdjacent tile.
 function adjacent_to(tile, terrain_name)
@@ -190,6 +201,7 @@ function place_map_labels()
       if selected_deep == 0 then
         place:create_extra("Wonder")
         if surrounded_by(place, "Deep Ocean") then
+          -- Fully surrounded
           place:set_label(_("Deep Trench"))
         else
           place:set_label(_("Thermal Vent"))
@@ -199,14 +211,15 @@ function place_map_labels()
       selected_ocean = selected_ocean - 1
       if selected_ocean == 0 then
         place:create_extra("Wonder")
-        if adjacent_to(place, "Glacier") then
-          place:set_label(_("Glacier Bay"))
-        elseif surrounded_by(place, "Ocean") then
+        if surrounded_by(place, "Ocean") then
+          -- Fully surrounded
           place:set_label(_("Atoll Chain"))
+        elseif adjacent_to(place, "Glacier") then
+          place:set_label(_("Glacier Bay"))
         elseif adjacent_to(place, "Deep Ocean") then
           place:set_label(_("Great Barrier Reef"))
         else
-          -- Coast
+          -- Coast (not adjacent to glacier nor deep ocean)
           place:set_label(_("Great Blue Hole"))
         end
       end
@@ -215,6 +228,7 @@ function place_map_labels()
       if selected_lake == 0 then
         place:create_extra("Wonder")
         if surrounded_by(place, "Lake") then
+          -- Fully surrounded
           place:set_label(_("Great Lakes"))
         elseif not adjacent_to(place, "Lake") then
           -- Isolated
@@ -228,8 +242,10 @@ function place_map_labels()
       if selected_swamp == 0 then
         place:create_extra("Wonder")
         if not adjacent_to(place, "Swamp") then
+          -- Isolated
           place:set_label(_("Grand Prismatic Spring"))
         elseif adjacent_to(place, "Ocean") then
+          -- Coast
           place:set_label(_("Mangrove Forest"))
         else
           place:set_label(_("Cenotes"))
@@ -240,10 +256,13 @@ function place_map_labels()
       if selected_glacier == 0 then
         place:create_extra("Wonder")
         if surrounded_by(place, "Glacier") then
+          -- Fully surrounded
           place:set_label(_("Ice Sheet"))
         elseif not adjacent_to(place, "Glacier") then
+          -- Isolated
           place:set_label(_("Frozen Lake"))
         elseif adjacent_to(place, "Ocean") then
+          -- Coast
           place:set_label(_("Ice Shelf"))
         else
           place:set_label(_("Advancing Glacier"))
@@ -260,8 +279,10 @@ function place_map_labels()
       if selected_desert == 0 then
         place:create_extra("Wonder")
         if surrounded_by(place, "Desert") then
+          -- Fully surrounded
           place:set_label(_("Sand Sea"))
         elseif not adjacent_to(place, "Desert") then
+          -- Isolated
           place:set_label(_("Salt Flat"))
         elseif random(1, 100) <= 50 then
           place:set_label(_("Singing Dunes"))
@@ -274,9 +295,10 @@ function place_map_labels()
       if selected_plain == 0 then
         place:create_extra("Wonder")
         if adjacent_to(place, "Ocean") then
+          -- Coast
           place:set_label(_("Long Beach"))
         elseif random(1, 100) <= 50 then
-          place:set_label(_("Mud Volcanoes"))
+          place:set_label(_("Valley of Geysers"))
         else
           place:set_label(_("Rock Pillars"))
         end
@@ -286,6 +308,7 @@ function place_map_labels()
       if selected_grassland == 0 then
         place:create_extra("Wonder")
         if adjacent_to(place, "Ocean") then
+          -- Coast
           place:set_label(_("White Cliffs"))
         elseif random(1, 100) <= 50 then
           place:set_label(_("Giant Cave"))
@@ -298,8 +321,10 @@ function place_map_labels()
       if selected_jungle == 0 then
         place:create_extra("Wonder")
         if surrounded_by(place, "Jungle") then
+          -- Fully surrounded
           place:set_label(_("Rainforest"))
         elseif adjacent_to(place, "Ocean") then
+          -- Coast
           place:set_label(_("Subterranean River"))
         else
           place:set_label(_("Sinkholes"))
@@ -311,7 +336,8 @@ function place_map_labels()
         place:create_extra("Wonder")
         if adjacent_to(place, "Mountains") then
           place:set_label(_("Stone Forest"))
-        elseif random(1, 100) <= 50 then
+        elseif surrounded_by(place, "Forest") then
+          -- Fully surrounded
           place:set_label(_("Sequoia Forest"))
         else
           place:set_label(_("Millenary Trees"))
@@ -323,14 +349,16 @@ function place_map_labels()
         place:create_extra("Wonder")
         if not adjacent_to(place, "Hills") then
           if adjacent_to(place, "Mountains") then
+            -- Isolated (but adjacent to mountains)
             place:set_label(_("Table Mountain"))
           else
+            -- Isolated (not adjacent to hills nor mountains)
             place:set_label(_("Inselberg"))
           end
         elseif random(1, 100) <= 50 then
           place:set_label(_("Karst Landscape"))
         else
-          place:set_label(_("Valley of Geysers"))
+          place:set_label(_("Mud Volcanoes"))
         end
       end
     elseif tname == "Mountains" then
@@ -338,10 +366,13 @@ function place_map_labels()
       if selected_mountain == 0 then
         place:create_extra("Wonder")
         if surrounded_by(place, "Mountains") then
+          -- Fully surrounded
           place:set_label(_("Highest Peak"))
         elseif not adjacent_to(place, "Mountains") then
+          -- Isolated
           place:set_label(_("Sacred Mount"))
         elseif adjacent_to(place, "Ocean") then
+          -- Coast
           place:set_label(_("Cliff Coast"))
         elseif random(1, 100) <= 50 then
           place:set_label(_("Active Volcano"))
@@ -351,7 +382,66 @@ function place_map_labels()
       end
     end
   end
-  return true
+  return false
 end
 
 signal.connect("map_generated", "place_map_labels")
+
+-- Add random extra resources to the map.
+function place_extra_resources(turn, year)
+
+  if turn == 1 then
+    for place in whole_map_iterate() do
+      local terr = place.terrain
+      local tname = terr:rule_name()
+
+      if random(1, 100) <= 2 then
+        if tname == "Desert"
+          and not place:has_extra("Oasis")
+          and not place:has_extra("Oil")
+          and not place:has_extra("Incense") then
+          place:create_extra("Niter")
+        elseif tname == "Plains"
+          and not place:has_extra("Wheat")
+          and not place:has_extra("Buffalo")
+          and not place:has_extra("Horses") then
+          place:create_extra("Niter")
+        elseif tname == "Swamp"
+          and not place:has_extra("Peat")
+          and not place:has_extra("Spice")
+          and not place:has_extra("Sugar") then
+          place:create_extra("Rubber")
+        elseif tname == "Jungle"
+          and not place:has_extra("Gems")
+          and not place:has_extra("Fruit")
+          and not place:has_extra("Ivory") then
+          place:create_extra("Rubber")
+        elseif tname == "Forest"
+          and not place:has_extra("Pheasant")
+          and not place:has_extra("Silk")
+          and not place:has_extra("Deer") then
+          place:create_extra("Rubber")
+        elseif tname == "Tundra"
+          and not place:has_extra("Game")
+          and not place:has_extra("Furs") then
+          place:create_extra("Aluminum")
+        elseif tname == "Hills"
+          and not place:has_extra("Coal")
+          and not place:has_extra("Wine")
+          and not place:has_extra("Marble") then
+          place:create_extra("Aluminum")
+        elseif tname == "Glacier"
+          and not place:has_extra("Seals")
+          and not place:has_extra("Oil") then
+          place:create_extra("Uranium")
+        elseif tname == "Mountains"
+          and not place:has_extra("Gold")
+          and not place:has_extra("Iron") then
+          place:create_extra("Uranium")
+        end
+      end
+    end
+  end
+end
+
+signal.connect("turn_begin", "place_extra_resources")
