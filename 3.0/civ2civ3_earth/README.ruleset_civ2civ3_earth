@@ -70,7 +70,7 @@ CORE CHANGES:
 
 - Unlimited movement on rails delayed to maglev (available with Superconductors). Movement bonus is x6 on railroads, x3 on roads, x3 on rivers (non diagonal).
 
-- Added Fort and Airstrip bases, required before you can build Fortress or Airbase, respectively. It prevents the construction of full bases in one single turn.
+- Added Fort and Airstrip bases, required before you can build Fortress or Airbase, respectively. It prevents the construction of full bases in one single turn. Fort and Airstrip on Mountains cannot be upgraded.
   Fortresses can be upgraded to Castles when they are inside your national borders, not adjacent to other castles or cities, and not on Mountains or Glaciers. Castles claim ownership of the tile, and are the only bases that protect full stacks from dying when one unit is defeated.
 
 - All military infantry units can build fortresses. All worker units can build airbases or castles. The working time required to build a base is 2 times the movement cost of the terrain.
@@ -98,7 +98,7 @@ CORE CHANGES:
 
 - Added new barbarian nation that controls hostile animal units (with low attack, up to 2), placed randomly at the start of the game.
 
-- Added new feature: Storms appear and disappear randomly on Deep Ocean tiles, and damage naval units ending the turn on an adjacent tile (or the same tile). Every unit entering the storm has its vision range reduced.
+- Added new feature: Storms appear and disappear randomly on Deep Ocean or Glacier tiles, and they damage units ending the turn on an adjacent tile (or the same tile). Every unit entering the storm has its vision range reduced.
 
 
 OPTIONAL RULES:
@@ -292,7 +292,7 @@ SDI Defense       -        -        -       +100%
 
 Great Wall       +50%      -        -        -
 
-Ocean adjacent to Naval Mine
+Ocean adjacent to Naval Mine,
 or Deep Ocean     -       +50%      -        -
 
 - Units in Deep Ocean, or shallow Ocean adjacent to a Naval Mine, receive a +50% defense bonus against Sea units (but not against Submarines).
@@ -348,7 +348,7 @@ Base Corruption    0%      30%      20%      10%      15%      25%       5%     
 Base Waste        30%       0%      10%      20%      15%       5%      25%      30%       0%      15%
 by Distance       +2%      +2%      +2%      +2%      +2%      +2%      +1%      +0%      +0%      +1%
 
-* The output per tile penalty is negated by The Pyramids wonder, or when Railroad is researched by any player.
+*: The output per tile penalty is negated by The Pyramids wonder, or when Railroad is researched by any player.
 
 - Added Tribal (available with Warrior Code), Fundamentalism (available with Theology), Federation (available with Economics) and Fascism (available with Military Tactics).
 
@@ -426,8 +426,8 @@ Special effects:
 - Astronomy: Increases vision radius of cities and fortresses.
 - Feudalism: Allows to upgrade Fortress to Castle when it is inside your national borders, not adjacent to other castles or cities, and not on Mountains or Glaciers.
 - Invention: Halves upgrade cost of your units.
-- Medicine: Non wheeled ground units recover 2 extra HP per turn, even without resting, except on Mountains, Glacier or Deep Ocean.
-- Physics: Wheeled ground units and naval units recover 2 extra HP per turn, except on Mountains, Glacier or Deep Ocean.
+- Medicine: Non wheeled ground units recover 2 extra HP per turn, on suitable terrain (plains or grassland), even without resting.
+- Physics: Wheeled ground units and naval units recover 2 extra HP per turn, on suitable terrain (plains, grassland, or shallow ocean).
 - Metallurgy: Galleon, Frigate and Ironclad are built veteran at cities with Iron and Niter resources.
 - Explosives allows new terrain improvements: Naval Mines to increase the defense of shallow oceans and damage adjacent naval units; Canals to join oceans separated by no more than 2 land tiles.
 - Electricity: Allows irrigation without adjacent water, improves the effect of Amphitheatres, and grants you vision inside your borders.
@@ -514,7 +514,7 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 
 - Military "Land" units can capture enemy Migrants (as slaves) and Caravans/Freights (as loot). Frigates can capture Galleons and Caravels (as pirates, but won't work if targets are carrying any load).
 
-- Created a new unit class for wheeled units ("Big Land") that can't move to Mountains, Jungles and Swamps, unless there is a road or base on the tile. They can attack to non native land tiles. They can't perform a regular attack (they can only bombard) against oceanic tiles, or from tiles with a river (no matter if there is a road, base or city).
+- Created a new unit class for wheeled units ("Big Land") that can't move or attack to Mountains, Jungles and Swamps, unless there is a road or base on the tile. They can bombard non native tiles (including oceans).
   They do not get defensive bonuses from the terrain, can not perform pillage, and need Galleons or Transports to travel by sea. They are the only units that can cause loss of population when attacking a city (prevented by City Walls).
 
 - Created a new unit class for Submarines ("Sub"), that can not attack other Submarines, and gets double defense against air attacks.
@@ -523,6 +523,7 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 
 - Diplomat and Spy are only visible from adjacent tiles. Diplomat units stay alive when they investigate cities, and they can do it directly from boats without disembarking. Explorers can also investigate cities, same as Diplomats.
 
+- New actions for Diplomat and Spy: expel non military units out of your territory if you are at peace with the target; expel diplomatic or unreachable units when they are not inside their own national borders or inside bases; steal map fragments from foreign cities.
 
 - Added Elephants from civ2, available with Polytheism: (att/def/mov-hp,cost) = (3/2/2-10,30). Obsolete by Dragoons.
 
@@ -542,11 +543,13 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 
 - Removed transport capability from Frigates, to force the use of Galleons. Reduced attack of Frigate and defense of Ironclad to 3 (was 4).
 
-- Battleship's hit points reduced to 30 (was 40), Ironclad and Submarine to 20 (was 30). Doubled the defense and the attack of Destroyers against Submarines. Now there is a Rock-paper-scissors relation between Destroyer-Cruiser-Submarine.
+- Battleship's hit points reduced to 30 (was 40), Ironclad and Submarine to 20 (was 30). Doubled the defense and the attack of Destroyers against Submarines. Now there is a Rock-paper-scissors relationship between Submarine-Destroyer-Cruiser.
 
-- All units that had Firepower 2 now have Firepower 1, in order to even the power of naval, air, and artillery units, and to simplify the mental calculation to compare them.
+- All units have Firepower 1, in order to even the power of naval, air, and artillery units, and to simplify the mental calculation to compare them.
 
 - Artillery and Howitzer receive the ability CityBuster, so their firepower is 1 in open field, and 2 against cities. Removed Ignore Walls for Howitzer (that would bypass the new city defense bonuses), and reduced movement to 1.
+
+- Armor receives a +50% defense bonus against other Armor units. This way Armor vs Armor battles are more even, while they keep the same power against other land units.
 
 - Air bombers and Helicopters have more hit points, but halved attack to make it harder to bombard enemies successfully.
 
@@ -556,7 +559,7 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 
 - Helicopters can carry 1 military Land unit, and can only be attacked by Fighters (with no extra attack bonuses), and by Missiles. Carriers can also transport military Land units.
 
-- Cruise Missile no longer cause unhappiness, range increased to 16, and allowed to attack air units.
+- Cruise Missile no longer cause unhappiness, range increased to 16, and allowed to attack air units. Air fighters can attack incoming missiles. Stealth Fighter and Stealth Bomber can carry 1 Missile unit.
 
 - Nuclear weapons can be built with Nuclear Fission, but they have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
 
@@ -565,73 +568,71 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 - Readjusted many costs so units with better stats are always more expensive. At the same time, modern units always get better ratio Att/Cost or Def/Cost.
 
 New unit flags:
-- Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. Artillery, ships and air bombers get a bombard rate of 1 for each 10 hit points. Infantry, cavalry and air fighters get 1 less bombard rate.
+- Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate is 1 for each 10 hit points of the unit, and is increased by 1 in the case of Bomber units.
   This action can only damage (not kill) the target, but it has a chance to damage every unit in a stack or city, with no chance for the attacker to be damaged or killed.
-- Flag HPFull: Air units and Submarines can't attack when damaged, but they can always bombard.
 - Flag AirBomber: Air bombers attack with limited combat rounds, equal to its bombard rate, allowing them to perform an attack first (with the possibility to kill damaged enemy units, and the risk of being damaged back), and then bombard in the same turn.
-- Flag Mobile: Ground units with 30 hit points (Mech Infantry, Armor and Howitzer) attack with combat rounds limited to 50. When the odds are even, it is possible that both the attacker and defender survive if they sum more than 50 hit points.
-  These units have less chances of suffering casualties, but several attackers might be necessary to kill one enemy unit.
-- Flag AutoAtt: Auto-attack enabled only for air fighters and submarines. When one of these units is alone, it will bombard an incoming enemy, without abandoning its tile. When stacked in a tile, the first one will perform a bombardment and the rest a normal attack.
+- Flag HPFull: Air units and Submarines can't attack when damaged, but they can always bombard.
+- Flag AutoAtt: Auto-attack enabled only for air fighters and submarines. When one of these units is alone, it will attack an incoming enemy. When stacked in a tile, the first one will perform a bombardment and the rest a normal attack.
 - Flag Provoking: All air units receive this flag, this way if an incoming fighter is not auto-attacked when it's alone, it won't be auto-attacked when other units move to the same tile.
 
 
-UNIT            Att  Def  Mov  FP   HP   Cost -Vet-     +Vet+     Special
-Warrior         1    1    1    1    10   10   
-Phalanx         1    2    1    1    10   20   
-Archers         3   *1    1    1    10  *20                      *Bombard 1
-Legion          4    2    1    1    10  *30   iron               *Marines
-Pikemen        *2   *3    1    1    10  *30   iron               *(No bonus anti-horse)
-Musketeers      3    3    1    1    20  *40   niter              *Bombard 1,*Marines
-Riflemen        5    4    1    1    20  *50   niter              *Bombard 1,*Marines
-Alpine Troops  *7   *4    1    1    20  *60   niter              *Bombard 1, IgTer
-Partisan        4   *5    1    1    20  *60                      *Bombard 1, IgTer, IgZOC
-Fanatics       *5   *5    1    1    20   20                      *Bombard 1,*1 Pop, No upkeep, No unhappy
-Marines         8    5    1    1    20   60             rubber   *Bombard 1, Marines
-Paratroopers    6    4    1    1    20   60             rubber   *Bombard 1, Paratroopers
+UNIT            Att  Def  Mov  FP(BR) HP   Cost -Vet-     +Vet+     Special
+Warrior         1    1    1    1      10   10   
+Phalanx         1    2    1    1      10   20   
+Archers         3   *1    1    1(1)   10  *20                      
+Legion          4    2    1    1      10  *30   iron               *Marines
+Pikemen        *2   *3    1    1      10  *30   iron               *(No bonus anti-horse)
+Musketeers      3    3    1    1(2)   20  *40   niter              *Marines
+Riflemen        5    4    1    1(2)   20  *50   niter              *Marines
+Alpine Troops  *7   *4    1    1(2)   20  *60   niter               IgTer
+Partisan        4   *5    1    1(2)   20  *60                       IgTer, IgZOC
+Fanatics       *5   *5    1    1(2)   20   20                      *1 Pop, No upkeep, No unhappy
+Marines         8    5    1    1(2)   20   60             rubber    Marines
+Paratroopers    6    4    1    1(2)   20   60             rubber    Paratroopers
 
-Horsemen        2    1    2    1    10   20             horses
-Elephants      *3   *2    2    1    10  *30             ivory
-Chariot        *4    1    2    1    10   30             horses   *Wheeled
-Crusaders       5   *2    2    1    10   40   iron      horses   *No unhappy
-Knights         4   *3    2    1    10   40   iron      horses
-Dragoons        5    2    2    1    20   50   niter     horses   *Bombard 1
-Cavalry         8    3    2    1    20   60   niter     horses   *Bombard 1
-Mech. Inf.      6    6    3    1    30  *70   iron/oil  rubber   *Bombard 2,*Wheeled,*Rounds 50
-Armor           10   5    3    1    30  *90   iron/oil  uranium  *Bombard 2,*Wheeled,*Rounds 50
+Horsemen        2    1    2    1      10   20             horses
+Elephants      *3   *2    2    1      10  *30             ivory
+Chariot        *4    1    2    1      10   30             horses   *Wheeled
+Crusaders       5   *2    2    1      10   40   iron      horses   *No unhappy
+Knights         4   *3    2    1      10   40   iron      horses
+Dragoons        5    2    2    1(2)   20   50   niter     horses   
+Cavalry         8    3    2    1(2)   20   60   niter     horses   
+Mech. Inf.      6    6    3    1(3)   30  *70   iron/oil  rubber   *Wheeled
+Armor           10   5    3    1(3)   30  *90   iron/oil  uranium  *Wheeled,*(x1.5 def vs Armor)
 
-Catapult        6    1    1    1    10   40                      *Bombard 1,*Wheeled
-Cannon          8    1    1    1    20  *50   iron,niter         *Bombard 2,*Wheeled
-Artillery       10  *2    1   *1(2) 20  *60   iron               *Bombard 2,*Wheeled,*CityBuster
-Howitzer        12   2   *1   *1(2) 30  *80   iron/oil  rubber   *Bombard 3,*Wheeled,*CityBuster,*Rounds 50
+Catapult        6    1    1    1(1)   10   40                      *Wheeled
+Cannon          8    1    1    1(2)   20  *50   iron,niter         *Wheeled
+Artillery       10  *2    1   *1\2(2) 20  *60   iron               *Wheeled,*CityBuster
+Howitzer        12   2   *1   *1\2(3) 30  *80   iron/oil  rubber   *Wheeled,*CityBuster
 
-Galley          1    1    3    1    10  *20                       Cargo 2, Coastal
-Caravel        *1   *2    3    1    10  *30                       Cargo 3
-Galleon         0    2    4    1    20   40   iron,niter          Cargo 4,*No unhappy
-Transport       0    3    5    1    30   50   iron                Cargo 8,*No unhappy
-Carrier        *0    9    5   *1    40  *150  iron/oil  aluminum  Cargo 8,*No unhappy
+Galley          1    1    3    1      10  *20                       Cargo 2, Coastal
+Caravel        *1   *2    3    1      10  *30                       Cargo 3
+Galleon         0    2    4    1      20   40   iron,niter          Cargo 4,*No unhappy
+Transport       0    3    5    1      30   50   iron                Cargo 8,*No unhappy
+Carrier        *0    9    5   *1      40  *150  iron/oil  aluminum  Cargo 8,*No unhappy
 
-Frigate        *3    2    4    1    20  *40   iron,niter         *Bombard 2,*No Cargo
-Ironclad        4   *3    4    1   *20  *50   iron,niter         *Bombard 2,
-Destroyer       4    4    6    1    30   60   iron               *Bombard 3,*(x2 att/def Sub)
-Cruiser         6    6    5   *1    30   80   iron               *Bombard 3,
-AEGIS Cruiser   8    8    5   *1    30   100  iron/oil  aluminum *Bombard 3,*(x2 def Air)
-Battleship      12   12   4   *1   *30   160  iron               *Bombard 3,
-Submarine      *12  *4   *5   *1   *20  *70   iron/oil  uranium  *Bombard 2,*(x2 def Air), Cargo 8,*AutoAtt,*HPFull
+Frigate        *3    2    4    1(2)   20  *40   iron,niter         *No Cargo
+Ironclad        4   *3    4    1(2)  *20  *50   iron,niter         
+Destroyer       4    4    6    1(3)   30   60   iron               *(x2 att/def vs Sub)
+Cruiser         6    6    5   *1(3)   30   80   iron               
+AEGIS Cruiser   8    8    5   *1(3)   30   100  iron/oil  aluminum *(x2 def vs Air)
+Battleship      12   12   4   *1(3)  *30   160  iron               
+Submarine      *12  *4   *5   *1(2)  *20  *70   iron/oil  uranium  *(x2 def vs Air), Cargo 8,*AutoAtt,*HPFull
 
-Fighter         4   *5    10  *1    20   60   iron/oil  aluminum *Bombard 1,*AutoAtt,*Fuel 2,*HPFull
-Bomber         *6   *2    8   *1   *30  *100  iron/oil  aluminum *Bombard 3,*Rounds 3,*Fuel 3,*HPFull, FieldUnit
-Helicopter     *5    3    6   *1   *30  *70   iron/oil  rubber   *Bombard 2,*Rounds 2,*Cargo 1,*HPFull
-Stealth Fighter 8   *9    14  *1    20   80   iron/oil  aluminum *Bombard 1,*AutoAtt,*Fuel 2,*HPFull
-Stealth Bomber *9    5    12  *1   *30  *120  iron/oil  aluminum *Bombard 3,*Rounds 3,*Fuel 3,*HPFull, FieldUnit
+Fighter         4   *5    10  *1(2)   20   60   iron/oil  aluminum *AutoAtt,*Fuel 2,*HPFull
+Bomber         *6   *2    8   *1(4)  *30  *100  iron/oil  aluminum *Rounds 4,*Fuel 3,*HPFull, FieldUnit
+Helicopter     *5    3    6   *1(3)  *30  *70   iron/oil  rubber   *Rounds 3,*Cargo 1,*HPFull
+Stealth Fighter 8   *9    14  *1(2)   20   80   iron/oil  aluminum *AutoAtt,*Fuel 2,*Cargo 1,*HPFull
+Stealth Bomber *9    5    12  *1(4)  *30  *120  iron/oil  aluminum *Rounds 4,*Fuel 3,*Cargo 1,*HPFull, FieldUnit
 
-Cruise Missile  18   0   *16  *1(2) 10  *50             aluminum *CityBuster,*No FieldUnit
-Nuclear         99   0    16   1    10   160            uranium   Nuclear, FieldUnit
+Cruise Missile  18   0   *16  *1\2    10  *50             aluminum *CityBuster,*No FieldUnit
+Nuclear         99   0    16   1      10   160            uranium   Nuclear, FieldUnit
 
-FP = Firepower, HP = Hit Points
+FP = Firepower, BR = Bombard Rate, HP = Hit Points
 Vet+ = One more veteran level when produced at cities with this resource.
 Vet- = One less veteran level when produced at cities without one of these resources.
 iron,niter = both iron and niter required to avoid a double penalty; iron/oil = either iron or oil required to avoid the penalty.
-* = Changes compared to civ2 ruleset. Most affected are modern infantry, air units, and all units that had 2 firepower.
+* = Changes compared to civ2 ruleset.
 
 
 - Recovering of unit's hit points was readjusted, trying to simplify it, but main values are hardcoded (#):
@@ -649,11 +650,13 @@ With minor building          *(+50%)   60% (70%) Hospital    60% Harbour
 With main building            (100%)  100%(100%) Barracks   100% Port      100% Airport
 
 EVERY TURN
-Ground and naval units, with knowledge of Medicine and Physics   +2 HP
-(any terrain except Mountains, Glacier or Deep Ocean)
+With knowledge of Medicine and Physics:
+  Ground units (on plains or grassland)                            +2 HP
+  Naval units (on shallow ocean)                                   +2 HP
 
-Naval units on the same tile or adjacent to:
-Storm (any oceanic terrain), or Naval Mine (shallow ocean)       -4 HP
+Units on the same tile or adjacent to:
+  Storm (unit on any oceanic or glacier tile)                      -4 HP
+  Naval Mine (unit on shallow ocean, outside its national border)  -6 HP
 
 
 WONDERS:

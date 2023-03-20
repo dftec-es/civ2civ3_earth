@@ -644,8 +644,8 @@ flags    = ""
 graphic     = "a.medicine"
 graphic_alt = "-"
 helptext = _("\
-Non wheeled ground units recover 2 extra HPs per turn, even without \
-resting. Except on Mountains, Glacier or Deep Ocean.\
+Non wheeled ground units ending the turn on plains or grassland tiles \
+recover 2 extra HPs per turn, even without resting.\
 ")
 ;cost     = 120
 
@@ -765,8 +765,9 @@ flags    = ""
 graphic     = "a.physics"
 graphic_alt = "-"
 helptext = _("\
-Wheeled ground units and naval units recover 2 extra HPs per turn. Except on \
-Mountains, Glacier or Deep Ocean.\
+Wheeled ground units ending the turn on plains or grassland tiles, \
+or naval units ending the turn on shallow ocean or lake tiles, \
+recover 2 extra HPs per turn, even without resting.\
 ")
 ;cost     = 130
 

@@ -55,7 +55,15 @@ Uranium: One more veteran level when produced in cities with Uranium.\
     _("Fortress"), _("Can build Forts and Fortresses.")
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
-    _("Submarine"), _("Ignores the bonus to defense of sea units on Deep Ocean tiles.")
+    _("Submarine"), _("\
+Attack and defense value halved against Destroyer. \
+Ignores the bonus to defense of sea units on Deep Ocean tiles.\
+")
+    _("Tank"),
+; /* xgettext:no-c-format */
+_("\
+Gets 50% defensive bonus when attacked by another Tank.\
+")
     _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
     _("HelpWonder")
@@ -69,19 +77,15 @@ Uranium: One more veteran level when produced in cities with Uranium.\
     _("Marines"), _("Can launch attack from non-native tiles.")
     _("NoAutoAtt")
     _("Only_Land"), _("\
-Can only attack land tiles, and can not attack from river tiles. \
-But bombarding is not restricted.\
+Can not attack oceanic tiles, mountains, swamps, or jungles, unless there \
+is a road or base on the tile. Bombarding is not restricted.\
 ")
     _("Only_Sea"), _("\
-Can only attack sea tiles and cities. But bombarding is not restricted.\
-")
-    _("Mobile"), _("\
-Combat rounds limited to 50 when attacking. Both combatants might survive \
-when the odds are even, if they sum more than 50 HPs.\
+Can only attack sea tiles or cities. Bombarding is not restricted.\
 ")
     _("AirBomber"), _("Combat rounds equal to bombard rate.")
     _("HPFull"), _("Cannot attack once damaged, except for bombarding.")
-; units with HPFull require one of the following HP flags to know when they are undamaged
+; units with HPFull require one of the following HP flags to know when are undamaged
     _("HP10")
     _("HP20")
     _("HP30")
@@ -874,7 +878,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Niter", "Fortress", "NoAutoAtt"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
@@ -910,7 +914,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
@@ -947,7 +951,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "Capturer", "Bombarder",
@@ -984,7 +988,7 @@ uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer", "Bombarder",
@@ -1025,7 +1029,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
@@ -1069,7 +1073,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
@@ -1113,7 +1117,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
@@ -1149,9 +1153,8 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 2
-flags         = "Bombarder", "Only_Land", "Mobile",
-                "Iron_Oil", "Rubber", "NoAutoAtt"
+bombard_rate  = 3
+flags         = "Bombarder", "Only_Land", "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
@@ -1358,7 +1361,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 flags         = "Capturer", "Bombarder", "Horses", "Niter", "NoAutoAtt"
 roles         = "AttackFastStartUnit", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
@@ -1391,7 +1394,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
+bombard_rate  = 2
 flags         = "Capturer", "Bombarder", "Horses", "Niter", "NoAutoAtt"
 roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
@@ -1424,8 +1427,13 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 2
-flags         = "Bombarder", "Only_Land", "Mobile",
+bombard_rate  = 3
+bonuses       =
+   { "flag", "type", "value", "quiet"
+     "Tank", "DefenseMultiplier", 2, TRUE
+     "Tank", "DefenseDivider", 1, TRUE
+   }
+flags         = "Bombarder", "Only_Land", "Tank",
                 "Iron_Oil", "Uranium", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
@@ -1576,7 +1584,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 3
-flags         = "OneAttack", "CityBuster", "Bombarder", "Only_Land", "Mobile",
+flags         = "OneAttack", "CityBuster", "Bombarder", "Only_Land",
                 "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
@@ -1611,8 +1619,8 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
-targets       = "Air", "Missile", "Helicopter", "Sub"
+bombard_rate  = 2
+targets       = "Sub", "Air", "Missile", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
                 "Provoking", "Iron_Oil", "Aluminum"
 roles         = "DefendOk", "DefendOkStartUnit"
@@ -1652,7 +1660,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 3
+bombard_rate  = 4
 targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
                 "HPFull", "HP30", "HasNoZOC", "Provoking",
@@ -1694,7 +1702,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 2
+bombard_rate  = 3
 cargo         = "Land"
 targets       = "Sub"
 flags         = "AirAttacker", "Bombarder", "AirBomber", "HPFull", "HP30",
@@ -1729,15 +1737,16 @@ hitpoints     = 20
 firepower     = 1
 move_rate     = 14
 vision_radius_sq = 8
-transport_cap = 0
+transport_cap = 1
 fuel          = 2
 uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 1
-targets       = "Air", "Missile", "Helicopter", "Sub"
+bombard_rate  = 2
+cargo         = "Missile"
+targets       = "Sub", "Air", "Missile", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20",
                 "HasNoZOC", "Provoking", "Iron_Oil", "Aluminum"
 roles         = "DefendGood", "DefendGoodStartUnit"
@@ -1764,14 +1773,15 @@ hitpoints     = 30
 firepower     = 1
 move_rate     = 12
 vision_radius_sq = 8
-transport_cap = 0
+transport_cap = 1
 fuel          = 3
 uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
-bombard_rate  = 3
+bombard_rate  = 4
+cargo         = "Missile"
 targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
                 "HPFull", "HP30", "HasNoZOC", "Provoking",
@@ -2307,8 +2317,8 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 city_slots    = 0
-targets       = "Air", "Missile", "Helicopter", "Sub"
-disembarks    = "Sub"
+targets       = "Sub", "Air", "Missile", "Helicopter"
+disembarks    = "Sub", "Sea", "Air"
 flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC",
                 "Aluminum", "NoAutoAtt"
 roles         = ""
@@ -2343,8 +2353,8 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 city_slots    = 0
-targets       = "Sub"
-disembarks    = "Sub"
+targets       = "Sub", "Air", "Missile", "Helicopter"
+disembarks    = "Sub", "Sea", "Air"
 flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "NoAutoAtt"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")

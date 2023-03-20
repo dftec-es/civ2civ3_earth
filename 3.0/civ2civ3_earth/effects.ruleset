@@ -308,29 +308,19 @@ reqs    =
       "OutputType", "Gold", "Local"
     }
 
-; Fixed number of combat rounds for mobile units
-[effect_combat_rounds_mobile]
-type    = "Combat_Rounds"
-value   = 50
-reqs    =
-    { "type", "name", "range", "present"
-      "UnitFlag", "Mobile", "Local", TRUE
-      "UnitFlag", "AirBomber", "Local", FALSE
-    }
-
 ; Combat rounds equal to bombard rate for air bombers
-[effect_combat_rounds_bomber_2]
+[effect_combat_rounds_bomber]
 type    = "Combat_Rounds"
-value   = 2
+value   = 3
 reqs    =
     { "type", "name", "range", "present"
       "UnitFlag", "AirBomber", "Local", TRUE
       "UnitType", "Helicopter", "Local", TRUE
     }
 
-[effect_combat_rounds_bomber_3]
+[effect_combat_rounds_bomber_1]
 type    = "Combat_Rounds"
-value   = 3
+value   = 4
 reqs    =
     { "type", "name", "range", "present"
       "UnitFlag", "AirBomber", "Local", TRUE
@@ -362,12 +352,13 @@ reqs    =
 ; Damage caused by naval mines (on adjacent tile)
 [effect_naval_mine_damage]
 type    = "Unit_Recover"
-value   = -4
+value   = -6
 reqs    =
     { "type", "name", "range", "present"
       "Extra", "Naval Mine", "Adjacent", TRUE
       "TerrainClass", "Oceanic", "Local", TRUE
       "Terrain", "Deep Ocean", "Local", FALSE
+      "UnitState", "OnDomesticTile", "Local", FALSE
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
@@ -387,6 +378,7 @@ value   = -4
 reqs    =
     { "type", "name", "range", "present"
       "Extra", "Naval Mine", "Local", TRUE
+      "UnitState", "OnDomesticTile", "Local", FALSE
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
@@ -413,9 +405,29 @@ reqs    =
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+;      "UnitClass", "Helicopter", "Local", FALSE
+;      "UnitClass", "Air", "Local", FALSE
+;      "UnitClass", "Missile", "Local", FALSE
+    }
+
+[effect_storm_damage_land]
+type    = "Unit_Recover"
+value   = -4
+reqs    =
+    { "type", "name", "range", "present"
+      "Extra", "Storm", "Adjacent", TRUE
+      "TerrainFlag", "CanHaveStorm", "Local", TRUE
+      "TerrainClass", "Oceanic", "Local", FALSE
+;      "UnitClass", "Land", "Local", FALSE
+;      "UnitClass", "Small Land", "Local", FALSE
+;      "UnitClass", "Big Land", "Local", FALSE
+;      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Sea", "Local", FALSE
+      "UnitClass", "Trireme", "Local", FALSE
+      "UnitClass", "Sub", "Local", FALSE
+;      "UnitClass", "Helicopter", "Local", FALSE
+;      "UnitClass", "Air", "Local", FALSE
+;      "UnitClass", "Missile", "Local", FALSE
     }
 
 ; Compatibility with previous version
@@ -706,6 +718,8 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "Terrain", "Mountains", "Local", TRUE
+      "Extra", "Road", "Local", FALSE
+      "UnitFlag", "IgTer", "Local", FALSE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
@@ -716,8 +730,6 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
-      "UnitFlag", "IgTer", "Local", FALSE
-      "Extra", "Road", "Local", FALSE
     }
 
 ; Movement penalty if started turn on river (for every land unit)
@@ -726,7 +738,9 @@ type    = "Move_Bonus"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Terrain", "Mountains", "Local", FALSE
+      "Extra", "River", "Local", TRUE
+      "Extra", "Road", "Local", FALSE
+      "UnitFlag", "IgTer", "Local", FALSE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
@@ -738,8 +752,6 @@ reqs    =
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
-      "Extra", "Road", "Local", FALSE
-      "Extra", "River", "Local", TRUE
     }
 
 ; Nuclear power gives +1 moves to sea units
@@ -825,6 +837,7 @@ value   = 2
 reqs    =
     { "type", "name", "range", "present"
       "Tech", "Medicine", "Player", TRUE
+      "TerrainFlag", "RecoverHP", "Local", TRUE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
@@ -835,9 +848,6 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
-      "Terrain", "Deep Ocean", "Local", FALSE
-      "Terrain", "Glacier", "Local", FALSE
-      "Terrain", "Mountains", "Local", FALSE
     }
 
 ; Physics allow wheeled and naval units to recover faster
@@ -847,6 +857,7 @@ value   = 2
 reqs    =
     { "type", "name", "range", "present"
       "Tech", "Physics", "Player", TRUE
+      "TerrainFlag", "RecoverHP", "Local", TRUE
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
@@ -857,10 +868,6 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
-      "Terrain", "Deep Ocean", "Local", FALSE
-      "Terrain", "Glacier", "Local", FALSE
-      "Terrain", "Mountains", "Local", FALSE
-      "Extra", "Naval Mine", "Adjacent", FALSE
     }
 
 ; Food waste relative to map: -10.0% at max distance

@@ -54,7 +54,15 @@ Uranium: One more veteran level when produced in cities with Uranium.\
     _("Fortress"), _("Can build Forts and Fortresses.")
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
-    _("Submarine"), _("Ignores the bonus to defense of sea units on Deep Ocean tiles.")
+    _("Submarine"), _("\
+Attack and defense value halved against Destroyer. \
+Ignores the bonus to defense of sea units on Deep Ocean tiles.\
+")
+    _("Tank"),
+; /* xgettext:no-c-format */
+_("\
+Gets 50% defensive bonus when attacked by another Tank.\
+")
     _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
     _("HelpWonder")
@@ -1350,7 +1358,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Iron_Oil", "Uranium"
+bonuses       =
+   { "flag", "type", "value", "quiet"
+     "Tank", "DefenseMultiplier", 2, TRUE
+     "Tank", "DefenseDivider", 1, TRUE
+   }
+flags         = "Tank", "Iron_Oil", "Uranium"
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
@@ -1523,7 +1536,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-targets       = "Air", "Missile", "Helicopter", "Sub"
+targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "HasNoZOC", "Iron_Oil", "Aluminum"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
@@ -1646,7 +1659,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-targets       = "Air", "Missile", "Helicopter", "Sub"
+targets       = "Sub", "Air", "Helicopter"
 flags         = "Partial_Invis", "AirAttacker", "HasNoZOC",
                 "Iron_Oil", "Aluminum"
 roles         = "DefendGood", "DefendGoodStartUnit"
@@ -1679,7 +1692,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-bombard_rate  = 3
+bombard_rate  = 4
 flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirAttacker",
                 "Bombarder", "HasNoZOC", "Iron_Oil", "Aluminum"
 roles         = "DefendOk", "DefendOkStartUnit"
@@ -2185,8 +2198,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-targets       = "Air", "Missile", "Helicopter", "Sub"
-disembarks    = "Sub"
+targets       = "Sub", "Air", "Missile", "Helicopter"
+disembarks    = "Sub", "Sea"
 flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC", "Aluminum"
 roles         = ""
 helptext      = _("\
@@ -2219,8 +2232,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-targets       = "Sub"
-disembarks    = "Sub"
+targets       = "Sub", "Air", "Missile", "Helicopter"
+disembarks    = "Sub", "Sea"
 flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")

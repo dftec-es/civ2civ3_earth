@@ -26,6 +26,7 @@ Optional (server options):
 
 Terrains:
 * Ground units starting the turn on unroaded Rivers receive a -1 penalty to movement (same as Mountains).
+* Fort and Airstrip on Mountains cannot be upgraded to full fortresses. Removed the restriction on rivers (sorry for changing it again).
 * Forest and Jungle can be mined to get Lumber (+1 production). Forests and Plains can no longer be transformed to Grassland at the beginning, only Grassland to Forest (10 turns), Forest to Plains (10 turns), and Plains to Forest (10 turns).
 - Added new resources, up to 3 per terrain: Incense (+4 trade on desert), Deer (+2 food on forest, while Pheasant now +1 food and +1 trade), Marble (+1 production and +1 trade on hills), Ivory (now on jungle, with 1 less trade), Seals (same bonuses as Ivory, but on glacier), Shellfish (+1 food and +1 trade on oceans and lakes), Salt (+1 production and +1 trade on coastal ocean), Horses (+1 production and +1 trade on plains, while Buffalo now +1 food and +1 production), Sugar (+2 food and +2 trade on swamp).
 - There are now 6 resources on Grassland, with 3 different effects: Cattle or Corn (+1 food), Wool or Cotton (+1 production), Tea or Tobacco (+2 trade).
@@ -61,7 +62,7 @@ Gobernments:
 * Fundamentalism no longer gets any penalty to Science output. Anarchy doesn't get any penalty to Luxury output.
 
 Techs:
-- Medicine: allows non wheeled ground units to recover 2 HP per turn, even without resting. Physics allow the same for wheeled and naval units.
+* Medicine: allows non wheeled ground units to recover 2 HP per turn, on plains or grassland, even without resting. Physics allow the same for wheeled units, and for naval units on shallow ocean.
 * Metallurgy: Galleon, Frigate and Ironclad are built veteran at cities with Iron and Niter resources. They are no longer affected by the Lighthouse veterancy bonus.
 - Explosives allows new terrain improvements: Naval Mines to increase the defense of shallow oceans and damage adjacent naval units; Canals to join oceans separated by no more than 2 land tiles.
 - Labor Union: allows cities to build engineers with one extra veteran level.
@@ -83,9 +84,11 @@ Units:
 - Increased by one the number of veterancy levels, with effects: 100%, 125%, 150%, 175% and 200%. Engineers up to 150%.
 - All military infantry units can build fortresses. All worker units can build airbases, and can pillage any terrain improvement.
 * The working time required to build a base is 2 times the movement cost of the terrain.
-- Nuclear weapons have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
-* Fighter units can now cause unhappiness (when they end the turn outside national borders). Galleon, Transport and Carrier (ships with attack 0) no longer cause unhappiness due to military activity.
 * Cavalry units are no longer slowed down when damaged. Crusaders get defense 2 (was 1).
+* Armor receives a +50% defense bonus against other Armor units. This way Armor vs Armor battles are more even, while they keep the same power against other land units.
+- Nuclear weapons have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
+* Missiles can disembark from its transporter unit, but they need a city or airbase to embark again.
+* Air fighters can now cause unhappiness (when they end the turn outside national borders). Galleon, Transport and Carrier (ships with attack 0) no longer cause unhappiness due to military activity.
 * Diplomat/Spy and Stealth aircraft are only visible from adjacent tiles, like Submarines.
 * Minor adjustment to the HP recover rate of units. See the new table.
 
@@ -97,7 +100,7 @@ Naval:
 - Reduced a bit the cost of several naval units.
 - Reduced a bit some vision ranges. Most air and naval units see 2 tiles in horizontal/vertical, and 1 tile in diagonal (same as Explorers), except AEGIS cruiser and Stealth Fighter/Bomber that can see 2 tiles in diagonal too.
 * AEGIS cruiser doubles its defense against air attacks (was x5). Destroyer doubles its defense and its attack against Submarine.
-* New unit class for Submarines, that can not attack other Submarines. Defense reduced to 4, but doubled against air attacks. Missiles, when outside cities, can disembark from Submarines, but not embark again.
+* New unit class for Submarines, that can not attack other Submarines. Defense reduced to 4, but doubled against air attacks.
 
 Wonders:
 * Readjusted effects and obsolescence of many wonders. See the table.

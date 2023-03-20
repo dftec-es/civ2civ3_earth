@@ -313,7 +313,7 @@ reqs    =
 ; Damage caused by naval mines (on adjacent tile)
 [effect_naval_mine_damage]
 type    = "Unit_Recover"
-value   = -4
+value   = -6
 reqs    =
     { "type", "name", "range", "present"
       "Extra", "Naval Mine", "Adjacent", TRUE
@@ -645,6 +645,8 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "Terrain", "Mountains", "Local", TRUE
+      "Extra", "Road", "Local", FALSE
+      "UnitFlag", "IgTer", "Local", FALSE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
@@ -655,8 +657,6 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
-      "UnitFlag", "IgTer", "Local", FALSE
-      "Extra", "Road", "Local", FALSE
     }
 
 ; Movement penalty if started turn on river (for every land unit)
@@ -665,7 +665,9 @@ type    = "Move_Bonus"
 value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Terrain", "Mountains", "Local", FALSE
+      "Extra", "River", "Local", TRUE
+      "Extra", "Road", "Local", FALSE
+      "UnitFlag", "IgTer", "Local", FALSE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
@@ -677,8 +679,6 @@ reqs    =
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
-      "Extra", "Road", "Local", FALSE
-      "Extra", "River", "Local", TRUE
     }
 
 ; Nuclear power gives +1 moves to sea units
@@ -764,6 +764,7 @@ value   = 2
 reqs    =
     { "type", "name", "range", "present"
       "Tech", "Medicine", "Player", TRUE
+      "TerrainFlag", "RecoverHP", "Local", TRUE
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
@@ -774,9 +775,6 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
-      "Terrain", "Deep Ocean", "Local", FALSE
-      "Terrain", "Glacier", "Local", FALSE
-      "Terrain", "Mountains", "Local", FALSE
     }
 
 ; Physics allow wheeled and naval units to recover faster
@@ -786,6 +784,7 @@ value   = 2
 reqs    =
     { "type", "name", "range", "present"
       "Tech", "Physics", "Player", TRUE
+      "TerrainFlag", "RecoverHP", "Local", TRUE
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
@@ -796,10 +795,6 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
-      "Terrain", "Deep Ocean", "Local", FALSE
-      "Terrain", "Glacier", "Local", FALSE
-      "Terrain", "Mountains", "Local", FALSE
-      "Extra", "Naval Mine", "Adjacent", FALSE
     }
 
 ; Base -1% food each 1 tile

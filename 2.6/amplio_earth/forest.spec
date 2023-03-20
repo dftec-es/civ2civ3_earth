@@ -2,6 +2,7 @@
 
 options = "+Freeciv-2.6-spec"
 
+[info]
 artists = "
     Peter Arbor <peter.arbor@gmail.com>
     Bardo

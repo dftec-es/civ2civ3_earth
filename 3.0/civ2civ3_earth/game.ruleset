@@ -747,15 +747,15 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "Extra",        "Bombardment",  "Local", FALSE
+      "MaxUnitsOnTile", "1",          "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
       "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
-; AI: Enable bombard from river (when attack is disabled)
-[actionenabler_bombard_ai_only_land_river]
+; AI: Enable bombard against unpassable terrain (when attack is disabled)
+[actionenabler_bombard_ai_only_land_unpassable]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
@@ -764,8 +764,12 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "Extra",        "Bombardment",  "Local", FALSE
-      "Extra",        "River",        "Local", TRUE
+      "MaxUnitsOnTile", "1",          "Local", TRUE
+    }
+target_reqs    =
+    { "type",         "name",         "range", "present"
+      "ExtraFlag",    "ForWheeled",   "Local", FALSE
+      "TerrainFlag",  "NoWheeled",    "Local", TRUE
     }
 
 ; AI: Enable bombard from sea to land (when attack is disabled)
@@ -778,7 +782,7 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "Extra",        "Bombardment",  "Local", FALSE
+      "MaxUnitsOnTile", "1",          "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
@@ -797,7 +801,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
+      "MaxUnitsOnTile", "1",         "Local", TRUE
       "MinHitPoints", "10",          "Local", FALSE
     }
 
@@ -811,7 +815,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
+      "MaxUnitsOnTile", "1",         "Local", TRUE
       "MinHitPoints", "20",          "Local", FALSE
     }
 
@@ -825,7 +829,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
+      "MaxUnitsOnTile", "1",         "Local", TRUE
       "MinHitPoints", "30",          "Local", FALSE
     }
 
@@ -840,7 +844,7 @@ actor_reqs    =
       "MinMoveFrags", "1",           "Local", TRUE
       "MinMoveFrags", "6",           "Local", FALSE
       "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
+      "MaxUnitsOnTile", "1",         "Local", TRUE
     }
 
 ; AI: Enable bombard from city
@@ -852,7 +856,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
+      "MaxUnitsOnTile", "1",         "Local", TRUE
       "CityTile",     "Center",      "Local", TRUE
     }
 
@@ -895,6 +899,7 @@ actor_reqs    =
     }
 
 ; Diplomatic units can expel NonMil units while at peace
+; (from domestic tiles)
 [actionenabler_expel_unit]
 action = "Expel Unit"
 actor_reqs    =
@@ -909,17 +914,17 @@ actor_reqs    =
 target_reqs    =
     { "type",          "name",           "range", "present"
       "UnitFlag",      "NonMil",         "Local", TRUE
-      "UnitFlag",      "Diplomat",       "Local", FALSE
       "UnitState",     "OnDomesticTile", "Local", FALSE
     }
 
-; Diplomatic units can always expel other diplomatic units
+; Diplomatic units can expel other diplomatic units
+; (outside bases or domestic tiles)
 [actionenabler_expel_diplomat]
 action = "Expel Unit"
 actor_reqs    =
     { "type",          "name",           "range", "present"
       "UnitFlag",      "Diplomat",       "Local", TRUE
-      "UnitState",     "OnDomesticTile", "Local", TRUE
+      "UnitState",     "OnLivableTile",  "Local", TRUE
       "DiplRel",       "Is foreign",     "Local", TRUE
       "MinMoveFrags",  "1",              "Local", TRUE
     }
@@ -927,6 +932,25 @@ target_reqs    =
     { "type",          "name",           "range", "present"
       "UnitFlag",      "Diplomat",       "Local", TRUE
       "UnitState",     "OnDomesticTile", "Local", FALSE
+      "ExtraFlag",     "DiplomatDefense", "Local", FALSE
+    }
+
+; Diplomatic units can expel unreachable units
+; (outside bases or domestic tiles)
+[actionenabler_expel_unreachable]
+action = "Expel Unit"
+actor_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitFlag",      "Diplomat",       "Local", TRUE
+      "UnitState",     "OnLivableTile",  "Local", TRUE
+      "DiplRel",       "Is foreign",     "Local", TRUE
+      "MinMoveFrags",  "1",              "Local", TRUE
+    }
+target_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitClassFlag", "Unreachable",    "Local",  TRUE
+      "UnitState",     "OnDomesticTile", "Local", FALSE
+      "ExtraFlag",     "DiplomatDefense", "Local", FALSE
     }
 
 [actionenabler_nuke]
@@ -975,8 +999,8 @@ actor_reqs    =
       "DiplRel",       "War",              "Local", TRUE
     }
 
-; Only_Land: can not attack to oceanic tiles, except for bombarding
-; can not attack from river tiles, except for bombarding
+; Only_Land: Can not attack against oceanic tiles, except for bombarding
+; Can not attack against unpassable terrain (not suitable for wheeled units)
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_only_land]
 action = "Attack"
@@ -987,14 +1011,31 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "Extra",        "River",        "Local", FALSE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
       "TerrainClass", "Oceanic",      "Local", FALSE
+      "TerrainFlag",  "NoWheeled",    "Local", FALSE
     }
 
-; Only_Sea: can attack only oceanic tiles, except for bombarding
+; Only_Land: Can attack against passable terrain
+; (with extra suitable for wheeled units)
+[actionenabler_attack_only_land_extra]
+action = "Attack"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "UnitFlag",     "Only_Land",    "Local", TRUE
+      "UnitFlag",     "NonMil",       "Local", FALSE
+      "UnitState",    "Transported",  "Local", FALSE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+    }
+target_reqs    =
+    { "type",         "name",         "range", "present"
+      "ExtraFlag",    "ForWheeled",   "Local", TRUE
+    }
+
+; Only_Sea: Can attack only oceanic tiles, except for bombarding
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_only_sea]
 action = "Attack"
@@ -1011,8 +1052,8 @@ target_reqs    =
       "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
-; Only_Sea: can attack city tiles
-[actionenabler_attack_only_sea_vs_city]
+; Only_Sea: Can attack city tiles
+[actionenabler_attack_only_sea_city]
 action = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
