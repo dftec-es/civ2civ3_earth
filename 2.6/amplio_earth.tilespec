@@ -9,7 +9,7 @@ name = "amplio_earth"
 priority = 30
 
 ; There`s no separate versioning in tilesets part of main freeciv distribution
-version = "2.6_2021"
+version = "2.6_2023_alpha"
 
 ; Summary and full description of the tileset.
 summary = _("Large isometric tileset based on Amplio.")

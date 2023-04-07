@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2023_alfa"
+version = "3.0_2023_alpha"
 
 ; Summary of the ruleset
 summary = _("\
