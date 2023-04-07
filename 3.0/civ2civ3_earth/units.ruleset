@@ -130,7 +130,7 @@ veteran_move_bonus = 0, 0, 0, 0, 0
 ; The number can be variable, up to 32
 ; When adding new classes, remember to check effects.ruleset also.
 ; Eg. if you divide class 'Land' to two separate classes, you may
-; want add effect giving City Walls defence bonus against new class
+; want add effect giving City Walls defense bonus against new class
 ; too.
 ;
 ; The actual tag used (the * in [unitclass_*]) does not matter, except
@@ -714,7 +714,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
+roles         = ""
 helptext      = _("\
 This unit may be built from the start of the game. It is the weakest \
 offensive unit.\
@@ -747,7 +747,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
 ")
@@ -779,7 +779,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 1
-flags         = "OneAttack", "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
+flags         = "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -846,7 +846,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 flags         = "OneAttack", "Capturer", "Iron", "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx as the preferred \
 city defender.\
@@ -881,7 +881,7 @@ city_slots    = 0
 bombard_rate  = 2
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Niter", "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild", "HutTech",
                 "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
 Musketeers are infantry equipped with early firearms and replace \
@@ -919,7 +919,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Niter", "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good at defending your \
 cities.\
@@ -993,7 +993,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer", "Bombarder",
                 "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit"
+roles         = ""
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
@@ -1034,7 +1034,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
                 "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
+roles         = "DefendOk", "DefendOkStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts at using the terrain \
 to their advantage.\
@@ -1078,7 +1078,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
                 "Rubber", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit"
+roles         = ""
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
 airbase, or airstrip, Paratroopers who have not expended any \
@@ -1122,7 +1122,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Rubber", "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
 ")
@@ -1155,7 +1155,7 @@ uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 3
 flags         = "Bombarder", "Only_Land", "Iron_Oil", "Rubber", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
 of any land unit, and is very fast on roads and easy terrain, but it is \
@@ -1471,7 +1471,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 1
-flags         = "OneAttack", "Bombarder", "Only_Land", "NoAutoAtt"
+flags         = "Bombarder", "Only_Land", "NoAutoAtt"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Catapults are large rock-throwing machines of war. They are very \
@@ -1511,7 +1511,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 2
-flags         = "OneAttack", "Bombarder", "Only_Land",
+flags         = "Bombarder", "Only_Land",
                 "Iron", "Niter", "NoAutoAtt"
 roles         = "AttackStrongStartUnit", "BarbarianTech", "BarbarianBuildTech"
 helptext      = _("\
@@ -1548,7 +1548,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 2
-flags         = "OneAttack", "CityBuster", "Bombarder", "Only_Land",
+flags         = "CityBuster", "Bombarder", "Only_Land",
                 "Iron", "NoAutoAtt"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
@@ -1584,7 +1584,7 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 3
-flags         = "OneAttack", "CityBuster", "Bombarder", "Only_Land",
+flags         = "CityBuster", "Bombarder", "Only_Land",
                 "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
@@ -1620,10 +1620,10 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 2
-targets       = "Sub", "Air", "Missile", "Helicopter"
+targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
                 "Provoking", "Iron_Oil", "Aluminum"
-roles         = "DefendOk", "DefendOkStartUnit"
+roles         = ""
 helptext      = _("\
 Fighters are your first airborne units. They can move anywhere and \
 attack any unit.\
@@ -1709,7 +1709,7 @@ flags         = "AirAttacker", "Bombarder", "AirBomber", "HPFull", "HP30",
                 "HasNoZOC", "Provoking", "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
-Helicopters can also transport one military land unit; while some troops \
+Helicopters can transport one military land unit; while some troops \
 must load or unload in a city, airstrip, or airbase (and not in the field \
 or onboard a Carrier), infantry units can embark or disembark at any time.\
 "), _("\
@@ -1737,7 +1737,7 @@ hitpoints     = 20
 firepower     = 1
 move_rate     = 14
 vision_radius_sq = 8
-transport_cap = 1
+transport_cap = 0
 fuel          = 2
 uk_happy      = 1
 uk_shield     = 1
@@ -1745,11 +1745,10 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 2
-cargo         = "Missile"
-targets       = "Sub", "Air", "Missile", "Helicopter"
+targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20",
                 "HasNoZOC", "Provoking", "Iron_Oil", "Aluminum"
-roles         = "DefendGood", "DefendGoodStartUnit"
+roles         = ""
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement radius.\
 ")
@@ -1773,7 +1772,7 @@ hitpoints     = 30
 firepower     = 1
 move_rate     = 12
 vision_radius_sq = 8
-transport_cap = 1
+transport_cap = 0
 fuel          = 3
 uk_happy      = 1
 uk_shield     = 1
@@ -1781,12 +1780,11 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 0
 bombard_rate  = 4
-cargo         = "Missile"
 targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
                 "HPFull", "HP30", "HasNoZOC", "Provoking",
                 "Iron_Oil", "Aluminum", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit"
+roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement radius.\
 ")
@@ -2040,7 +2038,7 @@ bonuses       =
    }
 flags         = "BadCityDefender", "Bombarder",
                 "Iron", "NoAutoAtt"
-roles         = "Hunter"
+roles         = ""
 helptext      = _("\
 An improved Ironclad, with better move rate and vision. Anti-submarine \
 weapons double its attack and defense against Submarines.\
@@ -2118,7 +2116,7 @@ bonuses       =
    }
 flags         = "BadCityDefender", "Bombarder",
                 "Iron_Oil", "Aluminum", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit"
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The AEGIS Cruiser is equipped with an advanced defensive missile \
 system, giving it double defense against all air attacks.\
@@ -2231,7 +2229,7 @@ city_slots    = 0
 cargo         = "Land", "Air", "Missile", "Helicopter"
 flags         = "BadCityDefender", "HasNoZOC",
                 "Iron_Oil", "Aluminum", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit"
+roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Carrier is a mobile airport.\
 "), _("\
@@ -2447,7 +2445,7 @@ If a foreign unit is alone on a tile, you may attempt to bribe it \
 with your Diplomat. By paying a sum of gold the unit will immediately \
 become yours; the exact sum depends on the status of the unit and \
 that of the civilization owning it. Bribery when not at war will cause \
-a diplomatic incident.\
+a diplomatic incident. Homeless Diplomats cannot bribe units.\
 "), _("\
 Diplomats can also perform a number of actions in another player's \
 city, although each Diplomat may attempt only one action. Most of \

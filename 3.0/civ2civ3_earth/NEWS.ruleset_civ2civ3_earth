@@ -15,9 +15,9 @@ Core:
 - Enabled national trade routes again, that spread the bonuses of special resources. Each city can establish 1 trade route (2 after the discovery of The Corporation).
 * Trade routes with foreign cities get 50% of the income, and only while the cities are allies (or on the same team).
 * Enabled tech leakage again, with halved effect (the cost of a technology known by all players would be half of the normal cost).
-* It is no longer necessary to establish embassies, as players get them automatically when they contact another player for the first time.
 * The city tile gets the same +50% defense bonus as a Fort (against naval units too, not only against ground units). Cities with size>8 double this bonus to +100% (as before). While cities with size>16 now get an additional +50% against air and missile units (being the total defense same as a Fortress).
 * Waste of Food caused by distance to Palace is now relative to the size of the map, up to -10% Food for cities at max distance (-5% with Granary or Courthouse).
+* The AI traits, that affect all difficulty levels, were adjusted to be expansionist (90) and aggressive (90).
 
 Optional (server options):
 * Trading technologies in the diplomacy dialog is not allowed (else the AI can't handle the following options).
@@ -53,7 +53,7 @@ Gobernments:
 - Added new government: Fascism (available with Tactics, that was renamed to Military Tactics, and requires Leadership and Conscription).
 * Empire Size does no longer depend on the chosen government. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.
 * Corruption and waste by distance are fixed to 2% per tile for ancient governments, 1% for modern governments, and 0% for Federation and Communism; no longer linked to the research of Trade or The Corporation techs.
-* Tribal (available with Warrior Code) gets 3 units free of upkeep per city; and +1 content per city, instead of martial law. Federation gets +2 Luxury points per city.
+* Tribal (available with Warrior Code) gets 3 units free of upkeep per city; +1 content per city, instead of martial law; and extra vision radius of ground units. Federation gets +2 Luxury points per city.
 * Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold).
 * Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, but no matter if it wasn't producing any trade. Republic is restored to get both "Has senate" and "Revolution when unhappy" effects, same as Democracy. Federation no longer has a senate.
 * Max tax rates changed to 80% for Federation and 90% for Communism.
@@ -84,10 +84,9 @@ Buildings:
 * Doubled the coins needed to buy spaceship parts (same as wonders).
 
 Combat:
-* When attacking, it is now possible to chose between different actions (if available for the unit), like regular attack, capture, or bombard.
+* When attacking, it is now possible to chose between different actions (if available for the unit): regular attack, capture, or bombard.
 * Bombard action is only allowed to 1 unit from each tile per turn.
-  When a unit performs a bombardment from a tile, a marker appears on this tile and prevents other units in a stack to bombard from the same tile until the next turn.
-  Alone units are always allowed to bombard. Since all remaining move points are consumed by the bombard action, no other units will be able to bombard alone from the same tile.
+  When a unit performs a bombardment from a tile, a marker appears on this tile and prevents other units to bombard from the same tile until the next turn.
 * Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate is 1 for each 10 hit points of the unit, and is increased by 1 in the case of Bomber units.
 * Flag HPFull: Air units and Submarines can't attack when damaged, but they can always bombard.
 * Flag AirBomber: Air bombers attack with limited combat rounds, equal to its bombard rate, allowing them to perform an attack first (with the possibility to kill damaged enemy units, and the risk of being damaged back), and then bombard in the same turn.
@@ -106,8 +105,8 @@ Units:
 - Nuclear weapons have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
 * Missiles can disembark from its transporter unit, but they need a city or airbase to embark again.
 * Air fighters can now cause unhappiness (when they end the turn outside national borders). Galleon, Transport and Carrier (ships with attack 0) no longer cause unhappiness due to military activity.
-* Air fighters can auto-attack incoming missiles. Stealth aircrafts can carry 1 Missile unit, and they are no longer invisible. Else it'd require micromanagement to avoid their auto-attacks, and AWACS would be useless.
-* Diplomat and Spy are only visible from adjacent tiles, like Submarines.
+* Stealth aircrafts are no longer invisible. Else it'd require micromanagement to avoid their auto-attacks, and AWACS would be useless.
+* Diplomat and Spy are only visible from adjacent tiles, like Submarines. Homeless agents cannot bribe units.
 * New actions for Diplomat and Spy: expel non military units out of your territory if you are at peace with the target; expel diplomatic or unreachable units when they are not inside their own national borders or inside bases; steal map fragments from foreign cities.
 * Minor adjustment to the HP recover rate of units. See the new table.
 

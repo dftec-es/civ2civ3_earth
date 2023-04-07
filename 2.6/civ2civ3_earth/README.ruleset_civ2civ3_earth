@@ -1,10 +1,10 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 12-2022)
+Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 04-2023)
 ============================================================
 
-"civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with freeciv since v2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios.
+"civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with freeciv since v2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
 
-This "earth" pack introduces some of the changes planned for future versions of civ2civ3, allowing players to test them before they are available in the next freeciv releases. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
+I have been working on this ruleset since Freeciv 2.2. The version I made for Freeciv 2.5 was included in the official distro, and later they decided to make it the default ruleset for Freeciv 3.0. My opinion is that the ruleset was not ready for that, but now that it is the default one, it is hard to keep introducing changes there. Since 2.6, I have continued the development of the ruleset in this "earth" pack, that is available either from the modpack installer that comes with Freeciv, or from GitHub: https://github.com/dftec-es/civ2civ3_earth/tags
 
 
 OBJECTIVES:
@@ -28,7 +28,7 @@ INFO:
 
 - Help texts have been updated (mainly buildings and wonders), so the info showed ingame already takes into account the changed rules. Some graphical tables from the manual might not match (mainly terrains and governments), so better use the tables in this Readme as reference.
 
-- I suggest new players to start a game with 6 players or so, AI skill level Normal, and default ruleset options (small continental map with 100 land tiles per player). This way AI will progress at similar pace as real history.
+- I suggest new players to start a game with 6 players or so, AI skill level Normal, and default ruleset options (small continental map with 100 land tiles per player).
 
 - For challenging games, you may place several AI players in the same team. For example, one team with 5 AIs together against you.
 
@@ -36,6 +36,8 @@ INFO:
 
 HARD AI (no limit to tax rates): +20% Science, Luxury, Gold and Production, +20% Veteran chance, -20% Pollution, Tech cost is 2/3, 2 units per city free of upkeep, +50 AI love.
 CHEATING AI (limited tax rates): +40% Science, Luxury, Gold and Production, +40% Veteran chance, -20% Pollution, Tech cost is 2/3, 2 units per city free of upkeep, +100 AI love.
+
+- The AI traits, that affect all difficulty levels, were adjusted so every AI is expansionist (90) and aggressive (90). If the optional setting "AI trait distribution method" is set to "Even", each AI will get a random value of aggressiveness between 50 and 90, allowing a more peaceful game.
 
 The following is a full list of changes compared to classic ruleset (although it should be playable without reading it)...
 
@@ -367,7 +369,7 @@ by Distance       +2%      +2%      +2%      +2%      +2%      +2%      +1%     
 
 - Tribal gets +1 content citizen in every city (but units can't apply martial law). Federation gets +2 Luxury points in every city. Communism cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).
 
-- Tribal and Fascism increase the chance of units getting the next veteran level after a battle. Every unit under Fascism, only ground units under Tribal.
+- Tribal and Fascism increase the chance of units to obtain the next veteran level after a battle. Every unit in the case of Fascism; only ground units in the case of Tribal, but they also get increased vision radius.
 
 - Spies and Diplomats built under Federation or Communism will start at the first veteran level.
 
@@ -506,7 +508,7 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 
 - Military "Land" units can capture enemy Migrants (as slaves) and Caravans/Freights (as loot). Frigates can capture Galleons and Caravels (as pirates, but won't work if targets are carrying any load).
 
-- Created a new unit class for wheeled units ("Big Land") that can't move to Mountains, Jungles and Swamps, unless there is a road or base on the tile. They do not get defensive bonuses from the terrain, can not perform pillage, and need Galleons or Transports to travel by sea.
+- Created a new unit class for wheeled units ("Big Land") that can't move or attack to Mountains, Jungles and Swamps, unless there is a road or base on the tile. They do not get defensive bonuses from the terrain, can not perform pillage, and need Galleons or Transports to travel by sea.
   They are the only units that can cause loss of population when attacking a city (prevented by City Walls).
 
 - Created a new unit class for Submarines ("Sub"), that can not attack other Submarines, and gets double defense against air attacks.
@@ -547,7 +549,7 @@ Workers:   pop 0, cost 20, upkeep 1, food 0
 
 - Air units can perform pillage (representing bombardment of infrastructure), and can be airlifted from a city with an Airport to another. Increased defense of all air units, in order to discourage the use of ground units to protect them.
 
-- Increased fuel of all planes by one (giving them an extra turn in the air), in order to allow battles for air control. All planes lose 10% of hit points, like helicopters, when they end a turn outside a city, airstrip, or airbase.
+- Increased fuel of all airplanes by one (giving them an extra turn in the air), in order to allow battles for air control. All airplanes lose 10% of hit points, like helicopters, when they end a turn outside a city, airstrip, airbase, or a Carrier.
 
 - Helicopters can carry 1 military Land unit, and can only be attacked by Fighters (with no extra attack bonuses), and by Missiles. Carriers can also transport military Land units.
 
@@ -585,8 +587,8 @@ Armor           10   5    3    1    30  *90   iron/oil  uranium  *Wheeled,*(x1.5
 
 Catapult        6    1    1    1    10   40                      *Wheeled
 Cannon          8    1    1    1    20  *50   iron,niter         *Wheeled
-Artillery       10  *2    1   *1(2) 20  *60   iron               *Wheeled,*CityBuster
-Howitzer        12   2   *1   *1(2) 30  *80   iron/oil  rubber   *Wheeled,*CityBuster
+Artillery       10  *2    1   *1\2  20  *60   iron               *Wheeled,*CityBuster
+Howitzer        12   2   *1   *1\2  30  *80   iron/oil  rubber   *Wheeled,*CityBuster
 
 Galley          1    1    3    1    10  *20                       Cargo 2, Coastal
 Caravel        *1   *2    3    1    10  *30                       Cargo 3
@@ -608,7 +610,7 @@ Helicopter     *5    3    6   *1   *30  *70   iron/oil  rubber   *Bombard 2,*Car
 Stealth Fighter 8   *8    14  *1    20   80   iron/oil  aluminum *Fuel 2, Invis
 Stealth Bomber *9    5    12  *1   *30  *120  iron/oil  aluminum *Bombard 4,*Fuel 3, FieldUnit, Invis
 
-Cruise Missile  18   0   *16  *1(2) 10  *50             aluminum *CityBuster,*No FieldUnit
+Cruise Missile  18   0   *16  *1\2  10  *50             aluminum *CityBuster,*No FieldUnit
 Nuclear         99   0    16   1    10   160            uranium   Nuclear, FieldUnit
 
 FP = Firepower, HP = Hit Points
@@ -622,24 +624,24 @@ iron,niter = both iron and niter required to avoid a double penalty; iron/oil = 
 # Resting: +10% (neither moving on their own nor attacking), unless the unit belongs to a class losing HP (Air/Helicopter).
 # Fortified: +10% (unit that can fortify spending a turn fortified, even inside cities or bases).
 
-RESTING OUTSIDE CITY    (HP REGEN %)  LAND (FORTIFIED)#      SEA            AIR
-In the Open                  #(+10%)   10% (20%)             10%           -10%
-In minor base                *( +0%)   10% (20%) Fort                       10% Airstrip
-In full base                 *(+24%)   34% (44%) Fortress                   34% Airbase
+RESTING OUTSIDE CITY (HP REGEN %)   LAND (FORTIFIED)#      SEA            AIR
+In the Open               #( +0%)    10% (20%)             10%           -10%
+In minor base             *( +0%)    10% (20%) Fort                       10% Airstrip
+In full base              *(+24%)    34% (44%) Fortress                   34% Airbase
 
-RESTING INSIDE CITY     (HP REGEN %)  LAND (FORTIFIED)#      SEA            AIR
-Without building             #(+34%)   44% (54%)             44%            34%
-With minor building          *(+50%)   60% (70%) Hospital    60% Harbour
-With main building            (100%)  100%(100%) Barracks   100% Port      100% Airport
+RESTING INSIDE CITY  (HP REGEN %)   LAND (FORTIFIED)#      SEA            AIR
+Without building          #(+34%)    44% (54%)             44%            34%
+With minor building       *(+50%)    60% (70%) Hospital    60% Harbour   
+With main building         (100%)   100%(100%) Barracks   100% Port      100% Airport
 
 EVERY TURN
 With knowledge of Medicine and Physics:
-  Ground units (on plains or grassland)        +2 HP
-  Naval units (on shallow ocean)               +2 HP
+  Ground units (on plains or grassland)       +2 HP
+  Naval units (on shallow ocean)              +2 HP
 
 Naval units on the same tile or adjacent to:
-  Storm (on any oceanic tile)                  -4 HP
-  Naval Mine (on shallow ocean)                -6 HP
+  Storm (unit on any oceanic tile)            -4 HP
+  Naval Mine (unit on shallow ocean)          -6 HP
 
 
 WONDERS:

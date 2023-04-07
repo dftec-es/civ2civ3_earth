@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2021"
+version = "3.0_2023_alfa"
 
 ; Summary of the ruleset
 summary = _("\
@@ -227,22 +227,22 @@ will_never = "Nuclear", "NoAutoAtt" ;(none but fighters and submarines)
 [actions]
 ; If force_trade_route is set to TRUE it is illegal for an actor unit to
 ; enter the marketplace of a city if it can establish a trade route to it
-; in stead.
+; instead.
 force_trade_route = FALSE
 
 ; If force_capture_units is set to TRUE it is illegal for an actor unit to
 ; bombard, explode nuclear or perform a regular attack against a tile if
-; it can capture units on it in stead.
+; it can capture units on it instead.
 force_capture_units = FALSE
 
 ; If force_bombard is set to TRUE it is illegal for an actor unit to
 ; explode nuclear or perform a regular attack against a tile if it can
-; bombard it in stead.
+; bombard it instead.
 force_bombard = FALSE
 
 ; If force_explode_nuclear is set to TRUE it is illegal for an actor unit
 ; to perform a regular attack against a tile if it can do explode nuclear
-; in stead.
+; instead.
 force_explode_nuclear = TRUE
 
 ; If poison_empties_food_stock is set to TRUE a successful "Poison City"
@@ -322,11 +322,11 @@ ui_name_enter_marketplace = _("Enter %sMarketplace%s")
 ; /* TRANS: Help _build Wonder (100% chance of success). */
 ui_name_help_wonder = _("Help %sbuild Wonder%s")
 
-; /* TRANS: Rec_ycle Unit (100% chance of success). */
-ui_name_recycle_unit = _("Rec%sycle Unit%s")
+; /* TRANS: Dis_band recovering production (100% chance of success). */
+ui_name_recycle_unit = _("Dis%sband recovering production%s")
 
-; /* TRANS: _You're Fired (100% chance of success). */
-ui_name_disband_unit = _("%sYou're Fired%s")
+; /* TRANS: Dis_band without recovering production (100% chance of success). */
+ui_name_disband_unit = _("Dis%sband without recovering production%s")
 
 ; /* TRANS: _Capture Units (100% chance of success). */
 ui_name_capture_units = _("%sCapture Units%s")
@@ -612,6 +612,7 @@ action = "Bribe Unit"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Diplomat", "Local", TRUE
+      "UnitState", "HasHomeCity", "Local", TRUE
       "DiplRel", "Alliance", "Local", FALSE
       "DiplRel", "Team", "Local", FALSE
       "UnitState", "OnLivableTile", "Local", TRUE
@@ -701,7 +702,7 @@ target_reqs    =
 
 ; Enable bombard from a stack, only for 1 unit per tile and per turn
 ; (when a unit bombards from a tile, a Bombardment extra is placed by lua script,
-; and doesn't allow unit stacks to bombard from that tile again until next turn,
+; and doesn't allow units to bombard from that tile again until next turn,
 ; when the extra automatically disappears)
 ; Enabled for the AI, that will always try to bombard from a stack
 [actionenabler_bombard_stack]
@@ -717,7 +718,6 @@ actor_reqs    =
     }
 
 ; Enable bombard when attacker is alone
-; (alone units can always bombard, no matter if other players used the same tile to bombard earlier)
 ; Disabled for the AI (else an alone AI won't use the normal attack), with some exceptions ("AI:...")
 [actionenabler_bombard_alone]
 action = "Bombard"
@@ -728,6 +728,7 @@ actor_reqs    =
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "MaxUnitsOnTile", "1",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
       "AI",           "Away",        "Player", FALSE
       "AI",           "Novice",      "Player", FALSE
       "AI",           "Easy",        "Player", FALSE
@@ -747,7 +748,7 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "MaxUnitsOnTile", "1",          "Local", TRUE
+      "Extra",        "Bombardment",  "Local", FALSE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
@@ -764,7 +765,7 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "MaxUnitsOnTile", "1",          "Local", TRUE
+      "Extra",        "Bombardment",  "Local", FALSE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
@@ -782,7 +783,7 @@ actor_reqs    =
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
-      "MaxUnitsOnTile", "1",          "Local", TRUE
+      "Extra",        "Bombardment",  "Local", FALSE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
@@ -801,7 +802,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
       "MinHitPoints", "10",          "Local", FALSE
     }
 
@@ -815,7 +816,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
       "MinHitPoints", "20",          "Local", FALSE
     }
 
@@ -829,7 +830,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
       "MinHitPoints", "30",          "Local", FALSE
     }
 
@@ -844,7 +845,7 @@ actor_reqs    =
       "MinMoveFrags", "1",           "Local", TRUE
       "MinMoveFrags", "6",           "Local", FALSE
       "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
     }
 
 ; AI: Enable bombard from city
@@ -856,7 +857,7 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
       "CityTile",     "Center",      "Local", TRUE
     }
 
@@ -1397,7 +1398,7 @@ name           = _("Spaceship Launch")
 type           = "Spaceship"
 unique         = FALSE
 culture        = 5000
-first_msg      = _("You're the first one to launch a spaceship towards Alpha Centauri!");
+first_msg      = _("You're the first one to launch a spaceship towards Alpha Centauri!")
 cons_msg       = _("You have launched a spaceship towards Alpha Centauri!")
 
 [achievement_map_known]
@@ -1614,9 +1615,9 @@ set =
       "restrictinfra", "ENABLED"
       "unreachableprotects", "DISABLED"
       "autoattack", "ENABLED"
-      "onsetbarbs", 120
       "occupychance", 100
       "razechance", 10
+      "onsetbarbs", 120
       "team_pooled_research", "DISABLED"
       "trading_tech", "DISABLED"
       "conquercost", 50

@@ -257,10 +257,6 @@ reqs    =
 type    = "City_Unhappy_Size"
 value   = 4
 
-[effect_embassies]
-type    = "Have_Embassies"
-value   = 1
-
 ; Barbarian effects
 
 [effect_barb1]
@@ -524,6 +520,26 @@ reqs    =
       "Extra", "Fortress", "Local", TRUE
     }
 
+; Carried HP regen: same as airstrip
+[effect_carried_hp_regen]
+type    = "HP_Regen"
+value   = 10
+reqs    =
+    { "type", "name", "range", "present"
+      "UnitState", "Transported", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
+      "UnitClass", "Land", "Local", FALSE
+      "UnitClass", "Small Land", "Local", FALSE
+      "UnitClass", "Big Land", "Local", FALSE
+      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Sea", "Local", FALSE
+      "UnitClass", "Trireme", "Local", FALSE
+      "UnitClass", "Sub", "Local", FALSE
+;      "UnitClass", "Helicopter", "Local", FALSE
+;      "UnitClass", "Air", "Local", FALSE
+;      "UnitClass", "Missile", "Local", FALSE
+    }
+
 ; Airstrip HP regen (every air unit)
 ; Same as non-air units that get a hardcoded +10% when resting
 [effect_airstrip_hp_regen]
@@ -541,7 +557,7 @@ reqs    =
       "UnitClass", "Sub", "Local", FALSE
 ;      "UnitClass", "Helicopter", "Local", FALSE
 ;      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+;      "UnitClass", "Missile", "Local", FALSE
     }
 
 ; Airbase HP regen: cumulative with airstrip
@@ -562,7 +578,7 @@ reqs    =
       "UnitClass", "Sub", "Local", FALSE
 ;      "UnitClass", "Helicopter", "Local", FALSE
 ;      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+;      "UnitClass", "Missile", "Local", FALSE
     }
 
 [effect_airstrip_defense]
@@ -818,6 +834,7 @@ reqs    =
       "UnitFlag", "Iron", "Local", TRUE
       "UnitFlag", "NonMil", "Local", FALSE
       "UnitFlag", "NoVeteran", "Local", FALSE
+      "Building", "Port Facility", "City", FALSE
     }
 
 ; Labor Union allows to build veteran engineers
@@ -2042,6 +2059,28 @@ value   = 1
 reqs    =
     { "type", "name", "range", "quiet"
       "Gov", "Tribal", "Player", TRUE
+    }
+
+[effect_vision_tribal]
+type    = "Unit_Vision_Radius_Sq"
+value   = 4
+reqs    =
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Tribal", "Player", TRUE, TRUE
+      "UnitClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "NonMil", "Local", FALSE, FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE, FALSE
+    }
+
+[effect_vision_tribal_1]
+type    = "Unit_Vision_Radius_Sq"
+value   = 4
+reqs    =
+    { "type", "name", "range", "present", "quiet"
+      "Gov", "Tribal", "Player", TRUE, TRUE
+      "UnitClass", "Big Land", "Local", TRUE, FALSE
+      "UnitFlag", "NonMil", "Local", FALSE, FALSE
+      "UnitFlag", "NoVeteran", "Local", FALSE, FALSE
     }
 
 [effect_combat_tribal]
@@ -4439,9 +4478,9 @@ reqs    =
     }
 
 [effect_united_nations_2]
-type    = "Have_Contacts"
-value	= 1
-reqs	=
+type    = "Have_Embassies"
+value   = 1
+reqs    =
     { "type", "name", "range"
       "Building", "United Nations", "World"
     }

@@ -18,6 +18,7 @@ Core:
 * Trade routes with foreign cities get 50% of the income, and only while the cities are allies (or on the same team).
 * Enabled tech leakage again.
 * The city tile gets the same +50% defense bonus as a Fort (against naval units too, not only against ground units). Cities with size>8 double this bonus to +100% (as before). While cities with size>16 now get an additional +50% against air and missile units (being the total defense same as a Fortress).
+* The AI traits, that affect all difficulty levels, were adjusted to be expansionist (90) and aggressive (90).
 
 Optional (server options):
 * Trading technologies in the diplomacy dialog is not allowed (else the AI can't handle the following options).
@@ -53,7 +54,7 @@ Gobernments:
 - Added new government: Fascism (available with Tactics, that was renamed to Military Tactics, and requires Leadership and Conscription).
 * Empire Size does no longer depend on the chosen government. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.
 * Corruption and waste by distance are fixed to 2% per tile for ancient governments, 1% for modern governments, and 0% for Federation and Communism; no longer linked to the research of Trade or The Corporation techs.
-* Tribal (available with Warrior Code) gets 3 units free of upkeep per city; and +1 content per city, instead of martial law. Federation gets +2 Luxury points per city.
+* Tribal (available with Warrior Code) gets 3 units free of upkeep per city; +1 content per city, instead of martial law; and extra vision radius of ground units. Federation gets +2 Luxury points per city.
 * Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold).
 * Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, but no matter if it wasn't producing any trade. Republic is restored to get both "Has senate" and "Revolution when unhappy" effects, same as Democracy. Federation no longer has a senate.
 * Max tax rates changed to 80% for Federation and 90% for Communism.

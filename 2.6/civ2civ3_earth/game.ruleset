@@ -25,7 +25,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "2.6_2021"
+version = "2.6_2023_alfa"
 
 ; Summary of the ruleset
 summary = _("\
@@ -643,7 +643,7 @@ name           = _("Spaceship Launch")
 type           = "Spaceship"
 unique         = FALSE
 culture        = 5000
-first_msg      = _("You're the first one to launch a spaceship towards Alpha Centauri!");
+first_msg      = _("You're the first one to launch a spaceship towards Alpha Centauri!")
 cons_msg       = _("You have launched a spaceship towards Alpha Centauri!")
 
 [achievement_map_known]
@@ -815,7 +815,6 @@ set =
       "flatpoles", 0
       "separatepoles", "DISABLED"
       "startunits", "cwsx"
-;      "huts", 30
       "citymindist", 3
       "trademindist", 3
       "techlevel", 1
@@ -823,9 +822,9 @@ set =
       "foggedborders", "ENABLED"
       "restrictinfra", "ENABLED"
       "unreachableprotects", "DISABLED"
-      "onsetbarbs", 120
       "occupychance", 100
       "razechance", 10
+      "onsetbarbs", 120
       "team_pooled_research", "DISABLED"
       "trading_tech", "DISABLED"
       "conquercost", 50

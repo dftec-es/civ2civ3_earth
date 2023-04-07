@@ -12,8 +12,9 @@ description="Default nations data for Freeciv"
 options="+Freeciv-3.0-ruleset web-compatible"
 format_version=10
 
-; This section contains meta information for freeciv-ruledit to recreate the ruleset
-; file in a form wanted. These have no in-game effect whatsoever
+; This section contains meta information for freeciv-ruledit and freeciv-ruleup
+; to recreate the ruleset file in a form wanted.
+; These have no in-game effect whatsoever.
 [ruledit]
 
 ; Nationlist to add include statement for. If this entry is omitted, all the nations
@@ -22,7 +23,7 @@ nationlist = "default/nationlist.ruleset"
 
 ; List of nations to embed to main nations.ruleset despite separate nationlist
 ; being used for other nations.
-embedded_nations = "barbarian", "pirate"
+embedded_nations = "Barbarian", "Pirate", "Animal Kingdom"
 
 [compatibility]
 ; Initial government for all the nations that do not
@@ -41,7 +42,7 @@ default_government = "Despotism"
 ; midpoint between <trait>_min and <trait>_max.
 
 ; Value of trait "expansionist" defines how much AI wants to settle new territory.
-expansionist_min = 50
+expansionist_min = 90
 expansionist_max = 90
 expansionist_default = 90
 
@@ -51,9 +52,9 @@ trader_max = 70
 trader_default = 50
 
 ; Value of trait "aggressive" defines how easily AI declares war.
-aggressive_min = 30
+aggressive_min = 50
 aggressive_max = 90
-aggressive_default = 70
+aggressive_default = 90
 
 ; Please keep [ruledit] section in sync with these includes
 *include "default/nationlist.ruleset"

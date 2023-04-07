@@ -2087,7 +2087,7 @@ Also, if any player's city is in disorder for more than two turns in \
 a row, that player's government falls (even for governments other than \
 Republic and Democracy).\
 "), _("\
-Every player gets in contact with every other player.\
+Every player gets an embassy with every other player.\
 "), _("\
 The city where it is built produces Diplomats and Spies with an \
 additional veteran level.\

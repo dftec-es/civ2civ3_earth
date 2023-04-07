@@ -112,8 +112,8 @@ Compared to Despotism, a Tribal economy is more shield-oriented. Its\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Increases by half the chance of land units getting the next veteran level\
- after a battle.\n\
+* Increases by half the chance of land units to obtain the next veteran\
+ level after a battle, and also increases their vision radius.\n\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
@@ -409,7 +409,7 @@ Fascism is better suited for militaristic nations.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Increases by a quarter the chance of any unit getting the next\
+* Increases by a quarter the chance of any unit to obtain the next\
  veteran level after a battle.\n\
 * City improvements which would normally have an upkeep of 1 or 2 gold are\
  free of upkeep.\n\
