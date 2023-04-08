@@ -1,6 +1,6 @@
 [info]
 options = "+Freeciv-2.6-modpack"
-baseURL = "./"
+baseURL = "."
 name    = "Civ2civ3_Earth"
 type    = "Modpack"
 version = "2023_alpha"
