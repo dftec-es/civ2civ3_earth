@@ -61,7 +61,7 @@ Ignores the bonus to defense of sea units on Deep Ocean tiles.\
     _("Tank"),
 ; /* xgettext:no-c-format */
 _("\
-Gets 50% defensive bonus when attacked by another Tank.\
+Gets 25% defensive bonus when attacked by another Tank.\
 ")
     _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
@@ -178,9 +178,8 @@ flags         = "TerrainSpeed", "CanOccupyCity", "BuildAnywhere",
 name          = _("?unitclass:Small Land")
 min_speed     = 1
 hp_loss_pct   = 0
-flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom",
-                "ZOC", "CanFortify", "CanPillage", "TerrainDefense",
-                "DoesntOccupyTile", "Airliftable"
+flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom", "ZOC",
+                "CanFortify", "TerrainDefense", "DoesntOccupyTile", "Airliftable"
 
 [unitclass_land_big]
 ; /* TRANS: Unit class: used adjectivally */
@@ -683,7 +682,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 flags         = "OneAttack", "Capturer", "Fortress"
-roles         = ""
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game. It is the weakest \
 offensive unit.\
@@ -945,7 +944,7 @@ uk_gold       = 0
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer", "Fortress"
-roles         = ""
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
@@ -1024,7 +1023,7 @@ uk_gold       = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Paratroopers", "Capturer", "Rubber", "Fortress"
-roles         = ""
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
 airbase, or airstrip, Paratroopers who have not expended any \
@@ -1360,8 +1359,8 @@ uk_food       = 1
 uk_gold       = 1
 bonuses       =
    { "flag", "type", "value", "quiet"
-     "Tank", "DefenseMultiplier", 2, TRUE
-     "Tank", "DefenseDivider", 1, TRUE
+     "Tank", "DefenseMultiplier", 4, TRUE
+     "Tank", "DefenseDivider", 3, TRUE
    }
 flags         = "Tank", "Iron_Oil", "Uranium"
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
@@ -1660,8 +1659,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 targets       = "Sub", "Air", "Helicopter"
-flags         = "Partial_Invis", "AirAttacker", "HasNoZOC",
-                "Iron_Oil", "Aluminum"
+flags         = "AirAttacker", "HasNoZOC", "Iron_Oil", "Aluminum"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement radius.\
@@ -1693,7 +1691,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 bombard_rate  = 4
-flags         = "Partial_Invis", "FieldUnit", "OneAttack", "AirAttacker",
+flags         = "FieldUnit", "OneAttack", "AirAttacker",
                 "Bombarder", "HasNoZOC", "Iron_Oil", "Aluminum"
 roles         = ""
 helptext      = _("\
@@ -1722,7 +1720,7 @@ move_rate     = 3
 vision_radius_sq = 2
 transport_cap = 2
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -1758,7 +1756,7 @@ move_rate     = 3
 vision_radius_sq = 2
 transport_cap = 2
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -1792,7 +1790,7 @@ move_rate     = 3
 vision_radius_sq = 2
 transport_cap = 3
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
@@ -1830,20 +1828,20 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Big Land", "Merchant"
-flags         = "BadCityDefender", "HasNoZOC", "Capturable",
+flags         = "BadCityDefender", "HasNoZOC", "NonMil", "Capturable",
                 "Iron", "Niter"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Galleon is a pure transport ship, the first which can transport \
-large wheeled units. It cannot attack other ships, though it may still \
-defend itself when attacked.\
+large wheeled units. It cannot attack other ships, though it may \
+still defend itself when attacked.\
 ")
 
 [unit_frigate]
 name          = _("Frigate")
 class         = "Sea"
 tech_req      = "Navigation"
-obsolete_by   = "Destroyer"
+obsolete_by   = "Ironclad"
 graphic       = "u.frigate"
 graphic_alt   = "-"
 sound_move    = "m_frigate"
@@ -2040,7 +2038,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 targets       = "Sub"
-flags         = "BadCityDefender", "Iron"
+flags         = "BadCityDefender", "Iron_Oil"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The Battleship is the supreme naval unit with excellent offensive and \
@@ -2154,7 +2152,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Big Land", "Merchant"
-flags         = "Settlers", "BadCityDefender", "HasNoZOC", "Iron"
+flags         = "Settlers", "BadCityDefender", "HasNoZOC", "NonMil", "Iron"
 veteran_names = _("green"), _("regular"), _("veteran"), _("hardened"), _("elite")
 veteran_raise_chance      = 50, 33, 25, 20, 0
 veteran_work_raise_chance = 0, 0, 0, 0, 0
@@ -2292,8 +2290,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Partial_Invis", "Diplomat", "IgZOC", "NonMil", "HasNoZOC",
-                "Cant_Pillage"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
   _("?diplomatic_rank:attaché"),
@@ -2415,8 +2412,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Partial_Invis", "Diplomat", "IgZOC", "NonMil", "HasNoZOC",
-                "Cant_Pillage", "Spy"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2568,8 +2564,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify",
-                "Cant_Pillage"
+flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for mapping \
@@ -2696,7 +2691,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "NonMil", "HasNoZOC", "Cant_Pillage"
+flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil"
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \
@@ -2710,7 +2705,7 @@ class         = "Small Land"
 tech_req      = "None"
 obsolete_by   = "None"
 graphic       = "u.snake"
-graphic_alt   = "u.warriors"
+graphic_alt   = "u.explorer"
 sound_move    = "m_snake"
 sound_move_alt = "m_generic"
 sound_fight   = "f_snake"
@@ -2928,7 +2923,7 @@ class         = "Small Land"
 tech_req      = "None"
 obsolete_by   = "None"
 graphic       = "u.lion"
-graphic_alt   = "u.archers"
+graphic_alt   = "u.legion"
 sound_move    = "m_lion"
 sound_move_alt = "m_generic"
 sound_fight   = "f_lion"
@@ -2936,7 +2931,7 @@ sound_fight_alt = "f_generic"
 build_cost    = 10
 pop_cost      = 0
 attack        = 3
-defense       = 1
+defense       = 2
 hitpoints     = 10
 firepower     = 1
 move_rate     = 1

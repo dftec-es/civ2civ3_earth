@@ -25,7 +25,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "2.6_2023_alpha"
+version = "2.6_2023_beta"
 
 ; Summary of the ruleset
 summary = _("\
@@ -794,10 +794,10 @@ colorlist =
 ; freeciv optional team names definition.
 ;
 ; names =
-;  _("Team 0"),
 ; _("Team 1"),
 ; _("Team 2"),
 ; _("Team 3"),
+; _("Team 4"),
 ; etc...
 
 [settings]
@@ -805,19 +805,19 @@ colorlist =
 ;
 set =
     { "name", "value"
-      "aifill", 6
+      "aifill", 8
       "generator", "FRACTAL"
       "topology", "WRAPX|WRAPY|ISO"
       "mapsize", "PLAYER"
-      "tilesperplayer", 100
+      "tilesperplayer", 75
       "tinyisles", "ENABLED"
       "temperature", 60
       "flatpoles", 0
       "separatepoles", "DISABLED"
       "startunits", "cwsx"
+      "techlevel", 1
       "citymindist", 3
       "trademindist", 3
-      "techlevel", 1
       "borders", "ENABLED"
       "foggedborders", "ENABLED"
       "restrictinfra", "ENABLED"
@@ -825,6 +825,7 @@ set =
       "occupychance", 100
       "razechance", 10
       "onsetbarbs", 120
+      "teamplacement", "DISABLED"
       "team_pooled_research", "DISABLED"
       "trading_tech", "DISABLED"
       "conquercost", 50
@@ -833,5 +834,4 @@ set =
       "techlossrestore", 50
       "revolentype", "RANDQUICK"
       "revolen", 3
-      "victories", "SPACERACE"
     }

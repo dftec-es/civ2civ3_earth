@@ -24,16 +24,27 @@ end
 
 signal.connect("city_destroyed", "city_destroyed_callback")
 
--- Place Bombardment marker when a unit bombard from that tile.
-function action_started_callback(action, actor, target)
-  if action:rule_name() == "Bombard"
-     and not actor.tile:has_extra("Bombardment") then
-     actor.tile:create_extra("Bombardment")
+-- Place a marker when a unit bombards from that tile.
+function action_started_unit_units_callback(action, actor, target)
+  if action:rule_name() == "Bombard" then
+    actor.tile:create_extra("Bombardment")
   end
   return false
 end
 
-signal.connect("action_started_unit_units", "action_started_callback")
+signal.connect("action_started_unit_units", "action_started_unit_units_callback")
+
+-- Place a marker when a unit enters marketplace.
+function action_started_unit_city_callback(action, actor, target)
+  if action:rule_name() == "Enter Marketplace" then
+    target.tile:create_extra("Goods")
+    -- Create a copy of the actor unit in the target city (replacing the actor that is destroyed by this action).
+    edit.create_unit(actor.owner, target.tile, actor.utype, 0, actor:get_homecity(), 0)
+  end
+  return false
+end
+
+signal.connect("action_started_unit_city", "action_started_unit_city_callback")
 
 -- Check if there is certain terrain in ANY CAdjacent tile.
 function adjacent_to(tile, terrain_name)

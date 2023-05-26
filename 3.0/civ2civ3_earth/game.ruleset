@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2023_alpha"
+version = "3.0_2023_beta"
 
 ; Summary of the ruleset
 summary = _("\
@@ -317,7 +317,7 @@ ui_name_investigate_city_spend_unit = _("%sInvestigate City (spends the unit)%s"
 ui_name_establish_trade_route = _("Establish Trade %sRoute%s")
 
 ; /* TRANS: Enter _Marketplace (100% chance of success). */
-ui_name_enter_marketplace = _("Enter %sMarketplace%s")
+ui_name_enter_marketplace = _("%sCancel Trade Routes (after end of turn)%s")
 
 ; /* TRANS: Help _build Wonder (100% chance of success). */
 ui_name_help_wonder = _("Help %sbuild Wonder%s")
@@ -420,7 +420,7 @@ actor_reqs    =
     { "type",         "name",       "range", "present"
       "UnitFlag",     "Diplomat",   "Local", TRUE
       "MinMoveFrags", "1",          "Local", TRUE
-      "DiplRel",      "Is Foreign", "Local", TRUE
+      "DiplRel",      "Is foreign", "Local", TRUE
       "UnitFlag",     "Spy",        "Local", FALSE
     }
 target_reqs  =
@@ -434,13 +434,14 @@ actor_reqs    =
     { "type",         "name",       "range"
       "UnitFlag",     "Spy",        "Local"
       "MinMoveFrags", "1",          "Local"
-      "DiplRel",      "Is Foreign", "Local"
+      "DiplRel",      "Is foreign", "Local"
     }
 target_reqs  =
     { "type",        "name",      "range", "present"
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
+; New
 [actionenabler_establish_embassy_explorer]
 action       = "Establish Embassy Stay"
 actor_reqs    =
@@ -460,7 +461,7 @@ actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Diplomat", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
-      "DiplRel", "Is Foreign", "Local", TRUE
+      "DiplRel", "Is foreign", "Local", TRUE
       "UnitFlag", "Spy", "Local", FALSE
     }
 
@@ -470,9 +471,10 @@ actor_reqs    =
     { "type",   "name", "range"
       "UnitFlag", "Spy", "Local"
       "MinMoveFrags", "1", "Local"
-      "DiplRel", "Is Foreign", "Local"
+      "DiplRel", "Is foreign", "Local"
     }
 
+; New
 [actionenabler_investigate_city_explorer]
 action       = "Investigate City"
 actor_reqs    =
@@ -482,6 +484,7 @@ actor_reqs    =
       "DiplRel", "Is foreign", "Local"
     }
 
+; New
 [actionenabler_steal_maps]
 action = "Steal Maps"
 actor_reqs    =
@@ -497,6 +500,7 @@ target_reqs  =
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
+; New
 [actionenabler_steal_maps_spy]
 action = "Steal Maps Escape"
 actor_reqs    =
@@ -650,6 +654,30 @@ actor_reqs    =
       "MinMoveFrags", "1", "Local", TRUE
     }
 
+; New: Enter Marketplace modified to cancel trade routes
+; (when a unit performs this action, an extra is placed by lua script,
+; and all the trade routes of the city are canceled at the end of the turn,
+; then the extra automatically disappears)
+[actionenabler_marketplace]
+action = "Enter Marketplace"
+actor_reqs    =
+    { "type",         "name",        "range",  "present"
+      "UnitFlag",     "TradeRoute",  "Local",  TRUE
+      "DiplRel",      "Is foreign",  "Local",  FALSE
+      "AI",           "Away",        "Player", FALSE
+      "AI",           "Novice",      "Player", FALSE
+      "AI",           "Easy",        "Player", FALSE
+      "AI",           "Normal",      "Player", FALSE
+      "AI",           "Hard",        "Player", FALSE
+      "AI",           "Cheating",    "Player", FALSE
+      "AI",           "Experimental", "Player", FALSE
+    }
+target_reqs    =
+    { "type",         "name",        "range",  "present"
+      "Good",         "Goods",       "City",   TRUE
+      "Extra",        "Goods",       "City",   FALSE
+    }
+
 [actionenabler_help_build_wonder]
 action = "Help Wonder"
 actor_reqs    =
@@ -684,6 +712,7 @@ actor_reqs    =
       "UnitFlag", "EvacuateFirst", "Local", FALSE
     }
 
+; New
 [actionenabler_capture]
 action = "Capture Units"
 actor_reqs    =
@@ -700,12 +729,12 @@ target_reqs    =
       "CityTile",  "Center",       "Local", FALSE
     }
 
-; Enable bombard from a stack, only for 1 unit per tile and per turn
+; New: Enable bombard, only for 1 unit per tile and per turn
 ; (when a unit bombards from a tile, a Bombardment extra is placed by lua script,
 ; and doesn't allow units to bombard from that tile again until next turn,
 ; when the extra automatically disappears)
-; Enabled for the AI, that will always try to bombard from a stack
-[actionenabler_bombard_stack]
+; Disabled for the AI (else AI won't use the regular attack), with some exceptions ("AI:...")
+[actionenabler_bombard]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
@@ -713,21 +742,6 @@ actor_reqs    =
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", FALSE
-      "Extra",        "Bombardment", "Local", FALSE
-    }
-
-; Enable bombard when attacker is alone
-; Disabled for the AI (else an alone AI won't use the normal attack), with some exceptions ("AI:...")
-[actionenabler_bombard_alone]
-action = "Bombard"
-actor_reqs    =
-    { "type",         "name",        "range", "present"
-      "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitState",    "Transported", "Local", FALSE
-      "MinMoveFrags", "1",           "Local", TRUE
-      "DiplRel",      "War",         "Local", TRUE
-      "MaxUnitsOnTile", "1",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
       "AI",           "Away",        "Player", FALSE
       "AI",           "Novice",      "Player", FALSE
@@ -736,6 +750,33 @@ actor_reqs    =
       "AI",           "Hard",        "Player", FALSE
       "AI",           "Cheating",    "Player", FALSE
       "AI",           "Experimental", "Player", FALSE
+    }
+
+; AI: Enable bombard from city
+[actionenabler_bombard_ai_from_city]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "DiplRel",      "War",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "CityTile",     "Center",      "Local", TRUE
+    }
+
+; AI: Enable bombard rather than tired attack
+; (if the remaining moves are lower than 1)
+[actionenabler_bombard_ai_tired]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "MinMoveFrags", "6",           "Local", FALSE
+      "DiplRel",      "War",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
     }
 
 ; AI: Enable bombard from land to sea (when attack is disabled)
@@ -834,33 +875,6 @@ actor_reqs    =
       "MinHitPoints", "30",          "Local", FALSE
     }
 
-; AI: Enable bombard rather than tired attack
-; (if the remaining moves are lower than 1)
-[actionenabler_bombard_ai_tired]
-action = "Bombard"
-actor_reqs    =
-    { "type",         "name",        "range", "present"
-      "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitState",    "Transported", "Local", FALSE
-      "MinMoveFrags", "1",           "Local", TRUE
-      "MinMoveFrags", "6",           "Local", FALSE
-      "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
-    }
-
-; AI: Enable bombard from city
-[actionenabler_bombard_ai_from_city]
-action = "Bombard"
-actor_reqs    =
-    { "type",         "name",        "range", "present"
-      "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitState",    "Transported", "Local", FALSE
-      "MinMoveFrags", "1",           "Local", TRUE
-      "DiplRel",      "War",         "Local", TRUE
-      "Extra",        "Bombardment", "Local", FALSE
-      "CityTile",     "Center",      "Local", TRUE
-    }
-
 [actionenabler_build_city_pioneer]
 action = "Found City"
 actor_reqs    =
@@ -899,7 +913,7 @@ actor_reqs    =
       "MinMoveFrags", "1", "Local", TRUE
     }
 
-; Diplomatic units can expel NonMil units while at peace
+; New: Diplomatic units can expel NonMil units while at peace
 ; (from domestic tiles)
 [actionenabler_expel_unit]
 action = "Expel Unit"
@@ -918,7 +932,7 @@ target_reqs    =
       "UnitState",     "OnDomesticTile", "Local", FALSE
     }
 
-; Diplomatic units can expel other diplomatic units
+; New: Diplomatic units can expel other diplomatic units
 ; (outside bases or domestic tiles)
 [actionenabler_expel_diplomat]
 action = "Expel Unit"
@@ -936,7 +950,7 @@ target_reqs    =
       "ExtraFlag",     "DiplomatDefense", "Local", FALSE
     }
 
-; Diplomatic units can expel unreachable units
+; New: Diplomatic units can expel unreachable units
 ; (outside bases or domestic tiles)
 [actionenabler_expel_unreachable]
 action = "Expel Unit"
@@ -1000,7 +1014,7 @@ actor_reqs    =
       "DiplRel",       "War",              "Local", TRUE
     }
 
-; Only_Land: Can not attack against oceanic tiles, except for bombarding
+; New Only_Land: Can not attack against oceanic tiles, except for bombarding
 ; Can not attack against unpassable terrain (not suitable for wheeled units)
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_only_land]
@@ -1019,7 +1033,7 @@ target_reqs    =
       "TerrainFlag",  "NoWheeled",    "Local", FALSE
     }
 
-; Only_Land: Can attack against passable terrain
+; New Only_Land: Can attack against passable terrain
 ; (with extra suitable for wheeled units)
 [actionenabler_attack_only_land_extra]
 action = "Attack"
@@ -1036,7 +1050,7 @@ target_reqs    =
       "ExtraFlag",    "ForWheeled",   "Local", TRUE
     }
 
-; Only_Sea: Can attack only oceanic tiles, except for bombarding
+; New Only_Sea: Can attack only oceanic tiles, except for bombarding
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_only_sea]
 action = "Attack"
@@ -1053,7 +1067,7 @@ target_reqs    =
       "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
-; Only_Sea: Can attack city tiles
+; New Only_Sea: Can attack city tiles
 [actionenabler_attack_only_sea_city]
 action = "Attack"
 actor_reqs    =
@@ -1069,7 +1083,7 @@ target_reqs    =
       "CityTile",     "Center",       "Local", TRUE
     }
 
-; HPFull: Can attack only if the attacker is undamaged
+; New HPFull: Can attack only if the attacker is undamaged
 ; (can attack only from native tile, ignoring AttFromNonNative or Marines)
 [actionenabler_attack_hp_10]
 action = "Attack"
@@ -1503,7 +1517,7 @@ settings =
 ; When are goods for the trade route chosen.
 ; "Leaving" - Goods to carry are assigned to unit when it`s built, or it changes homecity
 ; "Arrival" - Goods are chosen when trade route is established, when unit arrives to destination
-goods_selection = "Leaving"
+goods_selection = "Arrival"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -1536,6 +1550,12 @@ goods_selection = "Leaving"
 
 [goods_good]
 name           = _("Goods")
+; Cancel trade routes when this extra is placed in the city by LUA script
+reqs =
+    { "type", "name", "range", "present"
+      "Extra", "Goods", "City", FALSE
+    }
+flags = "Bidirectional", "Depletes"
 
 [playercolors]
 background.r = 86
@@ -1597,27 +1617,36 @@ colorlist =
 ;
 set =
     { "name", "value"
-      "aifill", 6
+      "aifill", 8
       "generator", "FRACTAL"
       "topology", "WRAPX|WRAPY|ISO"
       "mapsize", "PLAYER"
-      "tilesperplayer", 100
+      "tilesperplayer", 75
       "tinyisles", "ENABLED"
       "temperature", 60
       "flatpoles", 0
       "separatepoles", "DISABLED"
       "startunits", "cwsx"
+      "techlevel", 1
       "citymindist", 3
       "trademindist", 3
-      "techlevel", 1
+      "tradeworldrelpct", 50
+      "trade_revenue_style", "CLASSIC"
       "borders", "ENABLED"
       "foggedborders", "ENABLED"
+      "happyborders", "NATIONAL"
+      "homecaughtunits", "ENABLED"
       "restrictinfra", "ENABLED"
       "unreachableprotects", "DISABLED"
       "autoattack", "ENABLED"
+      "killstack", "ENABLED"
+      "killcitizen", "ENABLED"
       "occupychance", 100
       "razechance", 10
+      "disasters", 10
+      "animals", 20
       "onsetbarbs", 120
+      "teamplacement", "DISABLED"
       "team_pooled_research", "DISABLED"
       "trading_tech", "DISABLED"
       "conquercost", 50
@@ -1625,7 +1654,11 @@ set =
       "techleak", 50
       "techlossforgiveness", 50
       "techlossrestore", 50
+      "techlost_donor", 0
+      "techlost_recv", 0
+      "techpenalty", 100
+      "multiresearch", "DISABLED"
       "revolentype", "RANDQUICK"
       "revolen", 3
-      "victories", "SPACERACE"
+      "phasemode", "ALL"
     }

@@ -62,14 +62,16 @@ Ignores the bonus to defense of sea units on Deep Ocean tiles.\
     _("Tank"),
 ; /* xgettext:no-c-format */
 _("\
-Gets 50% defensive bonus when attacked by another Tank.\
+Gets 25% defensive bonus when attacked by another Tank.\
 ")
     _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
     _("HelpWonder")
     _("Capturer"),   _("Can capture some enemy units.")
     _("Capturable"), _("Can be captured by some enemy units.")
-    _("Bombarder"), _("Can bombard, only if no other unit bombarded from the same tile this turn.")
+    _("Bombarder"), _("\
+Can bombard, only if no other unit bombarded from the same tile this turn.\
+")
     _("Cities")
     _("AddToCity")
     _("Nuclear")
@@ -208,9 +210,8 @@ flags         = "TerrainSpeed", "CanOccupyCity", "BuildAnywhere",
 name          = _("?unitclass:Small Land")
 min_speed     = 1
 hp_loss_pct   = 0
-flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom",
-                "ZOC", "CanFortify", "CanPillage", "TerrainDefense",
-                "DoesntOccupyTile", "Airliftable"
+flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom", "ZOC",
+                "CanFortify", "TerrainDefense", "DoesntOccupyTile", "Airliftable"
 
 [unitclass_land_big]
 ; /* TRANS: Unit class: used adjectivally */
@@ -531,7 +532,6 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
-city_slots    = 0
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity",
                 "Cities", "Fortress", "NoAutoAtt"
 ; No veteran levels (level name is never displayed)
@@ -576,7 +576,6 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
-city_slots    = 0
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity",
                 "Capturable", "Fortress", "NoAutoAtt"
 ; No veteran levels (level name is never displayed)
@@ -620,7 +619,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC",
                 "Fortress", "NoAutoAtt"
 ; No veteran levels (level name is never displayed)
@@ -664,7 +662,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Transform",
                 "Fortress", "NoAutoAtt"
 veteran_names = _("beginner"), _("seasoned"), _("senior")
@@ -712,9 +709,8 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
-roles         = ""
+roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game. It is the weakest \
 offensive unit.\
@@ -745,7 +741,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
@@ -777,7 +772,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 1
 flags         = "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
@@ -810,7 +804,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "OneAttack", "Marines", "Capturer",
                 "Iron", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
@@ -844,7 +837,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "OneAttack", "Capturer", "Iron", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
@@ -877,7 +869,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Niter", "Fortress", "NoAutoAtt"
@@ -913,7 +904,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
@@ -950,7 +940,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
@@ -987,13 +976,12 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
-city_slots    = 0
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer", "Bombarder",
                 "Fortress", "NoAutoAtt"
-roles         = ""
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
@@ -1028,7 +1016,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
@@ -1072,13 +1059,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
                 "Rubber", "Fortress", "NoAutoAtt"
-roles         = ""
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
 airbase, or airstrip, Paratroopers who have not expended any \
@@ -1116,7 +1102,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
@@ -1152,7 +1137,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 flags         = "Bombarder", "Only_Land", "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
@@ -1189,7 +1173,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "Capturer", "Horses", "NoAutoAtt"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
@@ -1222,7 +1205,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "Only_Land", "Capturer", "Horses", "NoAutoAtt"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
@@ -1259,7 +1241,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "Capturer", "Ivory", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
@@ -1292,7 +1273,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "Capturer", "Iron", "Horses", "NoAutoAtt"
 roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
@@ -1327,7 +1307,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 flags         = "Capturer", "Iron", "Horses", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit",
                 "HutTech", "BarbarianTech", "BarbarianBuildTech", "Hunter"
@@ -1360,7 +1339,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 flags         = "Capturer", "Bombarder", "Horses", "Niter", "NoAutoAtt"
 roles         = "AttackFastStartUnit", "BarbarianBuildTech", "Hunter"
@@ -1393,7 +1371,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 flags         = "Capturer", "Bombarder", "Horses", "Niter", "NoAutoAtt"
 roles         = "AttackFastStartUnit", "Hunter"
@@ -1426,12 +1403,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 bonuses       =
    { "flag", "type", "value", "quiet"
-     "Tank", "DefenseMultiplier", 2, TRUE
-     "Tank", "DefenseDivider", 1, TRUE
+     "Tank", "DefenseMultiplier", 4, TRUE
+     "Tank", "DefenseDivider", 3, TRUE
    }
 flags         = "Bombarder", "Only_Land", "Tank",
                 "Iron_Oil", "Uranium", "NoAutoAtt"
@@ -1469,7 +1445,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 1
 flags         = "Bombarder", "Only_Land", "NoAutoAtt"
 roles         = "AttackStrongStartUnit"
@@ -1509,7 +1484,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 flags         = "Bombarder", "Only_Land",
                 "Iron", "Niter", "NoAutoAtt"
@@ -1546,7 +1520,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 flags         = "CityBuster", "Bombarder", "Only_Land",
                 "Iron", "NoAutoAtt"
@@ -1582,7 +1555,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 flags         = "CityBuster", "Bombarder", "Only_Land",
                 "Iron_Oil", "Rubber", "NoAutoAtt"
@@ -1607,7 +1579,7 @@ sound_fight_alt = "f_generic"
 build_cost    = 60
 pop_cost      = 0
 attack        = 4
-defense       = 5
+defense       = 4
 hitpoints     = 20
 firepower     = 1
 move_rate     = 10
@@ -1618,12 +1590,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
-                "Provoking", "Iron_Oil", "Aluminum"
-roles         = ""
+                "Iron_Oil", "Aluminum"
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fighters are your first airborne units. They can move anywhere and \
 attack any unit.\
@@ -1659,12 +1630,10 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 4
 targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
-                "HPFull", "HP30", "HasNoZOC", "Provoking",
-                "Iron_Oil", "Aluminum", "NoAutoAtt"
+                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may only attack ground \
@@ -1701,12 +1670,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 cargo         = "Land"
 targets       = "Sub"
 flags         = "AirAttacker", "Bombarder", "AirBomber", "HPFull", "HP30",
-                "HasNoZOC", "Provoking", "Iron_Oil", "Rubber", "NoAutoAtt"
+                "HasNoZOC", "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
 Helicopters can transport one military land unit; while some troops \
@@ -1732,7 +1700,7 @@ sound_fight_alt = "f_generic"
 build_cost    = 80
 pop_cost      = 0
 attack        = 8
-defense       = 9
+defense       = 8
 hitpoints     = 20
 firepower     = 1
 move_rate     = 14
@@ -1743,12 +1711,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 targets       = "Sub", "Air", "Helicopter"
-flags         = "AirAttacker", "Bombarder", "HPFull", "HP20",
-                "HasNoZOC", "Provoking", "Iron_Oil", "Aluminum"
-roles         = ""
+flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
+                "Iron_Oil", "Aluminum"
+roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement radius.\
 ")
@@ -1778,12 +1745,10 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 4
 targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
-                "HPFull", "HP30", "HasNoZOC", "Provoking",
-                "Iron_Oil", "Aluminum", "NoAutoAtt"
+                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement radius.\
@@ -1811,11 +1776,10 @@ move_rate     = 3
 vision_radius_sq = 2
 transport_cap = 2
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 cargo         = "Land", "Small Land", "Merchant"
 flags         = "NoBuild", "BadCityDefender", "HasNoZOC", "NoAutoAtt"
 roles         = "Ferryboat", "FerryStartUnit"
@@ -1848,11 +1812,10 @@ move_rate     = 3
 vision_radius_sq = 2
 transport_cap = 2
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 cargo         = "Land", "Small Land", "Merchant"
 flags         = "BadCityDefender", "HasNoZOC", "NoAutoAtt"
 roles         = "Ferryboat", "FerryStartUnit"
@@ -1883,14 +1846,13 @@ move_rate     = 3
 vision_radius_sq = 2
 transport_cap = 3
 fuel          = 0
-uk_happy      = 1
+uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 cargo         = "Land", "Small Land", "Merchant"
-flags         = "BadCityDefender", "Only_Native_Attack",
-                "HasNoZOC", "Capturable", "NoAutoAtt"
+flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC",
+                "Capturable", "NoAutoAtt"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Caravel is a sailing ship that can enter any ocean tile.\
@@ -1921,22 +1883,21 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 cargo         = "Land", "Small Land", "Big Land", "Merchant"
-flags         = "BadCityDefender", "HasNoZOC", "Capturable",
+flags         = "BadCityDefender", "HasNoZOC", "NonMil", "Capturable",
                 "Iron", "Niter", "NoAutoAtt"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Galleon is a pure transport ship, the first which can transport \
-large wheeled units. It cannot attack other ships, though it may still \
-defend itself when attacked.\
+large wheeled units. It cannot attack other ships, though it may \
+still defend itself when attacked.\
 ")
 
 [unit_frigate]
 name          = _("Frigate")
 class         = "Sea"
 tech_req      = "Navigation"
-obsolete_by   = "Destroyer"
+obsolete_by   = "Ironclad"
 graphic       = "u.frigate"
 graphic_alt   = "-"
 sound_move    = "m_frigate"
@@ -1957,7 +1918,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 targets       = "Sub"
 flags         = "BadCityDefender", "Capturer", "Bombarder",
@@ -1993,7 +1953,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 targets       = "Sub"
 flags         = "BadCityDefender", "Bombarder",
@@ -2028,7 +1987,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 targets       = "Sub"
 bonuses       =
@@ -2072,7 +2030,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 targets       = "Sub"
 flags         = "BadCityDefender", "Bombarder",
@@ -2107,7 +2064,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 targets       = "Sub"
 bonuses       =
@@ -2147,10 +2103,9 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 3
 targets       = "Sub"
-flags         = "BadCityDefender", "Bombarder", "Iron", "NoAutoAtt"
+flags         = "BadCityDefender", "Bombarder", "Iron_Oil", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The Battleship is the supreme naval unit with excellent offensive and \
@@ -2182,7 +2137,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 bombard_rate  = 2
 cargo         = "Missile"
 bonuses       =
@@ -2225,7 +2179,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 cargo         = "Land", "Air", "Missile", "Helicopter"
 flags         = "BadCityDefender", "HasNoZOC",
                 "Iron_Oil", "Aluminum", "NoAutoAtt"
@@ -2267,9 +2220,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-city_slots    = 0
 cargo         = "Land", "Small Land", "Big Land", "Merchant"
-flags         = "Settlers", "BadCityDefender", "HasNoZOC",
+flags         = "Settlers", "BadCityDefender", "HasNoZOC", "NonMil",
                 "Iron", "NoAutoAtt"
 veteran_names = _("green"), _("regular"), _("veteran"), _("hardened"), _("elite")
 veteran_raise_chance      = 50, 33, 25, 20, 0
@@ -2314,7 +2266,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
 flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC",
@@ -2350,7 +2301,6 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
 flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "NoAutoAtt"
@@ -2411,9 +2361,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
-flags         = "Partial_Invis", "Diplomat", "IgZOC", "NonMil", "HasNoZOC",
-                "Cant_Pillage", "NoAutoAtt"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "NoAutoAtt"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
   _("?diplomatic_rank:attaché"),
@@ -2536,9 +2484,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
-flags         = "Partial_Invis", "Diplomat", "IgZOC", "NonMil", "HasNoZOC",
-                "Cant_Pillage", "Spy", "NoAutoAtt"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy",
+                "NoAutoAtt"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2692,9 +2639,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify",
-                "Cant_Pillage", "NoAutoAtt"
+                "NoAutoAtt"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for mapping \
@@ -2739,7 +2685,6 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-city_slots    = 0
 flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy",
                 "EvacuateFirst", "Unbribable", "GameLoss", "Unique",
                 "NoAutoAtt"
@@ -2781,7 +2726,6 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-city_slots    = 0
 flags         = "IgZOC", "NonMil", "Unbribable", "EvacuateFirst",
                 "SuperSpy", "NoHome", "NoBuild", "NoAutoAtt"
 ; No veteran levels (level name is never displayed)
@@ -2826,8 +2770,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
-flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "NoAutoAtt"
+flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \
@@ -2841,7 +2784,7 @@ class         = "Small Land"
 tech_req      = "None"
 obsolete_by   = "None"
 graphic       = "u.snake"
-graphic_alt   = "u.warriors"
+graphic_alt   = "u.explorer"
 sound_move    = "m_snake"
 sound_move_alt = "m_generic"
 sound_fight   = "f_snake"
@@ -2860,7 +2803,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "Partial_Invis", "HasNoZOC", "IgZOC", "NoAutoAtt"
 roles         = ""
@@ -2893,7 +2835,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -2926,7 +2867,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -2959,7 +2899,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -2992,7 +2931,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -3025,7 +2963,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -3058,7 +2995,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -3072,7 +3008,7 @@ class         = "Small Land"
 tech_req      = "None"
 obsolete_by   = "None"
 graphic       = "u.lion"
-graphic_alt   = "u.archers"
+graphic_alt   = "u.legion"
 sound_move    = "m_lion"
 sound_move_alt = "m_generic"
 sound_fight   = "f_lion"
@@ -3080,7 +3016,7 @@ sound_fight_alt = "f_generic"
 build_cost    = 10
 pop_cost      = 0
 attack        = 3
-defense       = 1
+defense       = 2
 hitpoints     = 10
 firepower     = 1
 move_rate     = 1
@@ -3091,7 +3027,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -3124,7 +3059,6 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "NoAutoAtt"
 roles         = ""
@@ -3157,7 +3091,6 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-city_slots    = 0
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "HasNoZOC", "NoVeteran", "NoAutoAtt"
 roles         = ""

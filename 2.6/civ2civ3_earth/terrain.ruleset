@@ -1568,7 +1568,7 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
@@ -1599,7 +1599,7 @@ reqs           =
       "Tech", "Construction", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Fortress", "Local", TRUE, FALSE
-      "Terrain", "Mountains", "Local", FALSE, FALSE
+      "Extra", "River", "Local", FALSE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1607,14 +1607,14 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 flags          = "NativeTile"
 helptext       = _("\
 Fortresses are more permanent forts; construction on them can only begin \
-once the underlying fort is complete. Forts on Mountains cannot be \
+once the underlying fort is complete. Forts on River tiles cannot be \
 upgraded to Fortresses.\
 "),
 ; /* xgettext:no-c-format */
@@ -1653,7 +1653,7 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress"
@@ -1692,7 +1692,7 @@ reqs           =
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
-      "Terrain", "Mountains", "Local", FALSE, FALSE
+      "Extra", "River", "Local", FALSE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1700,14 +1700,14 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress"
 flags          = "Refuel"
 helptext       = _("\
 Airbases are more permanent airstrips; construction on them can only \
-begin once the underlying airstrip is complete. Airstrips on Mountains \
+begin once the underlying airstrip is complete. Airstrips on River tiles \
 cannot be upgraded to Airbases.\
 "),
 ; /* xgettext:no-c-format */
@@ -1789,7 +1789,7 @@ _("\
 Every naval unit adjacent to a naval mine (or on the same tile) gets \
 the same defense as if it were in Deep Ocean (+50% against other sea \
 units, but not against submarines), and at the same time it takes some \
-damage (-4 hit points) at the end of each turn.\
+damage (-6 hit points) at the end of each turn.\
 ")
 
 [extra_ruins]
@@ -1818,8 +1818,7 @@ removal_time   = 0
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Ruins mark the former site of a city that was destroyed or abandoned. \
-They have no effect on gameplay other than giving 1 trade bonus for the \
-tile with the ruins.\
+They have no effect on gameplay.\
 ")
 
 [extra_road]
@@ -1986,8 +1985,8 @@ rmcauses       = "Pillage"
 graphic        = "road.canal"
 graphic_alt    = "road.river"
 activity_gfx   = "unit.canal"
-act_gfx_alt    = "unit.canal"
-act_gfx_alt2   = "unit.road"
+act_gfx_alt    = "unit.road"
+act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
@@ -2009,10 +2008,11 @@ removal_time   = 0
 native_to      = "Trireme", "Sea", "Sub"
 flags          = "NativeTile"
 helptext          = _("\
-Canals allow ships to travel through land tiles. Canals can be built \
-on low land tiles only, and not far inland. Every canal tile must be \
-cardinally adjacent to oceanic tile, so the maximum length of canal \
-through an island is two tiles, from one coast tile to the other.\
+Allows ships to travel through land tiles. Canals can be built on \
+low land tiles only (no hills, mountains or glaciers). Every canal \
+tile must be cardinally adjacent to an oceanic tile, so the maximum \
+length of a canal through an island is two tiles, from one coast tile \
+to the other.\
 ")
 
 [extra_wonder]

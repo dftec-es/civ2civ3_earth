@@ -48,7 +48,6 @@ extra_flags =
         _("Diplomatic units get a 25% defense bonus in diplomatic fights.")
     _("IrrigationSource")
     _("AllowsFarmlandOnDesert")
-    _("Coal_Peat_Oil")
     _("ForWheeled"), _("Suitable for wheeled units.")
   }
 
@@ -1553,7 +1552,7 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
@@ -1584,7 +1583,7 @@ reqs           =
       "Tech", "Construction", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Fortress", "Local", TRUE, FALSE
-      "Terrain", "Mountains", "Local", FALSE, FALSE
+      "Extra", "River", "Local", FALSE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1592,7 +1591,7 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
@@ -1600,7 +1599,7 @@ hidden_by      = "Castle"
 flags          = "NativeTile", "ForWheeled", "DiplomatDefense"
 helptext       = _("\
 Fortresses are more permanent forts; construction on them can only begin \
-once the underlying fort is complete. Forts on Mountains cannot be \
+once the underlying fort is complete. Forts on River tiles cannot be \
 upgraded to Fortresses.\
 "),
 ; /* xgettext:no-c-format */
@@ -1643,10 +1642,10 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 ;unit_seen      = "Hidden"
-native_to      = "Land", "Small Land", "Big Land"
+native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 flags          = "NativeTile", "ForWheeled", "DiplomatDefense", "NoStackDeath"
 helptext       = _("\
@@ -1685,7 +1684,7 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress", "Castle"
@@ -1724,7 +1723,7 @@ reqs           =
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
-      "Terrain", "Mountains", "Local", FALSE, FALSE
+      "Extra", "River", "Local", FALSE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1732,14 +1731,14 @@ rmreqs         =
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
 build_time     = 0
-build_time_factor = 2
+build_time_factor = 1
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress", "Castle"
 flags          = "Refuel", "ParadropFrom"
 helptext       = _("\
 Airbases are more permanent airstrips; construction on them can only \
-begin once the underlying airstrip is complete. Airstrips on Mountains \
+begin once the underlying airstrip is complete. Airstrips on River tiles \
 cannot be upgraded to Airbases.\
 "),
 ; /* xgettext:no-c-format */
@@ -1821,7 +1820,7 @@ _("\
 Every naval unit adjacent to a naval mine (or on the same tile) gets \
 the same defense as if it were in Deep Ocean (+50% against other sea \
 units, but not against submarines). If the unit is outside its own \
-national border, it also takes some damage (-4 hit points) at the end \
+national border, it also takes some damage (-6 hit points) at the end \
 of each turn.\
 ")
 
@@ -1851,8 +1850,7 @@ removal_time   = 0
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Ruins mark the former site of a city that was destroyed or abandoned. \
-They have no effect on gameplay other than giving 1 trade bonus for the \
-tile with the ruins.\
+They have no effect on gameplay.\
 ")
 
 [extra_road]
@@ -2018,8 +2016,8 @@ rmcauses       = "Pillage"
 graphic        = "road.canal"
 graphic_alt    = "road.river"
 activity_gfx   = "unit.canal"
-act_gfx_alt    = "unit.canal"
-act_gfx_alt2   = "unit.road"
+act_gfx_alt    = "unit.road"
+act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
@@ -2031,6 +2029,7 @@ reqs           =
       "Terrain", "Mountains", "Local", FALSE, FALSE
       "TerrainClass", "Oceanic", "CAdjacent", TRUE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
+      "UnitState", "OnDomesticTile", "Local", TRUE, FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -2041,10 +2040,11 @@ removal_time   = 0
 native_to      = "Trireme", "Sea", "Sub"
 flags          = "NativeTile"
 helptext          = _("\
-Canals allow ships to travel through land tiles. Canals can be built \
-on low land tiles only, and not far inland. Every canal tile must be \
-cardinally adjacent to oceanic tile, so the maximum length of canal \
-through an island is two tiles, from one coast tile to the other.\
+Allows ships to travel through land tiles. Canals can be built on \
+low land tiles (no hills, mountains or glaciers), and only inside \
+your national borders. Every canal tile must be cardinally adjacent \
+to an oceanic tile, so the maximum length of a canal through an island \
+is two tiles, from one coast tile to the other.\
 ")
 
 [extra_wonder]
@@ -2113,7 +2113,26 @@ buildable      = FALSE
 disappearance_chance = 10000
 helptext       = _("\
 Appears on a tile when a unit bombards from it. It prevents other \
-units in a stack to bombard from the same tile until the next turn.\
+units to bombard from the same tile until the next turn.\
+")
+
+[extra_goods]
+name           = _("Goods")
+category       = "Nuisance"
+;causes         = "Appear"
+rmcauses       = "Disappear"
+graphic        = "ts.grassland_resources"
+graphic_alt    = "-"
+activity_gfx   = "None"
+act_gfx_alt    = "-"
+act_gfx_alt2   = "-"
+rmact_gfx      = "None"
+rmact_gfx_alt  = "-"
+buildable      = FALSE
+disappearance_chance = 10000
+helptext       = _("\
+Cancels all the trade routes of the city at the end of the turn, and \
+then it disappears.\
 ")
 
 ; Strategic resources are added to the map by lua script (chance 200/10000)
@@ -2257,7 +2276,6 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-flags          = "Coal_Peat_Oil"
 
 [extra_buffalo]
 name           = _("Buffalo")
@@ -2284,7 +2302,6 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-flags          = "Coal_Peat_Oil"
 
 [extra_corn]
 name           = _("Corn")
@@ -2508,6 +2525,7 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
+; No longer used
 [extra_bonus]
 name           = _("Resources")
 category       = "Resource"
@@ -2637,7 +2655,6 @@ act_gfx_alt    = "-"
 act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
-flags          = "Coal_Peat_Oil"
 
 [extra_fish]
 name           = _("Fish")

@@ -78,7 +78,7 @@ helptext	= _("\
 Allows a city to produce veteran air units (including helicopters and \
 missiles). \
 Also, damaged air units (again, including helicopters) which stay in \
-town for one full turn without moving are completely restored.\
+town for one full turn without moving recover half of their hit points.\
 "), _("\
 Two cities with Airports can airlift one unit per turn (including \
 aircraft). Airlifting instantly transports the unit from one city \
@@ -253,8 +253,9 @@ With a Barracks, each new land unit built in a city will automatically \
 have Veteran status, which means that its attack and defense strengths \
 are increased by 50%.\
 "), _("\
-Also, damaged land units which stay in town for one full turn \
-without moving are completely restored.\
+Also, damaged land units which stay in town for one full turn without \
+moving recover half of their hit points. If there is a Hospital also \
+present in the city, the units are completely restored.\
 ")
 
 [building_barracks_ii]
@@ -282,8 +283,9 @@ With a Barracks, each new land unit built in a city will automatically \
 have Veteran status, which means that its attack and defense strengths \
 are increased by 50%.\
 "), _("\
-Also, damaged land units which stay in town for one full turn \
-without moving are completely restored.\
+Also, damaged land units which stay in town for one full turn without \
+moving recover half of their hit points. If there is a Hospital also \
+present in the city, the units are completely restored.\
 ")
 
 [building_barracks_iii]
@@ -309,8 +311,9 @@ With a Barracks, each new land unit built in a city will automatically \
 have Veteran status, which means that its attack and defense strengths \
 are increased by 50%.\
 "), _("\
-Also, damaged land units which stay in town for one full turn \
-without moving are completely restored.\
+Also, damaged land units which stay in town for one full turn without \
+moving recover half of their hit points. If there is a Hospital also \
+present in the city, the units are completely restored.\
 ")
 
 [building_cathedral]
@@ -359,12 +362,17 @@ sound		= "b_city_walls"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-City Walls make it easier to defend a city. They add a +100% bonus to the \
-intrinsic defense strength of units within the city against land units \
-(that is a two-thirds increase for small cities, or a one-half increase \
-for cities larger than size 8), but are ineffective against airborne and \
-sea units. City Walls also prevent the loss of population which occurs \
-when a defending unit is defeated by a land unit.\
+City Walls make it easier to defend a city. They add a +100% bonus to \
+the defense strength of units within the city against land units, and \
+prevents the loss of population which occurs when a defending unit is \
+defeated by a land unit.\
+"),
+; /* xgettext:no-c-format */
+_("\
+Every city has a defense bonus of +50% against land and sea units, and \
+the bonus is +100% if the city is larger than size 8. This bonus is \
+added to the City Walls, so the total defense bonus against land units \
+can reach +200%.\
 ")
 
 [building_coastal_defense]
@@ -388,10 +396,15 @@ sound		= "b_coastal_defense"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-Gives a +100% bonus to the intrinsic defense strength of units within \
-a city when defending against enemy ships. For small cities the defense \
-strength is doubled by this improvement; for cities larger than size 8, \
-it is increased by two-thirds.\
+Gives a +100% bonus to the defense strength of units within a city \
+when defending against enemy ships.\
+"),
+; /* xgettext:no-c-format */
+_("\
+Every city has a defense bonus of +50% against land and sea units, and \
+the bonus is +100% if the city is larger than size 8. This bonus is \
+added to the Coastal Defense, so the total defense bonus against sea \
+units can reach +200%.\
 ")
 
 [building_colosseum]
@@ -530,9 +543,6 @@ helptext	= _("\
 Gives one extra food resource on Ocean tiles (but not Lakes). Together \
 with a Supermarket, it gives one extra food on Deep Ocean tiles too. \
 The city needs to be coastal to build this improvement.\
-"), _("\
-Also, damaged sea units which stay in town for one full turn without \
-moving recover half of its hit points.\
 ")
 
 [building_hospital]
@@ -563,7 +573,8 @@ Together with a Sewer System, it allows a city to grow without a size \
 limit.\
 "), _("\
 Also, damaged land units (non wheeled) which stay in town for one \
-full turn without moving recover half of its hit points.\
+full turn without moving recover half of their hit points. If there is \
+a Barracks also present in the city, the units are completely restored.\
 ")
 
 [building_hydro_plant]
@@ -826,8 +837,9 @@ by rebuilding it in another city.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Under Despotism the city containing the palace gains a +75% bonus to \
-luxury production, and under Monarchy a +50% bonus to luxury production.\
+The city containing the palace gains a +75% bonus to luxury production \
+under a Tribal government, a +75% bonus to gold production under \
+Despotism, and a +50% bonus to gold and luxury production under Monarchy.\
 ")
 
 [building_ecclesiastical_palace]
@@ -863,8 +875,9 @@ stationed in the city, or sabotage your buildings.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Under Despotism the city containing the palace gains a +75% bonus to \
-luxury production, and under Monarchy a +50% bonus to luxury production.\
+The city containing the palace gains a +75% bonus to luxury production \
+under a Tribal government, a +75% bonus to gold production under \
+Despotism, and a +50% bonus to gold and luxury production under Monarchy.\
 "), _("\
 The city has no other benefits of the primary capital.\
 ")
@@ -911,8 +924,9 @@ sabotage	= 100
 sound		= "b_port_facility"
 sound_alt	= "b_generic"
 helptext	= _("\
-Allows a city to build veteran sea units. Also, damaged sea units which \
-stay in town for one full turn without moving are completely restored.\
+Allows a city to build veteran sea units. Also, damaged sea units \
+which stay in town for one full turn without moving recover half of \
+their hit points.\
 ")
 ; Includes Galleys, but not worth mentioning explicitly as unlikely
 ; to happen
@@ -1026,9 +1040,16 @@ upkeep		= 2
 sabotage	= 100
 sound		= "b_sam_battery"
 sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
 helptext	= _("\
-Doubles the intrinsic defense strength of units within a city \
+Gives a +100% bonus to the defense strength of units within a city \
 when defending against aircraft (including helicopters).\
+"),
+; /* xgettext:no-c-format */
+_("\
+A city larger than size 8 has a defense bonus of +50% against air and \
+missile units, which is added to the bonus from the SAM Battery, so the \
+total defense bonus against aircraft units can reach +150%.\
 ")
 
 [building_sdi_defense]
@@ -1049,13 +1070,20 @@ upkeep		= 3
 sabotage	= 100
 sound		= "b_sdi_defense"
 sound_alt	= "b_generic"
+; /* xgettext:no-c-format */
 helptext	= _("\
 Protects a city and its environs (up to 2 tiles away) from attacks \
 by other nations' Nuclear units. A Nuclear unit not owned by you or a \
 teammate which attacks a city with SDI Defense, or attacks a unit (or is \
 deliberately exploded) within range, is shot down and simply has no effect. \
-Also, doubles the intrinsic defense strength of units in the city when \
-defending against conventional missiles.\
+Also, gives a +100% bonus to the defense strength of units in the city \
+when defending against conventional missiles.\
+"),
+; /* xgettext:no-c-format */
+_("\
+A city larger than size 8 has a defense bonus of +50% against air and \
+missile units, which is added to the bonus from the SDI Defense, so the \
+total defense bonus against missile units can reach +150%.\
 ")
 
 [building_sewer_system]
@@ -1082,8 +1110,9 @@ Increases the size limit of a city by 8, and further reduces the chance \
 of a plague (by 30% of the base chance). Together with a Hospital, \
 it allows a city to grow without a size limit.\
 "), _("\
-A Sewer System is required for a city to grow larger than size 16: up \
-to size 20 with an Aqueduct, or unlimited with a Hospital.\
+A Sewer System is required for a city to grow larger than size 16, up \
+to size 20 together with an Aqueduct, or unlimited together with a \
+Hospital.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1589,11 +1618,10 @@ sound		= "w_great_wall"
 sound_alt	= "w_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-Increases the defense of all your cities by adding a +50% bonus to \
-its units' intrinsic defense strength against land units (this is \
-cumulative with City Walls only in cities of the same continent where \
-this wonder is built), and preventing the loss of population which \
-occurs when a defending unit is defeated by a land unit.\
+Adds a +50% bonus to the city defense against land units, and prevents \
+the loss of population which occurs when a defending unit is defeated \
+by a land unit, in every city of the same continent where this wonder \
+is built.\
 ")
 
 [building_hanging_gardens]
@@ -1711,11 +1739,9 @@ sabotage	= 0
 sound		= "w_king_richards_crusade"
 sound_alt	= "w_generic"
 helptext	= _("\
-Increases by 20 the base number of cities that your empire can support \
-before the size of the empire starts to cause additional unhappy citizens. \
-As the empire size threshold can vary from 8 (when this wonder is \
-available), up to 20 when all the governments have been discovered, \
-this wonder may prevent 3, 2, or at least 1 unhappy citizen per city.\
+Doubles the base number of cities that your empire can support before \
+they start to cause additional unhappy citizens -- in other words, it \
+prevents 1 unhappy citizen per city caused by the size of your empire.\
 "), _("\
 The chance of a land unit getting the next veteran level after a battle \
 increases by half.\
@@ -1833,7 +1859,7 @@ sound		= "w_marco_polos_embassy"
 sound_alt	= "w_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-Increases the trade income of all your trade routes by 25%.\
+Increases the trade income of all your trade routes by 50%.\
 "), _("\
 The city where it is built can establish one extra trade route.\
 ")
@@ -2051,9 +2077,8 @@ sabotage	= 0
 sound		= "w_sun_tzus_war_academy"
 sound_alt	= "w_generic"
 helptext	= _("\
-All your new military land units start with an additional veteran level \
-(this is cumulative with Barracks only in cities of the same continent \
-where this wonder is built).\
+All your new military land units start with an additional veteran level, \
+in cities of the same continent where this wonder is built.\
 ")
 
 [building_united_nations]
@@ -2074,6 +2099,11 @@ sabotage	= 0
 sound		= "w_united_nations"
 sound_alt	= "w_generic"
 helptext	= _("\
+Every player gets an embassy with every other player.\
+"), _("\
+The city where it is built produces Diplomats and Spies with an \
+additional veteran level.\
+"), _("\
 Creates a world senate that prevents unprovoked declaration of war by \
 any nuclear-capable nation (that is, any nation with knowledge of \
 Nuclear Fission, once the Manhattan Project has been built). This effect \
@@ -2082,11 +2112,6 @@ last until the Apollo Program is completed.\
 Also, if any player's city is in disorder for more than two turns in \
 a row, that player's government falls (even for governments other than \
 Republic and Democracy).\
-"), _("\
-Every player gets an embassy with every other player.\
-"), _("\
-The city where it is built produces Diplomats and Spies with an \
-additional veteran level.\
 ")
 
 [building_womens_suffrage]
