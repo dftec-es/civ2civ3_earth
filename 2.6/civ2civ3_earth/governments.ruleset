@@ -107,17 +107,18 @@ Under a Tribal government, you are part ruler of your people. Your\
  control over your citizens is maintained largely by spiritual counsel.\
 "), _("\
 Compared to Despotism, a Tribal economy is more shield-oriented. Its\
- bonuses to veterancy can be an advantage in wartime, but it lacks the\
- martial law of other early governments.\
+ bonuses to veterancy and vision range can be an advantage in wartime,\
+ but it lacks the martial law of other early governments.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 * Increases by half the chance of land units to obtain the next veteran\
- level after a battle, and also increases their vision radius.\n\
+ level after a battle, and also increases their vision range.\n\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
-* Each city gets 1 extra content citizen.\n\
+* Each of your cities will avoid 1 unhappiness, not including that\
+ caused by aggression.\n\
 * Each city can support up to 3 units for free; further units each cost\
  1 shield per turn.\n\
 * Unlike later governments, military units do not cause unhappiness even\
@@ -182,7 +183,8 @@ helptext = _("\
 Under Monarchy, a king or queen serves as a hereditary figurehead\
  for your government.\
 "), _("\
-Monarchy gives low unit upkeep costs.\
+Monarchy avoids the penalty to output per tile. It gives low unit upkeep\
+ costs, but units outside your borders may cause unhappiness.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -221,13 +223,19 @@ A Communist government is based on the ideal that all people are\
  citizens. Communism gives a balance between military and commercial\
  styles of government.\
 "), _("\
-Communism is a good government for maximizing shield production, and\
- for large empires.\
+Communism eliminates the corruption and waste caused by distance from\
+ the palace, and reduces considerably the gold paid for upkeep of\
+ buildings; but it does not get the trade bonus from irrigated land\
+ or city celebrations.\
+"), _("\
+It is a good alternative to Federation for large empires, especially\
+ when cities are surrounded by hills, mountains, jungles or forests\
+ (less trade, but more production).\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* City improvements which would normally have an upkeep of 1 or 2 gold are\
- free of upkeep.\n\
+* City improvements which would normally have an upkeep of 1 or 2 gold\
+ are free of upkeep.\n\
 * Cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 shield per turn.\n\
@@ -236,7 +244,7 @@ _("\
 * Military units impose martial law. Up to 3 military units inside a city\
  will each force 2 unhappy citizens to become content (the maximum\
  possible).\n\
-* Base corruption is 30%, but is not affected by distance to the capital.\n\
+* Base corruption is 30%, but is not affected by distance from the capital.\n\
 * There is no production waste.\
 ")
 
@@ -267,11 +275,15 @@ Improvements that normally convert unhappy citizens to content\
  citizens, produce `tithes' (gold) equivalent to the number\
  of people they would convert.\
 "), _("\
-Fundamentalism is a good government for maximizing gold, and its Fanatics\
- are useful in wartime.\
+Fundamentalism gets a significant bonus to gold production, especially\
+ useful when terrain is not favorable for trade; but city celebrations\
+ give no revenues, and science production is low even with taxes on\
+ science at maximum.\
 "),
 ; /* xgettext:no-c-format */
 _("\
+* Each 2 foreign citizens cause 1 unhappiness in their city while you\
+ are at war with their home state.\n\
 * Each city can support up to 2 units for free; further units each cost\
  2 gold per turn (except for Fanatics).\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
@@ -298,8 +310,16 @@ ruler_female_title = _("?female:Consul %s")
 helptext = _("\
 Federalism is a system in which the power to govern is shared between\
  national and provincial governments.\
- This decentralization minimizes the corruption and waste caused by distance\
- to capital, and avoids separatist movements.\
+ This decentralization minimizes the corruption and waste, and avoids\
+ separatist movements.\
+"), _("\
+Federation eliminates the corruption and waste caused by distance from\
+ the palace, and its bonus to luxury production allows cities to celebrate\
+ more easily; but it does not get the trade bonus from irrigated land.\
+"), _("\
+It is a good alternative to Democracy for larger empires or more\
+ aggressive wars, especially when cities are surrounded by sea (less\
+ land, but more trade).\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -335,6 +355,10 @@ Under a Republican government, citizens hold an election to select a\
  degree of freedom. Citizens under the Republic become unhappy\
  easily, but the self-sufficiency of your citizens allows high levels\
  of trade.\
+"), _("\
+Republic gets a significant bonus to trade on irrigated land; but it\
+ has a senate, units cannot impose martial law, and units outside your\
+ borders may cause unhappiness more easily.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -370,10 +394,18 @@ Under Democracy, citizens govern directly by voting on issues.\
  Democracy offers the highest possible level of trade, but also\
  offers the most potential for unhappiness; citizens become very\
  upset during wars.\
+"), _("\
+Democracy gets the same trade bonus on irrigated land as Republic,\
+ and reduces the corruption and waste caused by distance from the\
+ palace; but it has a senate, and it doubles the unhappiness caused\
+ by units outside your borders.\
+"), _("\
+It is the best government once city celebrations give revenues (when\
+ they produce more trade than the required to celebrate).\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Cities produce one extra trade point for every tile with irrigation.\n\
+* Cities produce one extra trade point for every tile with an irrigation.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
 * Each city can support one unit for free; further units each cost\
@@ -405,16 +437,22 @@ Fascism seeks to solve economic, political, and social problems by\
  achieving a national rebirth, exalting the nation or race above all\
  else, and promoting cults of unity, strength, and purity.\
 "), _("\
-Fascism is better suited for militaristic nations.\
+Fascism avoids the upkeep costs of many buildings like Communism,\
+ increases the chance of units becoming veteran, and it is the only\
+ modern government whose units can't cause unhappiness; but corruption\
+ and waste caused by distance is not eliminated.\
+"), _("\
+It is a good alternative for militaristic nations, especially when city\
+ celebrations are not worth the cost.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 * Increases by a quarter the chance of any unit to obtain the next\
  veteran level after a battle.\n\
-* City improvements which would normally have an upkeep of 1 or 2 gold are\
- free of upkeep.\n\
-* Each 2 citizens of enemy nationality in a city cause 1 extra unhappy\
- citizen.\n\
+* City improvements which would normally have an upkeep of 1 or 2 gold\
+ are free of upkeep.\n\
+* Each 2 foreign citizens cause 1 unhappiness in their city while you\
+ are at war with their home state.\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 shield per turn.\n\
 * Military units do not cause unhappiness even when deployed aggressively.\n\
@@ -451,3 +489,17 @@ _("\
 ;                           newlines so that xgettext parsing works
 ;
 ; */ <-- avoid gettext warnings
+
+; Multiplier factor * effect value should be 100 (this way UI values are used as-is)
+[multiplier_ai_love]
+name      = _("AI love for humans")
+start     = -20
+stop      = 20
+step      = 5
+offset    = 0
+factor    = -10
+default   = -10
+helptext  = _("\
+This setting allows you to reduce (to get a harder AI) or increase\
+ (to get an easier AI) the love of the AI for the human players.\
+")

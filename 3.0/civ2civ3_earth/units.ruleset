@@ -59,11 +59,7 @@ Uranium: One more veteran level when produced in cities with Uranium.\
 Attack and defense value halved against Destroyer. \
 Ignores the bonus to defense of sea units on Deep Ocean tiles.\
 ")
-    _("Tank"),
-; /* xgettext:no-c-format */
-_("\
-Gets 25% defensive bonus when attacked by another Tank.\
-")
+    _("Tank")
     _("Unbribable")
     _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
     _("HelpWonder")
@@ -80,13 +76,13 @@ Can bombard, only if no other unit bombarded from the same tile this turn.\
     _("NoAutoAtt")
     _("Only_Land"), _("\
 Can not attack oceanic tiles, mountains, swamps, or jungles, unless there \
-is a road or base on the tile. Bombarding is not restricted.\
+is a road or base on the tile. Bombardment is not restricted.\
 ")
     _("Only_Sea"), _("\
-Can only attack sea tiles or cities. Bombarding is not restricted.\
+Can only attack sea tiles or cities. Bombardment is not restricted.\
 ")
     _("AirBomber"), _("Combat rounds equal to bombard rate.")
-    _("HPFull"), _("Cannot attack once damaged, except for bombarding.")
+    _("HPFull"), _("Cannot attack once damaged, except to bombard.")
 ; units with HPFull require one of the following HP flags to know when are undamaged
     _("HP10")
     _("HP20")
@@ -586,9 +582,11 @@ veteran_power_fact = 100
 veteran_move_bonus = 0
 roles         = "Settlers"
 helptext      = _("\
-Migrants can be used to transfer population to other cities, but \
-may not found new cities. They can also perform the same terrain \
-alterations as Workers.\
+Migrants can be used to transfer population to other cities (of at \
+most size 8), but may not found new cities. They can also perform the \
+same terrain alterations as Workers.\
+"), _("\
+This unit can be captured by military land units or by frigates.\
 "), _("\
 TIP: Migrants can be a good alternative to Workers in overpopulated \
 cities, as they benefit from free food upkeep.\
@@ -745,6 +743,12 @@ flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
+"),
+; /* xgettext:no-c-format */
+_("\
+Remember that every unit receives a +25% defensive bonus when it is \
+stacked outside of cities, as long as there is another unit on the \
+same tile.\
 ")
 
 [unit_archers]
@@ -777,6 +781,21 @@ flags         = "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
+"), _("\
+Archers and catapults are the only ancient units with the ability to \
+bombard.\
+"), _("\
+Bombard action can only damage (not kill) the target, but it has a \
+chance to damage every unit in a stack or city, with no chance for \
+the attacker to be damaged or killed. This action is only allowed \
+for 1 unit from each tile per turn.\n\
+When a unit bombards from a tile, a marker appears on that tile and \
+prevents other units to bombard from the same tile until the next turn. \
+Until that bombardment marker disappears at the end of the turn, if \
+there is no city nor base on the tile, it gets the same defense bonus \
+as if there was a Fort. This bonus is only useful for the player who \
+moves earlier in the turn order (only for the AI in the case of single \
+player games).\
 ")
 
 [unit_legion]
@@ -810,6 +829,9 @@ roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry units with \
 an excellent offensive value.\
+"), _("\
+This unit (and their successors) can attack land tiles while on board \
+a ship.\
 ")
 
 [unit_pikemen]
@@ -877,6 +899,20 @@ roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild", "HutTech",
 helptext      = _("\
 Musketeers are infantry equipped with early firearms and replace \
 Pikemen as the preferred city defender.\
+"), _("\
+From now on, every unit will have the ability to bombard.\
+"), _("\
+Bombard action can only damage (not kill) the target, but it has a \
+chance to damage every unit in a stack or city, with no chance for \
+the attacker to be damaged or killed. This action is only allowed \
+for 1 unit from each tile per turn.\n\
+When a unit bombards from a tile, a marker appears on that tile and \
+prevents other units to bombard from the same tile until the next turn. \
+Until that bombardment marker disappears at the end of the turn, if \
+there is no city nor base on the tile, it gets the same defense bonus \
+as if there was a Fort. This bonus is only useful for the player who \
+moves earlier in the turn order (only for the AI in the case of single \
+player games).\
 ")
 
 [unit_riflemen]
@@ -985,7 +1021,7 @@ roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
-They do not cause unhappiness due to military activity.\
+This unit does not cause unhappiness due to military activity.\
 "), _("\
 Fundamentalist nations can maintain Fanatic units without having to \
 pay any upkeep. Instead, each unit reduces the population by 1.\
@@ -1142,10 +1178,14 @@ flags         = "Bombarder", "Only_Land", "Iron_Oil", "Rubber", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
-of any land unit, and is very fast on roads and easy terrain, but it is \
-hindered rather than helped by rough terrain (it cannot move into \
-mountains, swamps, or jungles), and it is unable to use less rough \
-terrain to improve their defense.\
+of any land unit.\
+"), _("\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
 ")
 
 [unit_horsemen]
@@ -1178,6 +1218,10 @@ roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
 Horsemen are mounted warriors and an early shock-troop that can \
 penetrate deep into enemy territory.\
+"), _("\
+As with other military land units: they can capture enemy units, but \
+only when all the units on the target tile are captureable (Caravan, \
+Freight or Migrants).\
 ")
 
 [unit_chariot]
@@ -1208,12 +1252,15 @@ uk_gold       = 1
 flags         = "Only_Land", "Capturer", "Horses", "NoAutoAtt"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
-Chariots are horse-pulled war wagons. They have a stronger attack than \
-Horsemen, but their speed comes at a cost: they are more expensive \
-to build, they cannot take advantage of terrain to defend themselves, \
-they cannot move in rough terrain (mountains, swamps, and jungles) \
-without roads, and they cannot be transported by sea using early ships \
-(Galleys and Caravels).\
+Chariots are horse-pulled war wagons, stronger but more expensive \
+than horsemen.\
+"), _("\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
 ")
 
 [unit_elephants]
@@ -1279,7 +1326,7 @@ helptext      = _("\
 Crusaders are highly disciplined mounted warriors driven by a higher \
 cause.\
 "), _("\
-They do not cause unhappiness due to military activity.\
+This unit does not cause unhappiness due to military activity.\
 ")
 
 [unit_knights]
@@ -1414,10 +1461,20 @@ flags         = "Bombarder", "Only_Land", "Tank",
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
-more damage than any mounted unit. However, they are less adaptable to \
-very rough terrain (they cannot move into mountains, swamps, or jungles \
-without roads), and unable to use less rough terrain to improve their \
-defense.\
+more damage than any mounted unit.\
+"), _("\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+This unit gets a +25% defense bonus against other Armor units. This \
+makes Armor slightly better than Mech. Infantry against attacks from \
+Armors, and slightly worse against attacks from Howitzers or other units.\
 ")
 
 [unit_catapult]
@@ -1453,10 +1510,27 @@ Catapults are large rock-throwing machines of war. They are very \
 strong attackers but equally weak defenders and will need an escort \
 to be effective.\
 "), _("\
-While powerful, Catapults (and their successors) are bulky and awkward; \
-they require roads to move in rough terrain (mountains, swamps, and \
-jungles), are difficult to defend, and are too big for early ships \
-(Galleys and Caravels).\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
+"), _("\
+Catapults and archers are the only ancient units with the ability to \
+bombard.\
+"), _("\
+Bombard action can only damage (not kill) the target, but it has a \
+chance to damage every unit in a stack or city, with no chance for \
+the attacker to be damaged or killed. This action is only allowed \
+for 1 unit from each tile per turn.\n\
+When a unit bombards from a tile, a marker appears on that tile and \
+prevents other units to bombard from the same tile until the next turn. \
+Until that bombardment marker disappears at the end of the turn, if \
+there is no city nor base on the tile, it gets the same defense bonus \
+as if there was a Fort. This bonus is only useful for the player who \
+moves earlier in the turn order (only for the AI in the case of single \
+player games).\
 ")
 
 [unit_cannon]
@@ -1493,6 +1567,13 @@ Cannons are large firearms that can fire heavy projectiles over long \
 distances. As with the catapults they replace, they are very strong \
 attackers but equally weak defenders and will need an escort to be \
 effective, and have limited mobility.\
+"), _("\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
 ")
 
 [unit_artillery]
@@ -1528,6 +1609,15 @@ helptext      = _("\
 The artillery is an upgraded cannon. As with its predecessors, it is a \
 very strong attacker but equally weak defender and will need an escort \
 to be effective, and has limited mobility.\
+"), _("\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
+"), _("\
+This unit gets double firepower when attacking cities.\
 ")
 
 [unit_howitzer]
@@ -1563,6 +1653,15 @@ helptext      = _("\
 Howitzers are upgraded artillery with improved defensive as well as \
 offensive capabilities. However, they still have the limited mobility \
 of their predecessors.\
+"), _("\
+As with other wheeled units: they cannot take advantage of terrain to \
+defend themselves; they cannot move or attack (bombardment is not \
+restricted) to mountains, jungles and swamps, unless there is a road \
+or base; they cannot be transported by sea using early ships (Galleys \
+and Caravels); and they can cause loss of population when attacking a \
+city without City Walls.\
+"), _("\
+This unit gets double firepower when attacking cities.\
 ")
 
 [unit_fighter]
@@ -1598,10 +1697,13 @@ roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fighters are your first airborne units. They can move anywhere and \
 attack any unit.\
+"), _("\
+This unit cannot attack once damaged, except to bombard. During enemy \
+turns, it can automatically attack or bombard an incoming enemy.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Fighters and other aircraft lose 10% of their hit points for every \
+As with other aircraft: they lose 10% of their hit points for every \
 turn not spent in a city, airstrip, or airbase, or on a Carrier.\
 ")
 
@@ -1638,10 +1740,15 @@ roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may only attack ground \
 targets, not other airborne units.\
+"), _("\
+As with other air bombers: they attack with a limited number of combat \
+rounds, equal to their bombard rate, but they cannot attack once damaged. \
+If they are not damaged, they can first perform a regular attack, and \
+then they can bombard in the same turn.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other aircraft, Bombers lose 10% of their hit points for every \
+As with other aircraft: they lose 10% of their hit points for every \
 turn not spent in a city, airstrip, or airbase, or on a Carrier.\
 ")
 
@@ -1681,6 +1788,11 @@ Helicopters can transport one military land unit; while some troops \
 must load or unload in a city, airstrip, or airbase (and not in the field \
 or onboard a Carrier), infantry units can embark or disembark at any time.\
 "), _("\
+As with other air bombers: they attack with a limited number of combat \
+rounds, equal to their bombard rate, but they cannot attack once damaged. \
+If they are not damaged, they can first perform a regular attack, and \
+then they can bombard in the same turn.\
+"), _("\
 Unlike other aircraft, Helicopters are not required to return to a city, \
 base, or Carrier to refuel after a set number of turns; however, care \
 must be exercised, due to the health they lose every turn.\
@@ -1718,6 +1830,14 @@ flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement radius.\
+"), _("\
+This unit cannot attack once damaged, except to bombard. During enemy \
+turns, it can automatically attack or bombard an incoming enemy.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other aircraft: they lose 10% of their hit points for every \
+turn not spent in a city, airstrip, or airbase, or on a Carrier.\
 ")
 
 [unit_stealth_bomber]
@@ -1752,6 +1872,16 @@ flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement radius.\
+"), _("\
+As with other air bombers: they attack with a limited number of combat \
+rounds, equal to their bombard rate, but they cannot attack once damaged. \
+If they are not damaged, they can first perform a regular attack, and \
+then they can bombard in the same turn.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other aircraft: they lose 10% of their hit points for every \
+turn not spent in a city, airstrip, or airbase, or on a Carrier.\
 ")
 
 [unit_galley]
@@ -1856,6 +1986,8 @@ flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC",
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Caravel is a sailing ship that can enter any ocean tile.\
+"), _("\
+This unit can be captured by an enemy Frigate.\
 ")
 
 [unit_galleon]
@@ -1891,6 +2023,8 @@ helptext      = _("\
 The Galleon is a pure transport ship, the first which can transport \
 large wheeled units. It cannot attack other ships, though it may \
 still defend itself when attacked.\
+"), _("\
+This unit can be captured by an enemy Frigate.\
 ")
 
 [unit_frigate]
@@ -1926,6 +2060,10 @@ roles         = "Hunter"
 helptext      = _("\
 The Frigate is a specialized ship with a strong offensive value. It \
 can attack units on land, but it cannot transport units.\
+"), _("\
+This is the first and only naval unit that can capture enemy units, but \
+only when all the units on the target tile are captureable (Caravel, \
+Galleon, Caravan, Freight or Migrants) and are not carrying any load.\
 ")
 
 [unit_ironclad]
@@ -2151,7 +2289,11 @@ Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\
 "), _("\
 Submarines attacking other naval units ignore the bonus to defense by \
-terrain (on deep ocean, or ocean with naval mines).\
+terrain (on deep ocean, or ocean with naval mines). They cannot attack \
+other Submarine units, and have double defense against all air attacks.\
+"), _("\
+This unit cannot attack once damaged, except to bombard. During enemy \
+turns, it can automatically attack or bombard an incoming enemy.\
 ")
 
 [unit_carrier]
@@ -2273,7 +2415,11 @@ flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC",
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile that can strike deep \
-into enemy territory.\
+into enemy territory, can attack other air units, and has double \
+firepower against cities.\
+"), _("\
+They can disembark from their transporter unit anywhere, but they need \
+a city or airbase to embark again.\
 ")
 
 [unit_nuclear]
@@ -2395,6 +2541,10 @@ become yours; the exact sum depends on the status of the unit and \
 that of the civilization owning it. Bribery when not at war will cause \
 a diplomatic incident. Homeless Diplomats cannot bribe units.\
 "), _("\
+Diplomats can expel non military units out of your territory if you \
+are at peace with the target, and can expel diplomatic or unreachable \
+units if they are not inside their own national borders or inside bases.\
+"), _("\
 Diplomats can also perform a number of actions in another player's \
 city, although each Diplomat may attempt only one action. Most of \
 these actions have a chance of failure. Also, any enemy Diplomats or \
@@ -2413,8 +2563,8 @@ cost to you.\
 "), _("\
  - \"Investigate City\": Your unit attempts to report detailed \
 information about the city: its status, what buildings and units are \
-within, and what it is currently producing. \
-The unit is not consumed by this action.\
+within, and what it is currently producing. The unit is not consumed \
+by this action.\
 "), _("\
  - \"Sabotage City\": Your unit attempts either to disrupt all the \
 city's work so far towards its current project, or to destroy an \
@@ -2438,10 +2588,6 @@ that of the civilization that owns it. It is not possible to incite \
 a rebellion in a capital, or in any city with Courthouse. Incitement \
 may be attempted in peacetime, but will cause a diplomatic incident.\
 "), _("\
-In some game strategies, hordes of Diplomats can be used to wreak \
-havoc on the enemy.  Little wonder that Diplomats are often \
-viewed with suspicion and fear!\
-"), _("\
 Diplomats built under Communist or Federation governments will \
 start at the first veteran level (secretary).\
 "),
@@ -2458,6 +2604,7 @@ A city gets +5% resistance in diplomatic fights against enemy agents for \
 each 100 culture points, up to +50% when the city reaches 1000 culture \
 points.\
 ")
+; WARNING: if helptext is too long (just a bit longer than this) ruleset won't load
 
 [unit_spy]
 name          = _("Spy")
@@ -2571,9 +2718,10 @@ route's ongoing revenue is doubled if the two cities involved are on \
 different continents, and halved if the two cities are from different \
 players.\
 "), _("\
+This unit can be captured by military land units or by frigates.\
+"), _("\
 A Caravan sent to one of your own cities that is building a wonder \
-can add 30 shields towards its production. If your city is not \
-building a wonder, the Caravan can take no special action.\
+can add 30 shields towards its production.\
 "), _("\
 TIP: You can stockpile a stack of Caravans in advance and bring \
 them all into a city where you have started to build a wonder, \
@@ -2612,6 +2760,8 @@ roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed. \
 It has the same behavior and movement restrictions.\
+"), _("\
+This unit can be captured by military land units or by frigates.\
 ")
 
 [unit_explorer]
@@ -2656,8 +2806,8 @@ cost to you.\
 "), _("\
  - \"Investigate City\": Your unit attempts to report detailed \
 information about the city: its status, what buildings and units are \
-within, and what it is currently producing. \
-The unit is not consumed by this action.\
+within, and what it is currently producing. The unit is not consumed \
+by this action.\
 ")
 
 [unit_leader]

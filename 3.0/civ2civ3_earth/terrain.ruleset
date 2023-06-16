@@ -482,8 +482,7 @@ color.r              = 214
 color.g              = 185
 color.b              = 106
 helptext             = _("\
-Deserts are regions of extreme dryness, making agriculture and trade \
-very difficult.\
+Deserts are regions of extreme dryness, making agriculture very difficult.\
 "), _("\
 Deserts can be irrigated for a small amount of extra food, but without \
 an oasis or river, bare desert cannot be further improved with \
@@ -537,7 +536,8 @@ color.r              = 43
 color.g              = 107
 color.b              = 19
 helptext             = _("\
-Forests are densely wooded, making agriculture somewhat problematic.\
+Forests are densely wooded, making agriculture and trade somewhat \
+problematic.\
 ")
 
 [terrain_grassland]
@@ -627,7 +627,7 @@ color.g              = 97
 color.b              = 5
 helptext             = _("\
 In addition to being amenable to agriculture, Hills are frequently \
-rich in resources.\
+rich in resources, but trade is somewhat problematic.\
 "), _("\
 Cities built in hills are at risk of earthquakes, which can interrupt \
 a city's current project.\
@@ -676,8 +676,8 @@ color.r              = 55
 color.g              = 156
 color.b              = 38
 helptext             = _("\
-Jungles are densely overgrown, making agriculture somewhat problematic. \
-Big Land units may not move into jungle without a road.\
+Jungles are densely overgrown, making agriculture and trade somewhat \
+problematic. Big Land units may not move into jungle without a road.\
 ")
 
 [terrain_mountains]
@@ -721,7 +721,7 @@ color.g              = 127
 color.b              = 118
 helptext             = _("\
 Mountains are regions of extreme altitude, making agriculture and \
-trade very difficult.\
+trade somewhat problematic.\
 "), _("\
 Land units that move into mountains can see an extra space, but a \
 fast land unit ending its turn in mountains without a road will start \
@@ -770,8 +770,7 @@ color.r              = 122
 color.g              = 156
 color.b              = 46
 helptext             = _("\
-Plains are very broad, sparse regions, which makes trade slightly \
-inconvenient.\
+Plains are very broad, sparse regions, suitable for some agriculture.\
 ")
 
 [terrain_swamp]
@@ -817,9 +816,8 @@ color.r              = 48
 color.g              = 85
 color.b              = 97
 helptext             = _("\
-Swamps suffer from an over-abundance of water, making agriculture \
-somewhat problematic. Big Land units may not move in swamps without \
-a road.\
+Swamps suffer from an over-abundance of water, fit for some agriculture \
+and little else. Big Land units may not move in swamps without a road.\
 ")
 
 [terrain_tundra]
@@ -862,8 +860,7 @@ color.r              = 188
 color.g              = 188
 color.b              = 188
 helptext             = _("\
-Tundra are broad, cold regions, fit for some agriculture and little \
-else.\
+Tundra are broad, cold regions, making agriculture somewhat problematic.\
 ")
 
 ; /* <-- avoid gettext warnings
@@ -2002,7 +1999,8 @@ Fast land unit ending its turn in rivers without a road will start its \
 next turn with one fewer movement point.\
 "), _("\
 Roads and railroads can only be built on River tiles if your \
-civilization has learned Bridge Building technology.\
+civilization has learned Bridge Building technology. Fortresses and \
+Airbases cannot be built on River tiles.\
 "), _("\
 Cities built on or next to rivers incur a small risk of flooding, \
 which will destroy stored food.\
@@ -2062,8 +2060,8 @@ rmact_gfx_alt  = "-"
 buildable      = FALSE
 flags          = "TerrChangeRemoves"
 helptext       = _("\
-Natural wonders produce 3 extra luxuries in the tile where they are \
-located.\
+Natural wonders produce 2 extra luxury points in the tile where they \
+are located.\
 "), _("\
 A city with a natural wonder within its workable area incur a small \
 risk of natural disaster, which will reduce the population.\

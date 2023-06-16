@@ -25,7 +25,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "2.6_2023_beta"
+version = "2.6_2023"
 
 ; Summary of the ruleset
 summary = _("\
@@ -507,7 +507,7 @@ free_tech_method = "Cheapest"
 
 [culture]
 ; Minimum culture points for cultural domination victory
-victory_min_points = 20000
+victory_min_points = 30000
 
 ; How big lead relative to second best player is needed for victory
 victory_lead_pct   = 100

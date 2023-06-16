@@ -28,7 +28,22 @@ options="+Freeciv-2.6-ruleset"
 ;
 ; */ <-- avoid gettext warnings
 
-; AI: "Away" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
+; AI: "Away" "Novice" "Easy" "Normal" "Hard" "Cheating"
+
+; Higher chance of AI wars (vs human)
+[effect_human_love]
+type    = "Gain_AI_Love"
+value   = -10
+multiplier = "AI love for humans"
+reqs    =
+    { "type", "name", "range", "present"
+      "AI", "Away", "Player", FALSE
+      "AI", "Novice", "Player", FALSE
+      "AI", "Easy", "Player", FALSE
+      "AI", "Normal", "Player", FALSE
+      "AI", "Hard", "Player", FALSE
+      "AI", "Cheating", "Player", FALSE
+    }
 
 ; Lower chance of AI wars (vs Hard AI)
 [effect_ai_hard_love]
@@ -552,7 +567,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; City (pop>8): against every land and sea
+; City (size > 8): against every land and sea
 [effect_city_defense_1]
 type    = "Defend_Bonus"
 value   = 50
@@ -572,7 +587,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; City (pop>16): against every air
+; City (size > 16): against every air
 ; Total summed city defense is equal to a Fortress
 [effect_city_defense_2]
 type    = "Defend_Bonus"
@@ -644,7 +659,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; Movement penalty if started turn on mountains (for every land unit)
+; Movement penalty on unroaded mountains (for every land unit)
 [effect_mountains_movement]
 type    = "Move_Bonus"
 value   = -1
@@ -665,7 +680,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; Movement penalty if started turn on river (for every land unit)
+; Movement penalty on unroaded river (for every land unit)
 [effect_river_movement]
 type    = "Move_Bonus"
 value   = -1
@@ -684,7 +699,28 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
+    }
+
+; Movement penalty on unroaded terrain (other than mountains) not suitable for wheeled units (big land)
+[effect_wheeled_movement]
+type    = "Move_Bonus"
+value   = -1
+reqs    =
+    { "type", "name", "range", "present"
+      "TerrainFlag", "NoWheeled", "Local", TRUE
+      "Terrain", "Mountains", "Local", FALSE
+      "Extra", "Road", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
+      "UnitClass", "Land", "Local", FALSE
+      "UnitClass", "Small Land", "Local", FALSE
+;      "UnitClass", "Big Land", "Local", FALSE
+      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Sea", "Local", FALSE
+      "UnitClass", "Trireme", "Local", FALSE
+      "UnitClass", "Sub", "Local", FALSE
+      "UnitClass", "Helicopter", "Local", FALSE
+      "UnitClass", "Air", "Local", FALSE
+      "UnitClass", "Missile", "Local", FALSE
     }
 
 ; Nuclear power gives +1 moves to sea units
@@ -1957,6 +1993,9 @@ reqs    =
       "Gov", "Anarchy", "Player", TRUE
       "Building", "Pyramids", "Player", FALSE
       "Tech", "Railroad", "World", FALSE
+      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
+      "OutputType", "Science", "Local", FALSE
     }
 
 [effect_gov_tile_penalty_tribal]
@@ -1967,6 +2006,9 @@ reqs    =
       "Gov", "Tribal", "Player", TRUE
       "Building", "Pyramids", "Player", FALSE
       "Tech", "Railroad", "World", FALSE
+      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
+      "OutputType", "Science", "Local", FALSE
     }
 
 [effect_gov_tile_penalty_despotism]
@@ -1977,6 +2019,9 @@ reqs    =
       "Gov", "Despotism", "Player", TRUE
       "Building", "Pyramids", "Player", FALSE
       "Tech", "Railroad", "World", FALSE
+      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
+      "OutputType", "Science", "Local", FALSE
     }
 
 ; Every irrigated tile
@@ -3047,16 +3092,6 @@ reqs    =
       "Building", "Palace", "City"
     }
 
-[effect_palace_tribal]
-type    = "Output_Bonus"
-value   = 75
-reqs    =
-    { "type", "name", "range"
-      "Gov", "Tribal", "Player"
-      "Building", "Palace", "City"
-      "OutputType", "Luxury", "Local"
-    }
-
 [effect_palace_despotism]
 type    = "Output_Bonus"
 value   = 75
@@ -3064,7 +3099,7 @@ reqs    =
     { "type", "name", "range"
       "Gov", "Despotism", "Player"
       "Building", "Palace", "City"
-      "OutputType", "Gold", "Local"
+      "OutputType", "Luxury", "Local"
     }
 
 [effect_palace_monarchy]
@@ -3075,16 +3110,6 @@ reqs    =
       "Gov", "Monarchy", "Player"
       "Building", "Palace", "City"
       "OutputType", "Luxury", "Local"
-    }
-
-[effect_palace_monarchy_1]
-type    = "Output_Bonus"
-value   = 50
-reqs    =
-    { "type", "name", "range"
-      "Gov", "Monarchy", "Player"
-      "Building", "Palace", "City"
-      "OutputType", "Gold", "Local"
     }
 
 [effect_palace_culture]
@@ -6079,6 +6104,9 @@ reqs    =
     { "type", "name", "range", "present"
       "Extra", "Pollution", "Local", TRUE
       "Extra", "Fallout", "Local", FALSE
+      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
+      "OutputType", "Science", "Local", FALSE
     }
 
 [effect_fallout]
@@ -6088,15 +6116,21 @@ reqs    =
     { "type", "name", "range", "present"
       "Extra", "Fallout", "Local", TRUE
       "Extra", "Pollution", "Local", FALSE
+      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
+      "OutputType", "Science", "Local", FALSE
     }
 
 [effect_pollution_fallout]
 type    = "Output_Tile_Punish_Pct"
 value   = 75
 reqs    =
-    { "type", "name", "range"
-      "Extra", "Fallout", "Local"
-      "Extra", "Pollution", "Local"
+    { "type", "name", "range", "present"
+      "Extra", "Fallout", "Local", TRUE
+      "Extra", "Pollution", "Local", TRUE
+      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
+      "OutputType", "Science", "Local", FALSE
     }
 
 ; Spy resistant: +5% for each 100 culture points of the city

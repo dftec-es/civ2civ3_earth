@@ -18,6 +18,7 @@ Core:
 * Trade routes with foreign cities receive 50% of the income, and only if the cities are allies (or on the same team).
 * Enabled tech leakage again: technologies are cheaper if already discovered by other nations you have embassy with.
 * The city tile gets the same +50% defense bonus as a Fort (also against naval units, not only against ground units). Cities with size > 8 double this bonus to +100% (as before). Cities with size > 16 now get an additional +50% defense against air and missile units (being the total defense the same as a Fortress).
+* Human players receive a negative AI Love, making it harder to keep the peace with every AI. There is a new setting in the game menu that allows you to adjust this value: Civilization -> Policies -> "AI love for humans".
 
 Optional (server options):
 * Trading technologies in the diplomacy dialog is not allowed (otherwise the AI can't handle the following options).
@@ -25,14 +26,15 @@ Optional (server options):
 - If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool.
 
 Terrains:
-* Ground units starting the turn on unroaded Rivers have a -1 movement penalty (same as on Mountains). Forts and Airstrips on River tiles cannot be upgraded to full fortresses.
+* Ground units on unroaded Rivers start the turn with -1 movement point (same as on Mountains). Wheeled units on unroaded Jungles and Swamps start the turn with -1 movement point too. Forts and Airstrips on River tiles cannot be upgraded to full fortresses.
 - Deep Ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food.
 * Forest and Jungle can be mined to produce Lumber (+1 production). Forests and Plains can no longer be transformed to Grassland at the beginning, only Grassland to Forest (10 turns), Forest to Plains (10 turns), and Plains to Forest (10 turns).
-- Added some new resources, up to 3 per terrain: Incense (+4 trade on desert), Deer (+2 food on forest, while Pheasant now +1 food and +1 trade), Marble (+1 production and +1 trade on hills), Ivory (now on jungle, with 1 less trade), Seals (same bonuses as Ivory, but on glacier), Shellfish (+1 food and +1 trade on oceans and lakes), Salt (+1 production and +1 trade on coastal ocean), Horses (+1 production and +1 trade on plains, while Buffalo now +1 food and +1 production), Sugar (+2 food and +2 trade on swamp).
+- Added some new resources, up to 3 per terrain
 - There are now 6 resources on Grassland, with 3 different effects: Cattle or Corn (+1 food), Wool or Cotton (+1 production), Tea or Tobacco (+2 trade).
 - There are also 4 extra strategic resources that can be used when certain tech is researched by the player (adding +2 production in the tile): Niter (on plains or desert, usable with Gunpowder), Rubber (on jungle, swamp or forest, with Chemistry), Aluminum (on hills or tundra, with Industrialization), Uranium (on mountains or glacier, with Atomic Theory).
-- All resources slightly reduce the chance of plague, so they can be seen in the city UI. Resources traded from other cities slightly increase the risk of plague.
-- When 2 cities are linked by a trade route: any special resource present in one city (within the city radius) is considered to be available in the other city too. For each resource traded to a city that did not have it, the city receives an extra bonus:
+- When 2 cities are linked by a trade route: any special resource present in one city (within the city radius) is considered to be available in the other city too.
+  All available resources slightly reduce the chance of plague, so they can be seen in the city UI. Resources traded from other cities slightly increase the risk of plague.
+- For each resource traded to a city that did not have it, the city receives an extra bonus:
   - Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in cities linked by trade route.
   - Food resources (Seals, Oasis, Pheasant, Deer, Cattle, Corn, Fruit, Fish, Whales, Wheat, Buffalo, Sugar, Game): +1 unit free of upkeep in cities linked by trade route.
   - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in cities linked by trade route.
@@ -53,9 +55,10 @@ Governments:
 - The appearance of Partisans in conquered cities requires the owner to have knowledge of Guerrilla Warfare.
 - Added a new government: Fascism (available with Military Tactics, which requires Leadership and Conscription).
 * Empire Size no longer depends on the government chosen. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.
-* Corruption and waste by distance are fixed to 2% per tile for ancient governments, 1% for modern governments, and 0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
-* Tribal (available with Warrior Code) gets 3 units per city free of upkeep; +1 content per city, instead of martial law; +75% Luxury from the Palace; and extra vision range for ground units. Federation gets +2 Luxury points per city.
-* Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, regardless if the tile wasn't producing any trade.
+* Corruption and waste by distance are fixed to +2% per tile for ancient governments, +1% for modern governments, and +0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
+* Tribal (available with Warrior Code) gets 3 units per city free of upkeep; +1 content per city, instead of martial law; and extra vision range for ground units. Federation gets +2 Luxury points per city.
+* Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold).
+* Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, and regardless if the tile wasn't producing any trade.
 * Republic is restored to get both "Has senate" and "Revolution when unhappy" effects, the same as Democracy. Federation no longer has a senate.
 * Max tax rates changed to 80% for Federation and 90% for Communism.
 * Under Fascism or Communism, you do not pay upkeep for buildings that cost 1 or 2 coins (was only buildings that cost 1 coin).
@@ -97,7 +100,7 @@ Units:
 Naval units:
 - Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against Sea units (but not against Submarines).
 - Trireme replaced by Galley, which can no longer navigate rivers, and is made obsolete by Caravels.
-* Frigates can capture Galleons and Caravels (only when they are not carrying any load).
+* Frigates can capture Galleons and Caravels (only when the targets are not carrying any load).
 * Cargo boats don't cause unhappiness due to military activity, including Galley, Caravel, Galleon, Transport, Carrier and Submarine.
 - Enabled ZOC for Sea units in Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.
 - Reduced a bit the cost of several naval units.

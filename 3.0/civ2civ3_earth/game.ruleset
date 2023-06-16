@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2023_beta"
+version = "3.0_2023"
 
 ; Summary of the ruleset
 summary = _("\
@@ -1275,7 +1275,7 @@ free_tech_method = "Cheapest"
 
 [culture]
 ; Minimum culture points for cultural domination victory
-victory_min_points = 20000
+victory_min_points = 30000
 
 ; How big lead relative to second best player is needed for victory
 victory_lead_pct   = 100
@@ -1616,49 +1616,49 @@ colorlist =
 ; freeciv game settings for civ2civ3 ruleset
 ;
 set =
-    { "name", "value"
-      "aifill", 8
-      "generator", "FRACTAL"
-      "topology", "WRAPX|WRAPY|ISO"
-      "mapsize", "PLAYER"
-      "tilesperplayer", 75
-      "tinyisles", "ENABLED"
-      "temperature", 60
-      "flatpoles", 0
-      "separatepoles", "DISABLED"
-      "startunits", "cwsx"
-      "techlevel", 1
-      "citymindist", 3
-      "trademindist", 3
-      "tradeworldrelpct", 50
-      "trade_revenue_style", "CLASSIC"
-      "borders", "ENABLED"
-      "foggedborders", "ENABLED"
-      "happyborders", "NATIONAL"
-      "homecaughtunits", "ENABLED"
-      "restrictinfra", "ENABLED"
-      "unreachableprotects", "DISABLED"
-      "autoattack", "ENABLED"
-      "killstack", "ENABLED"
-      "killcitizen", "ENABLED"
-      "occupychance", 100
-      "razechance", 10
-      "disasters", 10
-      "animals", 20
-      "onsetbarbs", 120
-      "teamplacement", "DISABLED"
-      "team_pooled_research", "DISABLED"
-      "trading_tech", "DISABLED"
-      "conquercost", 50
-      "diplbulbcost", 50
-      "techleak", 50
-      "techlossforgiveness", 50
-      "techlossrestore", 50
-      "techlost_donor", 0
-      "techlost_recv", 0
-      "techpenalty", 100
-      "multiresearch", "DISABLED"
-      "revolentype", "RANDQUICK"
-      "revolen", 3
-      "phasemode", "ALL"
+    { "name", "value", "lock"
+      "aifill", 8, FALSE
+      "generator", "FRACTAL", FALSE
+      "topology", "WRAPX|WRAPY|ISO", TRUE
+      "mapsize", "PLAYER", FALSE
+      "tilesperplayer", 75, FALSE
+      "tinyisles", "ENABLED", FALSE
+      "temperature", 60, FALSE
+      "flatpoles", 0, FALSE
+      "separatepoles", "DISABLED", FALSE
+      "startunits", "cwsx", FALSE
+      "techlevel", 1, FALSE
+      "citymindist", 3, FALSE
+      "trademindist", 3, FALSE
+      "tradeworldrelpct", 50, FALSE
+      "trade_revenue_style", "CLASSIC", FALSE
+      "borders", "ENABLED", FALSE
+      "foggedborders", "ENABLED", FALSE
+      "happyborders", "NATIONAL", FALSE
+      "homecaughtunits", "ENABLED", FALSE
+      "restrictinfra", "ENABLED", FALSE
+      "unreachableprotects", "DISABLED", FALSE
+      "autoattack", "ENABLED", FALSE
+      "killstack", "ENABLED", FALSE
+      "killcitizen", "ENABLED", FALSE
+      "occupychance", 100, FALSE
+      "razechance", 10, FALSE
+      "disasters", 10, FALSE
+      "animals", 20, FALSE
+      "onsetbarbs", 120, FALSE
+      "teamplacement", "DISABLED", FALSE
+      "team_pooled_research", "DISABLED", FALSE
+      "trading_tech", "DISABLED", FALSE
+      "conquercost", 50, FALSE
+      "diplbulbcost", 50, FALSE
+      "techleak", 50, FALSE
+      "techlossforgiveness", 50, FALSE
+      "techlossrestore", 50, FALSE
+      "techlost_donor", 0, FALSE
+      "techlost_recv", 0, FALSE
+      "techpenalty", 100, FALSE
+      "multiresearch", "DISABLED", FALSE
+      "revolentype", "RANDQUICK", FALSE
+      "revolen", 3, FALSE
+      "phasemode", "ALL", FALSE
     }

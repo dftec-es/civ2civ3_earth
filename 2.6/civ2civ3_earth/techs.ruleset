@@ -813,8 +813,8 @@ oil wells on Desert, Tundra and Glacier tiles, for an extra production \
 point.\
 "), _("\
 Allows cities to use Oil resource as an alternative to Iron in order to \
-build veteran units: units that require Oil are built with one less \
-veteran level, unless there are Oil or Iron resources in the city.\
+build certain veteran units: units that require Oil are built with one \
+less veteran level, unless there are Oil or Iron resources in the city.\
 ")
 cost     = 400
 
@@ -1002,6 +1002,16 @@ graphic     = "a.trade"
 graphic_alt = "-"
 helptext = _("\
 Allows establishing up to 1 trade route from each city.\
+"), _("\
+When 2 cities are linked by a trade route, any special resource present \
+in one city (within the city radius) is considered to be available in \
+the other city too. Resources present in the city slightly reduce the \
+chance of plague, so they can be seen in the city UI. Resources traded \
+from other cities slightly increase the risk of plague.\
+"), _("\
+For each resource traded to a city that did not have it, the receiving \
+city gets an extra bonus: +1 Luxury, +1 Production, or +1 unit free \
+of upkeep.\
 ")
 cost     = 40
 

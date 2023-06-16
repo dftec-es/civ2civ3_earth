@@ -572,7 +572,7 @@ A Hospital is used to treat the ill, and sometimes for medical \
 research. A city with a Hospital is less likely to suffer from \
 plagues (by 30% of the base chance).\
 "), _("\
-Together with an Aqueduct, it increases the size limit of a city by 8. \
+Together with an Aqueduct, it allows a city to grow up to size 16. \
 Together with a Sewer System, it allows a city to grow without a size \
 limit.\
 "), _("\
@@ -842,8 +842,7 @@ by rebuilding it in another city.\
 ; /* xgettext:no-c-format */
 _("\
 The city containing the palace gains a +75% bonus to luxury production \
-under a Tribal government, a +75% bonus to gold production under \
-Despotism, and a +50% bonus to gold and luxury production under Monarchy.\
+under Despotism, and a +50% bonus to luxury production under Monarchy.\
 ")
 
 [building_ecclesiastical_palace]
@@ -880,8 +879,7 @@ stationed in the city, or sabotage your buildings.\
 ; /* xgettext:no-c-format */
 _("\
 The city containing the palace gains a +75% bonus to luxury production \
-under a Tribal government, a +75% bonus to gold production under \
-Despotism, and a +50% bonus to gold and luxury production under Monarchy.\
+under Despotism, and a +50% bonus to luxury production under Monarchy.\
 "), _("\
 The city has no other benefits of the primary capital.\
 ")

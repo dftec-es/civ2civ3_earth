@@ -50,6 +50,7 @@ value   = 2
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10
+multiplier = "AI love for humans"
 reqs    =
     { "type", "name", "range", "present"
       "AI", "Away", "Player", FALSE
@@ -537,7 +538,7 @@ reqs    =
       "Extra", "Fortress", "Local", TRUE
     }
 
-; Carried HP regen: same as airstrip
+; Carried HP regen (every air unit): same as airstrip
 [effect_carried_hp_regen]
 type    = "HP_Regen"
 value   = 10
@@ -626,7 +627,7 @@ reqs    =
       "Extra", "Airbase", "Local", TRUE
     }
 
-; Stack: outside cities
+; Stack: outside of cities
 ; 100 - 20 = 80  (Attack * 4/5 = Defense * 5/4),
 ; equivalent to +25% defense, but multiplied to Defend_Bonus
 [effect_stack_defense]
@@ -638,7 +639,7 @@ reqs    =
       "CityTile", "Center", "Local", FALSE
     }
 
-; Bombardment: land outside cities and bases,
+; Bombardment: land outside of cities and bases,
 ; same defense as a Fort (against every land and sea)
 [effect_bombardment_defense]
 type    = "Defend_Bonus"
@@ -780,7 +781,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; Movement penalty if started turn on mountains (for every land unit)
+; Movement penalty on unroaded mountains (for every land unit)
 [effect_mountains_movement]
 type    = "Move_Bonus"
 value   = -1
@@ -801,7 +802,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; Movement penalty if started turn on river (for every land unit)
+; Movement penalty on unroaded river (for every land unit)
 [effect_river_movement]
 type    = "Move_Bonus"
 value   = -1
@@ -820,7 +821,28 @@ reqs    =
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
+    }
+
+; Movement penalty on unroaded terrain (other than mountains) not suitable for wheeled units (big land)
+[effect_wheeled_movement]
+type    = "Move_Bonus"
+value   = -1
+reqs    =
+    { "type", "name", "range", "present"
+      "TerrainFlag", "NoWheeled", "Local", TRUE
+      "Terrain", "Mountains", "Local", FALSE
+      "Extra", "Road", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
+      "UnitClass", "Land", "Local", FALSE
+      "UnitClass", "Small Land", "Local", FALSE
+;      "UnitClass", "Big Land", "Local", FALSE
+      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Sea", "Local", FALSE
+      "UnitClass", "Trireme", "Local", FALSE
+      "UnitClass", "Sub", "Local", FALSE
+      "UnitClass", "Helicopter", "Local", FALSE
+      "UnitClass", "Air", "Local", FALSE
+      "UnitClass", "Missile", "Local", FALSE
     }
 
 ; Nuclear power gives +1 moves to sea units
@@ -1331,8 +1353,8 @@ reqs    =
 type    = "Unhappy_Factor"
 value   = 2
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Democracy", "Player"
+    { "type", "name", "range", "quiet"
+      "Gov", "Democracy", "Player", TRUE
     }
 
 ; Govs with 1 free unit
@@ -2190,8 +2212,8 @@ reqs    =
 type    = "Make_Content"
 value   = 1
 reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Tribal", "Player", TRUE
+    { "type", "name", "range"
+      "Gov", "Tribal", "Player"
     }
 
 [effect_vision_tribal]
@@ -2369,8 +2391,8 @@ reqs    =
 type    = "Happiness_To_Gold"
 value   = 1
 reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Fundamentalism", "Player", TRUE
+    { "type", "name", "range"
+      "Gov", "Fundamentalism", "Player"
     }
 
 [effect_fanatics_fundamentalism]
@@ -3191,16 +3213,6 @@ reqs    =
       "Building", "Palace", "City"
     }
 
-[effect_palace_tribal]
-type    = "Output_Bonus"
-value   = 75
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Tribal", "Player", TRUE
-      "Building", "Palace", "City", FALSE
-      "OutputType", "Luxury", "Local", FALSE
-    }
-
 [effect_palace_despotism]
 type    = "Output_Bonus"
 value   = 75
@@ -3208,7 +3220,7 @@ reqs    =
     { "type", "name", "range", "quiet"
       "Gov", "Despotism", "Player", TRUE
       "Building", "Palace", "City", FALSE
-      "OutputType", "Gold", "Local", FALSE
+      "OutputType", "Luxury", "Local", FALSE
     }
 
 [effect_palace_monarchy]
@@ -3219,16 +3231,6 @@ reqs    =
       "Gov", "Monarchy", "Player", TRUE
       "Building", "Palace", "City", FALSE
       "OutputType", "Luxury", "Local", FALSE
-    }
-
-[effect_palace_monarchy_1]
-type    = "Output_Bonus"
-value   = 50
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Monarchy", "Player", TRUE
-      "Building", "Palace", "City", FALSE
-      "OutputType", "Gold", "Local", FALSE
     }
 
 [effect_palace_culture]
