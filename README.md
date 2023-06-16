@@ -9,8 +9,8 @@ Tagged versions have been tested and are ready to be played. The latest one uses
 How to use freeciv modpack installer to install it from github:
 * Depending which freeciv client you installed, you will probably have one modpack installer tool called something like "freeciv-mp-gtk3". Launch it. 
 * Where it says "Modpack URL", paste the following link (the one that matches your freeciv version):
-https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/master/2.6/civ2civ3_earth-2.6.modpack
-https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/master/3.0/civ2civ3_earth-3.0.mpdl
+https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/2.6/civ2civ3_earth-2.6.modpack
+https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/3.0/civ2civ3_earth-3.0.mpdl
 * Press install modpack
 
 How to install it manually from github:
