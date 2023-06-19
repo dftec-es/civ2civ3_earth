@@ -2,7 +2,7 @@
 [spec]
 
 ; Format and options of this spec file:
-options = "+Freeciv-3.0-spec"
+options = "+Freeciv-3.1-spec"
 
 [info]
 
@@ -113,7 +113,7 @@ tiles = { "row", "column", "tag"
  2,  9, "tx.farmland"
  3,  8, "tx.mine"
  4,  8, "tx.lumber"
- 5,  8, "tx.pollution"
+ 5,  9, "tx.pollution"
  6,  9, "tx.village"
  7,  8, "tx.fallout"
 
@@ -167,6 +167,7 @@ tiles = { "row", "column", "tag"
  17,  3, "t.blend.lake"
  17,  4, "user.attention"
  17,  5, "tx.fog"
+ 17,  6, "user.infratile"
 
 ;goto path sprites
  16,  7, "path.step"            ; turn boundary within path

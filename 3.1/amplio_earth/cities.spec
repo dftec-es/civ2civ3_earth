@@ -4,11 +4,14 @@
 ; specified in cities.ruleset file and the index only defines the read order
 ; of the images. The definitions are read starting with index 0 till the first
 ; missing value The index is checked against the city bonus of effect
-; EFT_CITY_IMAGE and the resulting image is used to draw the city on the tile.
+; City_Image and the resulting image is used to draw the city on the tile.
 ;
 ; Obviously the first tile must be 'style_name'_city_0 and the sizes must be
-; in ascending order. There must also be a 'style_name'_wall_0 tile used to
-; draw the wall and an occupied tile to indicate a military units in a city.
+; in ascending order. There must also be a 'style_name'_wall_0 tile used
+; for the default wall graphics and an occupied tile to indicate
+; a military units in a city.
+; For providing multiple walls buildings (as requested by the "Visible_Walls"
+; effect value) tags are 'style_name'_bldg_'effect_value'_'index'.
 ; The maximum number of images is only limited by the maximum size of a city
 ; (currently MAX_CITY_SIZE = 255).
 ;
@@ -16,7 +19,7 @@
 [spec]
 
 ; Format and options of this spec file:
-options = "+Freeciv-3.0-spec"
+options = "+Freeciv-3.1-spec"
 
 [info]
 

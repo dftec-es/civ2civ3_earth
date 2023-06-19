@@ -24,7 +24,7 @@ preferred="amplio_earth"
 
 [about]
 name="Civ2Civ3 Earth ruleset"
-version="3.0_2023_06"
+version="3.1_2023_06"
 summary=_("You are playing a custom version of civ2civ3 rules, from the same author:\n\nIt includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios.\n\nThe differences from the former default ruleset, 'classic', are listed in README.ruleset_civ2civ3_earth.")
 description=*civ2civ3_earth/README.ruleset_civ2civ3_earth*
 capabilities="std-terrains"
