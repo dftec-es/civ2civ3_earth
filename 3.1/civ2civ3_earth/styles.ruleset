@@ -12,9 +12,9 @@
 
 [datafile]
 description="Civ2Civ3 Earth ruleset styles data for Freeciv"
-ruledit="3.0.7+"
-options="+Freeciv-3.0-ruleset"
-format_version=10
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
 
 ; /* <-- avoid gettext warnings
 ;
@@ -62,7 +62,7 @@ name=_("?style:Celtic")
 ;                    more info on city tiles
 ; citizens_graphic = group of citizens tiles to use, see citizens/small
 ;                    spec for more info on citizens tiles
-;                    FIXME: this and _alt not currently used!
+;                    FIXME: this is currently not used!
 ; reqs             = requirements for this city style (see README.effects)
 ;
 ; */ <-- avoid gettext warnings
@@ -167,8 +167,8 @@ reqs={"type","name","range"
 ;
 ; music_peaceful = Music to play when nation in peaceful mood
 ; music_combat   = Music to play when nation in combat mood
-; reqs		 = requirements to activate the style (see effects.ruleset
-;		   and README.effects for help on requirements)
+; reqs           = requirements to activate the style (see effects.ruleset
+;                  and README.effects for help on requirements)
 ;
 ; */ <-- avoid gettext warnings
 

@@ -12,9 +12,9 @@
 
 [datafile]
 description="Civ2Civ3 Earth ruleset building data for Freeciv"
-ruledit="3.0.7+"
-options="+Freeciv-3.0-ruleset"
-format_version=10
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
 
 ; /* <-- avoid gettext warnings
 ;

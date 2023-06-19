@@ -12,9 +12,9 @@
 
 [datafile]
 description="Civ2Civ3 Earth ruleset game data for Freeciv"
-ruledit="3.0.7+"
-options="+Freeciv-3.0-ruleset"
-format_version=10
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
 
 [ruledit]
 description_file="civ2civ3_earth/README.ruleset_civ2civ3_earth"
@@ -51,10 +51,20 @@ illness_base_factor=10
 illness_min_size=5
 
 [auto_attack]
-will_never="Nuclear","NoAutoAtt"
+attack_actions="Capture Units","Bombard","Attack","Suicide Attack"
+if_attacker={"type","name","range","present","quiet"
+"DiplRel","War","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitFlag","Nuclear","Local",FALSE,TRUE
+"UnitFlag","NoAutoAtt","Local",FALSE,TRUE
+}
 
 [actions]
-force_explode_nuclear=TRUE
+diplchance_initial_odds="Sabotage City","Sabotage City Escape","Targeted Sabotage City Escape","Sabotage City Production Escape","Steal Tech","Steal Tech Escape Expected","Targeted Steal Tech Escape Expected","Incite City","Incite City Escape","Steal Maps","Steal Maps Escape"
+bribe_unit_post_success_forced_actions="Transport Embark","Transport Disembark","Transport Disembark 2","Conquer Extras","Conquer Extras 2","Enter Hut","Enter Hut 2","Frighten Hut","Frighten Hut 2","Unit Move"
+attack_post_success_forced_actions="Conquer City","Conquer City 2","Transport Disembark","Transport Disembark 2","Conquer Extras","Conquer Extras 2","Enter Hut","Enter Hut 2","Frighten Hut","Frighten Hut 2","Unit Move"
+escape_city="Transport Embark","Enter Hut","Enter Hut 2","Frighten Hut","Frighten Hut 2","Unit Move"
+unit_stack_death="Transport Embark","Conquer Extras","Conquer Extras 2","Enter Hut","Enter Hut 2","Frighten Hut","Frighten Hut 2","Unit Move"
 ui_name_poison_city_escape="%sPoison City%s"
 ui_name_sabotage_city_escape="%sSabotage City Escape%s"
 ui_name_targeted_sabotage_city_escape="Industrial %sSabotage%s"
@@ -64,10 +74,37 @@ ui_name_enter_marketplace="%sCancel Trade Routes (after end of turn)%s"
 ui_name_bribe_unit="%sBribe Enemy Unit%s"
 ui_name_sabotage_unit_escape="%sSabotage Enemy Unit%s"
 ui_name_found_city="%sBuild City%s"
+found_city_consuming_always=TRUE
 ui_name_join_city="%sAdd to City%s"
 ui_name_steal_maps="Steal %sMap Fragments"
 ui_name_steal_maps_escape="Steal %sMap Fragments and Escape%s"
+explode_nuclear_target_kind="Tile"
+explode_nuclear_consuming_always=TRUE
+nuke_city_target_kind="City"
+nuke_city_min_range=1
+nuke_city_max_range=1
+nuke_city_consuming_always=TRUE
+nuke_units_min_range=1
+nuke_units_consuming_always=TRUE
+airlift_max_range="unlimited"
+attack_blocked_by="Explode Nuclear","Nuke City","Nuke Units"  # Forbid "Attack" if any one of the listed actions are legal.
+suicide_attack_blocked_by="Explode Nuclear","Nuke City","Nuke Units"  # Forbid "Suicide Attack" if any one of the listed actions are legal.
+conquer_city_blocked_by="Explode Nuclear","Nuke City","Nuke Units","Attack","Suicide Attack"  # Forbid "Conquer City" if any one of the listed actions are legal.
+ui_name_conquer_city_2="%sConquer City from non native%s"
+conquer_city_2_blocked_by="Explode Nuclear","Nuke City","Nuke Units","Attack","Suicide Attack"  # Forbid "Conquer City 2" if any one of the listed actions are legal.
 ui_name_bombard="%sBombard%s"
+pillage_target_kind="Tile"
+ui_name_transport_disembark_2="%sDisembark from non native%s"
+ui_name_conquer_extras_2="%sConquer Extras from non native%s"
+ui_name_enter_hut_2="%sEnter Hut from non native%s"
+ui_name_frighten_hut_2="%sFrighten Hut from non native%s"
+ui_name_paradrop_unit_conquer="Contested Drop %sParatrooper%s"
+ui_name_paradrop_unit_frighten="Frighten Hut Drop %sParatrooper%s"
+ui_name_paradrop_unit_frighten_conquer="Frighten Hut Contested Drop %sParatrooper%s"
+ui_name_paradrop_unit_enter="Enter Hut Drop %sParatrooper%s"
+ui_name_paradrop_unit_enter_conquer="Enter Hut Contested Drop %sParatrooper%s"
+move_blocked_by="Transport Disembark","Transport Disembark 2","Conquer Extras","Conquer Extras 2","Enter Hut","Enter Hut 2","Frighten Hut","Frighten Hut 2"  # Forbid "Unit Move" if any one of the listed actions are legal.
+quiet_actions="Conquer City 2","Transport Disembark 2","Conquer Extras 2","Enter Hut 2","Frighten Hut 2","Unit Move"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -88,10 +125,11 @@ ui_name_bombard="%sBombard%s"
 
 [actionenabler_0]
 action="Establish Embassy"
-actor_reqs={"type","name","range"
-"UnitFlag","Spy","Local"
-"MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Spy","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","Foreign","Local",TRUE,FALSE
+"DiplRel","Has real embassy","Local",FALSE,TRUE
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
@@ -99,11 +137,12 @@ target_reqs={"type","name","range","present"
 
 [actionenabler_1]
 action="Establish Embassy Stay"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Diplomat","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
-"UnitFlag","Spy","Local",FALSE
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Diplomat","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","Foreign","Local",TRUE,FALSE
+"UnitFlag","Spy","Local",FALSE,FALSE
+"DiplRel","Has real embassy","Local",FALSE,TRUE
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
@@ -111,10 +150,11 @@ target_reqs={"type","name","range","present"
 
 [actionenabler_2]
 action="Establish Embassy Stay"
-actor_reqs={"type","name","range"
-"UnitType","Explorer","Local"
-"MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+actor_reqs={"type","name","range","present","quiet"
+"UnitType","Explorer","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","Foreign","Local",TRUE,FALSE
+"DiplRel","Has real embassy","Local",FALSE,TRUE
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
@@ -125,7 +165,7 @@ action="Investigate City"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Diplomat","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
+"DiplRel","Foreign","Local",TRUE
 "UnitFlag","Spy","Local",FALSE
 }
 
@@ -134,7 +174,7 @@ action="Investigate City"
 actor_reqs={"type","name","range"
 "UnitFlag","Spy","Local"
 "MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+"DiplRel","Foreign","Local"
 }
 
 [actionenabler_5]
@@ -142,7 +182,7 @@ action="Investigate City"
 actor_reqs={"type","name","range"
 "UnitType","Explorer","Local"
 "MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+"DiplRel","Foreign","Local"
 }
 
 [actionenabler_6]
@@ -186,43 +226,52 @@ actor_reqs={"type","name","range"
 }
 
 [actionenabler_10]
+action="Sabotage City Production Escape"
+actor_reqs={"type","name","range"
+"DiplRel","War","Local"
+"UnitFlag","Spy","Local"
+"UnitState","OnLivableTile","Local"
+"MinMoveFrags","1","Local"
+}
+
+[actionenabler_11]
 action="Steal Tech"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Spy","Local",FALSE
 "UnitFlag","Diplomat","Local",TRUE
 "UnitState","OnLivableTile","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
-}
-target_reqs={"type","name","range","present"
-"NationGroup","Barbarian","Player",FALSE
-}
-
-[actionenabler_11]
-action="Steal Tech Escape Expected"
-actor_reqs={"type","name","range"
-"UnitFlag","Spy","Local"
-"UnitState","OnLivableTile","Local"
-"MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+"DiplRel","Foreign","Local",TRUE
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
 }
 
 [actionenabler_12]
-action="Targeted Steal Tech Escape Expected"
+action="Steal Tech Escape Expected"
 actor_reqs={"type","name","range"
 "UnitFlag","Spy","Local"
 "UnitState","OnLivableTile","Local"
 "MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+"DiplRel","Foreign","Local"
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
 }
 
 [actionenabler_13]
+action="Targeted Steal Tech Escape Expected"
+actor_reqs={"type","name","range"
+"UnitFlag","Spy","Local"
+"UnitState","OnLivableTile","Local"
+"MinMoveFrags","1","Local"
+"DiplRel","Foreign","Local"
+}
+target_reqs={"type","name","range","present"
+"NationGroup","Barbarian","Player",FALSE
+}
+
+[actionenabler_14]
 action="Incite City"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Diplomat","Local",TRUE
@@ -230,25 +279,8 @@ actor_reqs={"type","name","range","present"
 "DiplRel","Team","Local",FALSE
 "UnitState","OnLivableTile","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
+"DiplRel","Foreign","Local",TRUE
 "UnitFlag","Spy","Local",FALSE
-}
-target_reqs={"type","name","range","present"
-"Building","Courthouse","City",FALSE
-"Building","Palace","City",FALSE
-"Building","Ecclesiastical Palace","City",FALSE
-"Building","Mausoleum of Mausolos","Player",FALSE
-}
-
-[actionenabler_14]
-action="Incite City Escape"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Spy","Local",TRUE
-"DiplRel","Alliance","Local",FALSE
-"DiplRel","Team","Local",FALSE
-"UnitState","OnLivableTile","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
 }
 target_reqs={"type","name","range","present"
 "Building","Courthouse","City",FALSE
@@ -258,31 +290,50 @@ target_reqs={"type","name","range","present"
 }
 
 [actionenabler_15]
-action="Establish Trade Route"
-actor_reqs={"type","name","range"
-"UnitFlag","TradeRoute","Local"
-"MinMoveFrags","1","Local"
+action="Incite City Escape"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Spy","Local",TRUE
+"DiplRel","Alliance","Local",FALSE
+"DiplRel","Team","Local",FALSE
+"UnitState","OnLivableTile","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","Foreign","Local",TRUE
+}
+target_reqs={"type","name","range","present"
+"Building","Courthouse","City",FALSE
+"Building","Palace","City",FALSE
+"Building","Ecclesiastical Palace","City",FALSE
+"Building","Mausoleum of Mausolos","Player",FALSE
 }
 
 [actionenabler_16]
+action="Establish Trade Route"
+actor_reqs={"type","name","range","quiet"
+"UnitFlag","TradeRoute","Local",FALSE
+"MinMoveFrags","1","Local",FALSE
+"UnitState","HasHomeCity","Local",TRUE
+}
+
+[actionenabler_17]
 action="Enter Marketplace"
-actor_reqs={"type","name","range","present"
-"UnitFlag","TradeRoute","Local",TRUE
-"DiplRel","Is foreign","Local",FALSE
-"AI","Away","Player",FALSE
-"AI","Novice","Player",FALSE
-"AI","Easy","Player",FALSE
-"AI","Normal","Player",FALSE
-"AI","Hard","Player",FALSE
-"AI","Cheating","Player",FALSE
-"AI","Experimental","Player",FALSE
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","TradeRoute","Local",TRUE,FALSE
+"DiplRel","Foreign","Local",FALSE,FALSE
+"AI","Away","Player",FALSE,FALSE
+"AI","Novice","Player",FALSE,FALSE
+"AI","Easy","Player",FALSE,FALSE
+"AI","Normal","Player",FALSE,FALSE
+"AI","Hard","Player",FALSE,FALSE
+"AI","Cheating","Player",FALSE,FALSE
+"AI","Experimental","Player",FALSE,FALSE
+"UnitState","HasHomeCity","Local",TRUE,TRUE
 }
 target_reqs={"type","name","range","present"
 "Good","Goods","City",TRUE
 "Extra","Goods","City",FALSE
 }
 
-[actionenabler_17]
+[actionenabler_18]
 action="Help Wonder"
 actor_reqs={"type","name","range","present"
 "UnitFlag","HelpWonder","Local",TRUE
@@ -296,7 +347,7 @@ target_reqs={"type","name","range"
 "BuildingGenus","GreatWonder","Local"
 }
 
-[actionenabler_18]
+[actionenabler_19]
 action="Bribe Unit"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Diplomat","Local",TRUE
@@ -305,7 +356,7 @@ actor_reqs={"type","name","range","present"
 "DiplRel","Team","Local",FALSE
 "UnitState","OnLivableTile","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
+"DiplRel","Foreign","Local",TRUE
 }
 target_reqs={"type","name","range","present"
 "UnitFlag","Unbribable","Local",FALSE
@@ -313,7 +364,21 @@ target_reqs={"type","name","range","present"
 "MaxUnitsOnTile","1","Local",TRUE
 }
 
-[actionenabler_19]
+[actionenabler_20]
+action="Capture Units"
+actor_reqs={"type","name","range"
+"UnitFlag","Capturer","Local"
+"DiplRel","War","Local"
+"MinMoveFrags","1","Local"
+"DiplRel","Foreign","Local"
+}
+target_reqs={"type","name","range","present"
+"UnitFlag","Capturable","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"CityTile","Center","Local",FALSE
+}
+
+[actionenabler_21]
 action="Sabotage Unit Escape"
 actor_reqs={"type","name","range"
 "UnitFlag","Spy","Local"
@@ -327,21 +392,7 @@ target_reqs={"type","name","range","present"
 "MaxUnitsOnTile","1","Local",TRUE
 }
 
-[actionenabler_20]
-action="Capture Units"
-actor_reqs={"type","name","range"
-"UnitFlag","Capturer","Local"
-"DiplRel","War","Local"
-"MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
-}
-target_reqs={"type","name","range","present"
-"UnitFlag","Capturable","Local",TRUE
-"UnitState","Transporting","Local",FALSE
-"CityTile","Center","Local",FALSE
-}
-
-[actionenabler_21]
+[actionenabler_22]
 action="Found City"
 actor_reqs={"type","name","range"
 "UnitFlag","Cities","Local"
@@ -353,53 +404,589 @@ target_reqs={"type","name","range","present"
 "TerrainFlag","NoCities","Local",FALSE
 }
 
-[actionenabler_22]
+[actionenabler_23]
 action="Found City"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Cities","Local",TRUE
 "UnitState","OnLivableTile","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",FALSE
+"DiplRel","Foreign","Local",FALSE
 }
 target_reqs={"type","name","range","present"
 "CityTile","Claimed","Local",TRUE
 "TerrainFlag","NoCities","Local",FALSE
 }
 
-[actionenabler_23]
+[actionenabler_24]
 action="Join City"
 actor_reqs={"type","name","range","present"
 "UnitFlag","AddToCity","Local",TRUE
-"DiplRel","Is foreign","Local",FALSE
+"DiplRel","Foreign","Local",FALSE
 "MinMoveFrags","1","Local",TRUE
 }
 
-[actionenabler_24]
+[actionenabler_25]
 action="Steal Maps"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Diplomat","Local",TRUE
 "UnitState","OnLivableTile","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
+"DiplRel","Foreign","Local",TRUE
 "UnitFlag","Spy","Local",FALSE
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
 }
 
-[actionenabler_25]
+[actionenabler_26]
 action="Steal Maps Escape"
 actor_reqs={"type","name","range"
 "UnitFlag","Spy","Local"
 "UnitState","OnLivableTile","Local"
 "MinMoveFrags","1","Local"
-"DiplRel","Is foreign","Local"
+"DiplRel","Foreign","Local"
 }
 target_reqs={"type","name","range","present"
 "NationGroup","Barbarian","Player",FALSE
 }
 
-[actionenabler_26]
+[actionenabler_27]
+action="Explode Nuclear"
+actor_reqs={"type","name","range"
+"UnitFlag","Nuclear","Local"
+}
+
+[actionenabler_28]
+action="Nuke City"
+actor_reqs={"type","name","range"
+"UnitFlag","Nuclear","Local"
+"MinMoveFrags","1","Local"
+"DiplRel","War","Local"
+}
+
+[actionenabler_29]
+action="Nuke Units"
+actor_reqs={"type","name","range"
+"UnitFlag","Nuclear","Local"
+"MinMoveFrags","1","Local"
+"DiplRel","War","Local"
+}
+target_reqs={"type","name","range","present"
+"CityTile","Center","Local",FALSE
+}
+
+[actionenabler_30]
+action="Expel Unit"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Diplomat","Local",TRUE
+"DiplRelTile","Foreign","Local",FALSE
+"DiplRel","Foreign","Local",TRUE
+"DiplRel","Alliance","Local",FALSE
+"DiplRel","War","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+}
+target_reqs={"type","name","range"
+"UnitFlag","NonMil","Local"
+"DiplRelTile","Foreign","Local"
+}
+
+[actionenabler_31]
+action="Expel Unit"
+actor_reqs={"type","name","range"
+"UnitFlag","Diplomat","Local"
+"UnitState","OnLivableTile","Local"
+"DiplRel","Foreign","Local"
+"MinMoveFrags","1","Local"
+}
+target_reqs={"type","name","range","present"
+"UnitFlag","Diplomat","Local",TRUE
+"DiplRelTile","Foreign","Local",TRUE
+"ExtraFlag","DiplomatDefense","Local",FALSE
+}
+
+[actionenabler_32]
+action="Expel Unit"
+actor_reqs={"type","name","range"
+"UnitFlag","Diplomat","Local"
+"UnitState","OnLivableTile","Local"
+"DiplRel","Foreign","Local"
+"MinMoveFrags","1","Local"
+}
+target_reqs={"type","name","range","present"
+"UnitClassFlag","Unreachable","Local",TRUE
+"DiplRelTile","Foreign","Local",TRUE
+"ExtraFlag","DiplomatDefense","Local",FALSE
+}
+
+[actionenabler_33]
+action="Disband Unit Recover"
+actor_reqs={"type","name","range","present"
+"UnitFlag","EvacuateFirst","Local",FALSE
+"DiplRel","War","Local",FALSE
+"DiplRel","Cease-fire","Local",FALSE
+"DiplRel","Armistice","Local",FALSE
+"DiplRel","Peace","Local",FALSE
+}
+
+[actionenabler_34]
+action="Disband Unit"
+actor_reqs={"type","name","range","present"
+"UnitFlag","EvacuateFirst","Local",FALSE
+}
+
+[actionenabler_35]
+action="Home City"
+actor_reqs={"type","name","range","present"
+"UnitFlag","NoHome","Local",FALSE
+"UnitState","HasHomeCity","Local",TRUE
+"DiplRel","Foreign","Local",FALSE
+}
+
+[actionenabler_36]
+action="Upgrade Unit"
+actor_reqs={"type","name","range","present"
+"DiplRel","Foreign","Local",FALSE
+}
+
+[actionenabler_37]
+action="Convert Unit"
+
+[actionenabler_38]
+action="Airlift Unit"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","Airliftable","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"CityTile","Center","Local",TRUE,TRUE
+}
+
+[actionenabler_39]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",FALSE,FALSE
+"UnitFlag","Only_Sea","Local",FALSE,FALSE
+"UnitFlag","HPFull","Local",FALSE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+
+[actionenabler_40]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",FALSE,FALSE
+"UnitFlag","Only_Sea","Local",FALSE,FALSE
+"UnitFlag","HPFull","Local",FALSE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+
+[actionenabler_41]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",FALSE,FALSE
+"UnitFlag","Only_Sea","Local",FALSE,FALSE
+"UnitFlag","HPFull","Local",FALSE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitClassFlag","AttFromNonNative","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+
+[actionenabler_42]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range","present"
+"TerrainClass","Oceanic","Local",FALSE
+"TerrainFlag","NoWheeled","Local",FALSE
+}
+
+[actionenabler_43]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"ExtraFlag","ForWheeled","Local"
+}
+
+[actionenabler_44]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Sea","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"TerrainClass","Oceanic","Local"
+}
+
+[actionenabler_45]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Sea","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Center","Local"
+}
+
+[actionenabler_46]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","HPFull","Local",TRUE,FALSE
+"UnitFlag","HP10","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinHitPoints","10","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+
+[actionenabler_47]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","HPFull","Local",TRUE,FALSE
+"UnitFlag","HP20","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinHitPoints","20","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+
+[actionenabler_48]
+action="Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","HPFull","Local",TRUE,FALSE
+"UnitFlag","HP30","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinHitPoints","30","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",FALSE,TRUE
+}
+
+[actionenabler_49]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",FALSE,FALSE
+"UnitFlag","Only_Sea","Local",FALSE,FALSE
+"UnitFlag","HPFull","Local",FALSE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+
+[actionenabler_50]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",FALSE,FALSE
+"UnitFlag","Only_Sea","Local",FALSE,FALSE
+"UnitFlag","HPFull","Local",FALSE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+
+[actionenabler_51]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",FALSE,FALSE
+"UnitFlag","Only_Sea","Local",FALSE,FALSE
+"UnitFlag","HPFull","Local",FALSE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitClassFlag","AttFromNonNative","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+
+[actionenabler_52]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range","present"
+"TerrainClass","Oceanic","Local",FALSE
+"TerrainFlag","NoWheeled","Local",FALSE
+}
+
+[actionenabler_53]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Land","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"ExtraFlag","ForWheeled","Local"
+}
+
+[actionenabler_54]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Sea","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"TerrainClass","Oceanic","Local"
+}
+
+[actionenabler_55]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Only_Sea","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","Transported","Local",FALSE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Center","Local"
+}
+
+[actionenabler_56]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","HPFull","Local",TRUE,FALSE
+"UnitFlag","HP10","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinHitPoints","10","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+
+[actionenabler_57]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","HPFull","Local",TRUE,FALSE
+"UnitFlag","HP20","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinHitPoints","20","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+
+[actionenabler_58]
+action="Suicide Attack"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","HPFull","Local",TRUE,FALSE
+"UnitFlag","HP30","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinHitPoints","30","Local",TRUE,FALSE
+"UnitClassFlag","Missile","Local",TRUE,TRUE
+}
+
+[actionenabler_59]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnLivableTile","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_60]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_61]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnLivableTile","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"CityTile","Center","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_62]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"CityTile","Center","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_63]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnLivableTile","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_64]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_65]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnLivableTile","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitFlag","BeachLander","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_66]
+action="Conquer City"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitFlag","BeachLander","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_67]
+action="Conquer City 2"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitState","OnLivableTile","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_68]
+action="Conquer City 2"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanOccupyCity","Local",TRUE,FALSE
+"UnitFlag","NonMil","Local",FALSE,FALSE
+"DiplRel","War","Local",TRUE,FALSE
+"MinMoveFrags","1","Local",TRUE,FALSE
+"UnitFlag","Marines","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,FALSE
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"MaxUnitsOnTile","0","Local"
+}
+
+[actionenabler_69]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -415,8 +1002,11 @@ actor_reqs={"type","name","range","present"
 "AI","Cheating","Player",FALSE
 "AI","Experimental","Player",FALSE
 }
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Center","Local",FALSE,TRUE
+}
 
-[actionenabler_27]
+[actionenabler_70]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -426,8 +1016,11 @@ actor_reqs={"type","name","range","present"
 "Extra","Bombardment","Local",FALSE
 "CityTile","Center","Local",TRUE
 }
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Center","Local",FALSE,TRUE
+}
 
-[actionenabler_28]
+[actionenabler_71]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -437,8 +1030,11 @@ actor_reqs={"type","name","range","present"
 "DiplRel","War","Local",TRUE
 "Extra","Bombardment","Local",FALSE
 }
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Center","Local",FALSE,TRUE
+}
 
-[actionenabler_29]
+[actionenabler_72]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -448,11 +1044,12 @@ actor_reqs={"type","name","range","present"
 "DiplRel","War","Local",TRUE
 "Extra","Bombardment","Local",FALSE
 }
-target_reqs={"type","name","range"
-"TerrainClass","Oceanic","Local"
+target_reqs={"type","name","range","present","quiet"
+"TerrainClass","Oceanic","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
 }
 
-[actionenabler_30]
+[actionenabler_73]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -462,12 +1059,13 @@ actor_reqs={"type","name","range","present"
 "DiplRel","War","Local",TRUE
 "Extra","Bombardment","Local",FALSE
 }
-target_reqs={"type","name","range","present"
-"ExtraFlag","ForWheeled","Local",FALSE
-"TerrainFlag","NoWheeled","Local",TRUE
+target_reqs={"type","name","range","present","quiet"
+"ExtraFlag","ForWheeled","Local",FALSE,FALSE
+"TerrainFlag","NoWheeled","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
 }
 
-[actionenabler_31]
+[actionenabler_74]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -482,7 +1080,7 @@ target_reqs={"type","name","range","present"
 "CityTile","Center","Local",FALSE
 }
 
-[actionenabler_32]
+[actionenabler_75]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -494,8 +1092,11 @@ actor_reqs={"type","name","range","present"
 "Extra","Bombardment","Local",FALSE
 "MinHitPoints","10","Local",FALSE
 }
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Center","Local",FALSE,TRUE
+}
 
-[actionenabler_33]
+[actionenabler_76]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -507,8 +1108,11 @@ actor_reqs={"type","name","range","present"
 "Extra","Bombardment","Local",FALSE
 "MinHitPoints","20","Local",FALSE
 }
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Center","Local",FALSE,TRUE
+}
 
-[actionenabler_34]
+[actionenabler_77]
 action="Bombard"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Bombarder","Local",TRUE
@@ -520,266 +1124,1143 @@ actor_reqs={"type","name","range","present"
 "Extra","Bombardment","Local",FALSE
 "MinHitPoints","30","Local",FALSE
 }
-
-[actionenabler_35]
-action="Explode Nuclear"
-actor_reqs={"type","name","range"
-"UnitFlag","Nuclear","Local"
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Center","Local",FALSE,TRUE
 }
 
-[actionenabler_36]
-action="Expel Unit"
+[actionenabler_78]
+action="Bombard"
 actor_reqs={"type","name","range","present"
-"UnitFlag","Diplomat","Local",TRUE
-"UnitState","OnDomesticTile","Local",TRUE
-"DiplRel","Is foreign","Local",TRUE
-"DiplRel","Alliance","Local",FALSE
-"DiplRel","War","Local",FALSE
+"UnitFlag","Bombarder","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+"AI","Away","Player",FALSE
+"AI","Novice","Player",FALSE
+"AI","Easy","Player",FALSE
+"AI","Normal","Player",FALSE
+"AI","Hard","Player",FALSE
+"AI","Cheating","Player",FALSE
+"AI","Experimental","Player",FALSE
+}
+target_reqs={"type","name","range","quiet"
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_79]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+"CityTile","Center","Local",TRUE
+}
+target_reqs={"type","name","range","quiet"
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_80]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"MinMoveFrags","6","Local",FALSE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+}
+target_reqs={"type","name","range","quiet"
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_81]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitFlag","Only_Land","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+}
+target_reqs={"type","name","range","quiet"
+"TerrainClass","Oceanic","Local",FALSE
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_82]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitFlag","Only_Land","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"ExtraFlag","ForWheeled","Local",FALSE,FALSE
+"TerrainFlag","NoWheeled","Local",TRUE,FALSE
+"DiplRelTileOther","War","Local",TRUE,TRUE
+}
+
+[actionenabler_83]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitFlag","HPFull","Local",TRUE
+"UnitFlag","HP10","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+"MinHitPoints","10","Local",FALSE
+}
+target_reqs={"type","name","range","quiet"
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_84]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitFlag","HPFull","Local",TRUE
+"UnitFlag","HP20","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+"MinHitPoints","20","Local",FALSE
+}
+target_reqs={"type","name","range","quiet"
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_85]
+action="Bombard"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Bombarder","Local",TRUE
+"UnitFlag","HPFull","Local",TRUE
+"UnitFlag","HP30","Local",TRUE
+"UnitState","Transported","Local",FALSE
+"MinMoveFrags","1","Local",TRUE
+"DiplRel","War","Local",TRUE
+"Extra","Bombardment","Local",FALSE
+"MinHitPoints","30","Local",FALSE
+}
+target_reqs={"type","name","range","quiet"
+"DiplRelTileOther","War","Local",TRUE
+}
+
+[actionenabler_86]
+action="Fortify"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanFortify","Local",TRUE,TRUE
+"UnitFlag","Cant_Fortify","Local",FALSE,TRUE
+"TerrainFlag","NoFortify","Local",FALSE,TRUE
+"Activity","Fortified","Local",FALSE,TRUE
+}
+
+[actionenabler_87]
+action="Fortify"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","CanFortify","Local",TRUE,TRUE
+"UnitFlag","Cant_Fortify","Local",FALSE,TRUE
+"CityTile","Center","Local",TRUE,TRUE
+"Activity","Fortified","Local",FALSE,TRUE
+}
+
+[actionenabler_88]
+action="Cultivate"
+actor_reqs={"type","name","range","present"
+"UnitClass","Sea","Local",FALSE
+"UnitFlag","Settlers","Local",TRUE
+}
+
+[actionenabler_89]
+action="Plant"
+actor_reqs={"type","name","range","present"
+"UnitClass","Sea","Local",FALSE
+"UnitFlag","Settlers","Local",TRUE
+}
+
+[actionenabler_90]
+action="Transform Terrain"
+actor_reqs={"type","name","range"
+"Tech","Fusion Power","Player"
+"UnitFlag","Transform","Local"
+"UnitFlag","Settlers","Local"
+}
+
+[actionenabler_91]
+action="Build Road"
+actor_reqs={"type","name","range"
+"UnitFlag","Settlers","Local"
+}
+
+[actionenabler_92]
+action="Build Irrigation"
+actor_reqs={"type","name","range","present"
+"Tech","Electricity","Player",TRUE
+"UnitClass","Sea","Local",FALSE
+"UnitFlag","Settlers","Local",TRUE
+}
+target_reqs={"type","name","range"
+"TerrainAlter","CanIrrigate","Local"
+}
+
+[actionenabler_93]
+action="Build Irrigation"
+actor_reqs={"type","name","range","present"
+"UnitClass","Sea","Local",FALSE
+"UnitFlag","Settlers","Local",TRUE
+}
+target_reqs={"type","name","range"
+"TerrainClass","Oceanic","CAdjacent"
+"TerrainAlter","CanIrrigate","Local"
+}
+
+[actionenabler_94]
+action="Build Irrigation"
+actor_reqs={"type","name","range","present"
+"UnitClass","Sea","Local",FALSE
+"UnitFlag","Settlers","Local",TRUE
+}
+target_reqs={"type","name","range"
+"ExtraFlag","IrrigationSource","CAdjacent"
+"TerrainAlter","CanIrrigate","Local"
+}
+
+[actionenabler_95]
+action="Build Mine"
+actor_reqs={"type","name","range","present"
+"UnitClass","Sea","Local",FALSE
+"UnitFlag","Settlers","Local",TRUE
+}
+target_reqs={"type","name","range","present"
+"Terrain","Deep Ocean","Local",FALSE
+"TerrainAlter","CanMine","Local",TRUE
+}
+
+[actionenabler_96]
+action="Build Mine"
+actor_reqs={"type","name","range"
+"Tech","Miniaturization","Player"
+"UnitFlag","Settlers","Local"
+}
+target_reqs={"type","name","range"
+"Terrain","Deep Ocean","Local"
+}
+
+[actionenabler_97]
+action="Build Base"
+actor_reqs={"type","name","range"
+"UnitFlag","Settlers","Local"
+}
+
+[actionenabler_98]
+action="Pillage"
+actor_reqs={"type","name","range"
+"UnitClassFlag","CanPillage","Local"
+}
+
+[actionenabler_99]
+action="Clean Pollution"
+actor_reqs={"type","name","range"
+"UnitFlag","Settlers","Local"
+}
+
+[actionenabler_100]
+action="Clean Fallout"
+actor_reqs={"type","name","range"
+"UnitFlag","Settlers","Local"
+}
+
+[actionenabler_101]
+action="Transport Board"
+actor_reqs={"type","name","range","present","quiet"
+"DiplRel","Armistice","Local",FALSE,TRUE
+"DiplRel","War","Local",FALSE,TRUE
+"DiplRel","Cease-fire","Local",FALSE,TRUE
+"DiplRel","Peace","Local",FALSE,TRUE
+"DiplRel","Never met","Local",FALSE,TRUE
+}
+
+[actionenabler_102]
+action="Transport Alight"
+actor_reqs={"type","name","range","quiet"
+"UnitState","Transported","Local",TRUE
+"UnitState","OnLivableTile","Local",TRUE
+}
+target_reqs={"type","name","range","quiet"
+"UnitState","Transporting","Local",TRUE
+}
+
+[actionenabler_103]
+action="Transport Embark"
+actor_reqs={"type","name","range","present","quiet"
+"DiplRel","Armistice","Local",FALSE,TRUE
+"DiplRel","War","Local",FALSE,TRUE
+"DiplRel","Cease-fire","Local",FALSE,TRUE
+"DiplRel","Peace","Local",FALSE,TRUE
+"DiplRel","Never met","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_104]
+action="Transport Disembark"
+actor_reqs={"type","name","range","quiet"
+"UnitState","OnNativeTile","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
+"UnitState","Transported","Local",TRUE
+}
+
+[actionenabler_105]
+action="Transport Disembark"
+actor_reqs={"type","name","range","quiet"
+"CityTile","Center","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
+"UnitState","Transported","Local",TRUE
+}
+
+[actionenabler_106]
+action="Transport Disembark"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitState","Transported","Local",TRUE,TRUE
+}
+
+[actionenabler_107]
+action="Transport Disembark"
+actor_reqs={"type","name","range","quiet"
+"UnitFlag","BeachLander","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
+"UnitState","Transported","Local",TRUE
+}
+
+[actionenabler_108]
+action="Transport Disembark 2"
+actor_reqs={"type","name","range","present","quiet"
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitState","Transported","Local",TRUE,TRUE
+}
+
+[actionenabler_109]
+action="Transport Unload"
+actor_reqs={"type","name","range","quiet"
+"UnitState","Transporting","Local",TRUE
+}
+target_reqs={"type","name","range","quiet"
+"UnitState","Transported","Local",TRUE
+"UnitState","OnLivableTile","Local",TRUE
+}
+
+[actionenabler_110]
+action="Conquer Extras"
+actor_reqs={"type","name","range","quiet"
+"DiplRel","War","Local",TRUE
+"UnitState","OnNativeTile","Local",TRUE
 "MinMoveFrags","1","Local",TRUE
 }
-target_reqs={"type","name","range","present"
-"UnitFlag","NonMil","Local",TRUE
-"UnitState","OnDomesticTile","Local",FALSE
+
+[actionenabler_111]
+action="Conquer Extras"
+actor_reqs={"type","name","range","quiet"
+"UnitState","OnNativeTile","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Extras Owned","Local",FALSE,TRUE
 }
 
-[actionenabler_37]
-action="Expel Unit"
-actor_reqs={"type","name","range"
-"UnitFlag","Diplomat","Local"
-"UnitState","OnLivableTile","Local"
-"DiplRel","Is foreign","Local"
-"MinMoveFrags","1","Local"
-}
-target_reqs={"type","name","range","present"
-"UnitFlag","Diplomat","Local",TRUE
-"UnitState","OnDomesticTile","Local",FALSE
-"ExtraFlag","DiplomatDefense","Local",FALSE
+[actionenabler_112]
+action="Conquer Extras"
+actor_reqs={"type","name","range","quiet"
+"DiplRel","War","Local",TRUE
+"CityTile","Center","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
 }
 
-[actionenabler_38]
-action="Expel Unit"
-actor_reqs={"type","name","range"
-"UnitFlag","Diplomat","Local"
-"UnitState","OnLivableTile","Local"
-"DiplRel","Is foreign","Local"
-"MinMoveFrags","1","Local"
+[actionenabler_113]
+action="Conquer Extras"
+actor_reqs={"type","name","range","quiet"
+"CityTile","Center","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
 }
-target_reqs={"type","name","range","present"
-"UnitClassFlag","Unreachable","Local",TRUE
-"UnitState","OnDomesticTile","Local",FALSE
-"ExtraFlag","DiplomatDefense","Local",FALSE
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Extras Owned","Local",FALSE,TRUE
 }
 
-[actionenabler_39]
-action="Recycle Unit"
-actor_reqs={"type","name","range","present"
-"UnitFlag","EvacuateFirst","Local",FALSE
-"DiplRel","War","Local",FALSE
-"DiplRel","Cease-fire","Local",FALSE
-"DiplRel","Armistice","Local",FALSE
-"DiplRel","Peace","Local",FALSE
+[actionenabler_114]
+action="Conquer Extras"
+actor_reqs={"type","name","range","present","quiet"
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
 }
 
-[actionenabler_40]
-action="Disband Unit"
-actor_reqs={"type","name","range","present"
-"UnitFlag","EvacuateFirst","Local",FALSE
+[actionenabler_115]
+action="Conquer Extras"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Extras Owned","Local",FALSE,TRUE
 }
 
-[actionenabler_41]
-action="Home City"
-actor_reqs={"type","name","range","present"
-"UnitFlag","NoHome","Local",FALSE
-"UnitState","HasHomeCity","Local",TRUE
-"DiplRel","Is foreign","Local",FALSE
+[actionenabler_116]
+action="Conquer Extras"
+actor_reqs={"type","name","range","quiet"
+"DiplRel","War","Local",TRUE
+"UnitFlag","BeachLander","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
 }
 
-[actionenabler_42]
-action="Upgrade Unit"
-actor_reqs={"type","name","range","present"
-"DiplRel","Is foreign","Local",FALSE
+[actionenabler_117]
+action="Conquer Extras"
+actor_reqs={"type","name","range","quiet"
+"UnitFlag","BeachLander","Local",TRUE
+"MinMoveFrags","1","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Extras Owned","Local",FALSE,TRUE
 }
 
-[actionenabler_43]
+[actionenabler_118]
+action="Conquer Extras 2"
+actor_reqs={"type","name","range","present","quiet"
+"DiplRel","War","Local",TRUE,TRUE
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_119]
+action="Conquer Extras 2"
+actor_reqs={"type","name","range","present","quiet"
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Extras Owned","Local",FALSE,TRUE
+}
+
+[actionenabler_120]
+action="Enter Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_121]
+action="Enter Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_122]
+action="Enter Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_123]
+action="Enter Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitFlag","BeachLander","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_124]
+action="Enter Hut 2"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+}
+
+[actionenabler_125]
+action="Frighten Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+
+[actionenabler_126]
+action="Frighten Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+
+[actionenabler_127]
+action="Frighten Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitClassFlag","TerrainSpeed","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+
+[actionenabler_128]
+action="Frighten Hut"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitFlag","BeachLander","Local",TRUE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+
+[actionenabler_129]
+action="Frighten Hut 2"
+actor_reqs={"type","name","range","present","quiet"
+"UnitClassFlag","HutNothing","Local",FALSE,FALSE
+"UnitState","OnNativeTile","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"UnitClassFlag","TerrainSpeed","Local",TRUE,TRUE
+"UnitFlag","BeachLander","Local",FALSE,TRUE
+"MinMoveFrags","1","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+
+[actionenabler_130]
 action="Paradrop Unit"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Paratroopers","Local",TRUE
 "UnitState","Transporting","Local",FALSE
 "ExtraFlag","ParadropFrom","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutNothing","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"Extra","Castle","Local",FALSE,TRUE
 }
 
-[actionenabler_44]
+[actionenabler_131]
 action="Paradrop Unit"
 actor_reqs={"type","name","range","present"
 "UnitFlag","Paratroopers","Local",TRUE
 "UnitState","Transporting","Local",FALSE
 "CityTile","Center","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutNothing","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"Extra","Castle","Local",FALSE,TRUE
 }
 
-[actionenabler_45]
-action="Airlift Unit"
+[actionenabler_132]
+action="Paradrop Unit"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",FALSE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_133]
+action="Paradrop Unit"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",FALSE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_134]
+action="Paradrop Unit Conquer"
 actor_reqs={"type","name","range","present"
-"UnitClassFlag","Airliftable","Local",TRUE
+"UnitFlag","Paratroopers","Local",TRUE
 "UnitState","Transporting","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
+"ExtraFlag","ParadropFrom","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutNothing","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"Extra","Castle","Local",TRUE,TRUE
 }
 
-[actionenabler_46]
-action="Attack"
+[actionenabler_135]
+action="Paradrop Unit Conquer"
 actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Land","Local",FALSE
-"UnitFlag","Only_Sea","Local",FALSE
-"UnitFlag","HPFull","Local",FALSE
-"UnitFlag","NonMil","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"UnitState","OnNativeTile","Local",TRUE
-"DiplRel","War","Local",TRUE
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"CityTile","Center","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutNothing","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"Extra","Castle","Local",TRUE,TRUE
 }
 
-[actionenabler_47]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Land","Local",FALSE
-"UnitFlag","Only_Sea","Local",FALSE
-"UnitFlag","HPFull","Local",FALSE
-"UnitFlag","NonMil","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"UnitFlag","Marines","Local",TRUE
-"DiplRel","War","Local",TRUE
+[actionenabler_136]
+action="Paradrop Unit Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
 }
 
-[actionenabler_48]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Land","Local",FALSE
-"UnitFlag","Only_Sea","Local",FALSE
-"UnitFlag","HPFull","Local",FALSE
-"UnitFlag","NonMil","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"UnitClassFlag","AttFromNonNative","Local",TRUE
-"DiplRel","War","Local",TRUE
+[actionenabler_137]
+action="Paradrop Unit Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
 }
 
-[actionenabler_49]
-action="Attack"
+[actionenabler_138]
+action="Paradrop Unit Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_139]
+action="Paradrop Unit Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_140]
+action="Paradrop Unit Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_141]
+action="Paradrop Unit Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"UnitClassFlag","HutNothing","Local",TRUE,FALSE
+"Nation","Animal Kingdom","Player",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_142]
+action="Paradrop Unit Frighten"
 actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Land","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"Extra","Castle","Local",FALSE,TRUE
+}
+
+[actionenabler_143]
+action="Paradrop Unit Frighten"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"CityTile","Center","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"Extra","Castle","Local",FALSE,TRUE
+}
+
+[actionenabler_144]
+action="Paradrop Unit Frighten"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",FALSE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_145]
+action="Paradrop Unit Frighten"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",FALSE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_146]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"Extra","Castle","Local",TRUE,TRUE
+}
+
+[actionenabler_147]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"CityTile","Center","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"Extra","Castle","Local",TRUE,TRUE
+}
+
+[actionenabler_148]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_149]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_150]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_151]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_152]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"Nation","Animal Kingdom","Player",FALSE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_153]
+action="Paradrop Unit Frighten Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"Nation","Animal Kingdom","Player",FALSE,TRUE
+"UnitClassFlag","HutFrighten","Local",TRUE,FALSE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_154]
+action="Paradrop Unit Enter"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"Extra","Castle","Local",FALSE,TRUE
+}
+
+[actionenabler_155]
+action="Paradrop Unit Enter"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"CityTile","Center","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"Extra","Castle","Local",FALSE,TRUE
+}
+
+[actionenabler_156]
+action="Paradrop Unit Enter"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_157]
+action="Paradrop Unit Enter"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_158]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"Extra","Castle","Local",TRUE,TRUE
+}
+
+[actionenabler_159]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present"
+"UnitFlag","Paratroopers","Local",TRUE
+"UnitState","Transporting","Local",FALSE
+"CityTile","Center","Local",TRUE
+"UnitType","Paratroopers","Local",TRUE
+"MinMoveFrags","6","Local",TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",FALSE,TRUE
+"CityTile","Center","Local",FALSE,TRUE
+"Extra","Castle","Local",TRUE,TRUE
+}
+
+[actionenabler_160]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_161]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_162]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_163]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+}
+target_reqs={"type","name","range","present","quiet"
+"CityTile","Claimed","Local",TRUE,FALSE
+"CityTile","Center","Local",FALSE,TRUE
+}
+
+[actionenabler_164]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"ExtraFlag","ParadropFrom","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"Nation","Animal Kingdom","Player",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_165]
+action="Paradrop Unit Enter Conquer"
+actor_reqs={"type","name","range","present","quiet"
+"UnitFlag","Paratroopers","Local",TRUE,FALSE
+"UnitState","Transporting","Local",FALSE,FALSE
+"CityTile","Center","Local",TRUE,FALSE
+"DiplRel","Peace","Local",FALSE,TRUE
+"UnitType","Paratroopers","Local",TRUE,FALSE
+"MinMoveFrags","6","Local",TRUE,FALSE
+"DiplRel","War","Local",TRUE,TRUE
+"UnitClassFlag","CanOccupyCity","Local",TRUE,TRUE
+"UnitFlag","NonMil","Local",FALSE,TRUE
+"Nation","Animal Kingdom","Player",FALSE,TRUE
+}
+target_reqs={"type","name","range"
+"CityTile","Claimed","Local"
+}
+
+[actionenabler_166]
+action="Unit Move"
+actor_reqs={"type","name","range","present"
+"MinMoveFrags","1","Local",TRUE
 "UnitState","Transported","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-}
-target_reqs={"type","name","range","present"
-"TerrainClass","Oceanic","Local",FALSE
-"TerrainFlag","NoWheeled","Local",FALSE
-}
-
-[actionenabler_50]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Land","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"UnitState","Transported","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-}
-target_reqs={"type","name","range"
-"ExtraFlag","ForWheeled","Local"
-}
-
-[actionenabler_51]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Sea","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"UnitState","Transported","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-}
-target_reqs={"type","name","range"
-"TerrainClass","Oceanic","Local"
-}
-
-[actionenabler_52]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","Only_Sea","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"UnitState","Transported","Local",FALSE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-}
-target_reqs={"type","name","range"
-"CityTile","Center","Local"
-}
-
-[actionenabler_53]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","HPFull","Local",TRUE
-"UnitFlag","HP10","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"UnitState","OnNativeTile","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-"MinHitPoints","10","Local",TRUE
-}
-
-[actionenabler_54]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","HPFull","Local",TRUE
-"UnitFlag","HP20","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"UnitState","OnNativeTile","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-"MinHitPoints","20","Local",TRUE
-}
-
-[actionenabler_55]
-action="Attack"
-actor_reqs={"type","name","range","present"
-"UnitFlag","HPFull","Local",TRUE
-"UnitFlag","HP30","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"UnitState","OnNativeTile","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"DiplRel","War","Local",TRUE
-"MinHitPoints","30","Local",TRUE
-}
-
-[actionenabler_56]
-action="Conquer City"
-actor_reqs={"type","name","range","present"
-"UnitClassFlag","CanOccupyCity","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"DiplRel","War","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"UnitState","OnLivableTile","Local",TRUE
-"Nation","Animal Kingdom","Player",FALSE
-}
-target_reqs={"type","name","range"
-"MaxUnitsOnTile","0","Local"
-}
-
-[actionenabler_57]
-action="Conquer City"
-actor_reqs={"type","name","range","present"
-"UnitClassFlag","CanOccupyCity","Local",TRUE
-"UnitFlag","NonMil","Local",FALSE
-"DiplRel","War","Local",TRUE
-"MinMoveFrags","1","Local",TRUE
-"UnitFlag","Marines","Local",TRUE
-"Nation","Animal Kingdom","Player",FALSE
-}
-target_reqs={"type","name","range"
-"MaxUnitsOnTile","0","Local"
 }
 
 [combat_rules]
 tired_attack=TRUE
 only_killing_makes_veteran=TRUE
+damage_reduces_bombard_rate=FALSE
 
 [borders]
 radius_sq_city=5
@@ -1076,6 +2557,51 @@ reqs={"type","name","range","present"
 "Extra","Goods","City",FALSE
 }
 flags="Bidirectional","Depletes"
+
+; /* <-- avoid gettext warnings
+;
+; Clause types
+;
+; Clause types that are not listed here, are not enabled at all.
+;
+; type                   = Type of the clause, one of "Advance", "Gold", "Map", "Seamap",
+;                          "City", "Ceasefire", "Peace", "Alliance", "Vision", "Embassy"
+; giver_reqs             = requirements that the giving side of the clause needs to fulfill
+;                          (see effects.ruleset and README.effects for help on requirements)
+; receiver_reqs          = requirements that the receiving side of the clause needs to fulfill
+;
+; */ <-- avoid gettext warnings
+
+
+[clause_0]
+type="Advance"
+
+[clause_1]
+type="Gold"
+
+[clause_2]
+type="Map"
+
+[clause_3]
+type="Seamap"
+
+[clause_4]
+type="City"
+
+[clause_5]
+type="Ceasefire"
+
+[clause_6]
+type="Peace"
+
+[clause_7]
+type="Alliance"
+
+[clause_8]
+type="Vision"
+
+[clause_9]
+type="Embassy"
 
 [settings]
 set={"name","value","lock"

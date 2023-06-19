@@ -12,9 +12,9 @@
 
 [datafile]
 description="Civ2Civ3 Earth ruleset effect data for Freeciv"
-ruledit="3.0.7+"
-options="+Freeciv-3.0-ruleset"
-format_version=10
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
 
 ; /* <-- avoid gettext warnings
 ;
@@ -223,7 +223,7 @@ reqs={"type","name","range"
 type="Output_Bonus"
 value=-25
 reqs={"type","name","range"
-"AI","Handicapped","Player"
+"AI","Restricted","Player"
 "OutputType","trade","Local"
 }
 
@@ -231,7 +231,7 @@ reqs={"type","name","range"
 type="Output_Bonus"
 value=-25
 reqs={"type","name","range"
-"AI","Handicapped","Player"
+"AI","Restricted","Player"
 "OutputType","shield","Local"
 }
 
@@ -318,7 +318,7 @@ reqs={"type","name","range","present"
 "Extra","Naval Mine","Adjacent",TRUE
 "TerrainClass","Oceanic","Local",TRUE
 "Terrain","Deep Ocean","Local",FALSE
-"UnitState","OnDomesticTile","Local",FALSE
+"DiplRelTile","Foreign","Local",TRUE
 "UnitClass","Land","Local",FALSE
 "UnitClass","Small Land","Local",FALSE
 "UnitClass","Big Land","Local",FALSE
@@ -333,7 +333,7 @@ type="Unit_Vision_Radius_Sq"
 value=-4
 reqs={"type","name","range","present"
 "Extra","Naval Mine","Local",TRUE
-"UnitState","OnDomesticTile","Local",FALSE
+"DiplRelTile","Foreign","Local",TRUE
 "UnitClass","Land","Local",FALSE
 "UnitClass","Small Land","Local",FALSE
 "UnitClass","Big Land","Local",FALSE
@@ -2830,7 +2830,7 @@ type="Nuke_Proof"
 value=100
 reqs={"type","name","range","present"
 "Building","SDI Defense","City",TRUE
-"DiplRel","Is foreign","Local",TRUE
+"DiplRel","Foreign","Local",TRUE
 "DiplRel","Team","Local",FALSE
 }
 
@@ -5179,77 +5179,6 @@ reqs={"type","name","range","present"
 }
 
 [effect_608]
-type="Irrig_Possible"
-value=1
-reqs={"type","name","range","present"
-"Tech","Electricity","Player",TRUE
-"UnitClass","Sea","Local",FALSE
-}
-
-[effect_609]
-type="Irrig_Possible"
-value=1
-reqs={"type","name","range","present"
-"TerrainClass","Oceanic","CAdjacent",TRUE
-"UnitClass","Sea","Local",FALSE
-}
-
-[effect_610]
-type="Irrig_Possible"
-value=1
-reqs={"type","name","range","present"
-"ExtraFlag","IrrigationSource","CAdjacent",TRUE
-"UnitClass","Sea","Local",FALSE
-}
-
-[effect_611]
-type="Irrig_Possible"
-value=-3
-reqs={"type","name","range","present"
-"Terrain","Desert","Local",TRUE
-"Extra","Irrigation","Local",TRUE
-"ExtraFlag","AllowsFarmlandOnDesert","Local",FALSE
-}
-
-[effect_612]
-type="Mining_Possible"
-value=1
-reqs={"type","name","range","present"
-"Terrain","Deep Ocean","Local",FALSE
-"UnitClass","Sea","Local",FALSE
-}
-
-[effect_613]
-type="Mining_Possible"
-value=1
-reqs={"type","name","range"
-"Terrain","Deep Ocean","Local"
-"Tech","Miniaturization","Player"
-}
-
-[effect_614]
-type="Irrig_TF_Possible"
-value=1
-reqs={"type","name","range","present"
-"UnitClass","Sea","Local",FALSE
-}
-
-[effect_615]
-type="Mining_TF_Possible"
-value=1
-reqs={"type","name","range","present"
-"UnitClass","Sea","Local",FALSE
-}
-
-[effect_616]
-type="Transform_Possible"
-value=1
-reqs={"type","name","range"
-"Tech","Fusion Power","Player"
-"UnitFlag","Transform","Local"
-}
-
-[effect_617]
 type="Output_Tile_Punish_Pct"
 value=50
 reqs={"type","name","range","present","quiet"
@@ -5260,7 +5189,7 @@ reqs={"type","name","range","present","quiet"
 "OutputType","science","Local",FALSE,TRUE
 }
 
-[effect_618]
+[effect_609]
 type="Output_Tile_Punish_Pct"
 value=50
 reqs={"type","name","range","present","quiet"
@@ -5271,7 +5200,7 @@ reqs={"type","name","range","present","quiet"
 "OutputType","science","Local",FALSE,TRUE
 }
 
-[effect_619]
+[effect_610]
 type="Output_Tile_Punish_Pct"
 value=75
 reqs={"type","name","range","present","quiet"
@@ -5282,11 +5211,83 @@ reqs={"type","name","range","present","quiet"
 "OutputType","science","Local",FALSE,TRUE
 }
 
-[effect_620]
+[effect_611]
 type="Casus_Belli_Caught"
 value=1
 reqs={"type","name","range","present"
 "Action","Steal Maps","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_612]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Maps","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_613]
+type="Casus_Belli_Caught"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Maps Escape","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_614]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Maps Escape","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_615]
+type="Casus_Belli_Caught"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Tech","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_616]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Tech","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_617]
+type="Casus_Belli_Caught"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Tech Escape Expected","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_618]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range","present"
+"Action","Steal Tech Escape Expected","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_619]
+type="Casus_Belli_Caught"
+value=1
+reqs={"type","name","range","present"
+"Action","Targeted Steal Tech Escape Expected","Local",TRUE
+"DiplRel","War","Local",FALSE
+}
+
+[effect_620]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range","present"
+"Action","Targeted Steal Tech Escape Expected","Local",TRUE
 "DiplRel","War","Local",FALSE
 }
 
@@ -5294,83 +5295,11 @@ reqs={"type","name","range","present"
 type="Casus_Belli_Success"
 value=1
 reqs={"type","name","range","present"
-"Action","Steal Maps","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_622]
-type="Casus_Belli_Caught"
-value=1
-reqs={"type","name","range","present"
-"Action","Steal Maps Escape","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_623]
-type="Casus_Belli_Success"
-value=1
-reqs={"type","name","range","present"
-"Action","Steal Maps Escape","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_624]
-type="Casus_Belli_Caught"
-value=1
-reqs={"type","name","range","present"
-"Action","Steal Tech","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_625]
-type="Casus_Belli_Success"
-value=1
-reqs={"type","name","range","present"
-"Action","Steal Tech","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_626]
-type="Casus_Belli_Caught"
-value=1
-reqs={"type","name","range","present"
-"Action","Steal Tech Escape Expected","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_627]
-type="Casus_Belli_Success"
-value=1
-reqs={"type","name","range","present"
-"Action","Steal Tech Escape Expected","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_628]
-type="Casus_Belli_Caught"
-value=1
-reqs={"type","name","range","present"
-"Action","Targeted Steal Tech Escape Expected","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_629]
-type="Casus_Belli_Success"
-value=1
-reqs={"type","name","range","present"
-"Action","Targeted Steal Tech Escape Expected","Local",TRUE
-"DiplRel","War","Local",FALSE
-}
-
-[effect_630]
-type="Casus_Belli_Success"
-value=1
-reqs={"type","name","range","present"
 "Action","Bribe Unit","Local",TRUE
 "DiplRel","War","Local",FALSE
 }
 
-[effect_631]
+[effect_622]
 type="Casus_Belli_Success"
 value=1
 reqs={"type","name","range","present"
@@ -5378,7 +5307,7 @@ reqs={"type","name","range","present"
 "DiplRel","War","Local",FALSE
 }
 
-[effect_632]
+[effect_623]
 type="Casus_Belli_Success"
 value=1
 reqs={"type","name","range","present"
@@ -5386,261 +5315,580 @@ reqs={"type","name","range","present"
 "DiplRel","War","Local",FALSE
 }
 
-[effect_633]
+[effect_624]
 type="Casus_Belli_Success"
 value=1
 reqs={"type","name","range"
 "Action","Explode Nuclear","Local"
 }
 
-[effect_634]
+[effect_625]
 type="Action_Odds_Pct"
 value=-50
 reqs={"type","name","range"
 "Action","Targeted Sabotage City Escape","Local"
 }
 
-[effect_635]
+[effect_626]
 type="Spy_Resistant"
 value=25
 reqs={"type","name","range"
 "ExtraFlag","DiplomatDefense","Local"
 }
 
-[effect_636]
+[effect_627]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","100","City"
 }
 
-[effect_637]
+[effect_628]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","200","City"
 }
 
-[effect_638]
+[effect_629]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","300","City"
 }
 
-[effect_639]
+[effect_630]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","400","City"
 }
 
-[effect_640]
+[effect_631]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","500","City"
 }
 
-[effect_641]
+[effect_632]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","600","City"
 }
 
-[effect_642]
+[effect_633]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","700","City"
 }
 
-[effect_643]
+[effect_634]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","800","City"
 }
 
-[effect_644]
+[effect_635]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","900","City"
 }
 
-[effect_645]
+[effect_636]
 type="Spy_Resistant"
 value=5
 reqs={"type","name","range"
 "MinCulture","1000","City"
 }
 
-[effect_646]
+[effect_637]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","1000","Player"
 }
 
-[effect_647]
+[effect_638]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","2000","Player"
 }
 
-[effect_648]
+[effect_639]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","3000","Player"
 }
 
-[effect_649]
+[effect_640]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","4000","Player"
 }
 
-[effect_650]
+[effect_641]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","5000","Player"
 }
 
-[effect_651]
+[effect_642]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","6000","Player"
 }
 
-[effect_652]
+[effect_643]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","7000","Player"
 }
 
-[effect_653]
+[effect_644]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","8000","Player"
 }
 
-[effect_654]
+[effect_645]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","9000","Player"
 }
 
-[effect_655]
+[effect_646]
 type="Unit_Bribe_Cost_Pct"
 value=50
 reqs={"type","name","range"
 "MinCulture","10000","Player"
+}
+
+[effect_647]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","1000","Player"
+}
+
+[effect_648]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","2000","Player"
+}
+
+[effect_649]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","3000","Player"
+}
+
+[effect_650]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","4000","Player"
+}
+
+[effect_651]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","5000","Player"
+}
+
+[effect_652]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","6000","Player"
+}
+
+[effect_653]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","7000","Player"
+}
+
+[effect_654]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","8000","Player"
+}
+
+[effect_655]
+type="Incite_Cost_Pct"
+value=50
+reqs={"type","name","range"
+"MinCulture","9000","Player"
 }
 
 [effect_656]
 type="Incite_Cost_Pct"
 value=50
 reqs={"type","name","range"
-"MinCulture","1000","Player"
-}
-
-[effect_657]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","2000","Player"
-}
-
-[effect_658]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","3000","Player"
-}
-
-[effect_659]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","4000","Player"
-}
-
-[effect_660]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","5000","Player"
-}
-
-[effect_661]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","6000","Player"
-}
-
-[effect_662]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","7000","Player"
-}
-
-[effect_663]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","8000","Player"
-}
-
-[effect_664]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
-"MinCulture","9000","Player"
-}
-
-[effect_665]
-type="Incite_Cost_Pct"
-value=50
-reqs={"type","name","range"
 "MinCulture","10000","Player"
 }
 
-[effect_666]
+[effect_657]
 type="Building_Buy_Cost_Pct"
 value=100
 reqs={"type","name","range"
 "BuildingGenus","GreatWonder","Local"
 }
 
-[effect_667]
+[effect_658]
 type="Building_Buy_Cost_Pct"
 value=100
 reqs={"type","name","range"
 "Building","Space Component","Local"
 }
 
-[effect_668]
+[effect_659]
 type="Building_Buy_Cost_Pct"
 value=100
 reqs={"type","name","range"
 "Building","Space Module","Local"
 }
 
-[effect_669]
+[effect_660]
 type="Building_Buy_Cost_Pct"
 value=100
 reqs={"type","name","range"
 "Building","Space Structural","Local"
+}
+
+[effect_661]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Transport Disembark 2","Local",TRUE
+"UnitState","OnNativeTile","Local",TRUE
+"UnitClassFlag","TerrainSpeed","Local",FALSE
+}
+
+[effect_662]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Conquer City 2","Local",TRUE
+"UnitState","OnNativeTile","Local",TRUE
+"UnitClassFlag","TerrainSpeed","Local",FALSE
+}
+
+[effect_663]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Conquer Extras 2","Local",TRUE
+"UnitState","OnNativeTile","Local",TRUE
+"UnitClassFlag","TerrainSpeed","Local",FALSE
+}
+
+[effect_664]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Enter Hut 2","Local",TRUE
+"UnitState","OnNativeTile","Local",TRUE
+"UnitClassFlag","TerrainSpeed","Local",FALSE
+}
+
+[effect_665]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Frighten Hut 2","Local",TRUE
+"UnitState","OnNativeTile","Local",TRUE
+"UnitClassFlag","TerrainSpeed","Local",FALSE
+}
+
+[effect_666]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range"
+"Action","Nuke City","Local"
+}
+
+[effect_667]
+type="Casus_Belli_Success"
+value=1
+reqs={"type","name","range"
+"Action","Nuke Units","Local"
+}
+
+[effect_668]
+type="Action_Odds_Pct"
+value=-50
+reqs={"type","name","range"
+"Action","Sabotage City Production Escape","Local"
+}
+
+[effect_669]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Bombard","Local",TRUE
+}
+
+[effect_670]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Heal Unit","Local",TRUE
+}
+
+[effect_671]
+type="Action_Success_Actor_Move_Cost"
+value=6
+reqs={"type","name","range","quiet"
+"Action","Expel Unit","Local",TRUE
+}
+
+[effect_672]
+type="Action_Success_Actor_Move_Cost"
+value=6
+reqs={"type","name","range","quiet"
+"Action","Capture Units","Local",TRUE
+}
+
+[effect_673]
+type="Action_Success_Actor_Move_Cost"
+value=1
+reqs={"type","name","range","quiet"
+"Action","Establish Embassy","Local",TRUE
+}
+
+[effect_674]
+type="Action_Success_Actor_Move_Cost"
+value=1
+reqs={"type","name","range","quiet"
+"Action","Investigate City","Local",TRUE
+}
+
+[effect_675]
+type="Action_Success_Target_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Expel Unit","Local",TRUE
+}
+
+[effect_676]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Attack","Local",TRUE
+"UnitFlag","OneAttack","Local",TRUE
+}
+
+[effect_677]
+type="Action_Success_Actor_Move_Cost"
+value=6
+reqs={"type","name","range","present","quiet"
+"Action","Attack","Local",TRUE,TRUE
+"UnitFlag","OneAttack","Local",FALSE,TRUE
+}
+
+[effect_678]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Poison City Escape","Local",TRUE
+}
+
+[effect_679]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Steal Gold Escape","Local",TRUE
+}
+
+[effect_680]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Sabotage City Escape","Local",TRUE
+}
+
+[effect_681]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Targeted Sabotage City Escape","Local",TRUE
+}
+
+[effect_682]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Sabotage City Production Escape","Local",TRUE
+}
+
+[effect_683]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Steal Tech Escape Expected","Local",TRUE
+}
+
+[effect_684]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Targeted Steal Tech Escape Expected","Local",TRUE
+}
+
+[effect_685]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Incite City Escape","Local",TRUE
+}
+
+[effect_686]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Sabotage Unit Escape","Local",TRUE
+}
+
+[effect_687]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Steal Maps Escape","Local",TRUE
+}
+
+[effect_688]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Suitcase Nuke Escape","Local",TRUE
+}
+
+[effect_689]
+type="Action_Success_Actor_Move_Cost"
+value=65535
+reqs={"type","name","range","quiet"
+"Action","Spread Plague","Local",TRUE
+}
+
+[effect_690]
+type="Fortify_Defense_Bonus"
+value=50
+reqs={"type","name","range"
+"Activity","Fortified","Local"
+}
+
+[effect_691]
+type="Fortify_Defense_Bonus"
+value=50
+reqs={"type","name","range","present"
+"CityTile","Center","Local",TRUE
+"Activity","Fortified","Local",FALSE
+"UnitClassFlag","CanFortify","Local",TRUE
+"UnitFlag","Cant_Fortify","Local",FALSE
+}
+
+[effect_692]
+type="Maps_Stolen_Pct"
+value=-50
+
+[effect_693]
+type="Unit_Shield_Value_Pct"
+value=-50
+reqs={"type","name","range"
+"Action","Disband Unit Recover","Local"
+}
+
+[effect_694]
+type="Unit_Shield_Value_Pct"
+value=-50
+reqs={"type","name","range"
+"Action","Upgrade Unit","Local"
+}
+
+[effect_695]
+type="Heal_Unit_Pct"
+value=-75
+reqs={"type","name","range"
+"Action","Heal Unit","Local"
+}
+
+[effect_696]
+type="Min_HP_Pct"
+value=33
+reqs={"type","name","range"
+"CityTile","Center","Local"
+}
+
+[effect_697]
+type="HP_Regen_2"
+value=10
+reqs={"type","name","range","present"
+"UnitClass","Helicopter","Local",FALSE
+"UnitClass","Air","Local",FALSE
+}
+
+[effect_698]
+type="HP_Regen_2"
+value=10
+reqs={"type","name","range"
+"Activity","Fortified","Local"
+}
+
+[effect_699]
+type="User_Effect_1"
+value=1
+reqs={"type","name","range","present"
+"UnitClassFlag","CanOccupyCity","Local",TRUE
+"UnitFlag","NonMil","Local",FALSE
+"DiplRel","War","Local",TRUE
+"Nation","Animal Kingdom","Player",FALSE
+}
+
+[effect_700]
+type="User_Effect_2"
+value=1
+reqs={"type","name","range"
+"DiplRel","War","Local"
+}
+
+[effect_701]
+type="User_Effect_2"
+value=1
+reqs={"type","name","range","present"
+"CityTile","Extras Owned","Local",FALSE
+}
+
+[effect_702]
+type="User_Effect_3"
+value=1
+reqs={"type","name","range","present"
+"UnitClassFlag","HutFrighten","Local",FALSE
+"UnitClassFlag","HutNothing","Local",FALSE
+}
+
+[effect_703]
+type="User_Effect_4"
+value=1
+reqs={"type","name","range","present"
+"UnitClassFlag","HutFrighten","Local",TRUE
+"UnitClassFlag","HutNothing","Local",FALSE
 }

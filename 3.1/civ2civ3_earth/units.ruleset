@@ -12,9 +12,9 @@
 
 [datafile]
 description="Civ2Civ3 Earth ruleset unit data for Freeciv"
-ruledit="3.0.7+"
-options="+Freeciv-3.0-ruleset"
-format_version=10
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
 
 [control]
 flags={"name","helptxt"
@@ -51,16 +51,23 @@ flags={"name","helptxt"
 "HP10",""
 "HP20",""
 "HP30",""
+"BeachLander","Won't lose all movement when moving from non-native terrain to native terrain."
+"Cant_Fortify",""
+"OneAttack",""
 }
 class_flags={"name","helptxt"
 "Airliftable","Can be airlifted from a suitable city."
 "AttFromNonNative","Can launch attack from non-native tiles."
+"Missile","Unit is destroyed when it attacks"
+"CanPillage","Can pillage tile improvements."
+"CanFortify","Gets a 50% defensive bonus while in cities."
+"HutNothing","Does nothing to huts."
 }
 
 [veteran_system]
 veteran_names="green","regular","veteran","hardened","elite"
 veteran_power_fact=100,125,150,175,200
-veteran_raise_chance=50,33,25,20,0
+veteran_base_raise_chance=50,33,25,20,0
 veteran_work_raise_chance=1,1,1,1,0
 veteran_move_bonus=0,0,0,0,0
 
@@ -90,8 +97,6 @@ veteran_move_bonus=0,0,0,0,0
 ; hp_loss_pct         = Hitpoints lost each turn if unit not in city or native base
 ; non_native_def_pct  = Defense power percentage applying when defending on
 ;                       non-native terrain (such as ship in harbour)
-; hut_behavior        = What happens to huts when unit enters tile:
-;                       "Normal", "Nothing", or "Frighten"
 ; flags               = List of unit class flags (from the following list; you
 ;                       cannot add custom unit class flags)
 ; helptext            = optional help text string; should escape all raw newlines
@@ -103,7 +108,6 @@ veteran_move_bonus=0,0,0,0,0
 ; "TerrainDefense"    = Units gain defense bonus from terrain
 ; "DamageSlows"       = Damaged units are slowed down
 ; "CanOccupyCity"     = Military units of this class can occupy enemy cities
-; "Missile"           = Unit is destroyed when it attacks
 ; "BuildAnywhere"     = Unit can be built even in the middle of non-native terrain
 ; "Unreachable"       = Unit can be attacked only by units explicitly listing this
 ;                       class in its 'targets', unless on a city or native base.
@@ -113,9 +117,6 @@ veteran_move_bonus=0,0,0,0,0
 ; "CollectRansom"     = Unit can collect ransom when killing lone barbarian leader
 ; "ZOC"               = Unit is subject to ZOC rules. Unit type flag "IgZOC" can
 ;                       override this
-; "CanFortify"        = Unit can fortify at land tiles. Unit type flag
-;                       "Cant_Fortify" can override this
-; "CanPillage"        = Unit can pillage tile infrastructure
 ; "DoesntOccupyTile"  = Even if this kind of enemy unit is on tile, cities can
 ;                       still work that tile
 ; "AttackNonNative"   = Unit can attack units on non-native tiles. Unit type
@@ -123,6 +124,9 @@ veteran_move_bonus=0,0,0,0,0
 ; "KillCitizen"       = Upon successful attack against a city, unit kills one
 ;                       citizen. The effect "Unit_No_Lose_Pop" and the server
 ;                       setting 'killcitizen' can disable this.
+; "HutFrighten"       = Will frighten rather than enter huts.
+; "NonNatBombardTgt"  = Certain attacks against these units are considered
+;                       Nonnative Bombard Attack type
 ;
 ; */ <-- avoid gettext warnings
 
@@ -131,64 +135,62 @@ veteran_move_bonus=0,0,0,0,0
 name=_("?unitclass:Missile")
 min_speed=0
 hp_loss_pct=0
-hut_behavior="Nothing"
-flags="Missile","Unreachable","DoesntOccupyTile","Airliftable"
+flags="Unreachable","DoesntOccupyTile","NonNatBombardTgt","Airliftable","Missile","HutNothing"
 
 [unitclass_1]
 name=_("?unitclass:Land")
 min_speed=1
 hp_loss_pct=0
-flags="TerrainSpeed","TerrainDefense","CanOccupyCity","BuildAnywhere","CollectRansom","ZOC","CanFortify","CanPillage","Airliftable"
+flags="TerrainSpeed","TerrainDefense","CanOccupyCity","BuildAnywhere","CollectRansom","ZOC","NonNatBombardTgt","Airliftable","CanPillage","CanFortify"
 
 [unitclass_2]
 name=_("?unitclass:Small Land")
 min_speed=1
 hp_loss_pct=0
-flags="TerrainSpeed","TerrainDefense","BuildAnywhere","CollectRansom","ZOC","CanFortify","DoesntOccupyTile","Airliftable"
+flags="TerrainSpeed","TerrainDefense","BuildAnywhere","CollectRansom","ZOC","DoesntOccupyTile","NonNatBombardTgt","Airliftable","CanFortify"
 
 [unitclass_3]
 name=_("?unitclass:Big Land")
 min_speed=1
 hp_loss_pct=0
-flags="TerrainSpeed","DamageSlows","CanOccupyCity","BuildAnywhere","CollectRansom","ZOC","CanFortify","AttackNonNative","KillCitizen","Airliftable"
+flags="TerrainSpeed","DamageSlows","CanOccupyCity","BuildAnywhere","CollectRansom","ZOC","AttackNonNative","KillCitizen","NonNatBombardTgt","Airliftable","CanFortify"
 
 [unitclass_4]
 name=_("?unitclass:Merchant")
 min_speed=1
 hp_loss_pct=0
-flags="TerrainSpeed","TerrainDefense","DamageSlows","BuildAnywhere","ZOC","DoesntOccupyTile","Airliftable"
+flags="TerrainSpeed","TerrainDefense","DamageSlows","BuildAnywhere","ZOC","DoesntOccupyTile","NonNatBombardTgt","Airliftable"
 
 [unitclass_5]
 name=_("?unitclass:Sea")
 min_speed=2
 hp_loss_pct=0
-flags="DamageSlows","ZOC","AttackNonNative","AttFromNonNative"
+flags="DamageSlows","ZOC","AttackNonNative","NonNatBombardTgt","AttFromNonNative"
 
 [unitclass_6]
 name=_("?unitclass:Galley")
 rule_name="Trireme"
 min_speed=2
 hp_loss_pct=0
-flags="DamageSlows","ZOC","AttFromNonNative"
+flags="DamageSlows","ZOC","NonNatBombardTgt","AttFromNonNative"
 
 [unitclass_7]
 name=_("?unitclass:Sub")
 min_speed=2
 hp_loss_pct=0
-flags="DamageSlows","Unreachable","ZOC","DoesntOccupyTile"
+flags="DamageSlows","Unreachable","ZOC","DoesntOccupyTile","NonNatBombardTgt"
 
 [unitclass_8]
 name=_("?unitclass:Helicopter")
 min_speed=1
 hp_loss_pct=10
-flags="CanOccupyCity","Unreachable","CollectRansom","DoesntOccupyTile","Airliftable"
+flags="CanOccupyCity","Unreachable","CollectRansom","DoesntOccupyTile","NonNatBombardTgt","Airliftable"
 
 [unitclass_9]
 name=_("?unitclass:Air")
 min_speed=1
 hp_loss_pct=10
-hut_behavior="Nothing"
-flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
+flags="Unreachable","DoesntOccupyTile","NonNatBombardTgt","Airliftable","CanPillage","HutNothing"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -220,7 +222,7 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ;                 for no alternate graphic.
 ; tech_req      = required advance, names from techs.ruleset, or special:
 ;                 "None" => available from start
-; impr_req	= required city improvement, names from buildings.ruleset
+; impr_req      = required city improvement, names from buildings.ruleset
 ; gov_req       = required government, names from governments.ruleset
 ; obsolete_by   = can be upgraded to and made obsolete by another unit by name
 ; build_cost    = production shields required to build
@@ -248,6 +250,10 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ; city_slots    = How many of homecity's unit maintenance slots unit takes
 ; city_size     = Initial size of the cities built by 'Found City' type units
 ;                 (but 'Join City' uses pop_cost)
+; tp_defense    = Method to decide if unit can be selected as a defender when
+;                 transported.
+;                   "Blocked" - Can't defend when transported
+;                   "Alight"   - Can defend if can alight or unload (current default)
 ; targets       = list of unit classes this unit can attack against even
 ;                 if they have Unreachable unit class flag
 ; embarks       = list of unit classes this unit may load into while not in
@@ -256,6 +262,8 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ; disembarks    = list of unit classes this unit may unload from while not in
 ;                 native base or city even if transporter has Unreachable unit
 ;                 class flag
+; vision_layer  = At which layer this unit is visible; "Main", "Stealth",
+;                 or "Subsurface"
 ; bonuses       = definitions of combat bonuses against specific other units
 ; bonuses.flag  = flag of the unit that bonus applies against
 ; bonuses.type  = type of the bonus. See below
@@ -271,53 +279,63 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ; veteran_names = Special veteran level for this unit. See the definitions in
 ;                 game.ruleset. All of the veteran_* entries have to have the
 ;                 same length!
-; veteran_raise_chance =
+; veteran_base_raise_chance =
 ; veteran_work_raise_chance =
 ; veteran_power_fact =
 ; veteran_move_bonus =
 ;
 ; roles         = special role strings
-; sound_move	= optional sound effect when the unit moves
+; sound_move    = optional sound effect when the unit moves
 ; sound_move_alt= optional alternative sound effect if above not
-;		  supported in client
-; sound_fight	= optional sound effect when the unit fights
+;                 supported in client
+; sound_fight   = optional sound effect when the unit fights
 ; sound_fight_alt = optional alternative sound effect if above not
-;		    supported in client
+;                   supported in client
 ; helptext        = optional help text string; should escape all raw newlines
 ;                   so that xgettext parsing works
 ;
 ;
 ; ** Bonuses **
 ;
-; "DefenseMultiplier" = Multiply defense value (1 + 'value') times.
-;                       Value of 1 means multiplication by 2, value 2 by 3...
-;                       Bonus is defined in defenders entry.
-; "DefenseDivider"    = Divide defense value with (1 + 'value').
-;                       Bonus is defined in attackers entry.
-; "FirePower1"        = Defender firepower is reduced to value 1 when
-;                       ever this has non-zero value.
-;                       Bonus is defined in attackers entry.
+; "DefenseMultiplier"    = See "DefenseMultiplierPct" below. This is
+;                          equivalent to that multiplied by 100.
+;                          Bonus is defined in defenders entry.
+; "DefenseMultiplierPct" = Multiply defense by 1 + (value / 100).
+;                          Value of 100 means multiplication by 2,
+;                          value of 50 means multiplication by 1.5, etc.
+;                          Effectively increases defense by value percent.
+;                          Bonus is defined in defenders entry.
+; "DefenseDivider"       = See "DefenseDividerPct" below. This is equivalent
+;                          to that multiplied by 100.
+;                          Bonus is defined in attackers entry.
+; "DefenseDividerPct"    = Divide defense value by 1 + (value / 100).
+;                          Value of 100 means division by 2,
+;                          value of 50 means division by 1.5, i.e.
+;                          multiplication with 2/3, etc.
+;                          Effectively increases *attack* by value percent.
+;                          Bonus is defined in attackers entry.
+; "LowFirepower"         = Defender firepower is reduced to low firepower
+;                          value defined in game.ruleset when
+;                          Bonus is defined in attackers entry.
+; "CityDefensePct"       = In a city, instead of "Defend_Bonus" effect
+;                          uses this bonus.
+;                          Bonus is defined in defenders entry.
 ;
 ;
 ; ** Flags **
 ;
 ; "IgZOC"       = ignore Zones of Control (ZOC) even if unit class has
 ;                 "ZOC" flag
-; "HasNoZOC"	= unit has no Zone of Control (ZOC), thus any unit can move
-;		  around it freely
-; "NonMil"	= a non-military unit: no attacks; no martial law; can enter
+; "HasNoZOC"  = unit has no Zone of Control (ZOC), thus any unit can move
+;                 around it freely
+; "NonMil"    = a non-military unit: no attacks; no martial law; can enter
 ;                 peaceful borders; DoesntOccupyTile
 ; "IgTer"       = use constant move cost defined in igter_cost (terrain.ruleset)
 ;                 rather than terrain/road etc cost, unless terrain cost is
 ;                 less
-; "OneAttack"	= can only make a single attack, regardless of movement points
-; "FieldUnit"	= cause unhappiness even when not being aggressive
-; "BeachLander" = won't lose all its movement when moving from non-native
-;                 terrain to native terrain even if slow_invasions is on.
-; "Partial_Invis" = visible only to adjancent units; does not hide transported
-;		  units other than missiles
-; "Settlers"	= can irrigate and build roads
-; "Diplomat"	= can defend against diplomat actions (see diplchance
+; "FieldUnit" = cause unhappiness even when not being aggressive
+; "Settlers"  = can irrigate and build roads
+; "Diplomat"  = can defend against diplomat actions (see diplchance
 ;                 server option)
 ; "Spy"       = strong in diplomatic battles. _Must_ be "Diplomat" also
 ; "CoastStrict" = (sea only) cannot leave coast
@@ -325,35 +343,34 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ;                 to regularly end turn on coast
 ; "Only_Native_Attack" = cannot attack targets on non-native tiles even if
 ;                 unit class can
-; "Cant_Fortify" =  cannot fortify even if unit class has "CanFortify" flag
 ; "Fanatic"   = can only be built by governments that allow them
 ;                 (see civ2/governments.ruleset, Fundamentalism government)
 ; "Unique"    = a player can only have one of these units in the game at
-;		  the same time; barbarians cannot use this at present
+;                 the same time; barbarians cannot use this at present
 ; "GameLoss"  = losing one of these units means you lose the game, but it
-;		  is produced without homecity and upkeep
+;                 is produced without homecity and upkeep
 ; "EvacuateFirst" = the game will try to rescue units with this flag before
 ;                 it tries to rescue units without it when their transport
 ;                 is destroyed. Think of the Birkenhead drill ("women and
 ;                 children first"). Replace "women and children" with
 ;                 "units with the EvacuateFirst unit type flag".
 ; "SuperSpy"  = this unit always wins diplomatic contests, that is, unless
-;		  it encounters another SuperSpy, in which case defender wins;
-;		  can also be used on non-diplomat units, in which case it can
-;		  protect cities from diplomats; also 100% spy survival chance
-; "NoHome"    = this unit has no homecity and will be free of all upkeep, and
-;		  therefore will not revolt along with its city of origin should
-;		  it be incited
+;                 it encounters another SuperSpy, in which case defender wins;
+;                 can also be used on non-diplomat units, in which case it can
+;                 protect cities from diplomats; also 100% spy survival chance
+; "NoHome"    = this unit is built with no homecity, free of all upkeep, and
+;                 therefore will not revolt along with its city of origin should
+;                 it be incited
 ; "NoVeteran"   = this unit cannot gain veteran levels through experience
-;                 (as if both raise_chance and work_raise_chance were zero);
+;                 (as if both base_raise_chance and work_raise_chance were zero);
 ;                 it can still gain veterancy through Veteran_Build, etc
 ; "CityBuster"  = this unit has double firepower against cities
 ; "NoBuild"     = this unit cannot be built
 ; "BadWallAttacker" = the firepower of this unit is set to 1 if
 ;                 attacking a city
-;		  defended by a city wall (or other city building defense)
+;                 defended by a city wall (or other city building defense)
 ; "BadCityDefender" = if attacked while in a city, firepower is set to 1
-;		  and firepower of attacker is doubled (the Pearl Harbour
+;                 and firepower of attacker is doubled (the Pearl Harbour
 ;                 rule)
 ; "BarbarianOnly" = only barbarians can build this unit
 ; "Shield2Gold" = Switch from shield upkeep to gold upkeep possible
@@ -373,9 +390,12 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ;                 do so even if has better odds when defending against it
 ;                 then when attacking it. Applies when the autoattack server
 ;                 setting is enabled.
+; "NeverProtects" = doesn't protect reachable units on its tile from enemy
+;                 attackers, even if the unreachableprotects server setting
+;                 is enabled and the unit class is unreachable
 ;
 ; Following actions require extra fields:
-;  "Attack"
+;  "Attack" and "Suicide Attack"
 ;   attack = base attack strength
 ;  "Bombard"
 ;   attack       = base attack strength
@@ -385,12 +405,10 @@ flags="Unreachable","CanPillage","DoesntOccupyTile","Airliftable"
 ;  "Paradrop Unit"
 ;   paratroopers_range  = the maximal range the unit can be paradropped to.
 ;                         Max range is 65534.
-;   paratroopers_mr_req = the move rate which is required at least for
-;                         paradropping (whole movement points)
-;   paratroopers_mr_sub = the move rate which is subtracted after paradropping
-;                         (whole movement points)
 ;  "Upgrade Unit"
 ;   obsolete_by = the unit type upgraded to.
+;  "Convert Unit"
+;   convert_to = the unit type converted to.
 ;
 ; ** Roles **
 ;
@@ -453,10 +471,11 @@ uk_happy=0
 uk_food=1
 veteran_names="green"
 veteran_power_fact=100
-veteran_raise_chance=0
+veteran_base_raise_chance=0
 veteran_work_raise_chance=0
 veteran_move_bonus=0
-flags="Cant_Fortify","HasNoZOC","NonMil","Settlers","Fortress","Cities","AddToCity","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","NonMil","Settlers","Fortress","Cities","AddToCity","NoAutoAtt","Cant_Fortify"
 roles="CitiesStartUnit"
 helptext="Settlers are one of the key units in the game, as they are your main means of founding new cities.","Settlers can also perform the same terrain alterations as Workers.","TIP: Optimal production of Settlers occurs in cities of at most size 4, or cities with a Granary of at most size 6."
 
@@ -484,10 +503,11 @@ uk_happy=0
 uk_food=1
 veteran_names="green"
 veteran_power_fact=100
-veteran_raise_chance=0
+veteran_base_raise_chance=0
 veteran_work_raise_chance=0
 veteran_move_bonus=0
-flags="Cant_Fortify","HasNoZOC","NonMil","Settlers","Fortress","Capturable","AddToCity","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","NonMil","Settlers","Fortress","Capturable","AddToCity","NoAutoAtt","Cant_Fortify"
 roles="Settlers"
 helptext="Migrants can be used to transfer population to other cities (of at most size 8), but may not found new cities. They can also perform the same terrain alterations as Workers.","This unit can be captured by military land units or by frigates.","TIP: Migrants can be a good alternative to Workers in overpopulated cities, as they benefit from free food upkeep."
 
@@ -517,10 +537,11 @@ uk_shield=1
 uk_gold=1
 veteran_names="green"
 veteran_power_fact=100
-veteran_raise_chance=0
+veteran_base_raise_chance=0
 veteran_work_raise_chance=0
 veteran_move_bonus=0
-flags="Cant_Fortify","HasNoZOC","NonMil","Settlers","Fortress","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","NonMil","Settlers","Fortress","NoAutoAtt","Cant_Fortify"
 roles="WorkerStartUnit","Settlers"
 helptext="Workers have the ability to improve terrain tiles. See the help on Terrain and Terrain Alterations for the effects of their actions.","With the required knowledges, Workers can build fortresses, airbases, and canals on land tiles. If on board a ship, they can also build oil platforms, buoys and naval mines on oceanic tiles."
 
@@ -548,10 +569,11 @@ uk_shield=1
 uk_gold=1
 veteran_names="beginner","seasoned","senior"
 veteran_power_fact=100,125,150
-veteran_raise_chance=50,33,0
+veteran_base_raise_chance=50,33,0
 veteran_work_raise_chance=2,1,0
 veteran_move_bonus=0,0,0
-flags="Cant_Fortify","HasNoZOC","NonMil","Settlers","Fortress","Transform","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","NonMil","Settlers","Fortress","Transform","NoAutoAtt","Cant_Fortify"
 roles="WorkerStartUnit","Settlers"
 helptext="Engineers are similar to Workers, but they work twice as fast, move twice as fast, and may gain experience from work enabling them to work even faster.","With knowledge of Fusion Power, Engineers may also perform more radical terrain transformations than Workers, Settlers, or Migrants, with the \"transform\" order. Examples include conversion of Tundra into Plains, or even Ocean into Grassland in some circumstances (when on board an ocean-going vessel, on a tile surrounded by sufficient existing land). See the Terrain Alterations section for more details."
 
@@ -579,7 +601,8 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
-flags="OneAttack","Fortress","Capturer","NoAutoAtt"
+tp_defense="Alight"
+flags="Fortress","Capturer","NoAutoAtt","OneAttack"
 roles="FirstBuild","DefendOk","DefendOkStartUnit"
 helptext="This unit may be built from the start of the game. It is the weakest offensive unit."
 
@@ -607,7 +630,8 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
-flags="OneAttack","Fortress","Capturer","NoAutoAtt"
+tp_defense="Alight"
+flags="Fortress","Capturer","NoAutoAtt","OneAttack"
 roles="FirstBuild","DefendOk","DefendOkStartUnit"
 helptext="The Phalanx is armored infantry, suitable for defending your cities.","Remember that every unit receives a +25% defensive bonus when it is stacked outside of cities, as long as there is another unit on the same tile."
 
@@ -636,6 +660,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=1
+tp_defense="Alight"
 flags="Fortress","Capturer","Bombarder","NoAutoAtt"
 roles="Hut","DefendOk","DefendOkStartUnit"
 helptext="Archers fight with bows and arrows and have a good offensive value.","Archers and catapults are the only ancient units with the ability to bombard.","Bombard action can only damage (not kill) the target, but it has a chance to damage every unit in a stack or city, with no chance for the attacker to be damaged or killed. This action is only allowed for 1 unit from each tile per turn.\nWhen a unit bombards from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn. Until that bombardment marker disappears at the end of the turn, if there is no city nor base on the tile, it gets the same defense bonus as if there was a Fort. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games)."
@@ -664,7 +689,8 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
-flags="OneAttack","Iron","Fortress","Capturer","Marines","NoAutoAtt"
+tp_defense="Alight"
+flags="Iron","Fortress","Capturer","Marines","NoAutoAtt","OneAttack"
 roles="DefendOk","BarbarianBuild","BarbarianSea","DefendOkStartUnit"
 helptext="Legions are heavily armed and well disciplined infantry units with an excellent offensive value.","This unit (and their successors) can attack land tiles while on board a ship."
 
@@ -692,7 +718,8 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
-flags="OneAttack","Iron","Fortress","Capturer","NoAutoAtt"
+tp_defense="Alight"
+flags="Iron","Fortress","Capturer","NoAutoAtt","OneAttack"
 roles="FirstBuild","DefendOk","DefendOkStartUnit"
 helptext="Equipped with long pikes, Pikemen replaces Phalanx as the preferred city defender."
 
@@ -721,7 +748,8 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
-flags="OneAttack","Niter","Fortress","Capturer","Bombarder","Marines","NoAutoAtt"
+tp_defense="Alight"
+flags="Niter","Fortress","Capturer","Bombarder","Marines","NoAutoAtt","OneAttack"
 roles="FirstBuild","HutTech","DefendOk","BarbarianTech","BarbarianBuildTech","BarbarianSeaTech","DefendOkStartUnit"
 helptext="Musketeers are infantry equipped with early firearms and replace Pikemen as the preferred city defender.","From now on, every unit will have the ability to bombard.","Bombard action can only damage (not kill) the target, but it has a chance to damage every unit in a stack or city, with no chance for the attacker to be damaged or killed. This action is only allowed for 1 unit from each tile per turn.\nWhen a unit bombards from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn. Until that bombardment marker disappears at the end of the turn, if there is no city nor base on the tile, it gets the same defense bonus as if there was a Fort. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games)."
 
@@ -752,7 +780,8 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
-flags="OneAttack","Niter","Fortress","Capturer","Bombarder","Marines","NoAutoAtt"
+tp_defense="Alight"
+flags="Niter","Fortress","Capturer","Bombarder","Marines","NoAutoAtt","OneAttack"
 roles="FirstBuild","DefendOk","DefendOkStartUnit"
 helptext="Riflemen are World War-era infantry, very good at defending your cities."
 
@@ -782,7 +811,8 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
-flags="IgTer","OneAttack","Niter","Fortress","Capturer","Bombarder","NoAutoAtt"
+tp_defense="Alight"
+flags="IgTer","Niter","Fortress","Capturer","Bombarder","NoAutoAtt","OneAttack"
 roles="DefendOk","DefendOkStartUnit"
 helptext="Alpine Troops are highly mobile units as well as excellent defenders."
 
@@ -811,7 +841,8 @@ fuel=0
 uk_happy=0
 uk_food=1
 bombard_rate=2
-flags="OneAttack","Fanatic","Fortress","Capturer","Bombarder","AddToCity","NoAutoAtt"
+tp_defense="Alight"
+flags="Fanatic","Fortress","Capturer","Bombarder","AddToCity","NoAutoAtt","OneAttack"
 roles="DefendOk","DefendOkStartUnit"
 helptext="Fanatics are warriors extremely devoted to a higher cause.","This unit does not cause unhappiness due to military activity.","Fundamentalist nations can maintain Fanatic units without having to pay any upkeep. Instead, each unit reduces the population by 1."
 
@@ -841,7 +872,8 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
-flags="IgZOC","IgTer","OneAttack","Fortress","Capturer","Bombarder","NoAutoAtt"
+tp_defense="Alight"
+flags="IgZOC","IgTer","Fortress","Capturer","Bombarder","NoAutoAtt","OneAttack"
 roles="Partisan","DefendOk","BarbarianTech","DefendOkStartUnit"
 helptext="Partisans are guerilla fighters who are experts at using the terrain to their advantage.","A number of Partisans are granted free when an enemy conquers your city -- they automatically assume defensive positions in the surrounding countryside -- but only under these conditions:\n - You must know about Guerilla Warfare.\n - At least three quarters of the citizens must have your nationality.\n - You must run either a Democracy or a Communist government."
 
@@ -871,10 +903,9 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 paratroopers_range=10
-paratroopers_mr_req=1
-paratroopers_mr_sub=0
 bombard_rate=2
-flags="OneAttack","Rubber","Fortress","Capturer","Bombarder","Paratroopers","NoAutoAtt"
+tp_defense="Alight"
+flags="Rubber","Fortress","Capturer","Bombarder","Paratroopers","NoAutoAtt","OneAttack"
 roles="DefendOk","DefendOkStartUnit"
 helptext="Paratroopers are experts at airborne attacks. From a friendly city, airbase, or airstrip, Paratroopers who have not expended any movement points can paradrop directly to any tile in range, and be immediately ready to act there. (Beware dropping into unseen territory, as Paratroopers landing on a tile occupied by enemy units are easy targets!)"
 
@@ -904,7 +935,8 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
-flags="OneAttack","Rubber","Fortress","Capturer","Bombarder","Marines","NoAutoAtt"
+tp_defense="Alight"
+flags="Rubber","Fortress","Capturer","Bombarder","Marines","NoAutoAtt","OneAttack"
 roles="FirstBuild","DefendOk","BarbarianSeaTech","DefendOkStartUnit"
 helptext="Marines are infantry who are experts at marine warfare."
 
@@ -932,6 +964,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=3
+tp_defense="Alight"
 flags="Iron_Oil","Rubber","Bombarder","NoAutoAtt","Only_Land"
 roles="FirstBuild","DefendOk","DefendOkStartUnit"
 helptext="The Mechanized Infantry has the strongest inherent defensive strength of any land unit.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls."
@@ -960,6 +993,7 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="Horses","Capturer","NoAutoAtt"
 roles="Hut","Barbarian","AttackFastStartUnit","Hunter"
 helptext="Horsemen are mounted warriors and an early shock-troop that can penetrate deep into enemy territory.","As with other military land units: they can capture enemy units, but only when all the units on the target tile are captureable (Caravan, Freight or Migrants)."
@@ -988,6 +1022,7 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="Horses","Capturer","NoAutoAtt","Only_Land"
 roles="AttackFastStartUnit"
 helptext="Chariots are horse-pulled war wagons, stronger but more expensive than horsemen.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls."
@@ -1017,6 +1052,7 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="Ivory","Capturer","NoAutoAtt"
 roles="DefendOk","DefendOkStartUnit","AttackFastStartUnit","Hunter"
 helptext="Elephants are towering animals trained for war that are often used as powerful shock troops."
@@ -1046,6 +1082,7 @@ uk_happy=0
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="Iron","Horses","Capturer","NoAutoAtt"
 roles="AttackFastStartUnit","Hunter"
 helptext="Crusaders are highly disciplined mounted warriors driven by a higher cause.","This unit does not cause unhappiness due to military activity."
@@ -1074,6 +1111,7 @@ uk_happy=1
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="Iron","Horses","Capturer","NoAutoAtt"
 roles="HutTech","DefendOk","BarbarianTech","BarbarianBuildTech","DefendOkStartUnit","AttackFastStartUnit","Hunter"
 helptext="Knights are mounted and heavily armored warriors."
@@ -1103,6 +1141,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
+tp_defense="Alight"
 flags="Niter","Horses","Capturer","Bombarder","NoAutoAtt"
 roles="BarbarianBuildTech","AttackFastStartUnit","Hunter"
 helptext="Dragoons are mounted warriors carrying early firearms."
@@ -1132,6 +1171,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
+tp_defense="Alight"
 flags="Niter","Horses","Capturer","Bombarder","NoAutoAtt"
 roles="AttackFastStartUnit","Hunter"
 helptext="Cavalry are mounted and highly trained soldiers."
@@ -1164,6 +1204,7 @@ bonuses={"flag","type","value","quiet"
 "Tank","DefenseDivider",3,TRUE
 }
 bombard_rate=3
+tp_defense="Alight"
 flags="Iron_Oil","Uranium","Tank","Bombarder","NoAutoAtt","Only_Land"
 roles="DefendOk","DefendOkStartUnit","AttackFastStartUnit","Hunter"
 helptext="Armors are motorized war wagons that are faster, stronger, and can take more damage than any mounted unit.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls.","This unit gets a +25% defense bonus against other Armor units. This makes Armor slightly better than Mech. Infantry against attacks from Armors, and slightly worse against attacks from Howitzers or other units."
@@ -1193,6 +1234,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=1
+tp_defense="Alight"
 flags="Bombarder","NoAutoAtt","Only_Land"
 roles="AttackStrongStartUnit"
 helptext="Catapults are large rock-throwing machines of war. They are very strong attackers but equally weak defenders and will need an escort to be effective.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls.","Catapults and archers are the only ancient units with the ability to bombard.","Bombard action can only damage (not kill) the target, but it has a chance to damage every unit in a stack or city, with no chance for the attacker to be damaged or killed. This action is only allowed for 1 unit from each tile per turn.\nWhen a unit bombards from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn. Until that bombardment marker disappears at the end of the turn, if there is no city nor base on the tile, it gets the same defense bonus as if there was a Fort. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games)."
@@ -1222,6 +1264,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
+tp_defense="Alight"
 flags="Iron","Niter","Bombarder","NoAutoAtt","Only_Land"
 roles="BarbarianTech","BarbarianBuildTech","AttackStrongStartUnit"
 helptext="Cannons are large firearms that can fire heavy projectiles over long distances. As with the catapults they replace, they are very strong attackers but equally weak defenders and will need an escort to be effective, and have limited mobility.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls."
@@ -1251,6 +1294,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=2
+tp_defense="Alight"
 flags="CityBuster","Iron","Bombarder","NoAutoAtt","Only_Land"
 roles="AttackStrongStartUnit"
 helptext="The artillery is an upgraded cannon. As with its predecessors, it is a very strong attacker but equally weak defender and will need an escort to be effective, and has limited mobility.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls.","This unit gets double firepower when attacking cities."
@@ -1279,6 +1323,7 @@ uk_food=1
 uk_shield=1
 uk_gold=1
 bombard_rate=3
+tp_defense="Alight"
 flags="CityBuster","Iron_Oil","Rubber","Bombarder","NoAutoAtt","Only_Land"
 roles="AttackStrongStartUnit"
 helptext="Howitzers are upgraded artillery with improved defensive as well as offensive capabilities. However, they still have the limited mobility of their predecessors.","As with other wheeled units: they cannot take advantage of terrain to defend themselves; they cannot move or attack (bombardment is not restricted) to mountains, jungles and swamps, unless there is a road or base; they cannot be transported by sea using early ships (Galleys and Caravels); and they can cause loss of population when attacking a city without City Walls.","This unit gets double firepower when attacking cities."
@@ -1309,6 +1354,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub","Helicopter","Air"
 bombard_rate=2
+tp_defense="Alight"
 flags="HasNoZOC","Iron_Oil","Aluminum","AirAttacker","Bombarder","HPFull","HP20"
 roles="DefendOk","DefendOkStartUnit"
 helptext="Fighters are your first airborne units. They can move anywhere and attack any unit.","This unit cannot attack once damaged, except to bombard. During enemy turns, it can automatically attack or bombard an incoming enemy.","As with other aircraft: they lose 10% of their hit points for every turn not spent in a city, airstrip, or airbase, or on a Carrier."
@@ -1339,6 +1385,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=4
+tp_defense="Alight"
 flags="HasNoZOC","FieldUnit","Iron_Oil","Aluminum","AirAttacker","Bombarder","NoAutoAtt","AirBomber","HPFull","HP30"
 helptext="Bombers are specialized airborne units that may only attack ground targets, not other airborne units.","As with other air bombers: they attack with a limited number of combat rounds, equal to their bombard rate, but they cannot attack once damaged. If they are not damaged, they can first perform a regular attack, and then they can bombard in the same turn.","As with other aircraft: they lose 10% of their hit points for every turn not spent in a city, airstrip, or airbase, or on a Carrier."
 
@@ -1368,6 +1415,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=3
+tp_defense="Alight"
 flags="HasNoZOC","Iron_Oil","Rubber","AirAttacker","Bombarder","NoAutoAtt","AirBomber","HPFull","HP30"
 helptext="Helicopters can transport one military land unit; while some troops must load or unload in a city, airstrip, or airbase (and not in the field or onboard a Carrier), infantry units can embark or disembark at any time.","As with other air bombers: they attack with a limited number of combat rounds, equal to their bombard rate, but they cannot attack once damaged. If they are not damaged, they can first perform a regular attack, and then they can bombard in the same turn.","Unlike other aircraft, Helicopters are not required to return to a city, base, or Carrier to refuel after a set number of turns; however, care must be exercised, due to the health they lose every turn."
 
@@ -1396,6 +1444,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub","Helicopter","Air"
 bombard_rate=2
+tp_defense="Alight"
 flags="HasNoZOC","Iron_Oil","Aluminum","AirAttacker","Bombarder","HPFull","HP20"
 roles="DefendOk","DefendOkStartUnit"
 helptext="An improved Fighter, with improved attack and a higher movement radius.","This unit cannot attack once damaged, except to bombard. During enemy turns, it can automatically attack or bombard an incoming enemy.","As with other aircraft: they lose 10% of their hit points for every turn not spent in a city, airstrip, or airbase, or on a Carrier."
@@ -1425,6 +1474,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=4
+tp_defense="Alight"
 flags="HasNoZOC","FieldUnit","Iron_Oil","Aluminum","AirAttacker","Bombarder","NoAutoAtt","AirBomber","HPFull","HP30"
 helptext="An improved Bomber, with improved attack and a higher movement radius.","As with other air bombers: they attack with a limited number of combat rounds, equal to their bombard rate, but they cannot attack once damaged. If they are not damaged, they can first perform a regular attack, and then they can bombard in the same turn.","As with other aircraft: they lose 10% of their hit points for every turn not spent in a city, airstrip, or airbase, or on a Carrier."
 
@@ -1454,6 +1504,7 @@ uk_happy=0
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="HasNoZOC","NoBuild","BadCityDefender","NoAutoAtt"
 roles="FerryBoat","FerryStartUnit"
 helptext="The Galley is your first boat unit. It can act as a transport ship and has rudimentary offensive capabilities. It may not enter deep ocean tiles."
@@ -1484,6 +1535,7 @@ uk_happy=0
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="HasNoZOC","BadCityDefender","NoAutoAtt"
 roles="FerryBoat","FerryStartUnit"
 helptext="The Galley is your first boat unit. It can act as a transport ship and has rudimentary offensive capabilities. It may not enter deep ocean tiles."
@@ -1513,6 +1565,7 @@ uk_happy=0
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="HasNoZOC","Only_Native_Attack","BadCityDefender","Capturable","NoAutoAtt"
 roles="FerryBoat","BarbarianBoat","FerryStartUnit"
 helptext="The Caravel is a sailing ship that can enter any ocean tile.","This unit can be captured by an enemy Frigate."
@@ -1542,6 +1595,7 @@ uk_happy=0
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="HasNoZOC","NonMil","BadCityDefender","Iron","Niter","Capturable","NoAutoAtt"
 roles="FerryBoat","BarbarianBoat","FerryStartUnit"
 helptext="The Galleon is a pure transport ship, the first which can transport large wheeled units. It cannot attack other ships, though it may still defend itself when attacked.","This unit can be captured by an enemy Frigate."
@@ -1572,6 +1626,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=2
+tp_defense="Alight"
 flags="BadCityDefender","Iron","Niter","Capturer","Bombarder","NoAutoAtt"
 roles="Hunter"
 helptext="The Frigate is a specialized ship with a strong offensive value. It can attack units on land, but it cannot transport units.","This is the first and only naval unit that can capture enemy units, but only when all the units on the target tile are captureable (Caravel, Galleon, Caravan, Freight or Migrants) and are not carrying any load."
@@ -1602,6 +1657,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=2
+tp_defense="Alight"
 flags="BadCityDefender","Iron","Niter","Bombarder","NoAutoAtt"
 roles="Hunter"
 helptext="The Ironclad is an armored ship, more sturdy than the Frigate."
@@ -1635,6 +1691,7 @@ bonuses={"flag","type","value"
 }
 targets="Sub"
 bombard_rate=3
+tp_defense="Alight"
 flags="BadCityDefender","Iron","Bombarder","NoAutoAtt"
 helptext="An improved Ironclad, with better move rate and vision. Anti-submarine weapons double its attack and defense against Submarines.","TIP: A very fast unit, which is very useful for hunting down enemy Transports and Submarines."
 
@@ -1664,6 +1721,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=3
+tp_defense="Alight"
 flags="BadCityDefender","Iron","Bombarder","NoAutoAtt"
 roles="DefendOk","DefendOkStartUnit"
 helptext="The Cruiser is a strong offensive boat unit."
@@ -1696,6 +1754,7 @@ bonuses={"flag","type","value"
 }
 targets="Sub"
 bombard_rate=3
+tp_defense="Alight"
 flags="BadCityDefender","Iron_Oil","Aluminum","Bombarder","NoAutoAtt"
 roles="DefendOk","DefendOkStartUnit"
 helptext="The AEGIS Cruiser is equipped with an advanced defensive missile system, giving it double defense against all air attacks."
@@ -1725,6 +1784,7 @@ uk_shield=1
 uk_gold=1
 targets="Sub"
 bombard_rate=3
+tp_defense="Alight"
 flags="BadCityDefender","Iron_Oil","Bombarder","NoAutoAtt"
 roles="DefendOk","DefendOkStartUnit"
 helptext="The Battleship is the supreme naval unit with excellent offensive and defensive values."
@@ -1746,6 +1806,7 @@ move_rate=5
 vision_radius_sq=6
 transport_cap=8
 cargo="Missile"
+vision_layer="Stealth"
 hitpoints=20
 firepower=1
 fuel=0
@@ -1757,7 +1818,8 @@ bonuses={"flag","type","value"
 "AirAttacker","DefenseMultiplier",1
 }
 bombard_rate=2
-flags="HasNoZOC","Partial_Invis","BadCityDefender","Iron_Oil","Uranium","Submarine","Bombarder","HPFull","HP20"
+tp_defense="Alight"
+flags="HasNoZOC","BadCityDefender","Iron_Oil","Uranium","Submarine","Bombarder","HPFull","HP20"
 roles="Hunter"
 helptext="Traveling under the surface of the ocean, Submarines have a very high strategic value, but a weak defense if caught off guard.","Submarines attacking other naval units ignore the bonus to defense by terrain (on deep ocean, or ocean with naval mines). They cannot attack other Submarine units, and have double defense against all air attacks.","This unit cannot attack once damaged, except to bombard. During enemy turns, it can automatically attack or bombard an incoming enemy."
 
@@ -1785,6 +1847,7 @@ uk_happy=0
 uk_food=1
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="HasNoZOC","BadCityDefender","Iron_Oil","Aluminum","NoAutoAtt"
 roles="FerryBoat","FerryStartUnit"
 helptext="The Carrier is a mobile airport.","It can transport aircraft and military land units (not wheeled), although land units cannot always be transferred to and from Helicopters while onboard (see Helicopter help).","TIP: Guard Carriers with a handful of fast-moving ships and a battleship, as losing a fully-equipped Carrier is VERY painful and expensive."
@@ -1815,9 +1878,10 @@ uk_shield=1
 uk_gold=1
 veteran_names="green","regular","veteran","hardened","elite"
 veteran_power_fact=100,125,150,175,200
-veteran_raise_chance=50,33,25,20,0
+veteran_base_raise_chance=50,33,25,20,0
 veteran_work_raise_chance=0,0,0,0,0
 veteran_move_bonus=0,0,0,0,0
+tp_defense="Alight"
 flags="HasNoZOC","NonMil","Settlers","BadCityDefender","Iron","NoAutoAtt"
 roles="FerryBoat","FerryStartUnit"
 helptext="The Transport cannot attack on its own but may defend itself when under attack.","Transports can clean pollution and fallout on water tiles and coastal cities. They may build oil platforms on deep ocean tiles (with knowledge of Miniaturization, for use by Offshore Platforms). They may also build buoys (with Radio), and naval mines (with Explosives)."
@@ -1846,7 +1910,8 @@ uk_happy=1
 uk_shield=1
 uk_gold=1
 targets="Missile","Sub","Helicopter","Air"
-flags="HasNoZOC","OneAttack","CityBuster","Aluminum","AirAttacker","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","CityBuster","Aluminum","AirAttacker","NoAutoAtt","OneAttack"
 helptext="The Cruise Missile is a long-distance missile that can strike deep into enemy territory, can attack other air units, and has double firepower against cities.","They can disembark from their transporter unit anywhere, but they need a city or airbase to embark again."
 
 [unit_48]
@@ -1875,10 +1940,11 @@ uk_gold=1
 targets="Missile","Sub","Helicopter","Air"
 veteran_names="green"
 veteran_power_fact=100
-veteran_raise_chance=0
+veteran_base_raise_chance=0
 veteran_work_raise_chance=0
 veteran_move_bonus=0
-flags="HasNoZOC","OneAttack","FieldUnit","Nuclear","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","FieldUnit","Nuclear","NoAutoAtt","OneAttack"
 helptext="You can build Nuclear units when you have the required advance, and the Manhattan Project wonder has been built by any player. However, without further technology they cannot move on their own.","With Rocketry, all Nuclear units (including those already built) gain a range of 8 movement points. Nuclear units starting the turn in a city with an Airport gain a range of 8 too (up to 16 with Rocketry).","On impact, the blast will destroy any unit in an area 3 tiles wide (3x3 squares for rectangular grids), including friendly units. Any city within the blast area loses half its population, and land tiles within the blast area are subject to nuclear fallout. ","Nuclear fallout reduces tile output and increases the risk of global nuclear winter; see the help on Fallout.","TIP: You may be involved in a situation where you've invaded an enemy country en masse, but the enemy cities are too strong. Before using a Nuclear unit, assemble a gang of cleanup units next to the city and have them ready to fix the fallout on the same turn it occurs! This minimizes the chance of nuclear winter. Eco-friendly nukes!"
 
 [unit_49]
@@ -1906,9 +1972,10 @@ uk_shield=1
 uk_gold=1
 veteran_names="attaché","secretary","envoy","ambassador"
 veteran_power_fact=100,105,110,115
-veteran_raise_chance=50,33,20,0
+veteran_base_raise_chance=50,33,20,0
 veteran_work_raise_chance=0,0,0,0
 veteran_move_bonus=0,0,0,0
+tp_defense="Alight"
 flags="HasNoZOC","IgZOC","NonMil","Diplomat","NoAutoAtt"
 roles="DiplomatStartUnit"
 helptext="A Diplomat is an official that carries your dispatches and is authorized to deal with foreign dignitaries. He may also undertake various covert operations with the intent of harming your opponents; Diplomats in your own cities defend them against such actions.","Many covert actions may be attempted even in peacetime, but the more aggressive actions will be discovered and cause diplomatic incidents, giving an excuse for the breaking of treaties by a Republic or Democracy, or a nuclear-armed regime otherwise restrained by the United Nations.","If a foreign unit is alone on a tile, you may attempt to bribe it with your Diplomat. By paying a sum of gold the unit will immediately become yours; the exact sum depends on the status of the unit and that of the civilization owning it. Bribery when not at war will cause a diplomatic incident. Homeless Diplomats cannot bribe units.","Diplomats can expel non military units out of your territory if you are at peace with the target, and can expel diplomatic or unreachable units if they are not inside their own national borders or inside bases.","Diplomats can also perform a number of actions in another player's city, although each Diplomat may attempt only one action. Most of these actions have a chance of failure. Also, any enemy Diplomats or Spies in the city will oppose hostile actions, as will the enemy Leader in games with leaders; in this case, either your unit or the defending unit will die (if you go up against the Leader you will always die). If the defending unit dies, you lose one movement point and may try again. ","The actions available to Diplomats in a city are:"," - \"Establish Embassy\": This action always succeeds, and gives permanent contact with the city's owner, as well as intelligence on their tax rates and technology. Each player you have an embassy with that knows a technology reduces that technology's research cost to you."," - \"Investigate City\": Your unit attempts to report detailed information about the city: its status, what buildings and units are within, and what it is currently producing. The unit is not consumed by this action."," - \"Sabotage City\": Your unit attempts either to disrupt all the city's work so far towards its current project, or to destroy an existing building in the city, at random. Once built, Palaces and Wonders cannot be sabotaged, and attempts to sabotage City Walls or any building in a capital each halve the chance of success. Sabotage may only be attempted when openly at war."," - \"Steal Technology\": Your unit attempts to learn the secrets of a random technology known to the city's owner but not to you. Technology may only be stolen once from a given enemy city by Diplomats. This action may be attempted even when not at war, but will cause a diplomatic incident."," - \"Incite a Revolt\": In return for gold a foreign city will change allegiance and join your empire, bringing along all nearby units that call it home, but reducing its size by 1. Units in other cities remain in the enemy's control, but units outside cities are lost to both players. The exact sum depends on the status of the city and that of the civilization that owns it. It is not possible to incite a rebellion in a capital, or in any city with Courthouse. Incitement may be attempted in peacetime, but will cause a diplomatic incident.","Diplomats built under Communist or Federation governments will start at the first veteran level (secretary).","The cost to bribe units or incite cities increases +50% for each 1000 culture points accumulated by the target player, up to +500% (as if the distance to the capital was 6 times lower) when the player reaches 10000 culture points.","A city gets +5% resistance in diplomatic fights against enemy agents for each 100 culture points, up to +50% when the city reaches 1000 culture points."
@@ -1937,9 +2004,10 @@ uk_shield=1
 uk_gold=1
 veteran_names="informant","handler","agent","spymaster"
 veteran_power_fact=100,105,110,115
-veteran_raise_chance=50,33,20,0
+veteran_base_raise_chance=50,33,20,0
 veteran_work_raise_chance=0,0,0,0
 veteran_move_bonus=0,0,0,0
+tp_defense="Alight"
 flags="HasNoZOC","IgZOC","NonMil","Diplomat","Spy","NoAutoAtt"
 roles="DiplomatStartUnit"
 helptext="A Spy is more skilled in the arts of espionage than her Diplomat predecessor.","She can perform all the functions of the Diplomat; refer to the Diplomat entry for more details. Unlike a Diplomat, a Spy may also survive an operation in a foreign city and become more experienced as a result. Spies are also more effective than Diplomats at defending cities against foreign Diplomats and Spies.","A Spy can also be used to:\n - sabotage an enemy unit (reducing its hit points to half), if it is alone on a tile and the players are at war;\n - poison the water supply of an enemy city (reducing the population by one);\n - steal specific technology (with a reduced chance of success);\n - steal further technologies from a city which has already been stolen from (although cities become more resistant each time they are stolen from);\n - sabotage predetermined city targets (with a reduced chance of success).","A Spy that survives the more aggressive actions (sabotage, theft, inciting rebellion, and poisoning) escapes to the safety of the nearest friendly city.","Spies built under Communist or Federation governments will start at the first veteran level (handler)."
@@ -1968,6 +2036,7 @@ uk_happy=0
 uk_shield=1
 uk_gold=1
 city_slots=1
+tp_defense="Alight"
 flags="HasNoZOC","NonMil","TradeRoute","HelpWonder","Capturable","NoAutoAtt"
 helptext="A Caravan carries goods or material for trading with other nations, or to help build wonders in your own cities.","Caravans cannot take advantage of maglevs, but may travel on the railroads that accompany them.","Caravans can establish trade routes with your own cities or those of allied nations (or from the same team) by traveling to them. The route's ongoing revenue is doubled if the two cities involved are on different continents, and halved if the two cities are from different players.","This unit can be captured by military land units or by frigates.","A Caravan sent to one of your own cities that is building a wonder can add 30 shields towards its production.","TIP: You can stockpile a stack of Caravans in advance and bring them all into a city where you have started to build a wonder, and finish it in only one turn!"
 
@@ -1994,6 +2063,7 @@ uk_happy=0
 uk_shield=1
 uk_gold=1
 city_slots=1
+tp_defense="Alight"
 flags="HasNoZOC","NonMil","TradeRoute","HelpWonder","Capturable","NoAutoAtt"
 helptext="The Freight unit replaces the Caravan, and moves at twice the speed. It has the same behavior and movement restrictions.","This unit can be captured by military land units or by frigates."
 
@@ -2019,7 +2089,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","HasNoZOC","IgZOC","NonMil","IgTer","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","IgZOC","NonMil","IgTer","NoAutoAtt","Cant_Fortify"
 roles="Explorer","ExplorerStartUnit"
 helptext="Explorers are brave individuals that are very useful for mapping unknown territory.","Explorers can also perform some actions in another player's city:"," - \"Establish Embassy\": This action always succeeds, and gives permanent contact with the city's owner, as well as intelligence on their tax rates and technology. Each player you have an embassy with that knows a technology reduces that technology's research cost to you."," - \"Investigate City\": Your unit attempts to report detailed information about the city: its status, what buildings and units are within, and what it is currently producing. The unit is not consumed by this action."
 
@@ -2046,9 +2117,10 @@ fuel=0
 uk_happy=0
 veteran_names="green"
 veteran_power_fact=100
-veteran_raise_chance=0
+veteran_base_raise_chance=0
 veteran_work_raise_chance=0
 veteran_move_bonus=0
+tp_defense="Alight"
 flags="IgZOC","NonMil","GameLoss","Unique","EvacuateFirst","SuperSpy","NoHome","NoBuild","Unbribable","NoAutoAtt"
 roles="KingStartUnit"
 helptext="This is you. If you lose this unit, you lose the game. So don't.","Won't unleash barbarians from huts."
@@ -2076,9 +2148,10 @@ fuel=0
 uk_happy=0
 veteran_names="green"
 veteran_power_fact=100
-veteran_raise_chance=0
+veteran_base_raise_chance=0
 veteran_work_raise_chance=0
 veteran_move_bonus=0
+tp_defense="Alight"
 flags="IgZOC","NonMil","EvacuateFirst","SuperSpy","NoHome","NoBuild","Unbribable","NoAutoAtt"
 roles="BarbarianLeader"
 helptext="One Barbarian Leader appears every time there is a barbarian uprising somewhere in the world.","When a Barbarian Leader is killed on a tile without any defending units, the ransom is paid, but only to land units and helicopters. Usually the ransom is 100 gold, but can be less if the barbarian has less money."
@@ -2106,6 +2179,7 @@ fuel=3
 uk_happy=0
 uk_shield=1
 uk_gold=1
+tp_defense="Alight"
 flags="HasNoZOC","NonMil","Iron_Oil","Cant_Pillage","NoAutoAtt"
 helptext="The AWACS (Airborne Warning and Control System) is an airplane with an advanced radar that can determine the location of enemy units over a wide area."
 
@@ -2126,13 +2200,15 @@ defense=0
 move_rate=1
 vision_radius_sq=2
 transport_cap=0
+vision_layer="Stealth"
 hitpoints=10
 firepower=1
 fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","HasNoZOC","IgZOC","Partial_Invis","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","IgZOC","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_58]
@@ -2158,7 +2234,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_59]
@@ -2184,7 +2261,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_60]
@@ -2210,7 +2288,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_61]
@@ -2236,7 +2315,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_62]
@@ -2262,7 +2342,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_63]
@@ -2288,7 +2369,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_64]
@@ -2314,7 +2396,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_65]
@@ -2340,7 +2423,8 @@ fuel=0
 uk_happy=0
 uk_shield=1
 uk_gold=1
-flags="Cant_Fortify","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."
 
 [unit_66]
@@ -2364,5 +2448,6 @@ hitpoints=10
 firepower=1
 fuel=0
 uk_happy=0
-flags="Cant_Fortify","HasNoZOC","NoVeteran","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt"
+tp_defense="Alight"
+flags="HasNoZOC","NoVeteran","NoBuild","Cant_Pillage","Unbribable","NoAutoAtt","Cant_Fortify"
 helptext="Watch out for wild animals in the beginning of the game."

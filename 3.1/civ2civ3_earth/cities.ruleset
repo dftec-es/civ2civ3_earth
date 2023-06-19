@@ -12,9 +12,9 @@
 
 [datafile]
 description="Civ2Civ3 Earth ruleset cities data for Freeciv"
-ruledit="3.0.7+"
-options="+Freeciv-3.0-ruleset"
-format_version=10
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
 
 ; /* <-- avoid gettext warnings
 ;
@@ -41,7 +41,7 @@ format_version=10
 ;                 plain tag is used instead.
 ; graphic_alt   = fallback graphic tag in case the specialist graphic isn't
 ;                 found.
-; reqs	        = requirements to have the specialist pick (see
+; reqs          = requirements to have the specialist pick (see
 ;                 effects.ruleset and README.effects for help on requirements)
 ; helptext      = optional help text string; should escape all raw newlines
 ;                 so that xgettext parsing works
@@ -82,9 +82,9 @@ partisans_pct=75
 
 [missing_unit_upkeep]
 food_protected="EvacuateFirst"
-food_unit_act="Join City","Help Wonder","Establish Trade Route","Recycle Unit"
+food_unit_act="Join City","Help Wonder","Establish Trade Route","Disband Unit Recover"
 gold_protected="EvacuateFirst"
-gold_unit_act="Join City","Help Wonder","Establish Trade Route","Recycle Unit"
+gold_unit_act="Join City","Help Wonder","Establish Trade Route","Disband Unit Recover"
 shield_protected="EvacuateFirst"
-shield_unit_act="Join City","Help Wonder","Establish Trade Route","Recycle Unit"
+shield_unit_act="Join City","Help Wonder","Establish Trade Route","Disband Unit Recover"
 shield_wipe=TRUE
