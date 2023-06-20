@@ -31,4 +31,4 @@ The installed files and folders should look like this:
 where /2.6/ should match the freeciv version that you had installed.
 
 #### Earth map 124x68 Rhye enlarged
-The earth map scenario (seen in the screenshot) was designed for this ruleset, but cannot be open source (map made by Rhye for civ4), and can be downloaded separately from [here](https://drive.google.com/file/d/1Di-O4LCYN0X2cOp9K_FGcqwsoDr8vKt2/view?usp=sharing).
+The world map scenario (seen in the screenshot) was designed for this ruleset, but it cannot have an open license (map made by Rhye for civ4). It can be downloaded separately from [here](https://drive.google.com/file/d/1Di-O4LCYN0X2cOp9K_FGcqwsoDr8vKt2/view?usp=sharing).
