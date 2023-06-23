@@ -1619,7 +1619,7 @@ set =
     { "name", "value", "lock"
       "aifill", 8, FALSE
       "generator", "FRACTAL", FALSE
-      "topology", "WRAPX|WRAPY|ISO", TRUE
+      "topology", "WRAPX|WRAPY|ISO", FALSE
       "mapsize", "PLAYER", FALSE
       "tilesperplayer", 75, FALSE
       "tinyisles", "ENABLED", FALSE
