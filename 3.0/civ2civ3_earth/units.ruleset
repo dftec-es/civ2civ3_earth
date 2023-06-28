@@ -89,6 +89,7 @@ Can only attack sea tiles or cities. Bombardment is not restricted.\
     _("HP20")
     _("HP30")
   }
+; Flags "Only_Sea" and "HP10" are not being used currently by any unit and cause warnings from unused action enablers
 ; Used 33 out of 40 unit type flags
 
 ; Names for custom unit class flags. There can be up to 8 of these.
@@ -1911,8 +1912,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Merchant"
-flags         = "NoBuild", "BadCityDefender", "Only_Sea", "HP10",
-                "HasNoZOC", "NoAutoAtt"
+flags         = "NoBuild", "BadCityDefender", "HasNoZOC", "NoAutoAtt"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Galley is your first boat unit. It can act as a transport ship \
@@ -1920,7 +1920,6 @@ and has rudimentary offensive capabilities. It may not enter deep \
 ocean tiles.\
 ")
 ; Trireme renamed to Galley. Ancient galley kept for partial savegame compatibility.
-; Flags "Only_Sea" and "HP10" are useless here, added to avoid warnings from unused flags
 
 [unit_trireme]
 name          = _("Galley")
