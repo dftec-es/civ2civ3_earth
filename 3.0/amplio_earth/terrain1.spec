@@ -113,7 +113,7 @@ tiles = { "row", "column", "tag"
  2,  9, "tx.farmland"
  3,  8, "tx.mine"
  4,  8, "tx.lumber"
- 5,  8, "tx.pollution"
+ 5,  9, "tx.pollution"
  6,  9, "tx.village"
  7,  8, "tx.fallout"
 

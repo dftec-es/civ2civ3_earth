@@ -739,6 +739,7 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
@@ -758,6 +759,7 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
@@ -772,6 +774,7 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "MinMoveFrags", "6",           "Local", FALSE
@@ -779,13 +782,15 @@ actor_reqs    =
       "Extra",        "Bombardment", "Local", FALSE
     }
 
-; AI: Enable bombard from land to sea (when attack is disabled)
+; AI: Enable bombard to sea (when attack is disabled)
 [actionenabler_bombard_ai_only_land]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "Bombarder",    "Local", TRUE
       "UnitFlag",     "Only_Land",    "Local", TRUE
+      "UnitFlag",     "Only_Sea",     "Local", FALSE
+      "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
@@ -796,13 +801,14 @@ target_reqs    =
       "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
-; AI: Enable bombard against unpassable terrain (when attack is disabled)
+; AI: Enable bombard to unpassable terrain (when attack is disabled)
 [actionenabler_bombard_ai_only_land_unpassable]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "Bombarder",    "Local", TRUE
       "UnitFlag",     "Only_Land",    "Local", TRUE
+      "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
@@ -814,13 +820,15 @@ target_reqs    =
       "TerrainFlag",  "NoWheeled",    "Local", TRUE
     }
 
-; AI: Enable bombard from sea to land (when attack is disabled)
+; AI: Enable bombard to land (when attack is disabled)
 [actionenabler_bombard_ai_only_sea]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "Bombarder",    "Local", TRUE
       "UnitFlag",     "Only_Sea",     "Local", TRUE
+      "UnitFlag",     "Only_Land",    "Local", FALSE
+      "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
@@ -833,6 +841,7 @@ target_reqs    =
     }
 
 ; AI: Enable bombard for damaged HPFull units (when attack is disabled)
+; OnNativeTile because it is a requirement of the related Attack enabler
 [actionenabler_bombard_ai_hp10]
 action = "Bombard"
 actor_reqs    =
@@ -840,7 +849,11 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP10",        "Local", TRUE
+      "UnitFlag",     "Only_Land",   "Local", FALSE
+      "UnitFlag",     "Only_Sea",    "Local", FALSE
+      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
+      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -854,7 +867,11 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP20",        "Local", TRUE
+      "UnitFlag",     "Only_Land",   "Local", FALSE
+      "UnitFlag",     "Only_Sea",    "Local", FALSE
+      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
+      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -868,7 +885,11 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP30",        "Local", TRUE
+      "UnitFlag",     "Only_Land",   "Local", FALSE
+      "UnitFlag",     "Only_Sea",    "Local", FALSE
+      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
+      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1014,8 +1035,8 @@ actor_reqs    =
       "DiplRel",       "War",              "Local", TRUE
     }
 
-; New Only_Land: Can not attack against oceanic tiles, except for bombarding
-; Can not attack against unpassable terrain (not suitable for wheeled units)
+; New Only_Land: Can attack only land tiles, except to bombard,
+; and only terrain suitable for wheeled units
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_only_land]
 action = "Attack"
@@ -1033,8 +1054,7 @@ target_reqs    =
       "TerrainFlag",  "NoWheeled",    "Local", FALSE
     }
 
-; New Only_Land: Can attack against passable terrain
-; (with extra suitable for wheeled units)
+; New Only_Land: Can attack terrain with extra suitable for wheeled units
 [actionenabler_attack_only_land_extra]
 action = "Attack"
 actor_reqs    =
@@ -1050,7 +1070,7 @@ target_reqs    =
       "ExtraFlag",    "ForWheeled",   "Local", TRUE
     }
 
-; New Only_Sea: Can attack only oceanic tiles, except for bombarding
+; New Only_Sea: Can attack only oceanic tiles, except to bombard
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_only_sea]
 action = "Attack"
@@ -1083,7 +1103,7 @@ target_reqs    =
       "CityTile",     "Center",       "Local", TRUE
     }
 
-; New HPFull: Can attack only if the attacker is undamaged
+; New HPFull: Can attack only if the attacker is undamaged (doesn't work together with Only_Land or Only_Sea)
 ; (can attack only from native tile, ignoring AttFromNonNative or Marines)
 [actionenabler_attack_hp_10]
 action = "Attack"
@@ -1091,6 +1111,8 @@ actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "HPFull",       "Local", TRUE
       "UnitFlag",     "HP10",         "Local", TRUE
+      "UnitFlag",     "Only_Land",    "Local", FALSE
+      "UnitFlag",     "Only_Sea",     "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",            "Local", TRUE
@@ -1104,6 +1126,8 @@ actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "HPFull",       "Local", TRUE
       "UnitFlag",     "HP20",         "Local", TRUE
+      "UnitFlag",     "Only_Land",    "Local", FALSE
+      "UnitFlag",     "Only_Sea",     "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",            "Local", TRUE
@@ -1117,6 +1141,8 @@ actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "HPFull",       "Local", TRUE
       "UnitFlag",     "HP30",         "Local", TRUE
+      "UnitFlag",     "Only_Land",    "Local", FALSE
+      "UnitFlag",     "Only_Sea",     "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",            "Local", TRUE

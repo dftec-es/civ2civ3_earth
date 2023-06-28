@@ -75,7 +75,7 @@ Can bombard, only if no other unit bombarded from the same tile this turn.\
     _("Marines"), _("Can launch attack from non-native tiles.")
     _("NoAutoAtt")
     _("Only_Land"), _("\
-Can not attack oceanic tiles, mountains, swamps, or jungles, unless there \
+Cannot attack oceanic tiles, mountains, swamps, or jungles, unless there \
 is a road or base on the tile. Bombardment is not restricted.\
 ")
     _("Only_Sea"), _("\
@@ -83,7 +83,8 @@ Can only attack sea tiles or cities. Bombardment is not restricted.\
 ")
     _("AirBomber"), _("Combat rounds equal to bombard rate.")
     _("HPFull"), _("Cannot attack once damaged, except to bombard.")
-; units with HPFull require one of the following HP flags to know when are undamaged
+; HPFull is cancelled by Only_Land or Only_Sea, and it cancels AttFromNonNative and Marines
+; Units with HPFull require one of the following HP flags to know when are they undamaged
     _("HP10")
     _("HP20")
     _("HP30")
@@ -777,7 +778,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 bombard_rate  = 1
-flags         = "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
+flags         = "OneAttack", "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -1559,8 +1560,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 bombard_rate  = 2
-flags         = "Bombarder", "Only_Land",
-                "Iron", "Niter", "NoAutoAtt"
+flags         = "Bombarder", "Only_Land", "Iron", "Niter", "NoAutoAtt"
 roles         = "AttackStrongStartUnit", "BarbarianTech", "BarbarianBuildTech"
 helptext      = _("\
 Cannons are large firearms that can fire heavy projectiles over long \
@@ -1911,7 +1911,8 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Merchant"
-flags         = "NoBuild", "BadCityDefender", "HasNoZOC", "NoAutoAtt"
+flags         = "NoBuild", "BadCityDefender", "Only_Sea", "HP10",
+                "HasNoZOC", "NoAutoAtt"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Galley is your first boat unit. It can act as a transport ship \
@@ -1919,6 +1920,7 @@ and has rudimentary offensive capabilities. It may not enter deep \
 ocean tiles.\
 ")
 ; Trireme renamed to Galley. Ancient galley kept for partial savegame compatibility.
+; Flags "Only_Sea" and "HP10" are useless here, added to avoid warnings from unused flags
 
 [unit_trireme]
 name          = _("Galley")
@@ -2132,8 +2134,7 @@ bonuses       =
      "Submarine", "DefenseMultiplier", 1
      "Submarine", "DefenseDivider", 1
    }
-flags         = "BadCityDefender", "Bombarder",
-                "Iron", "NoAutoAtt"
+flags         = "BadCityDefender", "Bombarder", "Iron", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
 An improved Ironclad, with better move rate and vision. Anti-submarine \
@@ -2170,8 +2171,7 @@ uk_food       = 1
 uk_gold       = 1
 bombard_rate  = 3
 targets       = "Sub"
-flags         = "BadCityDefender", "Bombarder",
-                "Iron", "NoAutoAtt"
+flags         = "BadCityDefender", "Bombarder", "Iron", "NoAutoAtt"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The Cruiser is a strong offensive boat unit.\
