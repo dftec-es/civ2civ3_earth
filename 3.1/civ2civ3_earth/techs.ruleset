@@ -1,0 +1,675 @@
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes,
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+
+[datafile]
+description="Civ2Civ3 Earth ruleset tech data for Freeciv"
+ruledit="3.1.0-beta2+"
+options="+Freeciv-3.1-ruleset"
+format_version=20
+
+; /* <-- avoid gettext warnings
+;
+; Tech classes:
+;
+; First one is the default one.
+; If there is none, tech classes feature is disabled
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
+; cost_pct                = how much techs of the class cost compared
+;                           to normal. Default is 100%.
+;
+; */ <-- avoid gettext warnings
+
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual advances, one per section.
+; The number can be variable, up to 250.
+;
+; The actual tag used (the * in [advance_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; Notes:
+;
+; name          = translatable name as seen by user
+; rule_name     = (optional) internal name for savegames, rulesets etc; if
+;                 not present, "name" is used for this purpose too. Since
+;                 the name used in savegames must not change, if you want
+;                 to rename an item after a ruleset has been released, you
+;                 should set "rule_name" to the original value of "name".
+; class         = tech class this tech belongs to, if they have been defined.
+;                 Default is first one defined above.
+; req1, req2    = advances required before researching this one
+; root_req      = tech required before acquiring this tech, by any means.
+;                 All techs with any direct or indirect dependency on this
+;                 one will *also* have this root_req, as well as their own
+;                 and any others they inherit.
+;                 Giving "None" explicitly here prevents a tech from
+;                 inheriting root_reqs in this way, and stops root_req
+;                 inheritance through that tech.
+;                 Specifying a tech's root_req as itself means that the tech
+;                 can only be acquired by special means (nation's init_techs,
+;                 scripting, etc).
+; research_reqs = requirements before researching this one. Can have non
+;                 tech requirements because it is a requirement vector.
+;                 See doc/README.effects to learn more about requirement
+;                 vectors.
+;                 Requiring a tech here instead of in req1, req2 or
+;                 root_req is not supported yet.
+;                 Requirements that may become fulfilled during the game
+;                 when they weren't at the start of the game is not
+;                 supported yet.
+; flags         = special flag strings
+; graphic       = icon for technology
+; graphic_alt   = alternate icon
+; helptext      = optional help text string (set units ruleset for examples)
+; bonus_message = text seen when a player is the first to discover
+;                 an bonus tech. Must contain '%s' to mark place of the tech
+;                 gained.
+; cost          = if tech_cost_style is set to "Classic+" or "Experimental+",
+;                 this field is read for information on how much a tech
+;                 costs.
+;
+; Special values for req1 and req2 are "None" (first section below)
+; and "Never" (never available).  If only one tech is required,
+; it should be listed as req1.
+;
+; As well as custom flags defined above, the following flag strings are
+; possible:
+;
+; "Bonus_Tech"          = player gets extra tech if reached first
+; "Bridge"              = "Settler" unit types can build extras that
+;                         require bridge when occurring with some other
+;                         extra. See "bridged_over" extra property in
+;                         terrain.ruleset.
+; "Build_Airborne"      = from now on can build air units (for use by AI)
+; "Claim_Ocean"         = Player claims ocean tiles even if they are not
+;                         adjacent to border source
+; "Claim_Ocean_Limited" = Oceanic border sources claim ocean tiles even if
+;                         they are not adjacent to border source
+;
+; */ <-- avoid gettext warnings
+
+
+[advance_0]
+name=_("Advanced Flight")
+req1="Radio"
+req2="Machine Tools"
+graphic="a.advanced_flight"
+
+[advance_1]
+name=_("Alphabet")
+req1="None"
+req2="None"
+graphic="a.alphabet"
+
+[advance_2]
+name=_("Amphibious Warfare")
+req1="Engineering"
+req2="Tactics"
+graphic="a.amphibious_warfare"
+
+[advance_3]
+name=_("Astronomy")
+req1="Mysticism"
+req2="Mathematics"
+graphic="a.astronomy"
+helptext="Increases vision radius of cities and fortresses."
+
+[advance_4]
+name=_("Atomic Theory")
+req1="Chemistry"
+req2="Refrigeration"
+graphic="a.atomic_theory"
+helptext="Uranium resources produce 2 extra shields in the tile where they are located.","Uranium is required in a city to build a Nuclear Plant or the wonder Manhattan Project. Cities with available Uranium build Armor and Submarine units with one extra veteran level."
+
+[advance_5]
+name=_("Automobile")
+req1="Combustion"
+req2="Steel"
+graphic="a.automobile"
+
+[advance_6]
+name=_("Banking")
+req1="Trade"
+req2="The Republic"
+graphic="a.banking"
+
+[advance_7]
+name=_("Bridge Building")
+req1="The Wheel"
+req2="Construction"
+graphic="a.bridge_building"
+flags="Bridge"
+helptext="Allows roads to be built on river tiles."
+
+[advance_8]
+name=_("Bronze Working")
+req1="None"
+req2="None"
+graphic="a.bronze_working"
+
+[advance_9]
+name=_("Ceremonial Burial")
+req1="None"
+req2="None"
+graphic="a.ceremonial_burial"
+
+[advance_10]
+name=_("Chemistry")
+req1="University"
+req2="Medicine"
+graphic="a.chemistry"
+helptext="Rubber resources produce 2 extra shields in the tile where they are located.","Cities with available Rubber build Marines, Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra veteran level."
+
+[advance_11]
+name=_("Chivalry")
+req1="Feudalism"
+req2="Horseback Riding"
+graphic="a.chivalry"
+
+[advance_12]
+name=_("Code of Laws")
+req1="Alphabet"
+req2="None"
+graphic="a.code_of_laws"
+
+[advance_13]
+name=_("Combined Arms")
+req1="Mobile Warfare"
+req2="Advanced Flight"
+graphic="a.combined_arms"
+
+[advance_14]
+name=_("Combustion")
+req1="Refining"
+req2="Engineering"
+graphic="a.combustion"
+
+[advance_15]
+name=_("Communism")
+req1="Theology"
+req2="Industrialization"
+graphic="a.communism"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_16]
+name=_("Computers")
+req1="Miniaturization"
+req2="Radio"
+graphic="a.computers"
+helptext="If the Internet wonder have been built by any player, all cities on the map are continuously visible, despite fog-of-war, to every player with knowledge of Computers."
+
+[advance_17]
+name=_("Conscription")
+req1="Democracy"
+req2="Metallurgy"
+graphic="a.conscription"
+
+[advance_18]
+name=_("Construction")
+req1="Masonry"
+req2="Iron Working"
+graphic="a.construction"
+helptext="Allows Settlers, Migrants, Workers, Engineers, and military infantry units to build forts and fortresses."
+
+[advance_19]
+name=_("Currency")
+req1="Bronze Working"
+req2="None"
+graphic="a.currency"
+
+[advance_20]
+name=_("Democracy")
+req1="Banking"
+req2="Invention"
+graphic="a.democracy"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_21]
+name=_("Economics")
+req1="Banking"
+req2="University"
+graphic="a.economics"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_22]
+name=_("Electricity")
+req1="Metallurgy"
+req2="Theory of Gravity"
+graphic="a.electricity"
+helptext="Allows irrigation without an adjacent water source, improves the effect of Amphitheaters, and grants you vision inside your borders."
+
+[advance_23]
+name=_("Electronics")
+req1="The Corporation"
+req2="Electricity"
+graphic="a.electronics"
+
+[advance_24]
+name=_("Engineering")
+req1="Electricity"
+req2="Steam Engine"
+graphic="a.engineering"
+
+[advance_25]
+name=_("Environmentalism")
+req1="Recycling"
+req2="Space Flight"
+graphic="a.environmentalism"
+
+[advance_26]
+name=_("Espionage")
+req1="Communism"
+req2="Democracy"
+graphic="a.espionage"
+
+[advance_27]
+name=_("Explosives")
+req1="Gunpowder"
+req2="Chemistry"
+graphic="a.explosives"
+helptext="Allows Settlers, Migrants, Workers and Engineers to build canals, and naval mines. Allows Transports to build naval mines."
+
+[advance_28]
+name=_("Feudalism")
+req1="Iron Working"
+req2="Monarchy"
+graphic="a.feudalism"
+helptext="Allows Settlers, Migrants, Workers and Engineers to upgrade fortresses to castles when they are inside your national borders, not adjacent to other castles or cities, and not on terrains where cities can not be built (Mountains or Glaciers)."
+
+[advance_29]
+name=_("Flight")
+req1="Combustion"
+req2="Tactics"
+graphic="a.flight"
+flags="Build_Airborne"
+
+[advance_30]
+name=_("Fusion Power")
+req1="Superconductors"
+req2="Labor Union"
+graphic="a.fusion_power"
+helptext="Makes it possible for Engineers to transform terrains.","It also reduces the pollution from shield production by a further 25% in your cities with Nuclear Plants, making them equivalent to Solar Plants."
+
+[advance_31]
+name=_("Genetic Engineering")
+req1="Refrigeration"
+req2="The Corporation"
+graphic="a.genetic_engineering"
+helptext="If the Cure For Cancer wonder have been built by any player, the risk of plague is reduced (by 10% of the base chance) in every city of every player with knowledge of Genetic Engineering."
+
+[advance_32]
+name=_("Guerilla Warfare")
+req1="Communism"
+req2="Tactics"
+graphic="a.guerilla_warfare"
+
+[advance_33]
+name=_("Gunpowder")
+req1="Invention"
+req2="Feudalism"
+graphic="a.gunpowder"
+helptext="Niter resources produce 2 extra shields in the tile where they are located.","Cities without available Niter build gunpowder based units with one less veteran level: Musketeers, Riflemen, Alpine Troops, Dragoons, Cavalry, Cannon, Galleon, Frigate and Ironclad.\n"
+
+[advance_34]
+name=_("Horseback Riding")
+req1="None"
+req2="None"
+graphic="a.horseback_riding"
+helptext="Cities with available Horses (resource) build horse based units with one more veteran level: Horsemen, Chariot, Crusaders, Knights, Dragoons, and Cavalry."
+
+[advance_35]
+name=_("Industrialization")
+req1="Railroad"
+req2="Banking"
+graphic="a.industrialization"
+helptext="Aluminum resources produce 2 extra shields in the tile where they are located.","Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise Missile, Fighter and Bomber units with one extra veteran level."
+
+[advance_36]
+name=_("Invention")
+req1="Bridge Building"
+req2="Literacy"
+graphic="a.invention"
+helptext="Halves the upgrade cost of your units."
+
+[advance_37]
+name=_("Iron Working")
+req1="Bronze Working"
+req2="Warrior Code"
+graphic="a.iron_working"
+helptext="Cities without available Iron build units that require this resource with one less veteran level."
+
+[advance_38]
+name=_("Labor Union")
+req1="Communism"
+req2="Mobile Warfare"
+graphic="a.labor_union"
+helptext="Engineers are built with one extra veteran level."
+
+[advance_39]
+name=_("Laser")
+req1="Computers"
+req2="Nuclear Power"
+graphic="a.laser"
+
+[advance_40]
+name=_("Leadership")
+req1="Chivalry"
+req2="Gunpowder"
+graphic="a.leadership"
+
+[advance_41]
+name=_("Literacy")
+req1="Writing"
+req2="Code of Laws"
+graphic="a.literacy"
+
+[advance_42]
+name=_("Machine Tools")
+req1="Steel"
+req2="Tactics"
+graphic="a.machine_tools"
+
+[advance_43]
+name=_("Magnetism")
+req1="Seafaring"
+req2="Astronomy"
+graphic="a.magnetism"
+
+[advance_44]
+name=_("Map Making")
+req1="Alphabet"
+req2="None"
+graphic="a.map_making"
+
+[advance_45]
+name=_("Masonry")
+req1="None"
+req2="None"
+graphic="a.masonry"
+
+[advance_46]
+name=_("Mass Production")
+req1="Automobile"
+req2="The Corporation"
+graphic="a.mass_production"
+
+[advance_47]
+name=_("Mathematics")
+req1="Alphabet"
+req2="Masonry"
+graphic="a.mathematics"
+
+[advance_48]
+name=_("Medicine")
+req1="Philosophy"
+req2="Trade"
+graphic="a.medicine"
+helptext="Non wheeled ground units ending the turn on plains or grassland tiles recover 2 extra HPs per turn, even without resting."
+
+[advance_49]
+name=_("Metallurgy")
+req1="Gunpowder"
+req2="Mathematics"
+graphic="a.metallurgy"
+helptext="Galleon, Frigate and Ironclad are built veteran at cities with Iron and Niter resources (with one less veteran level for each one of these resources missing)."
+
+[advance_50]
+name=_("Miniaturization")
+req1="Combustion"
+req2="Electronics"
+graphic="a.miniaturization"
+helptext="Allows Settlers, Migrants, Workers, Engineers, and Transports to build oil platforms on Deep Ocean, required to get the bonus from Offshore Platforms."
+
+[advance_51]
+name=_("Mobile Warfare")
+req1="Automobile"
+req2="Machine Tools"
+graphic="a.mobile_warfare"
+
+[advance_52]
+name=_("Monarchy")
+req1="Ceremonial Burial"
+req2="Code of Laws"
+graphic="a.monarchy"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_53]
+name=_("Monotheism")
+req1="Astronomy"
+req2="Polytheism"
+graphic="a.monotheism"
+
+[advance_54]
+name=_("Mysticism")
+req1="Ceremonial Burial"
+req2="None"
+graphic="a.mysticism"
+helptext="Improves the effect of Temples."
+
+[advance_55]
+name=_("Navigation")
+req1="Invention"
+req2="Physics"
+graphic="a.navigation"
+
+[advance_56]
+name=_("Nuclear Fission")
+req1="Mass Production"
+req2="Atomic Theory"
+graphic="a.nuclear_fission"
+
+[advance_57]
+name=_("Nuclear Power")
+req1="Nuclear Fission"
+req2="Miniaturization"
+graphic="a.nuclear_power"
+helptext="Gives sea units one extra move."
+
+[advance_58]
+name=_("Philosophy")
+req1="Mysticism"
+req2="Literacy"
+graphic="a.philosophy"
+bonus_message="Great philosophers from all the world join your civilization: you learn %s immediately."
+flags="Bonus_Tech"
+
+[advance_59]
+name=_("Physics")
+req1="The Wheel"
+req2="Magnetism"
+graphic="a.physics"
+helptext="Wheeled ground units ending the turn on plains or grassland tiles, or naval units ending the turn on shallow ocean or lake tiles, recover 2 extra HPs per turn, even without resting."
+
+[advance_60]
+name=_("Plastics")
+req1="Mass Production"
+req2="Robotics"
+graphic="a.plastics"
+
+[advance_61]
+name=_("Polytheism")
+req1="Horseback Riding"
+req2="Ceremonial Burial"
+graphic="a.polytheism"
+helptext="Cities with available Ivory (resource) build Elephant units with one more veteran level."
+
+[advance_62]
+name=_("Pottery")
+req1="None"
+req2="None"
+graphic="a.pottery"
+
+[advance_63]
+name=_("Radio")
+req1="Flight"
+req2="Electronics"
+graphic="a.radio"
+helptext="Allows Settlers, Migrants, Workers and Engineers to build airstrips, airbases and buoys. Allows Transports to build buoys."
+
+[advance_64]
+name=_("?tech:Railroad")
+req1="Steam Engine"
+req2="Metallurgy"
+graphic="a.railroad"
+helptext="Allows Settlers, Migrants, Workers and Engineers to upgrade roads to railroads.","For Despotism or Tribal governments, cancels the penalty to worked tiles with output greater than 2 (as if all your cities were always celebrating)."
+
+[advance_65]
+name=_("Recycling")
+req1="Mass Production"
+req2="Sanitation"
+graphic="a.recycling"
+
+[advance_66]
+name=_("Refining")
+req1="Explosives"
+req2="Industrialization"
+graphic="a.refining"
+helptext="Allows Settlers, Migrants, Workers and Engineers to upgrade mines to oil wells on Desert, Tundra and Glacier tiles, for an extra production point.","Allows cities to use Oil resource as an alternative to Iron in order to build certain veteran units: units that require Oil are built with one less veteran level, unless there are Oil or Iron resources in the city."
+
+[advance_67]
+name=_("Refrigeration")
+req1="Sanitation"
+req2="Electricity"
+graphic="a.refrigeration"
+helptext="Allows Settlers, Migrants, Workers and Engineers to upgrade irrigation systems to farmland."
+
+[advance_68]
+name=_("Robotics")
+req1="Mobile Warfare"
+req2="Computers"
+graphic="a.robotics"
+
+[advance_69]
+name=_("Rocketry")
+req1="Advanced Flight"
+req2="Miniaturization"
+graphic="a.rocketry"
+helptext="Enables the movement of Nuclear weapons where it was not possible, or doubles the movement where it was already possible (from cities with an Airport)."
+
+[advance_70]
+name=_("Sanitation")
+req1="Bridge Building"
+req2="Medicine"
+graphic="a.sanitation"
+
+[advance_71]
+name=_("Seafaring")
+req1="Pottery"
+req2="Map Making"
+graphic="a.seafaring"
+
+[advance_72]
+name=_("Space Flight")
+req1="Computers"
+req2="Rocketry"
+graphic="a.space_flight"
+
+[advance_73]
+name=_("Stealth")
+req1="Plastics"
+req2="Space Flight"
+graphic="a.stealth"
+
+[advance_74]
+name=_("Steam Engine")
+req1="Chemistry"
+req2="Navigation"
+graphic="a.steam_engine"
+
+[advance_75]
+name=_("Steel")
+req1="Engineering"
+req2="Industrialization"
+graphic="a.steel"
+
+[advance_76]
+name=_("Superconductors")
+req1="Space Flight"
+req2="Laser"
+graphic="a.superconductors"
+helptext="Allows Settlers, Migrants, Workers and Engineers to upgrade railroads with maglev."
+
+[advance_77]
+name=_("Military Tactics")
+rule_name="Tactics"
+req1="Conscription"
+req2="Leadership"
+graphic="a.tactics"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_78]
+name=_("The Corporation")
+req1="Economics"
+req2="Industrialization"
+graphic="a.the_corporation"
+helptext="Allows establishing up to 2 trade routes from each city."
+
+[advance_79]
+name=_("The Republic")
+req1="Literacy"
+req2="None"
+graphic="a.the_republic"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_80]
+name=_("The Wheel")
+req1="Horseback Riding"
+req2="None"
+graphic="a.the_wheel"
+
+[advance_81]
+name=_("Theology")
+req1="Philosophy"
+req2="Monotheism"
+graphic="a.theology"
+helptext="\nImproves the effect of Cathedrals.","Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_82]
+name=_("Theory of Gravity")
+req1="Physics"
+req2="University"
+graphic="a.theory_of_gravity"
+
+[advance_83]
+name=_("Trade")
+req1="Currency"
+req2="Pottery"
+graphic="a.trade"
+helptext="Allows establishing up to 1 trade route from each city.","When 2 cities are linked by a trade route, any special resource present in one city (within the city radius) is considered to be available in the other city too. Resources present in the city slightly reduce the chance of plague, so they can be seen in the city UI. Resources traded from other cities slightly increase the risk of plague.","For each resource traded to a city that did not have it, the receiving city gets an extra bonus: +1 Luxury, +1 Production, or +1 unit free of upkeep."
+
+[advance_84]
+name=_("University")
+req1="Mathematics"
+req2="Philosophy"
+graphic="a.university"
+
+[advance_85]
+name=_("Warrior Code")
+req1="None"
+req2="None"
+graphic="a.warrior_code"
+helptext="Increases by 2 the number of cities that your nation can support before the size of the empire causes extra unhappiness in your citizens."
+
+[advance_86]
+name=_("Writing")
+req1="Alphabet"
+req2="None"
+graphic="a.writing"

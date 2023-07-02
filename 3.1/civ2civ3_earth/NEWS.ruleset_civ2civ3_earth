@@ -6,7 +6,6 @@ LATEST CHANGES:
 
 Known bugs:
 * When the ruleset is played with a version of Freeciv prior to 3.0.8, the "Investigate city" action may cause a crash to desktop (related to the presence of traded resources in the target city). As an alternative, military units can use the "Bombard" action to see all defending units.
-* The server settings suggested by the ruleset are no longer loaded by default. Due to changes in freeciv 3.0 now user settings (from freeciv-client-rc-3.0) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of the client file freeciv-client-rc-3.0 before starting a new game.
 
 Fixed bugs:
 * Strategic resources no longer appear on the same tile as other special resources.

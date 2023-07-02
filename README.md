@@ -6,14 +6,14 @@
 
 Tagged versions have been tested and are ready to be played. The latest one uses to be available to install with the "modpack installer" tool shipped with freeciv.
 
-How to use freeciv modpack installer to install it from github:
+#### How to use freeciv modpack installer to install it from github:
 * Depending which freeciv client you installed, you will probably have one modpack installer tool called something like "freeciv-mp-gtk3". Launch it. 
 * Where it says "Modpack URL", paste the following link (the one that matches your freeciv version):
 https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/2.6/civ2civ3_earth-2.6.modpack
 https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/3.0/civ2civ3_earth-3.0.mpdl
-* Press install modpack
+* Press install modpack.
 
-How to install it manually from github:
+#### How to install it manually from github:
 * Download the latest pack from the "tags" section.
 * Extract to the same folder where "saves" folder is located (where savegames are stored).<br/>
 In linux it uses to be: /home/username/.freeciv/
@@ -30,3 +30,5 @@ The installed files and folders should look like this:
 ```
 where /2.6/ should match the freeciv version that you had installed.
 
+#### Earth map 124x68 Rhye enlarged
+The world map scenario (seen in the screenshot) was designed for this ruleset, but it cannot have an open license (map made by Rhye for civ4). It can be downloaded separately from [here](https://drive.google.com/file/d/1Di-O4LCYN0X2cOp9K_FGcqwsoDr8vKt2/view?usp=sharing).
