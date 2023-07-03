@@ -1,9 +1,9 @@
 # Civ2Civ3 Earth (Modpack for Freeciv)
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with freeciv since v2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
 
-See the [NEWS](https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/3.0/civ2civ3_earth/NEWS.ruleset_civ2civ3_earth) file for the latest changes compared to default civ2civ3 rules.
- 
-See the [README](https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/3.0/civ2civ3_earth/README.ruleset_civ2civ3_earth) file for a full list of changes compared to civ2 rules.
+See the file [NEWS.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/NEWS.ruleset_civ2civ3_earth) for the latest changes compared to default civ2civ3 rules.
+
+See the file [README.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/README.ruleset_civ2civ3_earth) for a full list of changes compared to default civ2civ3 rules.
 
 ![Tileset view](/Screenshots/civ2civ3_earth-tileset.jpg?raw=true "Tileset view")
 
