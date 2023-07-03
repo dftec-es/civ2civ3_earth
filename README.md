@@ -3,7 +3,7 @@
 
 See the file [NEWS.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/NEWS.ruleset_civ2civ3_earth) for the latest changes compared to default civ2civ3 rules.
 
-See the file [README.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/README.ruleset_civ2civ3_earth) for a full list of changes compared to default civ2civ3 rules.
+See the file [README.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/README.ruleset_civ2civ3_earth) for a full list of changes compared to civ2 rules.
 
 ![Tileset view](/Screenshots/civ2civ3_earth-tileset.jpg?raw=true "Tileset view")
 
