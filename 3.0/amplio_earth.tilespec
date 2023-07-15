@@ -132,6 +132,20 @@ main_intro_file    = "misc/intro"
 ; low-color systems, and if there are any duplicate tags (lattermost
 ; tag is used).
 files =
+  "misc/small.spec",
+  "misc/events.spec",
+  "misc/specialists.spec",
+  "misc/flags.spec",
+  "misc/space.spec",
+  "misc/techs.spec",
+  "misc/treaty.spec",
+  "misc/cursors.spec",
+  "misc/overlays.spec",
+  "misc/citybar.spec",
+  "misc/shields.spec",
+  "misc/editor.spec",
+  "misc/icons.spec",
+  "misc/wonders-large.spec",
   "amplio_earth/terrain1.spec",
 ;  "amplio_earth/terrain2.spec",
   "amplio_earth/canal.spec",
@@ -144,31 +158,17 @@ files =
   "amplio_earth/upkeep.spec",
   "amplio_earth/activities.spec",
   "amplio_earth/fog.spec",
-  "misc/small.spec",
-  "misc/events.spec",
   "amplio_earth/misc/governments.spec",
-  "misc/specialists.spec",
   "amplio_earth/animals.spec",
   "amplio_earth/units.spec",
   "amplio_earth/veterancy.spec",
-  "misc/flags.spec",
   "amplio_earth/misc/buildings-large.spec",
-  "misc/wonders-large.spec",
-  "misc/space.spec",
-  "misc/techs.spec",
-  "misc/treaty.spec",
   "amplio_earth/nuke.spec",
   "amplio_earth/explosions.spec",
   "amplio_earth/cities.spec",
   "amplio_earth/bases.spec",
   "amplio_earth/select.spec",
-  "amplio_earth/grid.spec",
-  "misc/cursors.spec",
-  "misc/overlays.spec",
-  "misc/citybar.spec",
-  "misc/shields.spec",
-  "misc/editor.spec",
-  "misc/icons.spec"
+  "amplio_earth/grid.spec"
 
 
 ; Include color definitions
