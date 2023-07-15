@@ -50,6 +50,9 @@ tiles = { "row", "column", "tag"
   2, 5, "grid.borders.u"
   2, 6, "grid.borders.d"
 
+  0, 7, "tx.fog"
+  1, 7, "tx.darkness"
+
   3, 0, "tx.darkness_n"
   3, 1, "tx.darkness_e"
   3, 2, "tx.darkness_se"

@@ -33,7 +33,8 @@ is_hex = TRUE
 hex_side = 24
 
 ; Blended fog
-fog_style      = "Auto"
+;fog_style      = "Auto"
+fog_style      = "Sprite"
 
 ;darkness_style = "Corner"
 darkness_style = "CardinalSingle"
@@ -149,8 +150,6 @@ files =
   "misc/editor.spec",
   "misc/icons.spec",
   "misc/wonders-large.spec",
-  "amplio_earth/terrain1.spec",
-;  "amplio_earth/terrain2.spec",
   "amplio_earth/tiles.spec",
   "amplio_earth/upkeep.spec",
   "amplio_earth/activities.spec",
@@ -165,6 +164,7 @@ files =
   "amplio_earth/cities.spec",
   "amplio_earth/bases.spec",
   "amplio_earth/select.spec",
+  "ampliohex_earth/terrain1.spec",
   "ampliohex_earth/canal.spec",
   "ampliohex_earth/forest.spec",
   "ampliohex_earth/hills.spec",
