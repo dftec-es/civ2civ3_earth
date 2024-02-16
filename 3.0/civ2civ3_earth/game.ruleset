@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2023_06b"
+version = "3.0_2023_06c"
 
 ; Summary of the ruleset
 summary = _("\
@@ -55,7 +55,8 @@ global_init_buildings="Palace"
 [tileset]
 ; If preferred tileset is set, clients that support the feature will suggest
 ; using that tileset with the ruleset.
-preferred = "amplio_earth"
+; preferred = "amplio_earth"
+; preferred = "ampliohex_earth"
 
 [soundset]
 ; If preferred soundset is set, clients that support the feature will suggest

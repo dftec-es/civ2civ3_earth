@@ -1,6 +1,9 @@
 # Civ2Civ3 Earth (Modpack for Freeciv)
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with freeciv since v2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
 
+See the file [NEWS.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/NEWS.ruleset_civ2civ3_earth) for the latest changes compared to default civ2civ3 rules.
+
+See the file [README.ruleset_civ2civ3_earth](https://github.com/dftec-es/civ2civ3_earth/blob/release/3.0/civ2civ3_earth/README.ruleset_civ2civ3_earth) for a full list of changes compared to civ2 rules.
 
 ![Tileset view](/Screenshots/civ2civ3_earth-tileset.jpg?raw=true "Tileset view")
 
@@ -22,13 +25,13 @@ If the tileset is not loaded, try to open freeciv Client settings &rarr; Local o
 
 The installed files and folders should look like this:
 ```sh
-/.freeciv/2.6/amplio_earth/
-/.freeciv/2.6/civ2civ3_earth/
-/.freeciv/2.6/scenarios/
-/.freeciv/2.6/amplio_earth.tilespec
-/.freeciv/2.6/civ2civ3_earth.serv
+/.freeciv/3.0/amplio_earth/
+/.freeciv/3.0/civ2civ3_earth/
+/.freeciv/3.0/scenarios/
+/.freeciv/3.0/amplio_earth.tilespec
+/.freeciv/3.0/civ2civ3_earth.serv
 ```
-where /2.6/ should match the freeciv version that you had installed.
+where /3.0/ should match the freeciv version that you had installed.
 
 #### Earth map 124x68 Rhye enlarged
 The world map scenario (seen in the screenshot) was designed for this ruleset, but it cannot have an open license (map made by Rhye for civ4). It can be downloaded separately from [here](https://drive.google.com/file/d/1Di-O4LCYN0X2cOp9K_FGcqwsoDr8vKt2/view?usp=sharing).
