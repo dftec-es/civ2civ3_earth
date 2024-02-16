@@ -3,7 +3,7 @@ options = "+Freeciv-3.0-mpdl"
 baseURL = "."
 name    = "Civ2civ3_Earth"
 type    = "Modpack"
-version = "2023_06b"
+version = "2023_06c"
 
 [files]
 list =
@@ -63,6 +63,7 @@ list =
   "ampliohex_earth/grid.spec"
   "ampliohex_earth/hills.spec"
   "ampliohex_earth/mountains.spec"
+  "ampliohex_earth/ocean.png"
   "ampliohex_earth/ocean.spec"
   "ampliohex_earth/rivers.png"
   "ampliohex_earth/rivers.spec"
