@@ -10,8 +10,8 @@
 ; than minor changes.
 
 [datafile]
-description="Civ2Civ3 game rules for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset game data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 ; This section contains meta information for freeciv-ruledit to recreate the ruleset
@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2023_06c"
+version = "3.0_2024_03"
 
 ; Summary of the ruleset
 summary = _("\

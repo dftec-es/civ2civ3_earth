@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v3.1 (Updated 06-2023)
+Civ2Civ3 Earth Ruleset for Freeciv v3.0 (Updated 03-2024)
 ============================================================
 
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
@@ -37,8 +37,6 @@ DIFFICULTY:
 HARD AI (no limit to tax rates): +20% Science, Luxury, Gold and Production, +20% Veteran chance, -20% Pollution, 2 units per city free of upkeep, Tech cost is 2/3, +20 AI love.
 CHEATING AI (limited tax rates): +40% Science, Luxury, Gold and Production, +40% Veteran chance, -20% Pollution, 2 units per city free of upkeep, Tech cost is 1/3, +40 AI love.
 
-- There is a new setting that can be adjusted in the game menu: Civilization -> Policies -> "AI love for humans", that allows you to reduce (to get a harder AI) or increase (to get an easier AI) the love of the AI for the human players.
-
 The following is a full list of changes compared to classic ruleset (although it should be playable without reading it)...
 
 
@@ -75,7 +73,9 @@ CORE CHANGES:
 - Unlimited movement on rails delayed to maglev (available with Superconductors). Movement bonus is x6 on railroads, x3 on roads, x3 on rivers (non diagonal).
 
 - Added Fort and Airstrip bases, required before you can build Fortress or Airbase, respectively. It prevents the construction of full bases in one single turn. Fort and Airstrip on River tiles cannot be upgraded.
-  Fortresses can be upgraded to Castles when they are inside your national borders, not adjacent to other castles or cities, and not on Mountains or Glaciers. Castles claim ownership of the tile, and are the only bases that protect full stacks from dying when one unit is defeated.
+  Forts automatically disappear if there are no units on the same tile at the end of the turn.
+
+- Fortresses can be upgraded to Castles when they are inside your national borders, not adjacent to other castles or cities, and not on Mountains or Glaciers. Castles claim ownership of the tile, and are the only bases that protect full stacks from dying when one unit is defeated.
 
 - All military infantry units can build fortresses. All worker units can build airbases or castles. The working time required to build a base is equal to the movement cost of the terrain.
 
@@ -361,7 +361,7 @@ Civil war         99%      45%      50%      35%      30%      20%      15%     
 
 Veteran                   +50%(land)                                            +Spies   +Spies    +25%(all)
 Special         +NoUpkeep +Content +75%Lux  +50%Lux  +Tithes  -Senate  -Senate  +Luxury  +NoUpkeep +NoUpkeep
-                -NoTaxes           (Palace) (Palace) +Fanatic -Revolt  -Revolt           (Cost 2)  (Cost 2)
+                -NoTaxes  +Vision  (Palace) (Palace) +Fanatic -Revolt  -Revolt           (Cost 2)  (Cost 2)
                                                      -National         +Partisan         +Partisan -National
 
 Base Corruption    0%      30%      20%      10%      15%      25%       5%       0%      30%      15%
@@ -579,7 +579,7 @@ The following unit changes are included in the table below:
 
 - Archers defense reduced to 1 (was 2), and cost to 20 (was 30). Legion cost reduced to 30 (was 40). This way the ratio Attack/Cost of ancient units is more even to Catapults.
 
-- Pikemen changed to (2/3), cost to 30, and removed the doubled defense vs horses. Attack of Chariots increased to 4 (was 3). Defense of Knights increased to 3 (was 2). In order to encourage early use of cavalry.
+- Pikemen changed to (2/3), cost to 30, with double attack against horses (was double defense). Attack of Chariots increased to 4 (was 3). Defense of Knights increased to 3 (was 2). In order to encourage early use of cavalry.
 
 - Alpine Troops changed to (7/4), and Partisan to (4/5). This way, Riflemen do not become obsolete as city defenders until Partisan or Marine are researched, and every modern infantry is somehow useful.
 
@@ -589,7 +589,7 @@ The following unit changes are included in the table below:
 
 - Removed transport capability from Frigates, to force the use of Galleons. Reduced attack of Frigate and defense of Ironclad to 3 (was 4).
 
-- Battleship's hit points reduced to 30 (was 40), Ironclad and Submarine to 20 (was 30). Doubled the defense and the attack of Destroyers against Submarines. Now there is a Rock-paper-scissors relationship between Submarine-Destroyer-Cruiser.
+- Battleship's hit points reduced to 30 (was 40), Ironclad and Submarine to 20 (was 30). Doubled the defense of Destroyers against Submarines. Now there is a Rock-paper-scissors relationship between Submarine-Destroyer-Cruiser.
 
 - Naval units with transport capability don't cause unhappiness due to military activity, but their military cargo do cause unhappiness when deployed outside national borders, as usual.
 
@@ -609,7 +609,7 @@ Warrior         1    1    1    1      10   10
 Phalanx         1    2    1    1      10   20   
 Archers         3   *1    1    1(1)   10  *20                      
 Legion          4    2    1    1      10  *30   iron               *Marines
-Pikemen        *2   *3    1    1      10  *30   iron               *(No bonus anti-horse)
+Pikemen        *2   *3    1    1      10  *30   iron               *(x2 att vs Horses)
 Musketeers      3    3    1    1(2)   20  *40   niter              *Marines
 Riflemen        5    4    1    1(2)   20  *50   niter              *Marines
 Alpine Troops  *7   *4    1    1(2)   20  *60   niter               IgTer
@@ -641,7 +641,7 @@ Carrier        *0    9    5   *1      40  *150  iron/oil  aluminum  Cargo 8,*No 
 
 Frigate        *3    2    4    1(2)   20  *40   iron,niter         *No Cargo
 Ironclad        4   *3    4    1(2)  *20  *50   iron,niter         
-Destroyer       4    4    6    1(3)   30   60   iron               *(x2 att/def vs Sub)
+Destroyer       4    4    6    1(3)   30   60   iron               *(x2 def vs Sub)
 Cruiser         6    6    5   *1(3)   30   80   iron               
 AEGIS Cruiser   8    8    5   *1(3)   30   100  iron/oil  aluminum *(x2 def vs Air)
 Battleship      12   12   4   *1(3)  *30   160  iron/oil           

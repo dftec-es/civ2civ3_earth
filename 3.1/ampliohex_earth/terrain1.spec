@@ -161,14 +161,12 @@ tiles = { "row", "column", "tag"
 
 ;add-ons
  17,  0, "t.dither_tile"
- 17,  0, "tx.darkness"
  17,  2, "mask.tile"
  17,  2, "t.unknown1"
  6,   0, "t.blend.arctic" ;ice over neighbors
  17,  3, "t.blend.coast"
  17,  3, "t.blend.lake"
  17,  4, "user.attention"
- 17,  5, "tx.fog"
  17,  6, "user.infratile"
 
 ;goto path sprites

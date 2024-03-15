@@ -37,8 +37,6 @@ DIFFICULTY:
 HARD AI (no limit to tax rates): +20% Science, Luxury, Gold and Production, +20% Veteran chance, -20% Pollution, 2 units per city free of upkeep, Tech cost is 2/3, +20 AI love.
 CHEATING AI (limited tax rates): +40% Science, Luxury, Gold and Production, +40% Veteran chance, -20% Pollution, 2 units per city free of upkeep, Tech cost is 1/3, +40 AI love.
 
-- There is a new setting that can be adjusted in the game menu: Civilization -> Policies -> "AI love for humans", that allows you to reduce (to get a harder AI) or increase (to get an easier AI) the love of the AI for the human players.
-
 The following is a full list of changes compared to classic ruleset (although it should be playable without reading it)...
 
 
@@ -348,7 +346,7 @@ Civil war         99%      45%      50%      35%      30%      20%      15%     
 
 Veteran                   +50%(land)                                            +Spies   +Spies    +25%(all)
 Special         +NoUpkeep +Content +75%Lux  +50%Lux  +Tithes  -Senate  -Senate  +Luxury  +NoUpkeep +NoUpkeep
-                -NoTaxes           (Palace) (Palace) +Fanatic -Revolt  -Revolt           (Cost 2)  (Cost 2)
+                -NoTaxes  +Vision  (Palace) (Palace) +Fanatic -Revolt  -Revolt           (Cost 2)  (Cost 2)
                                                      -National         +Partisan         +Partisan -National
 
 Base Corruption    0%      30%      20%      10%      15%      25%       5%       0%      30%      15%
@@ -554,7 +552,7 @@ The following unit changes are included in the table below:
 
 - Archers defense reduced to 1 (was 2), and cost to 20 (was 30). Legion cost reduced to 30 (was 40). This way the ratio Attack/Cost of ancient units is more even to Catapults.
 
-- Pikemen changed to (2/3), cost to 30, and removed the doubled defense vs horses. Attack of Chariots increased to 4 (was 3). Defense of Knights increased to 3 (was 2). In order to encourage early use of cavalry.
+- Pikemen changed to (2/3), cost to 30, with double attack against horses (was double defense). Attack of Chariots increased to 4 (was 3). Defense of Knights increased to 3 (was 2). In order to encourage early use of cavalry.
 
 - Alpine Troops changed to (7/4), and Partisan to (4/5). This way, Riflemen do not become obsolete as city defenders until Partisan or Marine are researched, and every modern infantry is somehow useful.
 
@@ -584,7 +582,7 @@ Warrior         1    1    1    1    10   10
 Phalanx         1    2    1    1    10   20   
 Archers         3   *1    1    1    10  *20                      
 Legion          4    2    1    1    10  *30   iron               *Marines
-Pikemen        *2   *3    1    1    10  *30   iron               *(No bonus anti-horse)
+Pikemen        *2   *3    1    1    10  *30   iron               *(x2 att vs Horses)
 Musketeers      3    3    1    1    20  *40   niter              *Marines
 Riflemen        5    4    1    1    20  *50   niter              *Marines
 Alpine Troops  *7   *4    1    1    20  *60   niter               IgTer

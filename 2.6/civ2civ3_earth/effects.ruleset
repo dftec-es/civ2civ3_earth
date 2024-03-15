@@ -34,7 +34,6 @@ options="+Freeciv-2.6-ruleset"
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10
-multiplier = "AI love for humans"
 reqs    =
     { "type", "name", "range", "present"
       "AI", "Away", "Player", FALSE
@@ -711,16 +710,7 @@ reqs    =
       "Terrain", "Mountains", "Local", FALSE
       "Extra", "Road", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
-      "UnitClass", "Land", "Local", FALSE
-      "UnitClass", "Small Land", "Local", FALSE
-;      "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
-      "UnitClass", "Sea", "Local", FALSE
-      "UnitClass", "Trireme", "Local", FALSE
-      "UnitClass", "Sub", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+      "UnitClass", "Big Land", "Local", TRUE
     }
 
 ; Nuclear power gives +1 moves to sea units

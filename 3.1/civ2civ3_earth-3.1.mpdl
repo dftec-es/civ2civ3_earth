@@ -1,5 +1,5 @@
 [info]
-options = "+Freeciv-3.0-mpdl"
+options = "+Freeciv-3.1-mpdl"
 baseURL = "."
 name    = "Civ2civ3_Earth"
 type    = "Modpack"
@@ -79,6 +79,7 @@ list =
   "civ2civ3_earth/game.ruleset"
   "civ2civ3_earth/governments.ruleset"
   "civ2civ3_earth/nations.ruleset"
+  "civ2civ3_earth/parser.lua"
   "civ2civ3_earth/script.lua"
   "civ2civ3_earth/styles.ruleset"
   "civ2civ3_earth/techs.ruleset"

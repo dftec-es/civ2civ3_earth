@@ -15,8 +15,8 @@
 ; then the first unit with this role will be chosen.
 
 [datafile]
-description="Civ2Civ3 unit_type data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset unit data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 [control]
@@ -56,7 +56,7 @@ Uranium: One more veteran level when produced in cities with Uranium.\
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
     _("Submarine"), _("\
-Attack and defense value halved against Destroyer. \
+Attack value halved against Destroyer. \
 Ignores the bonus to defense of sea units on Deep Ocean tiles.\
 ")
     _("Tank")
@@ -742,7 +742,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
 "),
@@ -861,8 +861,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+bonuses       =
+   { "flag", "type", "value"
+     "Horses", "DefenseDivider", 1
+   }
 flags         = "OneAttack", "Capturer", "Iron", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx as the preferred \
 city defender.\
@@ -896,7 +900,7 @@ uk_gold       = 1
 bombard_rate  = 2
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Niter", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild", "HutTech",
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
                 "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
 Musketeers are infantry equipped with early firearms and replace \
@@ -947,7 +951,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Niter", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good at defending your \
 cities.\
@@ -1059,7 +1063,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
                 "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "Partisan", "BarbarianTech"
+roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts at using the terrain \
 to their advantage.\
@@ -1145,7 +1149,7 @@ embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
                 "Rubber", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild", "BarbarianSeaTech"
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
 ")
@@ -1177,7 +1181,7 @@ uk_food       = 1
 uk_gold       = 1
 bombard_rate  = 3
 flags         = "Bombarder", "Only_Land", "Iron_Oil", "Rubber", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
 of any land unit.\
@@ -2131,13 +2135,12 @@ targets       = "Sub"
 bonuses       =
    { "flag", "type", "value"
      "Submarine", "DefenseMultiplier", 1
-     "Submarine", "DefenseDivider", 1
    }
 flags         = "BadCityDefender", "Bombarder", "Iron", "NoAutoAtt"
 roles         = ""
 helptext      = _("\
 An improved Ironclad, with better move rate and vision. Anti-submarine \
-weapons double its attack and defense against Submarines.\
+weapons double its defense against Submarines.\
 "), _("\
 TIP: A very fast unit, which is very useful for hunting down enemy \
 Transports and Submarines.\
@@ -2282,7 +2285,7 @@ bonuses       =
    }
 flags         = "Partial_Invis", "BadCityDefender", "Submarine", "Bombarder",
                 "HPFull", "HP20", "HasNoZOC", "Iron_Oil", "Uranium"
-roles         = "Hunter"
+roles         = "Hunter", "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\

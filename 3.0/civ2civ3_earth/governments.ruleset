@@ -11,8 +11,8 @@
 ; than minor changes.
 
 [datafile]
-description="Civ2Civ3 governments data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset government data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 [governments]
@@ -491,15 +491,4 @@ _("\
 ; */ <-- avoid gettext warnings
 
 ; Multiplier factor * effect value should be 100 (this way UI values are used as-is)
-[multiplier_ai_love]
-name      = _("AI love for humans")
-start     = -20
-stop      = 20
-step      = 5
-offset    = 0
-factor    = -10
-default   = -10
-helptext  = _("\
-This setting allows you to reduce (to get a harder AI) or increase\
- (to get an easier AI) the love of the AI for the human players.\
-")
+

@@ -8,8 +8,8 @@
 ; use your new customized file.
 
 [datafile]
-description="Civ2Civ3 cities data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset cities data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 ; /* <-- avoid gettext warnings

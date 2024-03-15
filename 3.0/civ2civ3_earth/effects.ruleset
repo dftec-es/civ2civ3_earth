@@ -10,8 +10,8 @@
 ; than minor changes.
 
 [datafile]
-description="Civ2Civ3 effects data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset effect data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 ; /* <-- avoid gettext warnings
@@ -29,7 +29,7 @@ format_version=10
 ;
 ; */ <-- avoid gettext warnings
 
-; AI: "Away" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
+; AI: "Away" "Handicapped" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 
 [effect_unit_slots]
 type    = "Unit_Slots"
@@ -50,10 +50,10 @@ value   = 2
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10
-multiplier = "AI love for humans"
 reqs    =
     { "type", "name", "range", "present"
       "AI", "Away", "Player", FALSE
+      "AI", "Handicapped", "Player", FALSE
       "AI", "Novice", "Player", FALSE
       "AI", "Easy", "Player", FALSE
       "AI", "Normal", "Player", FALSE
@@ -833,16 +833,7 @@ reqs    =
       "Terrain", "Mountains", "Local", FALSE
       "Extra", "Road", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
-      "UnitClass", "Land", "Local", FALSE
-      "UnitClass", "Small Land", "Local", FALSE
-;      "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
-      "UnitClass", "Sea", "Local", FALSE
-      "UnitClass", "Trireme", "Local", FALSE
-      "UnitClass", "Sub", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+      "UnitClass", "Big Land", "Local", TRUE
     }
 
 ; Nuclear power gives +1 moves to sea units

@@ -11,8 +11,8 @@
 ; than minor changes.
 
 [datafile]
-description="Civ2Civ3 tile_type data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset terrain data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 [control]
@@ -1529,7 +1529,7 @@ clean up nuclear fallout.\
 name           = _("Fort")
 category       = "Infra"
 causes         = "Base"
-rmcauses       = "Pillage"
+rmcauses       = "Pillage", "Disappear"
 graphic        = "base.outpost"
 graphic_alt    = "base.fortress"
 activity_gfx   = "unit.outpost"
@@ -1548,9 +1548,16 @@ rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
+disappearance_reqs =
+    { "type", "name", "range", "present"
+      "MaxUnitsOnTile", "0", "Local", TRUE
+      "Extra", "Fortress", "Local", FALSE
+      "Extra", "Castle", "Local", FALSE
+    }
 build_time     = 0
 build_time_factor = 1
 removal_time   = 0
+disappearance_chance = 10000
 native_to      = "Land", "Small Land", "Merchant", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 hidden_by      = "Fortress"
@@ -1560,6 +1567,9 @@ helptext       = _("\
 Forts are rapidly-built fortifications providing some defense (+50%) \
 against land units and boats. A fort is also necessary to start building \
 a fortress.\
+"), _("\
+It automatically disappears if there are no units on the same tile at \
+the end of the turn.\
 ")
 
 [extra_fortress]

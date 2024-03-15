@@ -11,8 +11,8 @@
 ; than minor changes.
 
 [datafile]
-description="Civ2Civ3 buildings data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset building data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 ; /* <-- avoid gettext warnings
@@ -253,9 +253,9 @@ sound		= "b_barracks_i"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-With a Barracks, each new land unit built in a city will automatically \
-have Veteran status, which means that its attack and defense strengths \
-are increased by 50%.\
+With a Barracks, each new military land unit built in a city will \
+automatically have Veteran status, which means that its attack and \
+defense strengths are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn without \
 moving recover half of their hit points. If there is a Hospital also \
@@ -283,9 +283,9 @@ sound		= "b_barracks_ii"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-With a Barracks, each new land unit built in a city will automatically \
-have Veteran status, which means that its attack and defense strengths \
-are increased by 50%.\
+With a Barracks, each new military land unit built in a city will \
+automatically have Veteran status, which means that its attack and \
+defense strengths are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn without \
 moving recover half of their hit points. If there is a Hospital also \
@@ -311,9 +311,9 @@ sound		= "b_barracks_iii"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-With a Barracks, each new land unit built in a city will automatically \
-have Veteran status, which means that its attack and defense strengths \
-are increased by 50%.\
+With a Barracks, each new military land unit built in a city will \
+automatically have Veteran status, which means that its attack and \
+defense strengths are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn without \
 moving recover half of their hit points. If there is a Hospital also \
@@ -1745,8 +1745,8 @@ Doubles the base number of cities that your empire can support before \
 they start to cause additional unhappy citizens -- in other words, it \
 prevents 1 unhappy citizen per city caused by the size of your empire.\
 "), _("\
-The chance of a land unit getting the next veteran level after a battle \
-increases by half.\
+The chance of a military land unit getting the next veteran level after \
+a battle increases by half.\
 ")
 
 [building_leonardos_workshop]
