@@ -25,7 +25,6 @@ flags =
   { "name", "helptxt"
     _("Wood"), _("Can be mined to produce Lumber.")
     _("Oil"), _("Mine can be upgraded to Oil Well.")
-    _("Sea"), _("Allows cities to build Harbors and coastal wonders.")
     _("NoPollution"), _("No Pollution nor Fallout appear here.")
     _("NoWheeled"), _("Terrain not suitable for wheeled units.")
     _("RecoverHP"), _("Allows units to recover extra HP.")
@@ -48,6 +47,7 @@ extra_flags =
         _("Diplomatic units get a 25% defense bonus in diplomatic fights.")
     _("IrrigationSource")
     _("AllowsFarmlandOnDesert")
+    _("Mined")
     _("ForWheeled"), _("Suitable for wheeled units.")
   }
 
@@ -336,8 +336,8 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "no"
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Sub"
-flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea", "RecoverHP"
-property_ocean_depth = 35
+flags                = "NoCities", "NoZoc", "NoFortify", "RecoverHP"
+property_ocean_depth = 32
 color.r              = 0
 color.g              = 46
 color.b              = 137
@@ -379,19 +379,19 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-native_to            = "Sea", "Air", "Missile", "Helicopter", "Sub"
-flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoFortify", "Sea", "CanHaveStorm"
-property_ocean_depth = 70
+native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Sub"
+flags                = "NoCities", "NoPollution", "UnsafeCoast", "NoFortify", "CanHaveStorm"
+property_ocean_depth = 64
 color.r              = 0
 color.g              = 33
 color.b              = 129
 helptext             = _("\
 Deep oceans cover much of the world away from coastlines, and only \
-seaworthy units (not including Galleys) can travel on them.\
+seaworthy units can travel on them.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Units in Deep Ocean receive a +50% defense bonus against sea units \
+Units on deep ocean receive a +50% defense bonus against sea units \
 (but not against submarines).\
 ")
 
@@ -428,8 +428,8 @@ warmer_wetter_result = "Lake"
 warmer_drier_result  = "Tundra"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "NoBarbs", "NoCities", "CanHaveRiver", "Oil", "Frozen", "CanHaveStorm"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
+flags                = "NoBarbs", "NoCities", "CanHaveRiver", "Oil", "Frozen", "CanHaveStorm", "UnsafeCoast"
 property_frozen      = 100
 color.r              = 232
 color.g              = 232
@@ -473,7 +473,7 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Tundra"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
 flags                = "CanHaveRiver", "Oil"
 property_dry         = 100
 property_tropical    = 50
@@ -526,7 +526,7 @@ warmer_wetter_result = "Jungle"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
 flags                = "Starter", "CanHaveRiver", "Wood"
 property_cold        = 20
 property_wet         = 20
@@ -574,7 +574,7 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Swamp"
 cooler_drier_result  = "Tundra"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
 flags                = "Starter", "CanHaveRiver", "RecoverHP"
 property_green       = 50
 property_temperate   = 50
@@ -618,7 +618,7 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
 flags                = "Starter", "CanHaveRiver"
 property_green       = 50
 property_mountainous = 30
@@ -629,8 +629,8 @@ helptext             = _("\
 In addition to being amenable to agriculture, Hills are frequently \
 rich in resources, but trade is somewhat problematic.\
 "), _("\
-Cities built in hills are at risk of earthquakes, which can interrupt \
-a city's current project.\
+Cities built on hills get the highest defense bonus, but are at risk \
+of earthquakes, which can interrupt a city's current project.\
 ")
 
 [terrain_jungle]
@@ -667,7 +667,7 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "Forest"
-native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Air", "Missile", "Helicopter"
 flags                = "CanHaveRiver", "NoWheeled", "Wood"
 property_foliage     = 50
 property_tropical    = 50
@@ -677,7 +677,8 @@ color.g              = 156
 color.b              = 38
 helptext             = _("\
 Jungles are densely overgrown, making agriculture and trade somewhat \
-problematic. Big Land units may not move into jungle without a road.\
+problematic. Large wheeled units may not move into jungle without a \
+road.\
 ")
 
 [terrain_mountains]
@@ -713,8 +714,8 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter"
-flags                = "NoCities", "CanHaveRiver", "NoWheeled"
+native_to            = "Land", "Small Land", "Fast Land", "Air", "Missile", "Helicopter"
+flags                = "NoCities", "CanHaveRiver", "NoWheeled", "UnsafeCoast"
 property_mountainous = 70
 color.r              = 129
 color.g              = 127
@@ -725,8 +726,8 @@ trade somewhat problematic.\
 "), _("\
 Land units that move into mountains can see an extra space, but a \
 fast land unit ending its turn in mountains without a road will start \
-its next turn with one fewer movement point. Big Land units may not \
-move into mountains without a road.\
+its next turn with one fewer movement point. Large wheeled units may \
+not move into mountains without a road.\
 ")
 
 [terrain_plains]
@@ -762,7 +763,7 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Desert"
 cooler_wetter_result = "Desert"
 cooler_drier_result  = "Desert"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
 flags                = "Starter", "CanHaveRiver", "RecoverHP"
 property_green       = 50
 property_temperate   = 50
@@ -806,7 +807,7 @@ warmer_wetter_result = "Desert"
 warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Desert"
-native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Air", "Missile", "Helicopter"
 flags                = "CanHaveRiver", "NoWheeled"
 property_wet         = 100
 property_tropical    = 10
@@ -817,7 +818,8 @@ color.g              = 85
 color.b              = 97
 helptext             = _("\
 Swamps suffer from an over-abundance of water, fit for some agriculture \
-and little else. Big Land units may not move in swamps without a road.\
+and little else. Large wheeled units may not move into swamps without \
+a road.\
 ")
 
 [terrain_tundra]
@@ -853,7 +855,7 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Desert"
-native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
 flags                = "NoBarbs", "CanHaveRiver", "Oil"
 property_cold        = 50
 color.r              = 188
@@ -1257,7 +1259,7 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "TerrainFlag", "Wood", "Local", FALSE, TRUE
       "TerrainClass", "Oceanic", "Local", FALSE, TRUE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "UnitClassFlag", "Naval", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1267,9 +1269,10 @@ build_time     = 0
 removal_time   = 0
 conflicts      = "Irrigation", "Farmland"
 hidden_by      = "Oil Well"
+flags          = "Mined"
 helptext       = _("\
 Mines can be built on some types of terrain, which increases the \
-number of production points produced by that tile. Hills and Mountains \
+number of production points produced by that tile. Hills and mountains \
 get an extra 2 production points per tile; other terrains get 1 extra \
 production point.\
 "), _("\
@@ -1291,7 +1294,7 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "TerrainFlag", "Wood", "Local", TRUE, TRUE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "UnitClassFlag", "Naval", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1300,6 +1303,11 @@ rmreqs         =
 build_time     = 0
 removal_time   = 0
 conflicts      = "Irrigation", "Farmland"
+flags          = "Mined"
+helptext       = _("\
+Lumber mills can be built in forests and jungles for an extra production \
+point.\
+")
 
 [extra_oil_well]
 name           = _("Oil Well")
@@ -1318,7 +1326,7 @@ reqs           =
       "Tech", "Refining", "Player", TRUE, FALSE
       "TerrainFlag", "Oil", "Local", TRUE, TRUE
       "Extra", "Mine", "Local", TRUE, FALSE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "UnitClassFlag", "Naval", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1327,8 +1335,9 @@ rmreqs         =
 build_time     = 0
 removal_time   = 0
 conflicts      = "Irrigation", "Farmland"
+flags          = "Mined"
 helptext       = _("\
-Once Refining is known, mines on Desert, Tundra and Glacier tiles can \
+Once Refining is known, mines on desert, tundra and glacier tiles can \
 be upgraded to oil wells for an extra production point.\
 ")
 
@@ -1356,11 +1365,12 @@ rmreqs         =
 build_time     = 0
 removal_time   = 0
 conflicts      = "Buoy", "Naval Mine"
+flags          = "Mined"
 helptext       = _("\
 Oil platforms allow cities with Offshore Platforms to get an extra \
-production point from Deep Ocean tiles.\
+production point from deep ocean tiles.\
 "), _("\
-Oil platforms can be built by Workers and similar units on board ships, \
+Oil platforms can be built by workers and similar units on board ships, \
 or directly by Transport units.\
 ")
 
@@ -1394,12 +1404,12 @@ Settlers, Engineers, or a Transport with the \"clean pollution\" order.\
 Pollution from production is likely to start becoming important as \
 your civilization becomes more industrialized, giving you buildings \
 such as Factory and Power Plant which boost production. Replacing a \
-Power Plant with cleaner forms of energy -- a Hydro Plant / Hoover \
-Dam, Nuclear Plant, or Solar Plant -- will reduce pollution from \
-production, as will a Recycling Center.\
+Power Plant with cleaner forms of energy -- a Hydro Plant, Nuclear \
+Plant, or Solar Plant -- will reduce pollution from production, as \
+will a Recycling Center.\
 "), _("\
 The city's population starts adding to pollution with the Factory, \
-Super Highways, Offshore Platform, and Mfg. Plant buildings; each \
+Super Highways, Supermarket, and Mfg. Plant buildings; each \
 building causes the population to add more to pollution. A Mass \
 Transit will counteract the pollution from two buildings in a city, \
 and the Eiffel Tower wonder will counteract the pollution from one \
@@ -1413,9 +1423,8 @@ When an unused tile becomes polluted, there is the temptation to avoid \
 the effort of cleaning it; but the spread of pollution has far more \
 terrible results than the immediate economic impact -- every polluted \
 tile increases the chance of global warming. Each time global warming \
-advances, the entire world loses coastal land to the sea and to jungles \
-and swamps, and inland tiles are lost to desert. This tends to \
-devastate cities and leads to global impoverishment.\
+advances, the entire world loses land to jungles, swamps and deserts. \
+This tends to devastate cities and leads to global impoverishment.\
 "), _("\
 The risk of global warming is cumulative; the longer polluted tiles \
 are left uncleaned, the higher the risk becomes, and the risk can \
@@ -1470,9 +1479,10 @@ rmact_gfx_alt  = "-"
 ; Note, there are extra restrictions on where farmland can be built
 ; through Irrig_Possible effects
 reqs           =
-    { "type", "name", "range"
-      "Tech", "Refrigeration", "Player"
-      "Extra", "Irrigation", "Local"
+    { "type", "name", "range", "present"
+      "Tech", "Refrigeration", "Player", TRUE
+      "Extra", "Irrigation", "Local", TRUE
+      "CityTile", "Center", "Local", FALSE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1488,8 +1498,6 @@ farmland by irrigating them a second time; if the city working the tile \
 has a Supermarket, a farmland tile provides 50% more food. (Hence, \
 farmland is only useful on tiles which with irrigation yield 2 or more \
 food.)\
-"), _("\
-Farmland on a tile prevents any trade bonus from Super Highways.\
 "), _("\
 Like irrigation, farmland is incompatible with mines and oil wells.\
 ")
@@ -1558,18 +1566,18 @@ build_time     = 0
 build_time_factor = 1
 removal_time   = 0
 disappearance_chance = 10000
-native_to      = "Land", "Small Land", "Merchant", "Big Land"
+native_to      = "Land", "Small Land", "Fast Land", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 hidden_by      = "Fortress"
 flags          = "NativeTile", "ForWheeled", "DiplomatDefense"
 ; /* xgettext:no-c-format */
 helptext       = _("\
 Forts are rapidly-built fortifications providing some defense (+50%) \
-against land units and boats. A fort is also necessary to start building \
-a fortress.\
+against land and sea units. A fort is necessary to start building a \
+fortress.\
 "), _("\
-It automatically disappears if there are no units on the same tile at \
-the end of the turn.\
+It automatically disappears if there are no units on the same tile \
+at the end of the turn.\
 ")
 
 [extra_fortress]
@@ -1600,19 +1608,19 @@ rmreqs         =
 build_time     = 0
 build_time_factor = 1
 removal_time   = 0
-native_to      = "Land", "Small Land", "Merchant", "Big Land"
+native_to      = "Land", "Small Land", "Fast Land", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 hidden_by      = "Castle"
 flags          = "NativeTile", "ForWheeled", "DiplomatDefense"
 helptext       = _("\
 Fortresses are more permanent forts; construction on them can only begin \
-once the underlying fort is complete. Forts on River tiles cannot be \
-upgraded to Fortresses.\
+once the underlying fort is complete. Forts on river tiles cannot be \
+upgraded to fortresses.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 Compared to a fort, units in a fortress receive extra defense (+50%) \
-against all units (in total, their defense against land units and boats \
+against all units (in total, their defense against land and sea units \
 is doubled), and do not count as aggressive if near a friendly city. \
 Any kind of land unit remaining in a fortress for a whole turn without \
 moving recovers a third of its hit points.\
@@ -1625,7 +1633,7 @@ further afield.\
 name           = _("Castle")
 category       = "Infra"
 causes         = "Base"
-rmcauses       = "Pillage"
+rmcauses       = "Pillage", "Disappear"
 graphic        = "base.castle"
 graphic_alt    = "base.fortress"
 activity_gfx   = "unit.castle"
@@ -1648,30 +1656,35 @@ rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
+disappearance_reqs =
+    { "type", "name", "range", "present"
+      "CityTile", "Center", "Adjacent", TRUE
+    }
 build_time     = 0
 build_time_factor = 1
 removal_time   = 0
+disappearance_chance = 10000
 ;unit_seen      = "Hidden"
-native_to      = "Land", "Small Land", "Merchant", "Big Land"
+native_to      = "Land", "Small Land", "Fast Land", "Big Land"
 conflicts      = "Airstrip", "Airbase"
 flags          = "NativeTile", "ForWheeled", "DiplomatDefense", "NoStackDeath"
 helptext       = _("\
 Castles are fortresses with some degree of autonomy; construction on them \
 can only begin once the underlying fortress is complete.\
 "), _("\
-Fortresses can be upgraded to castles when they are inside your national \
+Fortresses can be upgraded to castles when they are within your national \
 borders, not adjacent to other castles or cities, and not on terrains \
-where cities can not be built (mountains or glaciers).\
+where cities cannot be built (mountains or glaciers).\
 "), _("\
 Castles, like cities, protect full stacks from dying when one unit is \
-defeated, hide units inside from opponents, and claim ownership of the tile.\
+defeated, and claim ownership of the tile.\
 ")
 
 [extra_airstrip]
 name           = _("Airstrip")
 category       = "Infra"
 causes         = "Base"
-rmcauses       = "Pillage"
+rmcauses       = "Pillage", "Disappear"
 graphic        = "base.airstrip"
 graphic_alt    = "base.airbase"
 activity_gfx   = "unit.airstrip"
@@ -1690,13 +1703,19 @@ rmreqs         =
     { "type", "name", "range", "present"
       "UnitFlag", "Cant_Pillage", "Local", FALSE
     }
+disappearance_reqs =
+    { "type", "name", "range", "present"
+      "MaxUnitsOnTile", "0", "Local", TRUE
+      "Extra", "Airbase", "Local", FALSE
+    }
 build_time     = 0
 build_time_factor = 1
 removal_time   = 0
+disappearance_chance = 10000
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress", "Castle"
 hidden_by      = "Airbase"
-flags          = "Refuel", "ParadropFrom"
+flags          = "Refuel", "ParadropFrom", "DiplomatDefense"
 helptext       = _("\
 Airstrips are rapidly-built runways allowing air units to land, refuel, \
 and recover outside cities; an aircraft remaining on an airstrip for a \
@@ -1707,9 +1726,10 @@ an airstrip are vulnerable to attack by land units.\
 ; /* xgettext:no-c-format */
 _("\
 Any units on an airstrip receive extra defense (+50%) against enemy \
-aircraft.\
+aircraft. An airstrip is necessary to start building an airbase.\
 "), _("\
-An airstrip is necessary to start building an airbase.\
+It automatically disappears if there are no units on the same tile \
+at the end of the turn.\
 ")
 
 [extra_airbase]
@@ -1742,11 +1762,11 @@ build_time_factor = 1
 removal_time   = 0
 native_to      = "Air", "Helicopter", "Missile"
 conflicts      = "Fort", "Fortress", "Castle"
-flags          = "Refuel", "ParadropFrom"
+flags          = "Refuel", "ParadropFrom", "DiplomatDefense"
 helptext       = _("\
 Airbases are more permanent airstrips; construction on them can only \
-begin once the underlying airstrip is complete. Airstrips on River tiles \
-cannot be upgraded to Airbases.\
+begin once the underlying airstrip is complete. Airstrips on river tiles \
+cannot be upgraded to airbases.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1819,16 +1839,15 @@ removal_time   = 0
 native_to      = "Sea"
 conflicts      = "Oil Platform", "Buoy"
 helptext       = _("\
-Naval mines may be built in shallow ocean by Transports (or by worker \
-units on a sea-going vessel), but not adjacent to other naval mines.\
+Naval mines can be built by Transports (or by worker units on a sea-going \
+vessel) in shallow ocean, but not adjacent to other naval mines.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 Every naval unit adjacent to a naval mine (or on the same tile) gets \
 the same defense as if it were in Deep Ocean (+50% against other sea \
-units, but not against submarines). If the unit is outside its own \
-national border, it also takes some damage (-6 hit points) at the end \
-of each turn.\
+units, but not against submarines), but also its movement points are \
+reduced to the minimum at the start of each turn.\
 ")
 
 [extra_ruins]
@@ -1875,7 +1894,7 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "UnitClassFlag", "Naval", "Local", FALSE, TRUE
       "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 rmreqs         =
@@ -1884,13 +1903,13 @@ rmreqs         =
     }
 build_time     = 0
 removal_time   = 0
-native_to      = "Land", "Small Land", "Big Land", "Merchant"
+native_to      = "Land", "Small Land", "Big Land", "Fast Land"
 hidden_by      = "Railroad", "Maglev"
 flags          = "NativeTile", "ForWheeled", "AlwaysOnCityCenter"
 helptext       = _("\
-Roads allow your land units to move more quickly, and allow wheeled \
-Big Land units such as Chariots and Catapults to travel through \
-otherwise difficult terrain (Mountains, Jungle, and Swamp).\
+Roads allow your land units to move more quickly, and allow large wheeled \
+units such as Chariots and Catapults to travel through otherwise \
+difficult terrain (mountains, jungle, and swamp).\
 "), _("\
 On some terrains, roads also provide a trade bonus.\
 "), _("\
@@ -1915,7 +1934,7 @@ reqs           =
       "Tech", "Railroad", "Player", TRUE, FALSE
       "Extra", "Road", "Local", TRUE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "UnitClassFlag", "Naval", "Local", FALSE, TRUE
       "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 rmreqs         =
@@ -1924,7 +1943,7 @@ rmreqs         =
     }
 build_time     = 3
 removal_time   = 0
-native_to      = "Land", "Small Land", "Big Land", "Merchant"
+native_to      = "Land", "Small Land", "Big Land", "Fast Land"
 flags          = "NativeTile", "ForWheeled", "AutoOnCityCenter"
 hidden_by      = "Maglev"
 helptext       = _("\
@@ -1957,7 +1976,7 @@ reqs           =
       "Tech", "Superconductors", "Player", TRUE, FALSE
       "Extra", "Railroad", "Local", TRUE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
-      "UnitClass", "Sea", "Local", FALSE, TRUE
+      "UnitClassFlag", "Naval", "Local", FALSE, TRUE
       "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 rmreqs         =
@@ -1966,17 +1985,16 @@ rmreqs         =
     }
 build_time     = 3
 removal_time   = 0
-native_to      = "Land", "Small Land"
+native_to      = "Land", "Small Land", "Fast Land"
 flags          = "NativeTile", "ForWheeled", "AutoOnCityCenter"
 helptext       = _("\
 With sufficient technology, you may build magnetic levitation systems \
-along your railroad routes. Land and Small Land units expend no \
-movement points when riding a maglev; you may ride indefinitely. \
-(As may your enemies!)\
+along your railroad routes. Land units expend no movement points when \
+riding a maglev; you may ride indefinitely. (As may your enemies!)\
 "), _("\
-Your regular railroads are still used to carry heavy Big Land and \
-Merchant units for which the maglev system is unsuitable, and they \
-continue to provide production and trade bonuses.\
+Your regular railroads are still used to carry large wheeled units \
+for which the maglev system is unsuitable, and they continue to provide \
+production and trade bonuses.\
 "), _("\
 City center tiles with railroads are automatically upgraded to maglev \
 when you learn about Superconductors.\
@@ -1995,7 +2013,7 @@ act_gfx_alt2   = "-"
 rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
-native_to      = "Land", "Small Land", "Merchant"
+native_to      = "Land", "Small Land", "Fast Land"
 defense_bonus  = 25
 flags          = "NativeTile", "IrrigationSource", "AllowsFarmlandOnDesert"
 ; /* xgettext:no-c-format */
@@ -2004,13 +2022,13 @@ Any land terrain type may have a River on it. A River adds 1 \
 trade to the resources produced by that tile. It also increases a \
 tile's defense factor by 25%.\
 "), _("\
-Land units may move along rivers for faster travel (but not diagonally). \
-Fast land unit ending its turn in rivers without a road will start its \
-next turn with one fewer movement point.\
+Land units may move along rivers for faster travel (but not diagonally), \
+except for large wheeled units, which also have one less movement point \
+after ending their turn in a river without a road.\
 "), _("\
-Roads and railroads can only be built on River tiles if your \
+Roads and railroads can only be built on river tiles if your \
 civilization has learned Bridge Building technology. Fortresses and \
-Airbases cannot be built on River tiles.\
+airbases cannot be built on river tiles.\
 "), _("\
 Cities built on or next to rivers incur a small risk of flooding, \
 which will destroy stored food.\
@@ -2031,7 +2049,7 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Explosives", "Player", TRUE, FALSE
-      "TerrainClass", "Oceanic", "Local", FALSE, TRUE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
       "Terrain", "Glacier", "Local", FALSE, FALSE
       "Terrain", "Hills", "Local", FALSE, FALSE
       "Terrain", "Mountains", "Local", FALSE, FALSE
@@ -2049,8 +2067,8 @@ native_to      = "Trireme", "Sea", "Sub"
 flags          = "NativeTile"
 helptext          = _("\
 Allows ships to travel through land tiles. Canals can be built on \
-low land tiles (no hills, mountains or glaciers), and only inside \
-your national borders. Every canal tile must be cardinally adjacent \
+low land tiles (no hills, mountains or glaciers), and only within \
+your own national borders. Every canal tile must be cardinally adjacent \
 to an oceanic tile, so the maximum length of a canal through an island \
 is two tiles, from one coast tile to the other.\
 ")
@@ -2074,7 +2092,7 @@ Natural wonders produce 2 extra luxury points in the tile where they \
 are located.\
 "), _("\
 A city with a natural wonder within its workable area incur a small \
-risk of natural disaster, which will reduce the population.\
+risk of natural disaster, which will reduce its population.\
 ")
 
 ; Average number = Suitable tiles/50
@@ -2100,7 +2118,7 @@ buildable      = FALSE
 appearance_chance = 100
 disappearance_chance = 5000
 helptext       = _("\
-Storms appear and disappear randomly on Deep Ocean or Glacier tiles. \
+Storms appear and disappear randomly on deep ocean or glacier tiles. \
 Every unit that ends the turn on these terrains adjacent to a storm \
 (or on the same tile) takes some damage (-4 hit points).\
 ")
@@ -2163,10 +2181,10 @@ conflicts      = "Niter", "Rubber", "Uranium"
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource, required in a city to build the wonder Apollo \
-Program. Cities with available Aluminum build Carrier, AEGIS Cruiser, \
+Program. Cities with available aluminum build Carrier, AEGIS Cruiser, \
 Cruise Missile, Fighter and Bomber units with one extra veteran level.\
 "), _("\
-With the discovery of Industrialization, Aluminum produces 2 extra shields \
+With the discovery of Industrialization, aluminum produces 2 extra shields \
 in the tile (hills or tundra).\
 ")
 
@@ -2187,12 +2205,12 @@ buildable      = FALSE
 conflicts      = "Aluminum", "Rubber", "Uranium"
 flags          = "TerrChangeRemoves"
 helptext       = _("\
-Strategic resource. Cities without available Niter build gunpowder \
+Strategic resource. Cities without available niter build gunpowder \
 based units with one less veteran level: Musketeers, Riflemen, Alpine \
 Troops, Dragoons, Cavalry, Cannon, Artillery, Galleon, Frigate and \
 Ironclad.\
 "), _("\
-With the discovery of Gunpowder, Niter produces 2 extra shields in \
+With the discovery of Gunpowder, niter produces 2 extra shields in \
 the tile (plains or desert).\
 ")
 
@@ -2213,11 +2231,11 @@ buildable      = FALSE
 conflicts      = "Aluminum", "Niter", "Uranium"
 flags          = "TerrChangeRemoves"
 helptext       = _("\
-Strategic resource. Cities with available Rubber build Marines, \
+Strategic resource. Cities with available rubber build Marines, \
 Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
 veteran level.\
 "), _("\
-With the discovery of Chemistry, Rubber produces 2 extra shields in \
+With the discovery of Chemistry, rubber produces 2 extra shields in \
 the tile (jungle, swamp or forest).\
 ")
 
@@ -2239,10 +2257,10 @@ conflicts      = "Aluminum", "Niter", "Rubber"
 flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource, required in a city to build a Nuclear Plant or \
-the wonder Manhattan Project. Cities with available Uranium build \
+the wonder Manhattan Project. Cities with available uranium build \
 Armor and Submarine units with one extra veteran level.\
 "), _("\
-With discovery of Atomic Theory, Uranium produces 2 extra shields in \
+With discovery of Atomic Theory, uranium produces 2 extra shields in \
 the tile (mountains or glacier).\
 ")
 

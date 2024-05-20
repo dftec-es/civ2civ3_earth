@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.1_2024_03"
+version = "3.1_2024_05"
 
 ; When about to migrate ruleset under a new name in the future version, set
 ; alt_dir to the name of that future directory. Then savegames saved with this
@@ -247,7 +247,7 @@ only_real_fight_makes_veteran = TRUE
 ; When this setting is disabled, the modifier is always simply considered
 ; to be 100%, i.e, the base veterancy chance from units.ruleset is used as is.
 ; This affects both regular and diplomat combat.
-combat_odds_scaled_veterancy = TRUE
+combat_odds_scaled_veterancy = FALSE
 
 ; Does unit`s bombard rate get scaled down by how damaged it is.
 ; Even after this unit gets at least one bombard round.
@@ -299,18 +299,17 @@ nuke_defender_survival_chance_pct = 0
 attack_actions = "Capture Units", "Bombard", "Attack", "Suicide Attack"
 
 if_attacker =
-    { "type",         "name",    "range", "present"
-      "DiplRel",      "War",     "Local", TRUE
-      "MinMoveFrags", "1",       "Local", TRUE
-      ; Not a good idea to nuke our own area.
-      "UnitFlag",     "Nuclear", "Local", FALSE
+    { "type",         "name",         "range", "present"
+      "DiplRel",      "War",          "Local", TRUE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "UnitState",    "OnNativeTile", "Local", TRUE
       ; Only fighters and submarines auto attack.
-      "UnitFlag",     "NoAutoAtt", "Local", FALSE
+      "UnitFlag",     "AutoAtt",      "Local", TRUE
     }
 
 [actions]
 ; Forbid "Bombard" if any one of the listed actions are legal.
-;bombard_blocked_by = "Capture Units"
+bombard_blocked_by = "Capture Units"
 
 ; Forbid "Explode Nuclear" if any one of the listed actions are legal.
 ;explode_nuclear_blocked_by = "Capture Units"
@@ -552,9 +551,6 @@ ui_name_investigate_city_spend_unit = _("%sInvestigate City (spends the unit)%s"
 ; /* TRANS: Establish Trade _Route (100% chance of success). */
 ui_name_establish_trade_route = _("Establish Trade %sRoute%s")
 
-; /* TRANS: Enter _Marketplace (100% chance of success). */
-ui_name_enter_marketplace = _("%sCancel Trade Routes (after end of turn)%s")
-
 ; /* TRANS: Help _build Wonder (100% chance of success). */
 ui_name_help_wonder = _("Help %sbuild Wonder%s")
 
@@ -672,6 +668,9 @@ ui_name_transport_embark = _("%sEmbark%s")
 ; /* TRANS: Eliminate _Spy (100% chance of success). */
 ui_name_spy_attack = _("Eliminate %sSpy%s")
 
+; /* TRANS: _Resupply (100% chance of success). */
+ui_name_heal_unit = _("%sResupply%s")
+
 ; /* TRANS: Enter _Hut (100% chance of success). */
 ui_name_enter_hut = _("Enter %sHut%s")
 
@@ -690,11 +689,17 @@ ui_name_unit_move = _("%sKeep moving%s")
 ; Blank ruleset defined user actions.
 ; See the section "Ruleset defined actions" in doc/README.actions
 ; Example: set up "User Action 1"
-;ui_name_user_action_1                = _("%sDisrupt Supply Lines%s")
-;user_action_1_target_kind            = "Unit"
-;user_action_1_min_range              = 1
-;user_action_1_max_range              = 3
-;user_action_1_actor_consuming_always = FALSE
+ui_name_user_action_1                = _("%sCancel Trade Routes (after end of turn)%s")
+user_action_1_target_kind            = "City"
+user_action_1_min_range              = 0
+user_action_1_max_range              = 1
+user_action_1_actor_consuming_always = FALSE
+
+ui_name_user_action_2                = _("%sBombard Tile%s")
+user_action_2_target_kind            = "Tile"
+user_action_2_min_range              = 0
+user_action_2_max_range              = 0
+user_action_2_actor_consuming_always = FALSE
 
 ; Some actions have a action dice roll before the action starts where it can
 ; fail. The initial probability of success is 100% unless the action appears
@@ -706,8 +711,7 @@ diplchance_initial_odds = "Sabotage City", "Sabotage City Escape",
                           "Sabotage City Production Escape",
                           "Steal Tech", "Steal Tech Escape Expected",
                           "Targeted Steal Tech Escape Expected",
-                          "Incite City", "Incite City Escape",
-                          "Steal Maps", "Steal Maps Escape"
+                          "Incite City", "Incite City Escape"
 
 ; Suppress automatic help text generation about what enables and/or
 ; disables the following actions.
@@ -721,8 +725,17 @@ diplchance_initial_odds = "Sabotage City", "Sabotage City Escape",
 ; The version from the non native tile and the native tile version won`t
 ; appear in the same action selection dialog given their opposite
 ; requirements. Avoid double entries in the auto help by silencing it.
-quiet_actions = "Transport Disembark 2", "Conquer City 2", "Enter Hut 2",
-                "Frighten Hut 2", "Conquer Extras 2", "Unit Move"
+quiet_actions = "Transport Disembark", "Transport Disembark 2",
+                "Transport Embark", "Transport Board",
+                "Transport Unload", "Transport Alight",
+                "Paradrop Unit Enter Conquer", "Conquer City 2",
+                "Conquer Extras", "Conquer Extras 2",
+                "Enter Hut", "Enter Hut 2",
+                "Frighten Hut", "Frighten Hut 2",
+                "Disband Unit", "Disband Unit Recover",
+                "Cultivate", "Plant",
+                "Home City", "Upgrade Unit",
+                "Unit Move", "Airlift Unit", "User Action 2"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -739,6 +752,87 @@ quiet_actions = "Transport Disembark 2", "Conquer City 2", "Enter Hut 2",
 ; satisfied.
 ;
 ; */ <-- avoid gettext warnings
+
+; New Cancel Trade Routes: places an extra by lua script,
+; all the trade routes of the city are canceled at the end of the turn,
+; and then the extra automatically disappears
+[actionenabler_cancel_trade_routes]
+action = "User Action 1"
+actor_reqs    =
+    { "type",         "name",        "range",  "present"
+      "UnitFlag",     "TradeRoute",  "Local",  TRUE
+      "DiplRel",      "Foreign",     "Local",  FALSE
+      "AI",           "Away",        "Player", FALSE
+      "AI",           "Restricted",  "Player", FALSE
+      "AI",           "Novice",      "Player", FALSE
+      "AI",           "Easy",        "Player", FALSE
+      "AI",           "Normal",      "Player", FALSE
+      "AI",           "Hard",        "Player", FALSE
+      "AI",           "Cheating",    "Player", FALSE
+      "AI",           "Experimental", "Player", FALSE
+    }
+target_reqs    =
+    { "type",         "name",        "range",  "present"
+      "Good",         "Goods",       "City",   TRUE
+      "Extra",        "Goods",       "City",   FALSE
+    }
+
+; New Bombard Tile: places a Bombardment extra by lua script
+[actionenabler_bombard_tile]
+action = "User Action 2"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "AirBomber",   "Local", FALSE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+    }
+
+[actionenabler_bombard_tile_from_air_unclaimed]
+action = "User Action 2"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "AirBomber",   "Local", TRUE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "CityTile",     "Claimed",     "Local", FALSE
+    }
+
+[actionenabler_bombard_tile_from_air_domestic]
+action = "User Action 2"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "AirBomber",   "Local", TRUE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "DiplRelTile",  "Foreign",     "Local", FALSE
+    }
+
+[actionenabler_bombard_tile_from_air_at_war]
+action = "User Action 2"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "AirBomber",   "Local", TRUE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "DiplRelTile",  "War",         "Local", TRUE
+    }
+
+;[actionenabler_convert_unit]
+;action = "Convert Unit"
+;actor_reqs    =
+;    { "type",         "name",         "range", "present"
+;      "UnitState",    "Transporting", "Local", FALSE
+;      "UnitState",    "Transported",  "Local", FALSE
+;      "MinMoveFrags", "1",            "Local", TRUE
+;    }
 
 [actionenabler_sabotage_city]
 action = "Sabotage City"
@@ -924,7 +1018,7 @@ actor_reqs    =
       "DiplRel",      "Foreign",       "Local"
     }
 target_reqs  =
-    { "type",   "name", "range", "present"
+    { "type",        "name",      "range",  "present"
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
@@ -1016,6 +1110,58 @@ target_reqs    =
       "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
+[actionenabler_eliminate_spy]
+action        = "Spy Attack"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Spy", "Local", TRUE
+      "UnitState", "OnLivableTile", "Local", TRUE
+      "MinMoveFrags", "1", "Local", TRUE
+      "DiplRel", "Alliance", "Local", FALSE
+      "DiplRel", "Team", "Local", FALSE
+      "DiplRel", "Foreign", "Local", TRUE
+    }
+target_reqs   =
+    { "type",   "name", "range", "present"
+      "CityTile", "Center", "Local", FALSE
+    }
+
+; New: Diplomatic units can expel NonMil units while at peace
+; (if target on tile domestic for the actor)
+[actionenabler_expel_unit]
+action = "Expel Unit"
+actor_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitFlag",      "Diplomat",       "Local", TRUE
+      "DiplRel",       "Peace",          "Local", TRUE
+      "MinMoveFrags",  "1",              "Local", TRUE
+    }
+target_reqs    =
+    { "type",             "name",        "range", "present"
+      "UnitFlag",         "NonMil",      "Local", TRUE
+      "DiplRelTileOther", "Foreign",     "Local", FALSE
+    }
+
+; New: Diplomatic units can expel unreachable units
+; (if target outside cities and bases)
+[actionenabler_expel_unreachable]
+action = "Expel Unit"
+actor_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitFlag",      "Diplomat",       "Local", TRUE
+      "UnitState",     "OnLivableTile",  "Local", TRUE
+      "DiplRel",       "Foreign",        "Local", TRUE
+      "DiplRel",       "Alliance",       "Local", FALSE
+      "DiplRel",       "Team",           "Local", FALSE
+      "MinMoveFrags",  "1",              "Local", TRUE
+    }
+target_reqs    =
+    { "type",          "name",           "range", "present"
+      "UnitClassFlag", "Unreachable",    "Local", TRUE
+      "CityTile",      "Center",         "Local", FALSE
+      "ExtraFlag",     "DiplomatDefense", "Local", FALSE
+    }
+
 [actionenabler_trade_route]
 action = "Establish Trade Route"
 actor_reqs    =
@@ -1023,31 +1169,6 @@ actor_reqs    =
       "UnitFlag", "TradeRoute", "Local", TRUE
       "MinMoveFrags", "1", "Local", TRUE
       "UnitState", "HasHomeCity", "Local", TRUE
-    }
-
-; New: Enter Marketplace modified to cancel trade routes
-; (when a unit performs this action, an extra is placed by lua script,
-; and all the trade routes of the city are canceled at the end of the turn,
-; then the extra automatically disappears)
-[actionenabler_marketplace]
-action = "Enter Marketplace"
-actor_reqs    =
-    { "type",         "name",        "range",  "present"
-      "UnitFlag",     "TradeRoute",  "Local",  TRUE
-      "UnitState",    "HasHomeCity", "Local", TRUE
-      "DiplRel",      "Foreign",     "Local",  FALSE
-      "AI",           "Away",        "Player", FALSE
-      "AI",           "Novice",      "Player", FALSE
-      "AI",           "Easy",        "Player", FALSE
-      "AI",           "Normal",      "Player", FALSE
-      "AI",           "Hard",        "Player", FALSE
-      "AI",           "Cheating",    "Player", FALSE
-      "AI",           "Experimental", "Player", FALSE
-    }
-target_reqs    =
-    { "type",         "name",        "range",  "present"
-      "Good",         "Goods",       "City",   TRUE
-      "Extra",        "Goods",       "City",   FALSE
     }
 
 [actionenabler_help_build_wonder]
@@ -1064,6 +1185,20 @@ actor_reqs    =
 target_reqs    =
     { "type",   "name", "range"
       "BuildingGenus", "GreatWonder", "Local"
+    }
+
+[actionenabler_resupply]
+action = "Heal Unit"
+actor_reqs    =
+    { "type",         "name",       "range",  "present"
+      "UnitFlag",     "HelpWonder", "Local",  TRUE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",          "Local",  TRUE
+      "DiplRel",      "Armistice",  "Local",  FALSE
+      "DiplRel",      "War",        "Local",  FALSE
+      "DiplRel",      "Cease-fire", "Local",  FALSE
+      "DiplRel",      "Peace",      "Local",  FALSE
+      "DiplRel",      "Never met",  "Local",  FALSE
     }
 
 [actionenabler_disband_unit_recover]
@@ -1088,11 +1223,12 @@ actor_reqs    =
 [actionenabler_capture]
 action = "Capture Units"
 actor_reqs    =
-    { "type",   "name", "range", "present"
-      "UnitFlag", "Capturer", "Local", TRUE
-      "DiplRel", "War", "Local", TRUE
-      "MinMoveFrags", "1", "Local", TRUE
-      "DiplRel", "Foreign", "Local", TRUE
+    { "type",           "name",        "range", "present"
+      "UnitFlag",       "Capturer",    "Local", TRUE
+      "UnitState",      "HasHomeCity", "Local", TRUE
+      "DiplRel",        "War",         "Local", TRUE
+      "DiplRel",        "Foreign",     "Local", TRUE
+      "MinMoveFrags",   "1",           "Local", TRUE
     }
 target_reqs    =
     { "type",      "name",         "range", "present"
@@ -1111,7 +1247,6 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
@@ -1134,7 +1269,6 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
@@ -1159,7 +1293,6 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
@@ -1178,7 +1311,6 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "MinMoveFrags", "6",           "Local", FALSE
@@ -1195,7 +1327,6 @@ action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "NonMil",      "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
       "MinMoveFrags", "6",           "Local", FALSE
@@ -1209,14 +1340,12 @@ target_reqs    =
     }
 
 ; AI: Enable bombard to sea (when attack is disabled)
-[actionenabler_bombard_ai_only_land]
+[actionenabler_bombard_ai_wheeled]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "Bombarder",    "Local", TRUE
-      "UnitFlag",     "Only_Land",    "Local", TRUE
-      "UnitFlag",     "Only_Sea",     "Local", FALSE
-      "UnitFlag",     "NonMil",       "Local", FALSE
+      "UnitFlag",     "Wheeled",      "Local", TRUE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
@@ -1228,60 +1357,18 @@ target_reqs    =
       "CityTile",     "Center",       "Local", FALSE
     }
 
-; AI: Enable bombard to unpassable terrain (when attack is disabled)
-[actionenabler_bombard_ai_only_land_unpassable]
-action = "Bombard"
-actor_reqs    =
-    { "type",         "name",         "range", "present"
-      "UnitFlag",     "Bombarder",    "Local", TRUE
-      "UnitFlag",     "Only_Land",    "Local", TRUE
-      "UnitFlag",     "NonMil",       "Local", FALSE
-      "UnitState",    "Transported",  "Local", FALSE
-      "MinMoveFrags", "1",            "Local", TRUE
-      "DiplRel",      "War",          "Local", TRUE
-      "Extra",        "Bombardment",  "Local", FALSE
-    }
-target_reqs    =
-    { "type",         "name",         "range", "present"
-      "ExtraFlag",    "ForWheeled",   "Local", FALSE
-      "TerrainFlag",  "NoWheeled",    "Local", TRUE
-      "CityTile",     "Center",       "Local", FALSE
-    }
-
-; AI: Enable bombard to land (when attack is disabled)
-[actionenabler_bombard_ai_only_sea]
-action = "Bombard"
-actor_reqs    =
-    { "type",         "name",         "range", "present"
-      "UnitFlag",     "Bombarder",    "Local", TRUE
-      "UnitFlag",     "Only_Sea",     "Local", TRUE
-      "UnitFlag",     "Only_Land",    "Local", FALSE
-      "UnitFlag",     "NonMil",       "Local", FALSE
-      "UnitState",    "Transported",  "Local", FALSE
-      "MinMoveFrags", "1",            "Local", TRUE
-      "DiplRel",      "War",          "Local", TRUE
-      "Extra",        "Bombardment",  "Local", FALSE
-    }
-target_reqs    =
-    { "type",         "name",         "range", "present"
-      "TerrainClass", "Oceanic",      "Local", FALSE
-      "CityTile",     "Center",       "Local", FALSE
-    }
-
 ; AI: Enable bombard for damaged HPFull units (when attack is disabled)
-; OnNativeTile because it is a requirement of the related Attack enabler
 [actionenabler_bombard_ai_hp10]
 action = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
-      "UnitFlag",     "HP10",        "Local", TRUE
-      "UnitFlag",     "Only_Land",   "Local", FALSE
-      "UnitFlag",     "Only_Sea",    "Local", FALSE
-      "UnitFlag",     "NonMil",      "Local", FALSE
+      "UnitFlag",     "HP20",        "Local", FALSE
+      "UnitFlag",     "HP30",        "Local", FALSE
+      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1299,11 +1386,9 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP20",        "Local", TRUE
-      "UnitFlag",     "Only_Land",   "Local", FALSE
-      "UnitFlag",     "Only_Sea",    "Local", FALSE
-      "UnitFlag",     "NonMil",      "Local", FALSE
+      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1321,11 +1406,9 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP30",        "Local", TRUE
-      "UnitFlag",     "Only_Land",   "Local", FALSE
-      "UnitFlag",     "Only_Sea",    "Local", FALSE
-      "UnitFlag",     "NonMil",      "Local", FALSE
+      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1342,12 +1425,11 @@ actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
-      "UnitFlag",     "HP10",        "Local", TRUE
-      "UnitFlag",     "Only_Land",   "Local", FALSE
-      "UnitFlag",     "Only_Sea",    "Local", FALSE
-      "UnitFlag",     "NonMil",      "Local", FALSE
+      "UnitFlag",     "HP20",        "Local", FALSE
+      "UnitFlag",     "HP30",        "Local", FALSE
+      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1366,11 +1448,9 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP20",        "Local", TRUE
-      "UnitFlag",     "Only_Land",   "Local", FALSE
-      "UnitFlag",     "Only_Sea",    "Local", FALSE
-      "UnitFlag",     "NonMil",      "Local", FALSE
+      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1389,11 +1469,9 @@ actor_reqs    =
       "UnitFlag",     "Bombarder",   "Local", TRUE
       "UnitFlag",     "HPFull",      "Local", TRUE
       "UnitFlag",     "HP30",        "Local", TRUE
-      "UnitFlag",     "Only_Land",   "Local", FALSE
-      "UnitFlag",     "Only_Sea",    "Local", FALSE
-      "UnitFlag",     "NonMil",      "Local", FALSE
+      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Local", FALSE
@@ -1403,6 +1481,106 @@ target_reqs    =
     { "type",         "name",        "range", "present"
       "CityTile",     "Center",      "Local", TRUE
       "DiplRelTileOther", "War",     "Local", TRUE
+    }
+
+; AI: Enable bombard to land for HPFullSea units (when attack is disabled)
+[actionenabler_bombard_ai_hp_sea]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "UnitFlag",     "Bombarder",    "Local", TRUE
+      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
+      "UnitState",    "Transported",  "Local", FALSE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "Extra",        "Bombardment",  "Local", FALSE
+    }
+target_reqs    =
+    { "type",         "name",         "range", "present"
+      "TerrainClass", "Oceanic",      "Local", FALSE
+      "CityTile",     "Center",       "Local", FALSE
+    }
+
+; AI: Enable bombard to city for HPFullSea units (when attack is disabled)
+[actionenabler_bombard_ai_hp_sea_b]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "UnitFlag",     "Bombarder",    "Local", TRUE
+      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
+      "UnitState",    "Transported",  "Local", FALSE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "Extra",        "Bombardment",  "Local", FALSE
+    }
+target_reqs    =
+    { "type",         "name",         "range", "present"
+      "CityTile",     "Center",       "Local", TRUE
+      "DiplRelTileOther", "War",      "Local", TRUE
+    }
+
+; AI: Enable bombard for damaged HPFullSea units (when attack is disabled)
+[actionenabler_bombard_ai_hp10_sea]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "HPFullSea",   "Local", TRUE
+      "UnitFlag",     "HP20",        "Local", FALSE
+      "UnitFlag",     "HP30",        "Local", FALSE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "DiplRel",      "War",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "MinHitPoints", "10",          "Local", FALSE
+    }
+target_reqs    =
+    { "type",         "name",        "range", "present"
+      "TerrainClass", "Oceanic",     "Local", TRUE
+      "CityTile",     "Center",      "Local", FALSE
+    }
+
+[actionenabler_bombard_ai_hp20_sea]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "HPFullSea",   "Local", TRUE
+      "UnitFlag",     "HP20",        "Local", TRUE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "DiplRel",      "War",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "MinHitPoints", "20",          "Local", FALSE
+    }
+target_reqs    =
+    { "type",         "name",        "range", "present"
+      "TerrainClass", "Oceanic",     "Local", TRUE
+      "CityTile",     "Center",      "Local", FALSE
+    }
+
+[actionenabler_bombard_ai_hp30_sea]
+action = "Bombard"
+actor_reqs    =
+    { "type",         "name",        "range", "present"
+      "UnitFlag",     "Bombarder",   "Local", TRUE
+      "UnitFlag",     "HPFullSea",   "Local", TRUE
+      "UnitFlag",     "HP30",        "Local", TRUE
+      "UnitFlag",     "Wheeled",     "Local", FALSE
+      "UnitState",    "Transported", "Local", FALSE
+      "MinMoveFrags", "1",           "Local", TRUE
+      "DiplRel",      "War",         "Local", TRUE
+      "Extra",        "Bombardment", "Local", FALSE
+      "MinHitPoints", "30",          "Local", FALSE
+    }
+target_reqs    =
+    { "type",         "name",        "range", "present"
+      "TerrainClass", "Oceanic",     "Local", TRUE
+      "CityTile",     "Center",      "Local", FALSE
     }
 
 [actionenabler_build_city_pioneer]
@@ -1443,61 +1621,6 @@ actor_reqs    =
       "MinMoveFrags", "1", "Local", TRUE
     }
 
-; New: Diplomatic units can expel NonMil units while at peace
-; (from domestic tiles)
-[actionenabler_expel_unit]
-action = "Expel Unit"
-actor_reqs    =
-    { "type",          "name",           "range", "present"
-      "UnitFlag",      "Diplomat",       "Local", TRUE
-      "DiplRelTile",   "Foreign",        "Local", FALSE
-      "DiplRel",       "Foreign",        "Local", TRUE
-      "DiplRel",       "Alliance",       "Local", FALSE
-      "DiplRel",       "War",            "Local", FALSE
-      "MinMoveFrags",  "1",              "Local", TRUE
-    }
-target_reqs    =
-    { "type",          "name",           "range", "present"
-      "UnitFlag",      "NonMil",         "Local", TRUE
-      "DiplRelTile",   "Foreign",        "Local", TRUE
-    }
-
-; New: Diplomatic units can expel other diplomatic units
-; (outside bases or domestic tiles)
-[actionenabler_expel_diplomat]
-action = "Expel Unit"
-actor_reqs    =
-    { "type",          "name",           "range", "present"
-      "UnitFlag",      "Diplomat",       "Local", TRUE
-      "UnitState",     "OnLivableTile",  "Local", TRUE
-      "DiplRel",       "Foreign",        "Local", TRUE
-      "MinMoveFrags",  "1",              "Local", TRUE
-    }
-target_reqs    =
-    { "type",          "name",           "range", "present"
-      "UnitFlag",      "Diplomat",       "Local", TRUE
-      "DiplRelTile",   "Foreign",        "Local", TRUE
-      "ExtraFlag",     "DiplomatDefense", "Local", FALSE
-    }
-
-; New: Diplomatic units can expel unreachable units
-; (outside bases or domestic tiles)
-[actionenabler_expel_unreachable]
-action = "Expel Unit"
-actor_reqs    =
-    { "type",          "name",           "range", "present"
-      "UnitFlag",      "Diplomat",       "Local", TRUE
-      "UnitState",     "OnLivableTile",  "Local", TRUE
-      "DiplRel",       "Foreign",        "Local", TRUE
-      "MinMoveFrags",  "1",              "Local", TRUE
-    }
-target_reqs    =
-    { "type",          "name",           "range", "present"
-      "UnitClassFlag", "Unreachable",    "Local",  TRUE
-      "DiplRelTile",   "Foreign",        "Local",  TRUE
-      "ExtraFlag",     "DiplomatDefense", "Local", FALSE
-    }
-
 [actionenabler_nuke]
 action      = "Explode Nuclear"
 actor_reqs  =
@@ -1527,56 +1650,42 @@ target_reqs =
       "CityTile", "Center", "Local", FALSE
     }
 
-[actionenabler_attack_from_native]
+[actionenabler_attack_non_transported]
 action = "Attack"
 actor_reqs    =
     { "type",          "name",         "range", "present"
-      "UnitFlag",      "Only_Land",    "Local", FALSE
-      "UnitFlag",      "Only_Sea",     "Local", FALSE
       "UnitFlag",      "HPFull",       "Local", FALSE
+      "UnitFlag",      "HPFullSea",    "Local", FALSE
+      "UnitFlag",      "Wheeled",      "Local", FALSE
       "UnitFlag",      "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",      "Local", FALSE
+      "UnitState",     "Transported",  "Local", FALSE
       "MinMoveFrags",  "1",            "Local", TRUE
-      "UnitState",     "OnNativeTile", "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
     }
 
-[actionenabler_attack_marines]
+[actionenabler_attack_transported]
 action = "Attack"
 actor_reqs    =
     { "type",          "name",         "range", "present"
-      "UnitFlag",      "Only_Land",    "Local", FALSE
-      "UnitFlag",      "Only_Sea",     "Local", FALSE
+      "UnitFlag",      "Raider",       "Local", TRUE
       "UnitFlag",      "HPFull",       "Local", FALSE
+      "UnitFlag",      "HPFullSea",    "Local", FALSE
+      "UnitFlag",      "Wheeled",      "Local", FALSE
       "UnitFlag",      "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",      "Local", FALSE
+      "UnitState",     "Transported",  "Local", TRUE
       "MinMoveFrags",  "1",            "Local", TRUE
-      "UnitFlag",      "Marines",      "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
     }
 
-[actionenabler_attack_att_from_non_native]
-action = "Attack"
-actor_reqs    =
-    { "type",          "name",             "range", "present"
-      "UnitFlag",      "Only_Land",        "Local", FALSE
-      "UnitFlag",      "Only_Sea",         "Local", FALSE
-      "UnitFlag",      "HPFull",           "Local", FALSE
-      "UnitFlag",      "NonMil",           "Local", FALSE
-      "UnitClassFlag", "Missile",          "Local", FALSE
-      "MinMoveFrags",  "1",                "Local", TRUE
-      "UnitClassFlag", "AttFromNonNative", "Local", TRUE
-      "DiplRel",       "War",              "Local", TRUE
-    }
-
-; New Only_Land: Can attack only land tiles, except to bombard,
-; and only terrain suitable for wheeled units
+; New Wheeled: Can attack only land tiles, except to bombard
 ; (can attack from non-native tiles if not being transported)
-[actionenabler_attack_only_land]
+[actionenabler_attack_wheeled]
 action = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "Only_Land",    "Local", TRUE
+      "UnitFlag",     "Wheeled",      "Local", TRUE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
@@ -1586,109 +1695,119 @@ actor_reqs    =
 target_reqs    =
     { "type",         "name",         "range", "present"
       "TerrainClass", "Oceanic",      "Local", FALSE
-      "TerrainFlag",  "NoWheeled",    "Local", FALSE
     }
 
-; New Only_Land: Can attack terrain with extra suitable for wheeled units
-[actionenabler_attack_only_land_extra]
-action = "Attack"
-actor_reqs    =
-    { "type",         "name",         "range", "present"
-      "UnitFlag",     "Only_Land",    "Local", TRUE
-      "UnitFlag",     "NonMil",       "Local", FALSE
-      "UnitClassFlag", "Missile",     "Local", FALSE
-      "UnitState",    "Transported",  "Local", FALSE
-      "MinMoveFrags", "1",            "Local", TRUE
-      "DiplRel",      "War",          "Local", TRUE
-    }
-target_reqs    =
-    { "type",         "name",         "range", "present"
-      "ExtraFlag",    "ForWheeled",   "Local", TRUE
-    }
-
-; New Only_Sea: Can attack only oceanic tiles, except to bombard
+; New HPFull: Can attack only if the attacker is undamaged (doesn't work together with Wheeled)
 ; (can attack from non-native tiles if not being transported)
-[actionenabler_attack_only_sea]
+; When HP flag is missing, default to 10
+[actionenabler_attack_hp10]
 action = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "Only_Sea",     "Local", TRUE
+      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HP20",         "Local", FALSE
+      "UnitFlag",     "HP30",         "Local", FALSE
+      "UnitFlag",     "HPFullSea",    "Local", FALSE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
+      "MinHitPoints", "10",           "Local", TRUE
+    }
+
+[actionenabler_attack_hp20]
+action = "Attack"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HP20",         "Local", TRUE
+      "UnitFlag",     "HPFullSea",    "Local", FALSE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
+      "UnitFlag",     "NonMil",       "Local", FALSE
+      "UnitClassFlag", "Missile",     "Local", FALSE
+      "UnitState",    "Transported",  "Local", FALSE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "MinHitPoints", "20",           "Local", TRUE
+    }
+
+[actionenabler_attack_hp30]
+action = "Attack"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HP30",         "Local", TRUE
+      "UnitFlag",     "HPFullSea",    "Local", FALSE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
+      "UnitFlag",     "NonMil",       "Local", FALSE
+      "UnitClassFlag", "Missile",     "Local", FALSE
+      "UnitState",    "Transported",  "Local", FALSE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "MinHitPoints", "30",           "Local", TRUE
+    }
+
+; New HPFullSea: Can attack only oceanic tiles, except to bombard
+; and only if the attacker is undamaged (doesn't work together with Wheeled)
+; (can attack from non-native tiles if not being transported)
+[actionenabler_attack_hp10_sea]
+action = "Attack"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HP20",         "Local", FALSE
+      "UnitFlag",     "HP30",         "Local", FALSE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
+      "UnitFlag",     "NonMil",       "Local", FALSE
+      "UnitClassFlag", "Missile",     "Local", FALSE
+      "UnitState",    "Transported",  "Local", FALSE
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "MinHitPoints", "10",           "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
       "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
-; New Only_Sea: Can attack city tiles
-[actionenabler_attack_only_sea_city]
+[actionenabler_attack_hp20_sea]
 action = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "Only_Sea",     "Local", TRUE
+      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HP20",         "Local", TRUE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
+      "MinHitPoints", "20",           "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
-      "CityTile",     "Center",       "Local", TRUE
+      "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
-; New HPFull: Can attack only if the attacker is undamaged (doesn't work together with Only_Land or Only_Sea)
-; (can attack only from native tile, ignoring AttFromNonNative or Marines)
-[actionenabler_attack_hp_10]
+[actionenabler_attack_hp30_sea]
 action = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFull",       "Local", TRUE
-      "UnitFlag",     "HP10",         "Local", TRUE
-      "UnitFlag",     "Only_Land",    "Local", FALSE
-      "UnitFlag",     "Only_Sea",     "Local", FALSE
-      "UnitFlag",     "NonMil",       "Local", FALSE
-      "UnitClassFlag", "Missile",     "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
-      "MinMoveFrags", "1",            "Local", TRUE
-      "DiplRel",      "War",          "Local", TRUE
-      "MinHitPoints", "10",           "Local", TRUE
-    }
-
-[actionenabler_attack_hp_20]
-action = "Attack"
-actor_reqs    =
-    { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFull",       "Local", TRUE
-      "UnitFlag",     "HP20",         "Local", TRUE
-      "UnitFlag",     "Only_Land",    "Local", FALSE
-      "UnitFlag",     "Only_Sea",     "Local", FALSE
-      "UnitFlag",     "NonMil",       "Local", FALSE
-      "UnitClassFlag", "Missile",     "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
-      "MinMoveFrags", "1",            "Local", TRUE
-      "DiplRel",      "War",          "Local", TRUE
-      "MinHitPoints", "20",           "Local", TRUE
-    }
-
-[actionenabler_attack_hp_30]
-action = "Attack"
-actor_reqs    =
-    { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HPFullSea",    "Local", TRUE
       "UnitFlag",     "HP30",         "Local", TRUE
-      "UnitFlag",     "Only_Land",    "Local", FALSE
-      "UnitFlag",     "Only_Sea",     "Local", FALSE
+      "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
-      "UnitState",    "OnNativeTile", "Local", TRUE
+      "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
       "DiplRel",      "War",          "Local", TRUE
       "MinHitPoints", "30",           "Local", TRUE
+    }
+target_reqs    =
+    { "type",         "name",         "range", "present"
+      "TerrainClass", "Oceanic",      "Local", TRUE
     }
 
 [actionenabler_explode_missile]
@@ -1701,7 +1820,7 @@ actor_reqs    =
       "DiplRel",       "War",     "Local", TRUE
     }
 
-[actionenabler_conquer_city_native]
+[actionenabler_conquer_city_non_transported]
 action = "Conquer City"
 actor_reqs    =
     { "type",           "name",           "range",  "present"
@@ -1709,15 +1828,15 @@ actor_reqs    =
       "UnitFlag",       "NonMil",         "Local",  FALSE
       "DiplRel",        "War",            "Local",  TRUE
       "MinMoveFrags",   "1",              "Local",  TRUE
-      "UnitState",      "OnLivableTile",  "Local",  TRUE
       "Nation",         "Animal Kingdom", "Player", FALSE
+      "UnitState",      "Transported",    "Local",  FALSE
     }
 target_reqs    =
     { "type",           "name",           "range",  "present"
       "MaxUnitsOnTile", "0",              "Local",  TRUE
     }
 
-[actionenabler_conquer_city_marines]
+[actionenabler_conquer_city_transported]
 action = "Conquer City 2"
 actor_reqs    =
     { "type",           "name",           "range",  "present"
@@ -1725,9 +1844,9 @@ actor_reqs    =
       "UnitFlag",       "NonMil",         "Local",  FALSE
       "DiplRel",        "War",            "Local",  TRUE
       "MinMoveFrags",   "1",              "Local",  TRUE
-      "UnitFlag",       "Marines",        "Local",  TRUE
-      "UnitState",      "OnLivableTile",  "Local",  FALSE
       "Nation",         "Animal Kingdom", "Player", FALSE
+      "UnitState",      "Transported",    "Local",  TRUE
+      "UnitFlag",       "Raider",         "Local",  TRUE
     }
 target_reqs    =
     { "type",           "name",           "range",  "present"
@@ -1740,7 +1859,7 @@ actor_reqs    =
     { "type",      "name",        "range", "present"
       "UnitFlag",  "NoHome",      "Local", FALSE
       "UnitState", "HasHomeCity", "Local", TRUE
-      "DiplRel",   "Foreign",  "Local", FALSE
+      "DiplRel",   "Foreign",     "Local", FALSE
     }
 
 [actionenabler_change_home_city_diplo]
@@ -1781,7 +1900,6 @@ actor_reqs    =
 target_reqs   =
     { "type",     "name",    "range", "present"
       "CityTile", "Claimed", "Local", FALSE
-      "Extra",    "Castle",  "Local", FALSE
     }
 
 [actionenabler_paradrop_base_to_war_conquer]
@@ -1801,24 +1919,6 @@ actor_reqs    =
 target_reqs   =
     { "type",     "name",    "range", "present"
       "CityTile", "Claimed", "Local", TRUE
-    }
-
-[actionenabler_paradrop_base_to_unclaimed_base]
-action = "Paradrop Unit Enter Conquer"
-actor_reqs    =
-    { "type",          "name",         "range", "present"
-      "UnitFlag",      "Paratroopers", "Local", TRUE
-      "MinMoveFrags",  "6",            "Local", TRUE
-      "UnitState",     "Transporting", "Local", FALSE
-      "ExtraFlag",     "ParadropFrom", "Local", TRUE
-      "UnitClassFlag", "HutFrighten",  "Local", FALSE
-      "Nation",        "Animal Kingdom", "Player", FALSE
-    }
-target_reqs   =
-    { "type",     "name",    "range", "present"
-      "CityTile", "Claimed", "Local", FALSE
-      "CityTile", "Center",  "Local", FALSE
-      "Extra",    "Castle",  "Local", TRUE
     }
 
 [actionenabler_paradrop_city_to_claimed]
@@ -1851,7 +1951,6 @@ actor_reqs    =
 target_reqs   =
     { "type",     "name",    "range", "present"
       "CityTile", "Claimed", "Local", FALSE
-      "Extra",    "Castle",  "Local", FALSE
     }
 
 [actionenabler_paradrop_city_to_war_conquer]
@@ -1873,29 +1972,84 @@ target_reqs   =
       "CityTile", "Claimed", "Local", TRUE
     }
 
-[actionenabler_paradrop_city_to_unclaimed_base]
+; New: BeachLander units can paradrop instead of disembark
+; (except to terrain with movement cost 2 or more)
+[actionenabler_beach_lander_to_unclaimed]
+action = "Paradrop Unit Enter"
+actor_reqs    =
+    { "type",          "name",          "range", "present"
+      "UnitFlag",      "BeachLander",   "Local", TRUE
+      "MinMoveFrags",  "6",             "Local", TRUE
+      "UnitState",     "Transported",   "Local", TRUE
+      "UnitState",     "Transporting",  "Local", FALSE
+      "UnitClassFlag", "HutFrighten",   "Local", FALSE
+    }
+target_reqs   =
+    { "type",          "name",          "range", "present"
+      "CityTile",      "Claimed",       "Local", FALSE
+      "Terrain",       "Glacier",       "Local", FALSE
+      "Terrain",       "Forest",        "Local", FALSE
+      "Terrain",       "Hills",         "Local", FALSE
+      "Terrain",       "Jungle",        "Local", FALSE
+      "Terrain",       "Swamp",         "Local", FALSE
+      "Terrain",       "Mountains",     "Local", FALSE
+    }
+
+[actionenabler_beach_lander_to_claimed]
+action = "Paradrop Unit Enter"
+actor_reqs    =
+    { "type",          "name",          "range", "present"
+      "UnitFlag",      "BeachLander",   "Local", TRUE
+      "MinMoveFrags",  "6",             "Local", TRUE
+      "UnitState",     "Transported",   "Local", TRUE
+      "UnitState",     "Transporting",  "Local", FALSE
+      "DiplRel",       "Peace",         "Local", FALSE
+      "DiplRel",       "War",           "Local", FALSE
+      "UnitClassFlag", "HutFrighten",   "Local", FALSE
+    }
+target_reqs   =
+    { "type",          "name",          "range", "present"
+      "CityTile",      "Claimed",       "Local", TRUE
+      "CityTile",      "Center",        "Local", FALSE
+      "Terrain",       "Glacier",       "Local", FALSE
+      "Terrain",       "Forest",        "Local", FALSE
+      "Terrain",       "Hills",         "Local", FALSE
+      "Terrain",       "Jungle",        "Local", FALSE
+      "Terrain",       "Swamp",         "Local", FALSE
+      "Terrain",       "Mountains",     "Local", FALSE
+    }
+
+[actionenabler_beach_lander_to_war_conquer]
 action = "Paradrop Unit Enter Conquer"
 actor_reqs    =
-    { "type",          "name",         "range", "present"
-      "UnitFlag",      "Paratroopers", "Local", TRUE
-      "MinMoveFrags",  "6",            "Local", TRUE
-      "UnitState",     "Transporting", "Local", FALSE
-      "CityTile",      "Center",       "Local", TRUE
-      "UnitClassFlag", "HutFrighten",  "Local", FALSE
+    { "type",          "name",          "range", "present"
+      "UnitFlag",      "BeachLander",   "Local", TRUE
+      "MinMoveFrags",  "6",             "Local", TRUE
+      "UnitState",     "Transported",   "Local", TRUE
+      "UnitState",     "Transporting",  "Local", FALSE
+      "DiplRel",       "War",           "Local", TRUE
+      "UnitClassFlag", "CanOccupyCity", "Local", TRUE
+      "UnitFlag",      "NonMil",        "Local", FALSE
+      "UnitClassFlag", "HutFrighten",   "Local", FALSE
       "Nation",        "Animal Kingdom", "Player", FALSE
     }
 target_reqs   =
-    { "type",     "name",    "range", "present"
-      "CityTile", "Claimed", "Local", FALSE
-      "CityTile", "Center",  "Local", FALSE
-      "Extra",    "Castle",  "Local", TRUE
+    { "type",          "name",          "range", "present"
+      "CityTile",      "Claimed",       "Local", TRUE
+      "CityTile",      "Center",        "Local", FALSE
+      "Terrain",       "Glacier",       "Local", FALSE
+      "Terrain",       "Forest",        "Local", FALSE
+      "Terrain",       "Hills",         "Local", FALSE
+      "Terrain",       "Jungle",        "Local", FALSE
+      "Terrain",       "Swamp",         "Local", FALSE
+      "Terrain",       "Mountains",     "Local", FALSE
     }
 
 [actionenabler_upgrade_unit]
 action = "Upgrade Unit"
 actor_reqs    =
     { "type",    "name",       "range", "present"
-      "DiplRel", "Foreign", "Local", FALSE
+      "DiplRel", "Foreign",    "Local", FALSE
     }
 
 [actionenabler_airlift_unit]
@@ -1922,7 +2076,7 @@ action        = "Cultivate"
 actor_reqs    =
     { "type",          "name",         "range", "present"
       "UnitFlag",      "Settlers",     "Local", TRUE
-      "UnitClass",     "Sea",          "Local", FALSE
+      "UnitFlag",      "CanWork",      "Local", TRUE
     }
 
 [actionenabler_plant]
@@ -1930,14 +2084,39 @@ action        = "Plant"
 actor_reqs    =
     { "type",          "name",         "range", "present"
       "UnitFlag",      "Settlers",     "Local", TRUE
-      "UnitClass",     "Sea",          "Local", FALSE
+      "UnitFlag",      "CanWork",      "Local", TRUE
     }
 
 [actionenabler_pillage]
 action        = "Pillage"
 actor_reqs    =
-    { "type",          "name",         "range"
-      "UnitClassFlag", "CanPillage",   "Local"
+    { "type",          "name",         "range", "present"
+      "UnitClassFlag", "CanPillage",   "Local", TRUE
+      "UnitFlag",      "Cant_Pillage", "Local", FALSE
+    }
+target_reqs    =
+    { "type",          "name",         "range", "present"
+      "CityTile",      "Claimed",      "Local", FALSE
+    }
+
+; New:
+[actionenabler_pillage_domestic]
+action        = "Pillage"
+actor_reqs    =
+    { "type",          "name",         "range", "present"
+      "UnitClassFlag", "CanPillage",   "Local", TRUE
+      "UnitFlag",      "Cant_Pillage", "Local", FALSE
+      "DiplRelTile",   "Foreign",      "Local", FALSE
+    }
+
+; New:
+[actionenabler_pillage_war]
+action        = "Pillage"
+actor_reqs    =
+    { "type",          "name",         "range", "present"
+      "UnitClassFlag", "CanPillage",   "Local", TRUE
+      "UnitFlag",      "Cant_Pillage", "Local", FALSE
+      "DiplRelTile",   "War",          "Local", TRUE
     }
 
 [actionenabler_clean_pollution]
@@ -1945,6 +2124,20 @@ action        = "Clean Pollution"
 actor_reqs    =
     { "type",          "name",         "range", "present"
       "UnitFlag",      "Settlers",     "Local", TRUE
+      "UnitFlag",      "CanWork",      "Local", TRUE
+    }
+
+; New:
+[actionenabler_clean_pollution_ocean]
+action        = "Clean Pollution"
+actor_reqs    =
+    { "type",          "name",         "range", "present"
+      "UnitFlag",      "Settlers",     "Local", TRUE
+      "UnitClassFlag", "Naval",        "Local", TRUE
+    }
+target_reqs    =
+    { "type",          "name",         "range", "present"
+      "TerrainClass",  "Oceanic",      "Local", TRUE
     }
 
 [actionenabler_clean_fallout]
@@ -1952,16 +2145,33 @@ action        = "Clean Fallout"
 actor_reqs    =
     { "type",          "name",         "range", "present"
       "UnitFlag",      "Settlers",     "Local", TRUE
+      "UnitFlag",      "CanWork",      "Local", TRUE
     }
 
+; New:
+[actionenabler_clean_fallout_ocean]
+action        = "Clean Fallout"
+actor_reqs    =
+    { "type",          "name",         "range", "present"
+      "UnitFlag",      "Settlers",     "Local", TRUE
+      "UnitClassFlag", "Naval",        "Local", TRUE
+    }
+target_reqs    =
+    { "type",          "name",         "range", "present"
+      "TerrainClass",  "Oceanic",      "Local", TRUE
+    }
+
+; Fortifying requires at least 1 move fragment and not being transported
 [actionenabler_fortify_terrain]
 action        = "Fortify"
 actor_reqs    =
     { "type",          "name",         "range", "present"
+      "MinMoveFrags",  "1",            "Local", TRUE
       "UnitClassFlag", "CanFortify",   "Local", TRUE
       "UnitFlag",      "Cant_Fortify", "Local", FALSE
       "TerrainFlag",   "NoFortify",    "Local", FALSE
       "Activity",      "Fortified",    "Local", FALSE
+      "UnitState",     "Transported",  "Local", FALSE
     }
 
 [actionenabler_fortify_city]
@@ -1977,23 +2187,57 @@ actor_reqs    =
 [actionenabler_road]
 action        = "Build Road"
 actor_reqs    =
-    { "type",          "name",         "range"
-      "UnitFlag",      "Settlers",     "Local"
+    { "type",          "name",         "range", "present"
+      "UnitFlag",      "Settlers",     "Local", TRUE
+      "UnitFlag",      "CanWork",      "Local", TRUE
+      "TerrainClass",  "Land",         "Local", TRUE
     }
 
+; New: Any non naval settler can build bases on land
 [actionenabler_base]
 action        = "Build Base"
 actor_reqs    =
-    { "type",          "name",         "range"
-      "UnitFlag",      "Settlers",     "Local"
+    { "type",          "name",         "range", "present"
+      "UnitFlag",      "Settlers",     "Local", TRUE
+      "UnitClassFlag", "Naval",        "Local", FALSE
     }
+target_reqs    =
+    { "type",          "name",         "range", "present"
+      "TerrainClass",  "Land",         "Local", TRUE
+    }
+
+; Any settler (included transports) can build bases on ocean
+[actionenabler_base_ocean]
+action        = "Build Base"
+actor_reqs    =
+    { "type",          "name",         "range", "present"
+      "UnitFlag",      "Settlers",     "Local", TRUE
+    }
+target_reqs    =
+    { "type",          "name",         "range", "present"
+      "TerrainClass",  "Oceanic",      "Local", TRUE
+    }
+
+; FIXME: uncomment to enable infantry to build bases for 3.2
+; (won't work on 3.1 where Settlers flag is mandatory)
+; Unit flag Fortress allows to build bases on land
+;[actionenabler_base_fortress]
+;action        = "Build Base"
+;actor_reqs    =
+;    { "type",          "name",         "range", "present"
+;      "UnitFlag",      "Fortress",     "Local", TRUE
+;    }
+;target_reqs    =
+;    { "type",          "name",         "range", "present"
+;      "TerrainClass",  "Land",         "Local", TRUE
+;    }
 
 [actionenabler_mining]
 action        = "Build Mine"
 actor_reqs    =
-    { "type",      "name",     "range", "present"
-      "UnitFlag",  "Settlers", "Local", TRUE
-      "UnitClass", "Sea",      "Local", FALSE
+    { "type",         "name",       "range", "present"
+      "UnitFlag",     "Settlers",   "Local", TRUE
+      "UnitFlag",     "CanWork",    "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",       "range", "present"
@@ -2004,13 +2248,28 @@ target_reqs    =
 [actionenabler_mining_ocean]
 action        = "Build Mine"
 actor_reqs    =
-    { "type",      "name",            "range"
-      "UnitFlag",  "Settlers",        "Local"
-      "Tech",      "Miniaturization", "Player"
+    { "type",          "name",            "range",  "present"
+      "UnitFlag",      "Settlers",        "Local",  TRUE
+      "UnitFlag",      "CanWork",         "Local",  TRUE
+      "Tech",          "Miniaturization", "Player", TRUE
     }
 target_reqs    =
-    { "type",    "name",            "range",  "present"
-      "Terrain", "Deep Ocean",      "Local",  TRUE
+    { "type",         "name",       "range", "present"
+      "Terrain",      "Deep Ocean", "Local", TRUE
+    }
+
+; New: Allowed for naval settlers
+[actionenabler_mining_ocean_naval]
+action        = "Build Mine"
+actor_reqs    =
+    { "type",          "name",            "range",  "present"
+      "UnitFlag",      "Settlers",        "Local",  TRUE
+      "UnitClassFlag", "Naval",           "Local",  TRUE
+      "Tech",          "Miniaturization", "Player", TRUE
+    }
+target_reqs    =
+    { "type",         "name",       "range", "present"
+      "Terrain",      "Deep Ocean", "Local", TRUE
     }
 
 ; Prevent building farmland on bare deserts. It does not yield any bonus
@@ -2020,15 +2279,13 @@ target_reqs    =
 ; through climate change.)
 ; Deserts with food bonuses _are_ allowed farmland (hence exceptions).
 
-; "Sea" nreq is for Transports, which are only supposed to clean pollution
-
 [actionenabler_irrigate_src_tech_basic_irrigation]
 action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",        "range",  "present"
       "UnitFlag",  "Settlers",    "Local",  TRUE
+      "UnitFlag",  "CanWork",     "Local",  TRUE
       "Tech",      "Electricity", "Player", TRUE
-      "UnitClass", "Sea",         "Local",  FALSE
     }
 target_reqs    =
     { "type",         "name",        "range", "present"
@@ -2041,7 +2298,7 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",      "range", "present"
       "UnitFlag",  "Settlers",  "Local", TRUE
-      "UnitClass", "Sea",       "Local", FALSE
+      "UnitFlag",  "CanWork",   "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",        "range",     "present"
@@ -2055,7 +2312,7 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",     "range", "present"
       "UnitFlag",  "Settlers", "Local", TRUE
-      "UnitClass", "Sea",      "Local", FALSE
+      "UnitFlag",  "CanWork",  "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",             "range",     "present"
@@ -2069,8 +2326,8 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",        "range",  "present"
       "UnitFlag",  "Settlers",    "Local",  TRUE
+      "UnitFlag",  "CanWork",     "Local",  TRUE
       "Tech",      "Electricity", "Player", TRUE
-      "UnitClass", "Sea",         "Local",  FALSE
     }
 target_reqs    =
     { "type",         "name",        "range", "present"
@@ -2083,7 +2340,7 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",      "range", "present"
       "UnitFlag",  "Settlers",  "Local", TRUE
-      "UnitClass", "Sea",       "Local", FALSE
+      "UnitFlag",  "CanWork",   "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",        "range",     "present"
@@ -2097,7 +2354,7 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",     "range", "present"
       "UnitFlag",  "Settlers", "Local", TRUE
-      "UnitClass", "Sea",      "Local", FALSE
+      "UnitFlag",  "CanWork",  "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",             "range",     "present"
@@ -2111,8 +2368,8 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",        "range",  "present"
       "UnitFlag",  "Settlers",    "Local",  TRUE
+      "UnitFlag",  "CanWork",     "Local",  TRUE
       "Tech",      "Electricity", "Player", TRUE
-      "UnitClass", "Sea",         "Local",  FALSE
     }
 target_reqs    =
     { "type",         "name",                   "range", "present"
@@ -2125,7 +2382,7 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",      "range", "present"
       "UnitFlag",  "Settlers",  "Local", TRUE
-      "UnitClass", "Sea",       "Local", FALSE
+      "UnitFlag",  "CanWork",   "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",                   "range",    "present"
@@ -2139,13 +2396,13 @@ action        = "Build Irrigation"
 actor_reqs    =
     { "type",      "name",     "range", "present"
       "UnitFlag",  "Settlers", "Local", TRUE
-      "UnitClass", "Sea",      "Local", FALSE
+      "UnitFlag",  "CanWork",  "Local", TRUE
     }
 target_reqs    =
     { "type",      "name",                    "range",     "present"
       "ExtraFlag", "IrrigationSource",        "CAdjacent", TRUE
-      "Terrain",    "Desert",                 "Local",     TRUE
-      "ExtraFlag",  "AllowsFarmlandOnDesert", "Local",     TRUE
+      "Terrain",   "Desert",                  "Local",     TRUE
+      "ExtraFlag", "AllowsFarmlandOnDesert",  "Local",     TRUE
     }
 
 [actionenabler_alight]
@@ -2163,12 +2420,26 @@ target_reqs    =
 [actionenabler_board]
 action        = "Transport Board"
 actor_reqs    =
-    { "type",    "name",       "range", "present"
-      "DiplRel", "Armistice",  "Local", FALSE
-      "DiplRel", "War",        "Local", FALSE
-      "DiplRel", "Cease-fire", "Local", FALSE
-      "DiplRel", "Peace",      "Local", FALSE
-      "DiplRel", "Never met",  "Local", FALSE
+    { "type",         "name",       "range", "present"
+      "DiplRel",      "Armistice",  "Local", FALSE
+      "DiplRel",      "War",        "Local", FALSE
+      "DiplRel",      "Cease-fire", "Local", FALSE
+      "DiplRel",      "Peace",      "Local", FALSE
+      "DiplRel",      "Never met",  "Local", FALSE
+      "CityTile",     "Center",     "Local", FALSE
+    }
+
+[actionenabler_board_city]
+action        = "Transport Board"
+actor_reqs    =
+    { "type",         "name",       "range", "present"
+      "MinMoveFrags", "1",          "Local", TRUE
+      "DiplRel",      "Armistice",  "Local", FALSE
+      "DiplRel",      "War",        "Local", FALSE
+      "DiplRel",      "Cease-fire", "Local", FALSE
+      "DiplRel",      "Peace",      "Local", FALSE
+      "DiplRel",      "Never met",  "Local", FALSE
+      "CityTile",     "Center",     "Local", TRUE
     }
 
 [actionenabler_unload]
@@ -2183,32 +2454,12 @@ target_reqs    =
       "UnitState", "Transported",   "Local"
     }
 
-[actionenabler_disembark_from_native_tile]
+[actionenabler_disembark]
 action        = "Transport Disembark"
 actor_reqs    =
     { "type",         "name",         "range"
       "UnitState",    "Transported",  "Local"
       "MinMoveFrags", "1",            "Local"
-      "UnitState",    "OnNativeTile", "Local"
-    }
-
-[actionenabler_disembark_from_native_city]
-action        = "Transport Disembark"
-actor_reqs    =
-    { "type",         "name",        "range"
-      "UnitState",    "Transported", "Local"
-      "MinMoveFrags", "1",           "Local"
-      "CityTile",     "Center",      "Local"
-    }
-
-[actionenabler_disembark_from_non_native]
-action        = "Transport Disembark 2"
-actor_reqs    =
-    { "type",           "name",         "range", "present"
-      "UnitState",      "Transported",  "Local", TRUE
-      "MinMoveFrags",   "1",            "Local", TRUE
-      "UnitState",      "OnNativeTile", "Local", FALSE
-      "CityTile",       "Center",       "Local", FALSE
     }
 
 [actionenabler_embark]
@@ -2231,98 +2482,78 @@ actor_reqs =
       "UnitState",    "Transported", "Local", FALSE
     }
 
-[actionenabler_hut_enter_from_native_tile]
+[actionenabler_hut_enter_non_transported]
 action        = "Enter Hut"
 actor_reqs    =
     { "type",          "name",         "range", "present"
       "MinMoveFrags",  "1",            "Local", TRUE
-      "UnitState",     "OnNativeTile", "Local", TRUE
+      "UnitState",     "Transported",  "Local", FALSE
       "UnitClassFlag", "HutFrighten",  "Local", FALSE
     }
 
-[actionenabler_hut_enter_from_native_city]
-action        = "Enter Hut"
-actor_reqs    =
-    { "type",          "name",        "range", "present"
-      "MinMoveFrags",  "1",           "Local", TRUE
-      "CityTile",      "Center",      "Local", TRUE
-      "UnitClassFlag", "HutFrighten", "Local", FALSE
-    }
-
-[actionenabler_hut_enter_from_non_native]
+[actionenabler_hut_enter_transported]
 action        = "Enter Hut 2"
 actor_reqs    =
     { "type",           "name",         "range", "present"
       "MinMoveFrags",   "1",            "Local", TRUE
-      "UnitState",      "OnNativeTile", "Local", FALSE
-      "CityTile",       "Center",       "Local", FALSE
+      "UnitState",      "Transported",  "Local", TRUE
       "UnitClassFlag",  "HutFrighten",  "Local", FALSE
     }
 
-[actionenabler_hut_frighten_from_native_tile]
+[actionenabler_hut_frighten_non_transported]
 action        = "Frighten Hut"
 actor_reqs    =
-    { "type",          "name",         "range"
-      "MinMoveFrags",  "1",            "Local"
-      "UnitState",     "OnNativeTile", "Local"
-      "UnitClassFlag", "HutFrighten",  "Local"
+    { "type",          "name",         "range", "present"
+      "MinMoveFrags",  "1",            "Local", TRUE
+      "UnitState",     "Transported",  "Local", FALSE
+      "UnitClassFlag", "HutFrighten",  "Local", TRUE
     }
 
-[actionenabler_hut_frighten_from_native_city]
-action        = "Frighten Hut"
-actor_reqs    =
-    { "type",          "name",        "range"
-      "MinMoveFrags",  "1",           "Local"
-      "CityTile",      "Center",      "Local"
-      "UnitClassFlag", "HutFrighten",  "Local"
-    }
-
-[actionenabler_hut_frighten_from_non_native]
+[actionenabler_hut_frighten_transported]
 action        = "Frighten Hut 2"
 actor_reqs    =
     { "type",           "name",         "range", "present"
       "MinMoveFrags",   "1",            "Local", TRUE
-      "UnitState",      "OnNativeTile", "Local", FALSE
-      "CityTile",       "Center",       "Local", FALSE
+      "UnitState",      "Transported",  "Local", TRUE
       "UnitClassFlag",  "HutFrighten",  "Local", TRUE
     }
 
-[actionenabler_claim_extra_war_from_native_tile]
-action        = "Conquer Extras"
-actor_reqs    =
-    { "type",         "name",         "range"
-      "MinMoveFrags", "1",            "Local"
-      "DiplRel",      "War",          "Local"
-      "UnitState",    "OnNativeTile", "Local"
-    }
-
-[actionenabler_claim_extra_war_from_non_native]
-action        = "Conquer Extras 2"
-actor_reqs    =
-    { "type",         "name",           "range", "present"
-      "MinMoveFrags", "1",              "Local", TRUE
-      "DiplRel",      "War",            "Local", TRUE
-      "UnitState",    "OnNativeTile",   "Local", FALSE
-    }
-
-[actionenabler_claim_extra_unowned_from_native_tile]
+[actionenabler_claim_extra_war_non_transported]
 action        = "Conquer Extras"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "MinMoveFrags", "1",            "Local", TRUE
-      "UnitState",    "OnNativeTile", "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "UnitState",    "Transported",  "Local", FALSE
+    }
+
+[actionenabler_claim_extra_war_transported]
+action        = "Conquer Extras 2"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "MinMoveFrags", "1",            "Local", TRUE
+      "DiplRel",      "War",          "Local", TRUE
+      "UnitState",    "Transported",  "Local", TRUE
+    }
+
+[actionenabler_claim_extra_unowned_non_transported]
+action        = "Conquer Extras"
+actor_reqs    =
+    { "type",         "name",         "range", "present"
+      "MinMoveFrags", "1",            "Local", TRUE
+      "UnitState",    "Transported",  "Local", FALSE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
       "CityTile",     "Extras Owned", "Local", FALSE
     }
 
-[actionenabler_claim_extra_unowned_from_non_native]
+[actionenabler_claim_extra_unowned_transported]
 action        = "Conquer Extras 2"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "MinMoveFrags", "1",            "Local", TRUE
-      "UnitState",    "OnNativeTile", "Local", FALSE
+      "UnitState",    "Transported",  "Local", TRUE
     }
 target_reqs    =
     { "type",         "name",         "range", "present"
@@ -2405,10 +2636,10 @@ free_tech_method = "Cheapest"
 
 [culture]
 ; Minimum culture points for cultural domination victory
-victory_min_points = 30000
+victory_min_points = 40000
 
 ; How big lead relative to second best player is needed for victory
-victory_lead_pct   = 100
+victory_lead_pct   = 300
 
 ; How much existing history grows each turn. This makes older history
 ; of the same original value more valuable as newer history, as it has
@@ -2710,17 +2941,33 @@ flags = "Bidirectional", "Depletes"
 ;
 ; */ <-- avoid gettext warnings
 
-[clause_advance]
-type = "Advance"
+;[clause_advance]
+;type = "Advance"
 
 [clause_gold]
 type = "Gold"
 
 [clause_map]
 type = "Map"
+giver_reqs =
+    { "type", "name", "range"
+      "Tech", "Map Making", "Player"
+    }
+receiver_reqs =
+    { "type", "name", "range"
+      "Tech", "Map Making", "Player"
+    }
 
 [clause_seamap]
 type = "Seamap"
+giver_reqs =
+    { "type", "name", "range"
+      "Tech", "Map Making", "Player"
+    }
+receiver_reqs =
+    { "type", "name", "range"
+      "Tech", "Map Making", "Player"
+    }
 
 [clause_city]
 type = "City"
@@ -2737,8 +2984,8 @@ type = "Alliance"
 [clause_vision]
 type = "Vision"
 
-[clause_embassy]
-type = "Embassy"
+;[clause_embassy]
+;type = "Embassy"
 
 [playercolors]
 background.r = 86
@@ -2828,7 +3075,7 @@ set =
       "razechance", 10, FALSE
       "disasters", 10, FALSE
       "animals", 20, FALSE
-      "onsetbarbs", 120, FALSE
+      "onsetbarbs", 60, FALSE
       "teamplacement", "DISABLED", FALSE
       "team_pooled_research", "DISABLED", FALSE
       "trading_tech", "DISABLED", FALSE
@@ -2844,4 +3091,7 @@ set =
       "revolentype", "RANDQUICK", FALSE
       "revolen", 3, FALSE
       "phasemode", "ALL", FALSE
+      "traitdistribution", "EVEN", FALSE
+      "endspaceship", "ENABLED", FALSE
+      "victories", "", FALSE
     }

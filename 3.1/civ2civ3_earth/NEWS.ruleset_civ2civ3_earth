@@ -1,51 +1,51 @@
 LATEST CHANGES:
 ---------------
 
--: Changes compared to official civ2civ3 v3.0 (included in Freeciv release):
+-: Changes compared to official civ2civ3 (included in Freeciv release):
 *: Changes compared to previous civ2civ3_earth v2023_06 (available with Modpack Installer).
 
-Known bugs:
-- When the ruleset is played with a version of Freeciv prior to 3.0.8, the "Investigate city" action may cause a crash to desktop (related to the presence of traded resources in the target city). As an alternative, military units can use the "Bombard" action to see all defending units.
-- The server settings suggested by the ruleset are no longer loaded by default. Due to changes in freeciv 3.0 now user settings (from freeciv-client-rc-3.0) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of the client file freeciv-client-rc-3.0 before starting a new game.
+Known issues:
+* If the ruleset is played with a version of Freeciv prior to 3.1.2, the AI will not move the infantry units. This happens because the "Settler" flag is mandatory to be able to build fortresses in 3.1, and the AI manages these units as settlers until it is fixed in 3.1.2.
+- The server settings suggested by the ruleset are no longer loaded by default. Due to changes in Freeciv 3.0, now user settings (from freeciv-client-rc) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of freeciv-client-rc-3.x before starting a new game.
+* This modpack includes 2 custom tilesets, one for square and one for hexagonal topology, but they are no longer loaded by default. The player has to select them manually from the client local options -> Graphics -> Tileset (or by editing the values starting with "default_tileset_" in the file freeciv-client-rc).
 
 Fixed bugs:
 - Strategic resources no longer appear on the same tile as other special resources.
+* The AI seems to get stuck around tiles that cause damage. These effects are now disabled for the AI (hit point loss of air units in the open, galleys in deep ocean, and units near storms). Naval mines have also been changed to reduce movement points instead of hit points.
 
 Core:
-- The 6th citizen in each city is the first unhappy one (was the 5th).
 - Increased to 3 the output of Entertainer, Taxman and Scientist specialists (no longer increased by global effects of wonders).
 - Added a new barbarian nation that controls hostile animal units, randomly placed at the start of the game.
 - Storms are no longer enemy units, but terrain features that randomly appear and disappear on Deep Ocean or Glacier tiles, damaging adjacent units (-4 HP).
 - Enabled national trade routes again, with reduced income. Each city can establish 1 trade route (2 after the discovery of The Corporation).
 - Trade routes with foreign cities receive 50% of the income, and only if the cities are allies (or on the same team).
-- When a Caravan/Freight arrives to a national city, it is now possible to choose a new action that cancels the current trade routes of the city (at the end of the turn).
-- Enabled tech leakage again, with halved effect (the cost of a technology known to all players would be half of the normal cost).
+- Enabled tech leakage again, with halved effect: technologies are cheaper if already discovered by other nations you have embassy with (the cost of a technology known to all players would be half of the normal cost).
 - The city tile gets the same +50% defense bonus as a Fort (also against naval units, not only against ground units). Cities with size > 8 double this bonus to +100% (as before). Cities with size > 16 now get an additional +50% defense against air and missile units (being the total defense the same as a Fortress).
 - Waste of Food caused by distance to Palace is now relative to the map size, up to -10% Food for cities at max distance (-5% with Granary or Courthouse).
 * Human players receive a negative AI Love, making it harder to keep the peace with every AI. This setting can no longer be adjusted in game from the menu (otherwise the AI was able to change it too).
+* A diplomatic treaty no longer allows trading technologies or giving embassies, and trading maps requires knowledge of Map Making. You have to send diplomat units to foreign cities if you want to establish embassies, steal technologies or steal maps. 
 
 Optional (server options):
-- Trading technologies in the diplomacy dialog is not allowed (otherwise the AI can't handle the following options).
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points.
 - If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool.
+* AI trait distribution is now Even (instead of Fixed): each AI will start with different random values (and a very subtle effect) that determine how much they want to settle new territory, establish trade routes, declare war, or build buildings.
 
 Terrains:
-- Ground units on unroaded Rivers start the turn with -1 movement point (same as on Mountains). Wheeled units on unroaded Jungles and Swamps start the turn with -1 movement point too. Forts and Airstrips on River tiles cannot be upgraded to full fortresses.
-* Forts automatically disappear if there are no units on the same tile at the end of the turn.
+* Forts and Airstrips disappear automatically if there are no units on the same tile at the end of the turn. Forts and Airstrips on river tiles cannot be upgraded to full bases.
 - Deep Ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food.
 - Forest and Jungle can be mined to produce Lumber (+1 production). Forests and Plains can no longer be transformed to Grassland at the beginning, only Grassland to Forest (10 turns), Forest to Plains (10 turns), and Plains to Forest (10 turns).
 - Added some new resources, up to 3 per terrain
 - There are now 6 resources on Grassland, with 3 different effects: Cattle or Corn (+1 food), Wool or Cotton (+1 production), Tea or Tobacco (+2 trade).
 - There are also 4 extra strategic resources that can be used when certain tech is researched by the player (adding +2 production in the tile): Niter (on plains or desert, usable with Gunpowder), Rubber (on jungle, swamp or forest, with Chemistry), Aluminum (on hills or tundra, with Industrialization), Uranium (on mountains or glacier, with Atomic Theory).
-- When 2 cities are linked by a trade route: any special resource present in one city (within the city radius) is considered to be available in the other city too.
-  All available resources slightly reduce the chance of plague, so they can be seen in the city UI. Resources traded from other cities slightly increase the risk of plague.
-- For each resource traded to a city that did not have it, the city receives an extra bonus:
-  - Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in cities linked by trade route.
-  - Food resources (Seals, Oasis, Pheasant, Deer, Cattle, Corn, Fruit, Fish, Whales, Wheat, Buffalo, Sugar, Game): +1 unit free of upkeep in cities linked by trade route.
-  - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in cities linked by trade route.
+- When 2 cities are linked by a trade route: any special resource present in one city (within the city radius) is considered to be traded to the other city (and available in both cities).
+  Resources present in the city slightly reduce the chance of plague, so they can be seen in the city UI. Resources traded from other cities slightly increase the risk of plague.
+- For each resource traded to a city that did not have it, the receiving city gets an extra bonus:
+  - Luxury resources (Incense, Silk, Tea, Tobacco, Wine, Gems, Gold, Shellfish, Spice, Furs): +1 Luxury in the receiving city.
+  - Food resources (Seals, Oasis, Pheasant, Deer, Cattle, Corn, Fruit, Fish, Whales, Wheat, Buffalo, Sugar, Game): +1 unit free of upkeep in the receiving city.
+  - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in the receiving city.
 - Some units get additional veteran levels when certain resources are available in the city:
-  - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
-  - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
+  - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in any city linked by trade route).
+  * Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city, or 10% reduction in building cost if both are available in the city.
 - Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program requires Aluminum.
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
 
@@ -56,17 +56,19 @@ Culture:
 - Governments no longer get immunity against bribe or incite actions. Cities with a Courthouse or a Palace are now immune to incite actions.
 
 Governments:
-- Halved the chance of civil war for every government.
+- Halved the chance of civil war for all governments, with +5% for each city in disorder, and -5% for each celebrating city.
 - The appearance of Partisans in conquered cities requires the owner to have knowledge of Guerrilla Warfare.
-- Added a new government: Fascism (available with Military Tactics, which requires Leadership and Conscription).
+- New government: Fascism (available with Military Tactics, which requires Leadership and Conscription).
 - Empire Size no longer depends on the government chosen. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.
+* The number of content citizens, before the first unhappy one appears, is now 5 for most governments; 4 only for Despotism, Monarchy and Fundamentalism; 6 for Democracy and Federation.
 - Corruption and waste by distance are fixed to +2% per tile for ancient governments, +1% for modern governments, and +0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
-- Tribal (available with Warrior Code) gets 3 units per city free of upkeep; +1 content per city, instead of martial law; and extra vision range for ground units. Federation gets +2 Luxury points per city.
-- Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold).
+- Tribal (available with Warrior Code) gets 3 units per city free of upkeep, and extra vision range for ground units, instead of martial law.
+- Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold). Federation gets +2 Luxury points per city.
 - Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, and regardless if the tile wasn't producing any trade.
+* Fascism gets a +1 Gold bonus on each tile with a mine (including lumber, oil well and oil platform), instead of buildings free of upkeep.
 - Republic is restored to get both "Has senate" and "Revolution when unhappy" effects, the same as Democracy. Federation no longer has a senate.
 - Max tax rates changed to 80% for Federation and 90% for Communism.
-- Under Fascism or Communism, you do not pay upkeep for buildings that cost 1 or 2 coins (was only buildings that cost 1 coin).
+- Under Communism, you do not pay upkeep for buildings that cost 1 or 2 coins (was only buildings that cost 1 coin).
 - Under Fascism or Fundamentalism, citizens of enemy nationality cause extra unhappiness in the city (1 unhappy face for each 2 enemy citizens).
 - Fundamentalism no longer gets any penalty to Science output. Anarchy doesn't get any penalty to Luxury output.
 
@@ -75,65 +77,94 @@ Techs:
 - Feudalism: allows to upgrade a Fortress to a Castle when it is inside your national borders. Castles protect full stacks from dying when one unit is defeated.
 - Medicine: allows non-wheeled ground units to recover 2 HP per turn, on plains or grassland, even without resting. Physics allows the same for wheeled units (on plains or grassland), and for naval units on shallow ocean.
 - Metallurgy: Galleon, Frigate and Ironclad are built veteran at cities with Iron and Niter resources. They are no longer affected by the Lighthouse veteran bonus.
-- Explosives allow new terrain improvements: Naval Mines to increase the defense of shallow oceans and damage adjacent naval units; Canals to connect oceans separated by no more than 2 land tiles.
+- Explosives allow new terrain improvements: Naval Mines to increase the defense of shallow oceans and to reduce the movement of adjacent naval units; Canals to connect oceans separated by no more than 2 land tiles.
 - Labor Union: allows cities to build engineers with one additional veteran level.
 - Computers: Cities are continuously visible despite fog-of-war (once Internet wonder have been built by any player).
 - Genetic Engineering: Reduces the risk of plague in all your cities by -10% (once Cure for Cancer wonder has been built by any player).
 - Fusion Power: reduces -25% the pollution from Nuclear Plants, making them equivalent to Solar Plants. Nuclear Plant production is no longer doubled.
 
 Buildings:
-- Added a new building: Hospital (available with Medicine), which reduces the chance of plague in the city (old effect of Medicine), increases the size limit of the city, and allows damaged land units (non-wheeled) to recover half of their hit points.
-- Aqueduct increases the size limit of the city by 4 (by 8 together with a Hospital). Sewer System increases the size limit by 8 (together with a Hospital the size is unlimited).
-- The effect of Barracks, Port Facility and Airport to recover damaged units has been reduced from 100% to 50%. In cities with both Barracks and Hospital, non-wheeled ground units are completely restored in one turn.
+- New building: Hospital (available with Medicine), which reduces the chance of plague in the city (old effect of Medicine), increases the size limit of the city, and allows damaged ground units (non-wheeled) to recover their hit points faster.
+- The default city size limit is 8. Aqueduct increases the size limit by 4 (by 8 together with a Hospital). Sewer System increases the size limit by 8 (together with a Hospital the size is unlimited).
+- The effect of Barracks, Port Facility and Airport to recover damaged units has been reduced from 100% to 50%.
 - Buildings with a defense bonus are visible to others (middle click on the city).
 - Mass Transit neutralizes all the pollution generated by the population (was 50%).
 - The pollution threshold of each city increased from 20 to 30. Pollution caused by population is increased by Supermarket (instead of Offshore Platforms), Super Highways, Factory and Mfg Plant.
 - Super Highways produce one additional trade point in tiles with roads, but without mines nor farmlands, even if the tile was not producing any trade. It allows any terrain to produce trade (instead of extra food or shields), useful in the case of forests or irrigated land (as an alternative to Supermarkets).
 - Amphitheatre effect reduced from 3 to 2 content citizens (upkeep cost from 4 to 2). Now, a city with all the buildings that make citizens content can neutralize up to 12 unhappy citizens.
 - Research Lab doubles the effect of Library and University in the city (+50% for each one). Library and University are no longer required to build parts of the spaceship.
+  The maximum bonus with all buildings is now +200% Science, +200% Gold, and +100% Production.
 - Doubled the coins needed to buy spaceship parts (same as wonders).
 
+Actions:
+* Homeless units can no longer bribe or capture other units.
+* New actions for Diplomat and Spy: steal map fragments from foreign cities; expel non-military units from your territory if you are at peace with the target; expel unreachable units that are not inside cities or bases.
+* New actions for Caravan and Freight: resupply an adjacent target unit, healing all of its hit points, and being consumed by the action; cancel the current trade routes of a target city you own (effective at the end of the turn). Currently available only with GTK client.
+* Fortifying units receive the same defense bonus as units already fortified. This allows both human and AI players to get the bonus in the same turn. Units require some remaining move fragment, while not being transported, to start fortifying.
+* Units require some remaining move fragment and spend the entire movement to board/embark (load onto transport) inside cities. When units board/embark outside cities, it is the target transport that loses its remaining movement points. This prevents using a chain of transports to load-move-unload a unit multiple times in the same turn.
+* Ground units spend the entire movement to alight/disembark (unload from transport). This forces slow invasions no matter if the terrain is native or not.
+* Units can defend while being transported, but they cannot attack (ground units need to alight/disembark first, losing all movement points until the next turn).
+* Flag Raider: Legion, Musketeers, Riflemen and Marines are the only units that can attack while being transported.
+* Flag BeachLander: Marines can disembark normally, or drop 1 tile onto easy terrain (movement cost 1), without losing movement points.
+* Flag AirBomber: allows a new action to bombard the current tile and destroy all the infrastructure (as pillaging all at once). Currently available only with GTK client.
+  Air bombers no longer attack with a limited number of combat rounds, and they cannot attack Submarines.
+
 Combat:
-- When attacking, it is now possible to choose between different actions (if available for the unit): regular attack, capture, or bombard.
-- Bombard action is only allowed for 1 unit from each tile per turn. It allows to damage all the units on the target tile without the risk of being damaged back. 
-  When a unit performs a bombard from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn.
+- When attacking, it is now possible to choose between different actions, if available for the unit, and if the unit has a remaining move fragment:
+  - Regular attack: costs 1 entire move point, and moves the unit to the target tile (if possible, ZOC rules might prevent it), where both units keep fighting until one dies. The remaining movement points of the winner may end up being less due to the damage received.
+  - Capture units: costs all the remaining move points, and has the same effect as Bribe action, but without paying gold. It only works if all the units in the target tile are capturable and are not carrying any load.
+  - Bombard: costs all the remaining move points, without moving to the target tile, and allows to damage (up to the bombard rate value) all the units of the target tile without risk of receiving damage back.
+- Bombard action is only allowed for 1 unit from each tile per turn. When a unit bombards from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn.
   Until that bombardment marker disappears at the end of the turn, if there is no city nor base on the tile, it gets the same defense bonus as if there was a Fort: +50% against land and sea units. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games).
-- Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate (damage caused) is 1 for each 10 hit points of the unit, and is increased by 1 in the case of air bombers.
-- Flag AirBomber: Air bombers attack with a limited number of combat rounds, equal to their bombard rate, allowing them to first perform a regular attack (with the possibility of killing damaged enemy units, and the risk of being damaged back), and then bombard in the same turn.
+* Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
+  The bombard rate gets scaled down by the damage of the bombarding unit (being always at least 1).
+- Flags Capturer/Capturable: All military infantry units can capture enemy Migrants (as slaves) and Caravans/Freights (as loot). Frigates can capture Galleons and Caravels (as pirates).
 - Flag HPFull: Air units and Submarines can't attack once damaged, except to bombard.
 - Flag AutoAtt: Auto-attack enabled only for air fighters and submarines. These units can attack or bombard an incoming enemy. The auto-attacking units of the player try to bombard if possible, and else attack. The AI usually tries to attack first.
 
 Units:
-- Defense bonus of +25% for units stacked outside of cities, as long as there is another unit on the same tile.
-- Armor gets a +25% defense bonus against other Armor units. This makes armor slightly better than Mech. Infantry against attacks from Armors, and slightly worse against attacks from Howitzers or other units.
+- Defense bonus of +25% for units stacked outside of cities, as long as there is any other unit on the same tile.
+* Wheeled units outside cities and bases receive up to +25% defense bonus from terrain (they don't take full advantage of defensive terrain with rivers, hills or mountains). Armor no longer receives extra defense against other Armor units.
+* Wheeled units on unroaded Jungle, Swamp or River start the turn with -1 movement point (as do all ground units on Mountains). Enemy roads (within the borders of a nation at war with you) don't avoid this penalty.
+* Wheeled units (Big Land class) can be loaded onto any cargo boat, including Galleys (but no Carriers and Submarines). They can attack non-native tiles (mountains, jungles and swamps), and can bombard from shore to sea.
 - Increased the number of veteran levels by one, with the following effects: 100%, 125%, 150%, 175%, and 200%. Engineers up to 150%.
-- Units do not gain veterancy from combat if the enemy is not killed.
-- All military infantry units can build fortresses. All worker units can build airbases. Non-military units cannot pillage.
+* Units do not gain veterancy from combat if the enemy is not killed, or if either side of the fight is completely powerless.
+* All military infantry units can build fortresses. All worker units can build airbases and can pillage. Units cannot pillage foreign tiles unless at war.
 - The work time required to build a base is equal to the movement cost of the terrain.
+* Transport units (which are sea workers) can no longer alter land terrain, but only oceanic.
 - Cavalry units are no longer slowed down when damaged. Crusaders get defense 2 (was 1).
-* Pikemen double its attack (not its defense) against horses.
-- Wheeled units (Big Land class) can bombard non-native tiles (including coastal sea).
+* Pikemen double their attack (not their defense) against horses. Attack of Musketeers halved against horses.
 - Nuclear weapons have to start the turn in a city with an Airport in order to move (until the discovery of Rocketry).
 - Missiles can disembark from their transporter unit, but they need a city or airbase to embark again.
 - All air units can now cause unhappiness when they end the turn outside national borders (Air bombers and Nuclear missiles all the time, even inside national borders).
 - Diplomat/Spy and Stealth aircraft are no longer invisible. Otherwise, detecting them may require some micromanagement.
-- Homeless agents can no longer bribe units. New actions for Diplomat and Spy: expel non-military units out of your territory if you are at peace with the target; expel diplomatic or unreachable units if they are not inside their own national borders or inside bases; steal map fragments from foreign cities.
-- Some adjustments to the HP recover rate of units. See the new table (in README file).
+* HP recover rate of units was simplified, and the effect of buildings was reduced: 10% resting, 35% in cities or full bases, 50% in cities with the appropiate military building. Non-mechanized units recover up to 65% HP in cities with both Barracks and Hospital.
 
 Naval units:
-- Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against Sea units (but not against Submarines).
-- Trireme replaced by Galley, which can no longer navigate rivers, and is made obsolete by Caravels.
-- Frigates can capture Galleons and Caravels (only when the targets are not carrying any load).
-- Cargo boats don't cause unhappiness due to military activity, including Galley, Caravel, Galleon, Transport, Carrier and Submarine.
-- Enabled ZOC for Sea units in Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.
-- Reduced a bit the cost of several naval units.
+- Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against Sea units (not against Submarines).
+* Naval units adjacent to Naval Mines have a defense bonus only when not in enemy waters (within the borders of a nation you are at war with), and have a movement penalty only when not in friendly waters (within the borders of a nation you are not at war with).
+* Naval units lose all their movement points to move to enemy land tiles (via river/canal).
+* New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
+* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans or unsafe coasts (Mountains, Glaciers). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units).
+* Galleys, Sailboats and Transports can navigate rivers, and their unit class was renamed to Riverboat.
+* All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
+- Cargo boats don't cause unhappiness due to military activity, including Galley, Sailboat, Caravel, Galleon, Transport, Carrier and Submarine.
+- Enabled ZOC for naval units on Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.
 - Reduced a bit some vision ranges. Most air and naval units see 2 tiles horizontally/vertically, and 1 tile diagonally (same as Explorers), except AEGIS cruiser and Stealth Fighter/Bomber that can see 2 tiles diagonally too.
-* AEGIS cruiser doubles its defense against air attacks (was x5). Destroyer doubles its defense (but not its attack) against Submarine.
-- New unit class for Submarines, that can not attack other Submarines. Defense reduced to 4, but doubled against air attacks.
+* AEGIS cruiser doubles its defense against air attacks (was x5). Destroyer doubles its defense (but not its attack) against Submarines, so it can approach them without being auto-attacked.
+* New unit class for Submarines, that cannot attack other Submarines. Defense reduced to 4, but doubled against air attacks. Missile cargo reduced to 1, and allowed to bombard land tiles (otherwise AI won't build them).
 
 Wonders:
 - Readjusted effects and obsolescence of many wonders. See the table (in README file).
 - The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or specific resources available in the city ("Manhattan Project" and "Apollo Program").
 - Continental range: "J.S. Bach's Cathedral", "Great Wall" and "Sun Tzu's War Academy" affects only to cities of the same continent.
 - Global range: some minor effects, that may affect every player, added to "Cure For Cancer", "Internet", and "Women's Suffrage".
+* Every wonder produces as much culture per turn as its building cost/100.
+* Internet bonus simplified to +2 Science in your cities with a Research Lab (the result after summing the +200% from all science buildings can be up to +6 bulbs per city).
+* SETI Program, available with Radio, allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
+  This victory is only enabled if the server is set to end the game when the spaceship arrives (enabled by default).
 
+Future plans:
+* This might be the last version of the ruleset. Thanks to the impressive modding capabilities of Freeciv 3.1, I have finally been able to get the game balance that I like.
+* I will try to keep porting and fixing the ruleset for 3.2 and beyond, but if I don't, anyone can easily upgrade the ruleset to a new version thanks to the ruleup tool included in Freeciv releases.
+* The main pending tasks are to improve the helptexts, and to revise the balance of spy actions, air-to-air combat, and auto-attacking units.

@@ -9,7 +9,7 @@ name = "ampliohex_earth"
 priority = 30
 
 ; There`s no separate versioning in tilesets part of main freeciv distribution
-version = "3.0_2024_03"
+version = "3.0_2024_05"
 
 ; Summary and full description of the tileset.
 summary = _("Large isometric tileset based on Amplio.")
@@ -313,7 +313,7 @@ styles =
       "tx.irrigation",   "Cardinals"
       "tx.farmland",     "Cardinals"
       "tx.mine",         "Single1"
-      "tx.oil_mine",     "Single2"
+      "tx.oil_mine",     "Single1"
       "tx.oil_rig",      "Single1"
       "tx.lumber",       "Single1"
       "tx.niter",        "Single1"

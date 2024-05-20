@@ -24,28 +24,6 @@ end
 
 signal.connect("city_destroyed", "city_destroyed_callback")
 
--- Place a marker when a unit bombards from that tile.
-function action_started_unit_units_callback(action, actor, target)
-  if action:rule_name() == "Bombard" then
-    actor.tile:create_extra("Bombardment")
-  end
-  return false
-end
-
-signal.connect("action_started_unit_units", "action_started_unit_units_callback")
-
--- Place a marker when a unit enters marketplace.
-function action_started_unit_city_callback(action, actor, target)
-  if action:rule_name() == "Enter Marketplace" then
-    target.tile:create_extra("Goods")
-    -- Create a copy of the actor unit in the target city (replacing the actor that is destroyed by this action).
-    edit.create_unit(actor.owner, target.tile, actor.utype, 0, actor:get_homecity(), 0)
-  end
-  return false
-end
-
-signal.connect("action_started_unit_city", "action_started_unit_city_callback")
-
 -- Check if there is certain terrain in ANY CAdjacent tile.
 function adjacent_to(tile, terrain_name)
   for adj_tile in tile:circle_iterate(1) do
@@ -456,3 +434,26 @@ function place_extra_resources(turn, year)
 end
 
 signal.connect("turn_begin", "place_extra_resources")
+
+-- Place a Bombardment marker when a unit bombards from this tile.
+function action_started_unit_units_callback(action, actor, target)
+  if action:rule_name() == "Bombard" then
+    actor.tile:create_extra("Bombardment")
+  end
+  return false
+end
+
+signal.connect("action_started_unit_units", "action_started_unit_units_callback")
+
+-- Place a marker that will cancel the trade routes.
+function action_started_unit_city_callback(action, actor, target)
+  if action:rule_name() == "Enter Marketplace" then
+    target.tile:create_extra("Goods")
+    -- Create a copy of the actor unit in the target city (replacing the actor that is destroyed by this action).
+    edit.create_unit(actor.owner, target.tile, actor.utype, 0, actor:get_homecity(), 0)
+  end
+  return false
+end
+
+signal.connect("action_started_unit_city", "action_started_unit_city_callback")
+

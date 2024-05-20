@@ -24,28 +24,6 @@ end
 
 signal.connect("city_destroyed", "city_destroyed_callback")
 
--- Place a marker when a unit bombards from that tile.
-function action_started_unit_units_callback(action, actor, target)
-  if action:rule_name() == "Bombard" then
-    actor.tile:create_extra("Bombardment")
-  end
-  return false
-end
-
-signal.connect("action_started_unit_units", "action_started_unit_units_callback")
-
--- Place a marker when a unit enters marketplace.
-function action_started_unit_city_callback(action, actor, target)
-  if action:rule_name() == "Enter Marketplace" then
-    target.tile:create_extra("Goods")
-    -- Create a copy of the actor unit in the target city (replacing the actor that is destroyed by this action).
-    edit.create_unit(actor.owner, target.tile, actor.utype, 0, actor:get_homecity(), 0)
-  end
-  return false
-end
-
-signal.connect("action_started_unit_city", "action_started_unit_city_callback")
-
 -- Check if there is certain terrain in ANY CAdjacent tile.
 function adjacent_to(tile, terrain_name)
   for adj_tile in tile:circle_iterate(1) do
@@ -456,3 +434,160 @@ function place_extra_resources(turn, year)
 end
 
 signal.connect("turn_begin", "place_extra_resources")
+
+-- Victory for the player with the highest score and culture
+-- if they are more than 4 times the second-highest
+function score_victory(turn, year)
+  local leader = nil
+  local score_1st = 0
+  local score_2nd = 0
+  local culture_1st = 0
+  local culture_2nd = 0
+
+  -- Enabled by custom ruleset effect (SETI Program)
+  if effects.world_bonus("User_Effect_1") > 0 then
+    for player in players_iterate() do
+      local score = player:civilization_score()
+      local culture = player:culture()
+
+      if score > score_1st then
+        score_1st = score
+        -- save the score leader, that might not be the culture leader
+        leader = player
+      elseif score > score_2nd then
+        score_2nd = score
+      end
+      if culture > culture_1st then
+        culture_1st = culture
+      elseif culture > culture_2nd then
+        culture_2nd = culture
+      end
+    end
+
+    if leader ~= nil then
+      log.normal(_("Leading nation: %s, score: %d (%d > %d), culture: %d (%d > %d)"),
+        leader.nation,
+        leader:civilization_score(),
+        score_1st,
+        score_2nd,
+        leader:culture(),
+        culture_1st,
+        culture_2nd)
+      if leader:civilization_score() > 4 * score_2nd
+        and leader:culture() > 4 * culture_2nd then
+        -- if score leader has more culture than culture_2nd, it means it is the culture leader too
+        leader:victory()
+        return true
+      end
+    end
+  end
+  return false
+end
+
+signal.connect("turn_begin", "score_victory")
+
+-- Action Log: Returns a function that describes a tile target
+function tile_desc_func_gen(kind, owner_getter)
+  return function (target)
+    local owner
+    if owner_getter(target) == nil then
+      owner = _("unowned")
+    else
+      owner = owner_getter(target).nation:name_translation()
+    end
+    return _("%s %s (%d, %d)"):format(owner, kind, target.x, target.y)
+  end
+end
+
+-- Action Log: Describe the target based on its kind
+target_describer = {
+  ["City"] = function (target)
+    return _("%s city %s (id: %d)"):format(
+        target.owner.nation:name_translation(), target.name, target.id)
+  end,
+  ["Unit"] = function (target)
+    return _("%s %s (id: %d)"):format(
+      target.owner.nation:name_translation(),
+      target.utype:name_translation(), target.id)
+  end,
+  ["Stack"] = function (target)
+    return _("unit stack at (%d, %d)"):format(target.x, target.y)
+  end,
+  ["Tile"] = tile_desc_func_gen("tile", function (target)
+    return target.owner
+  end),
+  ["Extras"] = tile_desc_func_gen("tile extras", function (target)
+    return target:extra_owner(Nil)
+  end),
+  ["Self"] = function (target) return "it self" end,
+}
+
+-- Action Log: Log all performed actions (enable by adding to signal.connect)
+function action_started_callback(action, actor, target)
+  log.normal(_("%d: %s (rule name: %s) performed by %s %s (id: %d) on %s"),
+             game.current_turn(),
+             action:name_translation(),
+             action:rule_name(),
+             actor.owner.nation:name_translation(),
+             actor.utype:name_translation(),
+             actor.id,
+             target_describer[action:target_kind()](target))
+end
+
+-- Custom effects of performed actions
+function action_finished_callback(action, success, actor, target)
+  if action:rule_name() == "Bombard" then
+  -- (unit_units) Place a Bombardment marker when a unit bombards from this tile.
+    actor.tile:create_extra("Bombardment")
+  elseif action:rule_name() == "Heal Unit" then
+  -- (unit_unit) Kill the healer unit.
+    if success then
+      -- FIXME: this kill crashes when healer is being transported
+      actor:kill("used",Nil)
+    end
+  elseif action:rule_name() == "User Action 1" then
+  -- (unit_city) Place a marker that will cancel the trade routes.
+    target.tile:create_extra("Goods")
+  elseif action:rule_name() == "User Action 2" then
+  -- (unit_tile) Place a Bombardment marker using a custom action.
+  -- (Pillage action does not seem to send any signal)
+    target:create_extra("Bombardment")
+    if actor.utype:has_flag("AirBomber") then
+      -- Remove all extras from the tile at once
+      -- Extras are removed before the extras listed as their requirements, just in case
+      target:remove_extra("Farmland")
+      target:remove_extra("Irrigation")
+      target:remove_extra("Oil Well")
+      target:remove_extra("Mine")
+      target:remove_extra("Lumber")
+      target:remove_extra("Castle")
+      target:remove_extra("Fortress")
+      target:remove_extra("Fort")
+      target:remove_extra("Airbase")
+      target:remove_extra("Airstrip")
+      target:remove_extra("Maglev")
+      target:remove_extra("Railroad")
+      target:remove_extra("Road")
+      target:remove_extra("Canal")
+      target:remove_extra("Buoy")
+      target:remove_extra("Naval Mine")
+      target:remove_extra("Oil Platform")
+    end
+  end
+  return false
+end
+
+--signal.connect("action_started_unit_city", "action_started_callback")
+--signal.connect("action_started_unit_unit", "action_started_callback")
+--signal.connect("action_started_unit_units", "action_started_callback")
+--signal.connect("action_started_unit_tile", "action_started_callback")
+--signal.connect("action_started_unit_extras", "action_started_callback")
+--signal.connect("action_started_unit_self", "action_started_callback")
+
+signal.connect("action_finished_unit_city", "action_finished_callback")
+signal.connect("action_finished_unit_unit", "action_finished_callback")
+signal.connect("action_finished_unit_units", "action_finished_callback")
+signal.connect("action_finished_unit_tile", "action_finished_callback")
+--signal.connect("action_finished_unit_extras", "action_finished_callback")
+--signal.connect("action_finished_unit_self", "action_finished_callback")
+

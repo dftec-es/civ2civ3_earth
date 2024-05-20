@@ -36,8 +36,8 @@ Iron or Oil: One less veteran level when produced in cities without Iron nor Oil
     _("Niter"), _("\
 Niter: One less veteran level when produced in cities without Niter.\
 ")
-    _("Horses"), _("\
-Horses: One more veteran level when produced in cities with Horses.\
+    _("Horse"), _("\
+Horse: One more veteran level when produced in cities with Horses.\
 ")
     _("Ivory"), _("\
 Ivory: One more veteran level when produced in cities with Ivory. \
@@ -52,49 +52,48 @@ Aluminum: One more veteran level when produced in cities with Aluminum.\
 Uranium: One more veteran level when produced in cities with Uranium.\
 ")
     _("Cant_Pillage")
+    _("CanWork")
     _("Fortress"), _("Can build Forts and Fortresses.")
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
-    _("Submarine"), _("\
-Attack value halved against Destroyer. \
-Ignores the bonus to defense of sea units on Deep Ocean tiles.\
+    _("Submarine"), _("\Attack value halved when attacking Destroyer.")
+    _("Wheeled"), _("\
+Cannot move to rough terrain (mountains, jungles and swamps) unless \
+there is a road or base on the tile. If they start the turn on rough \
+terrain or rivers without friendly roads, they have -1 movement point.\
 ")
     _("Tank")
     _("Unbribable")
-    _("TradeRoute"), _("Can establish trade routes (must travel to target city).")
+    _("TradeRoute")
     _("HelpWonder")
-    _("Capturer"),   _("Can capture some enemy units.")
+    _("Capturer")
     _("Capturable"), _("Can be captured by some enemy units.")
     _("Bombarder"), _("\
-Can bombard, only if no other unit bombarded from the same tile this turn.\
+Can bombard only if no other unit bombarded from the same tile this turn. \
+The bombard rate gets scaled down by the damage of the bombarding unit.\
 ")
     _("Cities")
     _("AddToCity")
     _("Nuclear")
     _("Paratroopers"), _("Can be paradropped from a friendly city or suitable base.")
-    _("Marines"), _("Can launch attack from non-native tiles.")
+    _("Raider"), _("Can launch attack while being transported.")
     _("BeachLander"), _("\
-Won't lose all movement when moving from non-native terrain to native terrain.\
+Won't lose movement when disembarking, and can be dropped 1 tile into native terrain whose movement cost is 1.\
 ")
     _("Cant_Fortify")
     _("OneAttack")
-    _("NoAutoAtt")
-    _("Only_Land"), _("\
-Cannot attack oceanic tiles, mountains, swamps, or jungles, unless there \
-is a road or base on the tile. Bombardment is not restricted.\
+    _("AutoAtt"), _("Can auto attack units moving to an adjacent tile.")
+    _("AirBomber"), _("Can bombard a tile to destroy all its infrastructure.")
+    _("HPFullSea"), _("\
+Cannot attack land tiles, and cannot attack once damaged, except to bombard.\
 ")
-    _("Only_Sea"), _("\
-Can only attack sea tiles or cities. Bombardment is not restricted.\
-")
-    _("AirBomber"), _("Combat rounds equal to bombard rate.")
     _("HPFull"), _("Cannot attack once damaged, except to bombard.")
-; HPFull is cancelled by Only_Land or Only_Sea, and it cancels AttFromNonNative and Marines
-; Units with HPFull require one of the following HP flags to know when are they undamaged
-    _("HP10")
+; HPFull and HPFullSea are cancelled by Wheeled flag, and they ignore Raider flag
+; Units with HPFull or HPFullSea, with more than 10 HP, require one of the following HP flags to know when they are undamaged
     _("HP20")
     _("HP30")
   }
-; Flags "Only_Sea" and "HP10" are not being used currently by any unit and cause warnings from unused action enablers
+; Flag "" is not being used currently by any unit and may cause warnings from unused action enablers
 ; Used 36 out of 40 unit type flags
 
 ; Names for custom unit class flags. There can be up to 12 of these.
@@ -106,15 +105,17 @@ Can only attack sea tiles or cities. Bombardment is not restricted.\
 class_flags =
   { "name", "helptxt"
     _("Airliftable"), _("Can be airlifted from a suitable city.")
-    _("AttFromNonNative"), _("Can launch attack from non-native tiles.")
     _("Missile")
     _("CanPillage")
     _("CanFortify"),
     ; /* xgettext:no-c-format */
-                     _("Gets a 50% defensive bonus while in cities.")
-    _("Ground"), _("Ground units.")
-    _("Aerial"), _("Aerial units.")
-    _("Naval"), _("Naval units.")
+                     _("\
+Gets a 50% defensive bonus while in cities, while fortifying, or \
+while already fortified.\
+")
+    _("Ground")
+    _("Aerial")
+    _("Naval")
   }
 
 [veteran_system]
@@ -209,7 +210,7 @@ flags         = "Missile", "Unreachable", "DoesntOccupyTile", "Airliftable",
 name          = _("?unitclass:Land")
 min_speed     = 1
 hp_loss_pct   = 0
-flags         = "TerrainSpeed", "CanOccupyCity", "BuildAnywhere",
+flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
                 "CollectRansom", "ZOC", "CanFortify", "CanPillage",
                 "TerrainDefense", "Airliftable", "Ground"
 
@@ -218,8 +219,8 @@ flags         = "TerrainSpeed", "CanOccupyCity", "BuildAnywhere",
 name          = _("?unitclass:Small Land")
 min_speed     = 1
 hp_loss_pct   = 0
-flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom",
-                "ZOC", "CanFortify", "TerrainDefense", "DoesntOccupyTile",
+flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom", "ZOC",
+                "CanFortify", "CanPillage", "TerrainDefense", "DoesntOccupyTile",
                 "Airliftable", "Ground"
 
 [unitclass_land_big]
@@ -227,45 +228,46 @@ flags         = "TerrainSpeed", "BuildAnywhere", "CollectRansom",
 name          = _("?unitclass:Big Land")
 min_speed     = 1
 hp_loss_pct   = 0
-flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity", "BuildAnywhere",
-                "CollectRansom", "ZOC", "CanFortify", "KillCitizen", "Airliftable",
-                "AttackNonNative", "Ground"
+flags         = "TerrainSpeed", "DamageSlows", "CanOccupyCity",
+                "BuildAnywhere", "CollectRansom", "ZOC", "CanFortify", "CanPillage",
+                "KillCitizen", "Airliftable", "AttackNonNative", "Ground"
 
-[unitclass_merchant]
+[unitclass_land_fast]
 ; /* TRANS: Unit class: used adjectivally */
-name          = _("?unitclass:Merchant")
+name          = _("?unitclass:Fast Land")
 min_speed     = 1
 hp_loss_pct   = 0
-flags         = "TerrainSpeed", "DamageSlows", "BuildAnywhere", "ZOC",
-                "TerrainDefense", "DoesntOccupyTile", "Airliftable", "Ground"
+flags         = "TerrainSpeed", "CanOccupyCity", "BuildAnywhere",
+                "CollectRansom", "ZOC", "CanFortify", "CanPillage",
+                "TerrainDefense", "Airliftable", "Ground"
 
 [unitclass_sea]
 ; /* TRANS: Unit class: used adjectivally */
 name          = _("?unitclass:Sea")
 min_speed     = 2
 hp_loss_pct   = 0
-flags         = "ZOC", "DamageSlows", "AttackNonNative", "AttFromNonNative", "Naval"
+flags         = "ZOC", "DamageSlows", "AttackNonNative", "Naval"
 
 [unitclass_trireme]
 ; /* TRANS: Unit class: used adjectivally */
-name          = _("?unitclass:Galley")
+name          = _("?unitclass:Riverboat")
 rule_name     = "Trireme"
 min_speed     = 2
 hp_loss_pct   = 0
-flags         = "ZOC", "DamageSlows", "AttFromNonNative", "Naval"
+flags         = "ZOC", "DamageSlows", "Naval"
 
 [unitclass_sub]
 ; /* TRANS: Unit class: used adjectivally */
 name          = _("?unitclass:Sub")
 min_speed     = 2
 hp_loss_pct   = 0
-flags         = "Unreachable", "ZOC", "DamageSlows", "DoesntOccupyTile", "Naval"
+flags         = "Unreachable", "ZOC", "DamageSlows", "AttackNonNative", "DoesntOccupyTile", "Naval"
 
 [unitclass_heli]
 ; /* TRANS: Unit class: used adjectivally */
 name          = _("?unitclass:Helicopter")
 min_speed     = 1
-hp_loss_pct   = 10
+hp_loss_pct   = 0
 flags         = "Unreachable", "DoesntOccupyTile", "CanOccupyCity",
                 "CollectRansom", "Airliftable", "Aerial"
 
@@ -273,7 +275,7 @@ flags         = "Unreachable", "DoesntOccupyTile", "CanOccupyCity",
 ; /* TRANS: Unit class: used adjectivally */
 name          = _("?unitclass:Air")
 min_speed     = 1
-hp_loss_pct   = 10
+hp_loss_pct   = 0
 flags         = "Unreachable", "DoesntOccupyTile", "CanPillage",
                 "Airliftable", "HutFrighten", "Aerial"
 
@@ -559,8 +561,8 @@ uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
 tp_defense    = "Alight"
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity",
-                "Cities", "Fortress", "NoAutoAtt"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
+                "HasNoZOC", "AddToCity", "Cities"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -604,8 +606,8 @@ uk_shield     = 0
 uk_food       = 1
 uk_gold       = 0
 tp_defense    = "Alight"
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity",
-                "Capturable", "Fortress", "NoAutoAtt"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
+                "HasNoZOC", "AddToCity", "Capturable"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -650,8 +652,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC",
-                "Fortress", "NoAutoAtt"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil", "HasNoZOC"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -694,10 +695,10 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Transform",
-                "Fortress", "NoAutoAtt"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
+                "HasNoZOC", "Transform"
 veteran_names = _("beginner"), _("seasoned"), _("senior")
-veteran_base_raise_chance      = 50, 33, 0
+veteran_base_raise_chance = 50, 33, 0
 veteran_work_raise_chance = 2, 1, 0
 veteran_power_fact        = 100, 125, 150
 veteran_move_bonus        = 0, 0, 0
@@ -742,7 +743,9 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
+flags         = "OneAttack", "Capturer", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game. It is the weakest \
@@ -775,14 +778,16 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "OneAttack", "Capturer", "Fortress", "NoAutoAtt"
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
+flags         = "OneAttack", "Capturer", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-Remember that every unit receives a +25% defensive bonus when it is \
+Remember that every unit receives a +25% defense bonus when it is \
 stacked outside of cities, as long as there is another unit on the \
 same tile.\
 ")
@@ -814,7 +819,9 @@ uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
 bombard_rate  = 1
-flags         = "OneAttack", "Capturer", "Bombarder", "Fortress", "NoAutoAtt"
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
+flags         = "OneAttack", "Capturer", "Bombarder", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -822,10 +829,9 @@ Archers fight with bows and arrows and have a good offensive value.\
 Archers and catapults are the only ancient units with the ability to \
 bombard.\
 "), _("\
-Bombard action can only damage (not kill) the target, but it has a \
-chance to damage every unit in a stack or city, with no chance for \
-the attacker to be damaged or killed. This action is only allowed \
-for 1 unit from each tile per turn.\n\
+Bombard actions will only damage (never kill) defenders, but damage \
+all defenders on a tile, and have no risk for the attacker.\
+"), _("\
 When a unit bombards from a tile, a marker appears on that tile and \
 prevents other units to bombard from the same tile until the next turn. \
 Until that bombardment marker disappears at the end of the turn, if \
@@ -861,8 +867,10 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "OneAttack", "Marines", "Capturer",
-                "Iron", "Fortress", "NoAutoAtt"
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
+flags         = "OneAttack", "Raider", "Capturer",
+                "Iron", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry units with \
@@ -898,15 +906,19 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
 bonuses       =
    { "flag", "type", "value"
-     "Horses", "DefenseDivider", 1
+     "Horse", "DefenseDividerPct", 100
    }
-flags         = "OneAttack", "Capturer", "Iron", "Fortress", "NoAutoAtt"
+flags         = "OneAttack", "Capturer", "Iron", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx as the preferred \
 city defender.\
+"), _("\
+Attack value doubled when attacking horses.\
 ")
 
 [unit_musketeers]
@@ -936,20 +948,27 @@ uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
-flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
-                "Niter", "Fortress", "NoAutoAtt"
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
+bonuses       =
+   { "flag", "type", "value"
+     "Horse", "DefenseDividerPct", -50
+   }
+flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
+                "Niter", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
-                "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
+                "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
 Musketeers are infantry equipped with early firearms and replace \
 Pikemen as the preferred city defender.\
 "), _("\
+Attack value halved when attacking horses.\
+"), _("\
 From now on, every unit will have the ability to bombard.\
 "), _("\
-Bombard action can only damage (not kill) the target, but it has a \
-chance to damage every unit in a stack or city, with no chance for \
-the attacker to be damaged or killed. This action is only allowed \
-for 1 unit from each tile per turn.\n\
+Bombard actions will only damage (never kill) defenders, but damage \
+all defenders on a tile, and have no risk for the attacker.\
+"), _("\
 When a unit bombards from a tile, a marker appears on that tile and \
 prevents other units to bombard from the same tile until the next turn. \
 Until that bombardment marker disappears at the end of the turn, if \
@@ -988,8 +1007,8 @@ tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
-                "Niter", "Fortress", "NoAutoAtt"
+flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
+                "Niter", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good at defending your \
@@ -1026,7 +1045,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "Capturer", "Bombarder",
-                "Niter", "Fortress", "NoAutoAtt"
+                "Niter", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Alpine Troops are highly mobile units as well as excellent defenders.\
@@ -1058,13 +1077,14 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer", "Bombarder",
-                "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit"
+flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer",
+                "Bombarder", "Fortress"
+roles         = "DefendOk"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
@@ -1104,7 +1124,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
-                "Fortress", "NoAutoAtt"
+                "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts at using the terrain \
@@ -1117,6 +1137,47 @@ surrounding countryside -- but only under these conditions:\n\
  - At least three quarters of the citizens must have your nationality.\n\
  - You must run either a Democracy or a Communist government.\
 ")
+
+[unit_marines]
+name          = _("Marines")
+class         = "Land"
+tech_req      = "Amphibious Warfare"
+obsolete_by   = "None"
+graphic       = "u.marines"
+graphic_alt   = "-"
+sound_move    = "m_marines"
+sound_move_alt = "m_generic"
+sound_fight   = "f_marines"
+sound_fight_alt = "f_generic"
+build_cost    = 60
+pop_cost      = 0
+attack        = 8
+defense       = 5
+hitpoints     = 20
+firepower     = 1
+move_rate     = 1
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 1
+uk_shield     = 1
+uk_food       = 1
+uk_gold       = 1
+tp_defense    = "Alight"
+bombard_rate  = 2
+embarks       = "Helicopter"
+disembarks    = "Helicopter"
+flags         = "OneAttack", "Raider", "BeachLander", "Capturer",
+                "Bombarder", "Rubber", "Fortress"
+roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
+helptext      = _("\
+Marines are infantry who are experts at marine warfare.\
+"), _("\
+Marines that have not expended any movement points may drop from any \
+transport to an adjacent tile whose movement cost is 1, and be immediately \
+ready to act there.\
+")
+paratroopers_range = 1
 
 [unit_paratroopers]
 name          = _("Paratroopers")
@@ -1148,8 +1209,8 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
-                "Rubber", "Fortress", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit"
+                "Rubber", "Fortress"
+roles         = "DefendOk"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
 airbase, or airstrip, Paratroopers who have not expended any \
@@ -1159,42 +1220,6 @@ as Paratroopers landing on a tile occupied by enemy units are easy \
 targets!)\
 ")
 paratroopers_range = 10
-
-[unit_marines]
-name          = _("Marines")
-class         = "Land"
-tech_req      = "Amphibious Warfare"
-obsolete_by   = "None"
-graphic       = "u.marines"
-graphic_alt   = "-"
-sound_move    = "m_marines"
-sound_move_alt = "m_generic"
-sound_fight   = "f_marines"
-sound_fight_alt = "f_generic"
-build_cost    = 60
-pop_cost      = 0
-attack        = 8
-defense       = 5
-hitpoints     = 20
-firepower     = 1
-move_rate     = 1
-vision_radius_sq = 2
-transport_cap = 0
-fuel          = 0
-uk_happy      = 1
-uk_shield     = 1
-uk_food       = 1
-uk_gold       = 1
-tp_defense    = "Alight"
-bombard_rate  = 2
-embarks       = "Helicopter"
-disembarks    = "Helicopter"
-flags         = "OneAttack", "Marines", "Capturer", "Bombarder",
-                "Rubber", "Fortress", "NoAutoAtt"
-roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
-helptext      = _("\
-Marines are infantry who are experts at marine warfare.\
-")
 
 [unit_mech_inf]
 name          = _("Mech. Inf.")
@@ -1223,23 +1248,23 @@ uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
-flags         = "Bombarder", "Only_Land", "Iron_Oil", "Rubber", "NoAutoAtt"
+flags         = "Bombarder", "Wheeled", "Iron_Oil", "Rubber"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
 of any land unit.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 ")
 
 [unit_horsemen]
 name          = _("Horsemen")
-class         = "Land"
+class         = "Fast Land"
 tech_req      = "Horseback Riding"
 obsolete_by   = "Knights"
 graphic       = "u.horsemen"
@@ -1263,14 +1288,14 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Horses", "NoAutoAtt"
+flags         = "Capturer", "Horse"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
 Horsemen are mounted warriors and an early shock-troop that can \
 penetrate deep into enemy territory.\
 "), _("\
 As with other military land units: they can capture enemy units, but \
-only when all the units on the target tile are captureable (Caravan, \
+only when all the units on the target tile are capturable (Caravan, \
 Freight or Migrants).\
 ")
 
@@ -1300,23 +1325,23 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Only_Land", "Capturer", "Horses", "NoAutoAtt"
+flags         = "Wheeled", "Horse"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
 Chariots are horse-pulled war wagons, stronger but more expensive \
 than horsemen.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 ")
 
 [unit_elephants]
 name          = _("Elephants")
-class         = "Land"
+class         = "Fast Land"
 tech_req      = "Polytheism"
 obsolete_by   = "Dragoons"
 graphic       = "u.elephants"
@@ -1340,8 +1365,8 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Ivory", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
+flags         = "Capturer", "Ivory"
+roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Elephants are towering animals trained for war that are often used as \
 powerful shock troops.\
@@ -1349,7 +1374,7 @@ powerful shock troops.\
 
 [unit_crusaders]
 name          = _("Crusaders")
-class         = "Land"
+class         = "Fast Land"
 tech_req      = "Monotheism"
 obsolete_by   = "Dragoons"
 graphic       = "u.crusaders"
@@ -1373,8 +1398,8 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Iron", "Horses", "NoAutoAtt"
-roles         = "AttackFastStartUnit", "Hunter"
+flags         = "Capturer", "Iron", "Horse"
+roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Crusaders are highly disciplined mounted warriors driven by a higher \
 cause.\
@@ -1384,7 +1409,7 @@ This unit does not cause unhappiness due to military activity.\
 
 [unit_knights]
 name          = _("Knights")
-class         = "Land"
+class         = "Fast Land"
 tech_req      = "Chivalry"
 obsolete_by   = "Dragoons"
 graphic       = "u.knights"
@@ -1408,16 +1433,16 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Iron", "Horses", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit",
-                "HutTech", "BarbarianTech", "BarbarianBuildTech", "Hunter"
+flags         = "Capturer", "Iron", "Horse"
+roles         = "DefendOk", "AttackFastStartUnit", "HutTech", "BarbarianTech",
+                "BarbarianBuildTech", "Hunter"
 helptext      = _("\
 Knights are mounted and heavily armored warriors.\
 ")
 
 [unit_dragoons]
 name          = _("Dragoons")
-class         = "Land"
+class         = "Fast Land"
 tech_req      = "Leadership"
 obsolete_by   = "Cavalry"
 graphic       = "u.dragoons"
@@ -1442,15 +1467,15 @@ uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
-flags         = "Capturer", "Bombarder", "Horses", "Niter", "NoAutoAtt"
-roles         = "AttackFastStartUnit", "BarbarianBuildTech", "Hunter"
+flags         = "Capturer", "Bombarder", "Horse", "Niter"
+roles         = "DefendOk", "AttackFastStartUnit", "BarbarianTech", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
 Dragoons are mounted warriors carrying early firearms.\
 ")
 
 [unit_cavalry]
 name          = _("Cavalry")
-class         = "Land"
+class         = "Fast Land"
 tech_req      = "Tactics"
 obsolete_by   = "Armor"
 graphic       = "u.cavalry"
@@ -1475,8 +1500,8 @@ uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
-flags         = "Capturer", "Bombarder", "Horses", "Niter", "NoAutoAtt"
-roles         = "AttackFastStartUnit", "Hunter"
+flags         = "Capturer", "Bombarder", "Horse", "Niter"
+roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Cavalry are mounted and highly trained soldiers.\
 ")
@@ -1509,29 +1534,23 @@ uk_gold       = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 bonuses       =
+; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Tank", "DefenseMultiplier", 4, TRUE
+     "Tank", "DefenseMultiplier", 3, TRUE
      "Tank", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Only_Land", "Tank",
-                "Iron_Oil", "Uranium", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
+flags         = "Bombarder", "Wheeled", "Tank", "Iron_Oil", "Uranium"
+roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
 more damage than any mounted unit.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-This unit gets a +25% defense bonus against other Armor units. This \
-makes Armor slightly better than Mech. Infantry against attacks from \
-Armors, and slightly worse against attacks from Howitzers or other units.\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 ")
 
 [unit_catapult]
@@ -1560,28 +1579,27 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 1
-flags         = "Bombarder", "Only_Land", "NoAutoAtt"
+bombard_rate  = 2
+flags         = "Bombarder", "Wheeled"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Catapults are large rock-throwing machines of war. They are very \
 strong attackers but equally weak defenders and will need an escort \
 to be effective.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 "), _("\
 Catapults and archers are the only ancient units with the ability to \
 bombard.\
 "), _("\
-Bombard action can only damage (not kill) the target, but it has a \
-chance to damage every unit in a stack or city, with no chance for \
-the attacker to be damaged or killed. This action is only allowed \
-for 1 unit from each tile per turn.\n\
+Bombard actions will only damage (never kill) defenders, but damage \
+all defenders on a tile, and have no risk for the attacker.\
+"), _("\
 When a unit bombards from a tile, a marker appears on that tile and \
 prevents other units to bombard from the same tile until the next turn. \
 Until that bombardment marker disappears at the end of the turn, if \
@@ -1617,21 +1635,21 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 2
-flags         = "Bombarder", "Only_Land", "Iron", "Niter", "NoAutoAtt"
-roles         = "AttackStrongStartUnit", "BarbarianTech", "BarbarianBuildTech"
+bombard_rate  = 3
+flags         = "Bombarder", "Wheeled", "Iron", "Niter"
+roles         = "AttackStrongStartUnit", "BarbarianBuildTech"
 helptext      = _("\
 Cannons are large firearms that can fire heavy projectiles over long \
 distances. As with the catapults they replace, they are very strong \
 attackers but equally weak defenders and will need an escort to be \
 effective, and have limited mobility.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 ")
 
 [unit_artillery]
@@ -1660,21 +1678,21 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 2
-flags         = "CityBuster", "Bombarder", "Only_Land",
-                "Iron", "NoAutoAtt"
+bombard_rate  = 3
+flags         = "CityBuster", "Bombarder", "Wheeled",
+                "Iron"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 The artillery is an upgraded cannon. As with its predecessors, it is a \
 very strong attacker but equally weak defender and will need an escort \
 to be effective, and has limited mobility.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 "), _("\
 This unit gets double firepower when attacking cities.\
 ")
@@ -1705,21 +1723,21 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 3
-flags         = "CityBuster", "Bombarder", "Only_Land",
-                "Iron_Oil", "Rubber", "NoAutoAtt"
+bombard_rate  = 4
+flags         = "CityBuster", "Bombarder", "Wheeled",
+                "Iron_Oil", "Rubber"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Howitzers are upgraded artillery with improved defensive as well as \
 offensive capabilities. However, they still have the limited mobility \
 of their predecessors.\
-"), _("\
-As with other wheeled units: they cannot take advantage of terrain to \
-defend themselves; they cannot move or attack (bombardment is not \
-restricted) to mountains, jungles and swamps, unless there is a road \
-or base; they cannot be transported by sea using early ships (Galleys \
-and Caravels); and they can cause loss of population when attacking a \
-city without City Walls.\
+"),
+; /* xgettext:no-c-format */
+_("\
+As with other units in this class: they only get defense bonuses from \
+terrain outside cities and bases, and up to a maximum of +25%; they \
+can bombard from coastal land to sea; and they can cause loss of \
+population when attacking a city without City Walls.\
 "), _("\
 This unit gets double firepower when attacking cities.\
 ")
@@ -1750,10 +1768,10 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 2
+bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
-                "Iron_Oil", "Aluminum"
+                "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fighters are your first airborne units. They can move anywhere and \
@@ -1794,19 +1812,15 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 4
-targets       = "Sub"
+bombard_rate  = 5
+;targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
-                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum", "NoAutoAtt"
+                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
+                "NeverProtects"
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may only attack ground \
 targets, not other airborne units.\
-"), _("\
-As with other air bombers: they attack with a limited number of combat \
-rounds, equal to their bombard rate, but they cannot attack once damaged. \
-If they are not damaged, they can first perform a regular attack, and \
-then they can bombard in the same turn.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -1840,21 +1854,14 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 3
+bombard_rate  = 4
 cargo         = "Land"
-targets       = "Sub"
-flags         = "AirAttacker", "Bombarder", "AirBomber", "HPFull", "HP30",
-                "HasNoZOC", "Iron_Oil", "Rubber", "NoAutoAtt"
+targets       = "Sub", "Helicopter"
+flags         = "AirAttacker", "Bombarder", "HPFull", "HP30",
+                "HasNoZOC", "Iron_Oil", "Rubber", "NeverProtects"
 roles         = ""
 helptext      = _("\
-Helicopters can transport one military land unit; while some troops \
-must load or unload in a city, airstrip, or airbase (and not in the field \
-or onboard a Carrier), infantry units can embark or disembark at any time.\
-"), _("\
-As with other air bombers: they attack with a limited number of combat \
-rounds, equal to their bombard rate, but they cannot attack once damaged. \
-If they are not damaged, they can first perform a regular attack, and \
-then they can bombard in the same turn.\
+Helicopters can transport one military infantry unit.\
 "), _("\
 Unlike other aircraft, Helicopters are not required to return to a city, \
 base, or Carrier to refuel after a set number of turns; however, care \
@@ -1887,10 +1894,10 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 2
+bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
-                "Iron_Oil", "Aluminum"
+                "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement radius.\
@@ -1930,61 +1937,20 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 4
-targets       = "Sub"
+bombard_rate  = 5
+;targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
-                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum", "NoAutoAtt"
+                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
+                "NeverProtects"
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement radius.\
-"), _("\
-As with other air bombers: they attack with a limited number of combat \
-rounds, equal to their bombard rate, but they cannot attack once damaged. \
-If they are not damaged, they can first perform a regular attack, and \
-then they can bombard in the same turn.\
 "),
 ; /* xgettext:no-c-format */
 _("\
 As with other aircraft: they lose 10% of their hit points for every \
 turn not spent in a city, airstrip, or airbase, or on a Carrier.\
 ")
-
-[unit_galley]
-name          = _("Ancient Galley")
-rule_name     = "Galley"
-class         = "Trireme"
-tech_req      = "None"
-obsolete_by   = "Caravel"
-graphic       = "u.trireme"
-graphic_alt   = "-"
-sound_move    = "m_trireme"
-sound_move_alt = "m_generic"
-sound_fight   = "f_trireme"
-sound_fight_alt = "f_generic"
-build_cost    = 20
-pop_cost      = 0
-attack        = 1
-defense       = 1
-hitpoints     = 10
-firepower     = 1
-move_rate     = 3
-vision_radius_sq = 2
-transport_cap = 2
-fuel          = 0
-uk_happy      = 0
-uk_shield     = 1
-uk_food       = 1
-uk_gold       = 1
-tp_defense    = "Alight"
-cargo         = "Land", "Small Land", "Merchant"
-flags         = "NoBuild", "BadCityDefender", "HasNoZOC", "NoAutoAtt"
-roles         = "Ferryboat", "FerryStartUnit"
-helptext      = _("\
-The Galley is your first boat unit. It can act as a transport ship \
-and has rudimentary offensive capabilities. It may not enter deep \
-ocean tiles.\
-")
-; Trireme renamed to Galley. Ancient galley kept for partial savegame compatibility.
 
 [unit_trireme]
 name          = _("Galley")
@@ -2013,13 +1979,63 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-cargo         = "Land", "Small Land", "Merchant"
-flags         = "BadCityDefender", "HasNoZOC", "NoAutoAtt"
+bombard_rate  = 1
+cargo         = "Land", "Small Land", "Big Land", "Fast Land"
+flags         = "CoastStrict", "BadCityDefender", "HasNoZOC", "Bombarder"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
-The Galley is your first boat unit. It can act as a transport ship \
-and has rudimentary offensive capabilities. It may not enter deep \
-ocean tiles.\
+The Galley is your first boat unit. It can act as a transport ship, \
+can travel on rivers, and has rudimentary offensive capabilities.\
+"), _("\
+Galleys can enter 1 tile into deep ocean, but cannot enter a deep ocean \
+tile completely surrounded by deep oceans or unsafe coasts (mountains, \
+glaciers). They lose 1 hit point every turn ended on deep ocean.\
+"), _("\
+Units need some remaining move fragment and spend the entire movement \
+to embark inside cities. When units embark outside cities, it is the \
+target transport that loses its remaining movement points.\
+"), _("\
+Units cannot attack while being transported, unless they are Raiders \
+(Legion, Musketeers, Riflemen or Marines). Ground units spend the \
+entire movement to disembark, unless they are Marines.\
+")
+
+[unit_sailboat]
+name          = _("Sailboat")
+class         = "Trireme"
+tech_req      = "Astronomy"
+obsolete_by   = "Transport"
+graphic       = "u.sailboat"
+graphic_alt   = "u.trireme"
+sound_move    = "m_trireme"
+sound_move_alt = "m_generic"
+sound_fight   = "f_trireme"
+sound_fight_alt = "f_generic"
+build_cost    = 20
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 3
+vision_radius_sq = 2
+transport_cap = 3
+fuel          = 2
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 1
+uk_gold       = 1
+tp_defense    = "Alight"
+cargo         = "Land", "Small Land", "Big Land", "Fast Land"
+flags         = "Coast", "BadCityDefender", "HasNoZOC", "NonMil"
+roles         = "Ferryboat", "FerryStartUnit"
+helptext      = _("\
+Sailboats cannot attack other ships, though they may still defend \
+themself when attacked.\
+"), _("\
+They can travel on rivers and can enter deep oceans, but cannot end \
+far from safe coasts (on deep ocean completely surrounded by deep \
+oceans or unsafe coasts) more than 1 consecutive turn.\
 ")
 
 [unit_caravel]
@@ -2048,12 +2064,13 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-cargo         = "Land", "Small Land", "Merchant"
+bombard_rate  = 2
+cargo         = "Land", "Small Land", "Big Land", "Fast Land"
 flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC",
-                "Capturable", "NoAutoAtt"
+                "Capturable", "Bombarder"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
-The Caravel is a sailing ship that can enter any ocean tile.\
+The Caravel is a transport ship that can enter any ocean tile.\
 "), _("\
 This unit can be captured by an enemy Frigate.\
 ")
@@ -2071,7 +2088,7 @@ sound_fight   = "f_galleon"
 sound_fight_alt = "f_generic"
 build_cost    = 40
 pop_cost      = 0
-attack        = 0
+attack        = 2
 defense       = 2
 hitpoints     = 20
 firepower     = 1
@@ -2084,14 +2101,13 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-cargo         = "Land", "Small Land", "Big Land", "Merchant"
-flags         = "BadCityDefender", "HasNoZOC", "NonMil", "Capturable",
-                "Iron", "Niter", "NoAutoAtt"
+bombard_rate  = 3
+cargo         = "Land", "Small Land", "Big Land", "Fast Land"
+flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC",
+                "Capturable", "Bombarder", "Iron", "Niter"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
-The Galleon is a pure transport ship, the first which can transport \
-large wheeled units. It cannot attack other ships, though it may \
-still defend itself when attacked.\
+The Galleon is a transport ship that can enter any ocean tile.\
 "), _("\
 This unit can be captured by an enemy Frigate.\
 ")
@@ -2100,7 +2116,7 @@ This unit can be captured by an enemy Frigate.\
 name          = _("Frigate")
 class         = "Sea"
 tech_req      = "Navigation"
-obsolete_by   = "Ironclad"
+obsolete_by   = "Destroyer"
 graphic       = "u.frigate"
 graphic_alt   = "-"
 sound_move    = "m_frigate"
@@ -2122,17 +2138,17 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 2
+bombard_rate  = 3
 targets       = "Sub"
 flags         = "BadCityDefender", "Capturer", "Bombarder",
-                "Iron", "Niter", "NoAutoAtt"
+                "Iron", "Niter"
 roles         = "Hunter"
 helptext      = _("\
 The Frigate is a specialized ship with a strong offensive value. It \
 can attack units on land, but it cannot transport units.\
 "), _("\
 This is the first and only naval unit that can capture enemy units, but \
-only when all the units on the target tile are captureable (Caravel, \
+only when all the units on the target tile are capturable (Caravel, \
 Galleon, Caravan, Freight or Migrants) and are not carrying any load.\
 ")
 
@@ -2162,10 +2178,10 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 2
+bombard_rate  = 3
 targets       = "Sub"
 flags         = "BadCityDefender", "Bombarder",
-                "Iron", "Niter", "NoAutoAtt"
+                "Iron", "Niter"
 roles         = "Hunter"
 helptext      = _("\
 The Ironclad is an armored ship, more sturdy than the Frigate.\
@@ -2197,13 +2213,13 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 3
+bombard_rate  = 4
 targets       = "Sub"
 bonuses       =
    { "flag", "type", "value"
      "Submarine", "DefenseMultiplier", 1
    }
-flags         = "BadCityDefender", "Bombarder", "Iron", "NoAutoAtt"
+flags         = "BadCityDefender", "Bombarder", "Iron"
 roles         = ""
 helptext      = _("\
 An improved Ironclad, with better move rate and vision. Anti-submarine \
@@ -2239,9 +2255,9 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 3
+bombard_rate  = 4
 targets       = "Sub"
-flags         = "BadCityDefender", "Bombarder", "Iron", "NoAutoAtt"
+flags         = "BadCityDefender", "Bombarder", "Iron"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The Cruiser is a strong offensive boat unit.\
@@ -2273,14 +2289,13 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 3
+bombard_rate  = 4
 targets       = "Sub"
 bonuses       =
    { "flag", "type", "value"
      "AirAttacker", "DefenseMultiplier", 1
    }
-flags         = "BadCityDefender", "Bombarder",
-                "Iron_Oil", "Aluminum", "NoAutoAtt"
+flags         = "BadCityDefender", "Bombarder", "Iron_Oil", "Aluminum"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The AEGIS Cruiser is equipped with an advanced defensive missile \
@@ -2313,10 +2328,10 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-bombard_rate  = 3
+bombard_rate  = 4
 targets       = "Sub"
-flags         = "BadCityDefender", "Bombarder", "Iron_Oil", "NoAutoAtt"
-roles         = "DefendOk", "DefendOkStartUnit"
+flags         = "BadCityDefender", "Bombarder", "Iron_Oil"
+roles         = "DefendOk"
 helptext      = _("\
 The Battleship is the supreme naval unit with excellent offensive and \
 defensive values.\
@@ -2341,7 +2356,7 @@ hitpoints     = 20
 firepower     = 1
 move_rate     = 5
 vision_radius_sq = 6
-transport_cap = 8
+transport_cap = 1
 fuel          = 0
 uk_happy      = 0
 uk_shield     = 1
@@ -2355,8 +2370,9 @@ bonuses       =
    { "flag", "type", "value"
      "AirAttacker", "DefenseMultiplier", 1
    }
-flags         = "BadCityDefender", "Submarine", "Bombarder",
-                "HPFull", "HP20", "HasNoZOC", "Iron_Oil", "Uranium"
+flags         = "BadCityDefender", "Submarine", "Bombarder", "HPFullSea",
+                "HP20", "HasNoZOC", "Iron_Oil", "Uranium", "AutoAtt",
+                "NeverProtects"
 roles         = "Hunter", "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have a very high \
@@ -2397,15 +2413,12 @@ uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
 cargo         = "Land", "Air", "Missile", "Helicopter"
-flags         = "BadCityDefender", "HasNoZOC",
-                "Iron_Oil", "Aluminum", "NoAutoAtt"
-roles         = "Ferryboat", "FerryStartUnit"
+flags         = "BadCityDefender", "HasNoZOC", "Iron_Oil", "Aluminum"
+roles         = "Ferryboat", "DefendGood"
 helptext      = _("\
 The Carrier is a mobile airport.\
 "), _("\
-It can transport aircraft and military land units (not wheeled), \
-although land units cannot always be transferred to and from Helicopters \
-while onboard (see Helicopter help).\
+It can transport aircraft and military infantry units.\
 "), _("\
 TIP: Guard Carriers with a handful of fast-moving ships and a \
 battleship, as losing a fully-equipped Carrier is VERY painful \
@@ -2414,7 +2427,7 @@ and expensive.\
 
 [unit_transport]
 name          = _("Transport")
-class         = "Sea"
+class         = "Trireme"
 tech_req      = "Engineering"
 obsolete_by   = "None"
 graphic       = "u.transport"
@@ -2438,11 +2451,11 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 tp_defense    = "Alight"
-cargo         = "Land", "Small Land", "Big Land", "Merchant"
+cargo         = "Land", "Small Land", "Big Land", "Fast Land"
 flags         = "Settlers", "BadCityDefender", "HasNoZOC", "NonMil",
-                "Iron", "NoAutoAtt"
+                "Iron"
 veteran_names = _("green"), _("regular"), _("veteran"), _("hardened"), _("elite")
-veteran_base_raise_chance      = 50, 33, 25, 20, 0
+veteran_base_raise_chance = 50, 33, 25, 20, 0
 veteran_work_raise_chance = 0, 0, 0, 0, 0
 veteran_power_fact        = 100, 125, 150, 175, 200
 veteran_move_bonus        = 0, 0, 0, 0, 0
@@ -2451,13 +2464,11 @@ helptext      = _("\
 The Transport cannot attack on its own but may defend itself when \
 under attack.\
 "), _("\
-Transports can clean pollution and fallout on water tiles and coastal \
-cities. They may build oil platforms on deep ocean tiles (with \
+Transports can travel on rivers, can clean pollution and fallout on \
+water tiles. They may build oil platforms on deep ocean tiles (with \
 knowledge of Miniaturization, for use by Offshore Platforms). They \
 may also build buoys (with Radio), and naval mines (with Explosives).\
 ")
-; FIXME: also cleans pollution/fallout in coastal cities (and faster
-; than Engineers)
 
 [unit_cruise_missile]
 name          = _("Cruise Missile")
@@ -2484,11 +2495,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
 flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC",
-                "Aluminum", "NoAutoAtt"
+                "Aluminum", "NeverProtects"
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile that can strike deep \
@@ -2527,7 +2539,7 @@ uk_gold       = 1
 tp_defense    = "Alight"
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
-flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "NoAutoAtt"
+flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "NeverProtects"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -2542,7 +2554,8 @@ However, without further technology they cannot move on their own.\
 "), _("\
 With Rocketry, all Nuclear units (including those already built) gain \
 a range of 8 movement points. Nuclear units starting the turn in a \
-city with an Airport gain a range of 8 too (up to 16 with Rocketry).\
+city with an Airport also gain a range of 8 (if they are not being \
+transported, up to 16 with Rocketry).\
 "), _("\
 On impact, the blast will destroy any unit in an area 3 tiles wide \
 (3x3 squares for rectangular grids), including friendly units. \
@@ -2586,7 +2599,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "NoAutoAtt"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Cant_Pillage"
 veteran_names =
 ; /* TRANS: diplomatic rank. */
   _("?diplomatic_rank:attaché"),
@@ -2711,8 +2724,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy",
-                "NoAutoAtt"
+flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Cant_Pillage", "Spy"
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -2758,7 +2770,7 @@ at the first veteran level (handler).\
 
 [unit_caravan]
 name          = _("Caravan")
-class         = "Merchant"
+class         = "Small Land"
 tech_req      = "Trade"
 obsolete_by   = "Freight"
 graphic       = "u.caravan"
@@ -2782,9 +2794,8 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-city_slots    = 1
 flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC",
-                "Capturable", "NoAutoAtt"
+                "Cant_Fortify", "Cant_Pillage", "Capturable"
 roles         = ""
 helptext      = _("\
 A Caravan carries goods or material for trading with other nations, \
@@ -2811,7 +2822,7 @@ and finish it in only one turn!\
 
 [unit_freight]
 name          = _("Freight")
-class         = "Merchant"
+class         = "Small Land"
 tech_req      = "The Corporation"
 obsolete_by   = "None"
 graphic       = "u.freight"
@@ -2835,9 +2846,8 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-city_slots    = 1
 flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC",
-                "Capturable", "NoAutoAtt"
+                "Cant_Fortify", "Cant_Pillage", "Capturable"
 roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed. \
@@ -2873,7 +2883,7 @@ uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
 flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify",
-                "NoAutoAtt"
+                "Cant_Pillage"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for mapping \
@@ -2891,6 +2901,40 @@ cost to you.\
 information about the city: its status, what buildings and units are \
 within, and what it is currently producing. The unit is not consumed \
 by this action.\
+")
+
+[unit_awacs]
+name          = _("AWACS")
+class         = "Air"
+tech_req      = "Advanced Flight"
+obsolete_by   = "None"
+graphic       = "u.awacs"
+graphic_alt   = "u.bomber"  ; backwards compatibility
+sound_move    = "m_awacs"
+sound_move_alt = "m_generic"
+sound_fight   = "f_awacs"
+sound_fight_alt = "f_generic"
+build_cost    = 140
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 20
+firepower     = 1
+move_rate     = 16
+vision_radius_sq = 24
+transport_cap = 0
+fuel          = 3
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 1
+tp_defense    = "Alight"
+flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil"
+roles         = ""
+helptext      = _("\
+The AWACS (Airborne Warning and Control System) is an airplane with an \
+advanced radar that can determine the location of enemy units over a \
+wide area.\
 ")
 
 [unit_leader]
@@ -2920,8 +2964,7 @@ uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
 flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy",
-                "EvacuateFirst", "Unbribable", "GameLoss", "Unique",
-                "NoAutoAtt"
+                "EvacuateFirst", "Unbribable", "GameLoss", "Unique"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -2962,7 +3005,7 @@ uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
 flags         = "IgZOC", "NonMil", "Unbribable", "EvacuateFirst",
-                "SuperSpy", "NoHome", "NoBuild", "NoAutoAtt"
+                "SuperSpy", "NoHome", "NoBuild"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -2978,40 +3021,6 @@ When a Barbarian Leader is killed on a tile without any defending units, \
 the ransom is paid, but only to land units and helicopters. \
 Usually the ransom is 100 gold, but can be less if the barbarian has \
 less money.\
-")
-
-[unit_awacs]
-name          = _("AWACS")
-class         = "Air"
-tech_req      = "Advanced Flight"
-obsolete_by   = "None"
-graphic       = "u.awacs"
-graphic_alt   = "u.bomber"  ; backwards compatibility
-sound_move    = "m_awacs"
-sound_move_alt = "m_generic"
-sound_fight   = "f_awacs"
-sound_fight_alt = "f_generic"
-build_cost    = 140
-pop_cost      = 0
-attack        = 0
-defense       = 1
-hitpoints     = 20
-firepower     = 1
-move_rate     = 16
-vision_radius_sq = 24
-transport_cap = 0
-fuel          = 3
-uk_happy      = 0
-uk_shield     = 1
-uk_food       = 0
-uk_gold       = 1
-tp_defense    = "Alight"
-flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil", "NoAutoAtt"
-roles         = ""
-helptext      = _("\
-The AWACS (Airborne Warning and Control System) is an airplane with an \
-advanced radar that can determine the location of enemy units over a \
-wide area.\
 ")
 
 [unit_snake]
@@ -3042,7 +3051,7 @@ uk_gold       = 1
 tp_defense    = "Alight"
 vision_layer  = "Stealth"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "HasNoZOC", "IgZOC", "NoAutoAtt"
+                "HasNoZOC", "IgZOC"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3074,8 +3083,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3107,8 +3115,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3140,8 +3147,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3173,8 +3179,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3206,8 +3211,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3239,8 +3243,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3272,8 +3275,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3305,8 +3307,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 tp_defense    = "Alight"
-flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "NoAutoAtt"
+flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
@@ -3336,10 +3337,10 @@ fuel          = 0
 uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
-uk_gold       = 1
+uk_gold       = 0
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
-                "HasNoZOC", "NoVeteran", "NoAutoAtt"
+                "HasNoZOC", "NoVeteran"
 roles         = ""
 helptext      = _("\
 Watch out for wild animals in the beginning of the game.\
