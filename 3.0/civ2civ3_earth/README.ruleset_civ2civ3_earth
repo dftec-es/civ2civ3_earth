@@ -279,7 +279,7 @@ War Unhappiness   0        0        0       -1       -1       -1       -2       
 Martial Law      +1        0       +1       +1        0        0        0        0       +2       +2
 
 Content citizens  0        5        4        4        4        5        6        6        5        5
-Civil war        50%      40%      45%      35%      30%      15%      10%      5%       20%      25%
+Civil war        50%      40%      45%      35%      30%      15%      10%       5%      20%      25%
 
 Veteran                   +50%(land)                                            +Spies   +Spies    +25%(all)
 Special         +NoUpkeep +Vision  +75%Lux  +50%Lux  +Tithes  +1Trade  +1Trade  +2Luxury +NoUpkeep +1Gold
@@ -648,7 +648,7 @@ Artillery       10  *2    1   *1\2(3) 20  *60   iron               *Wheeled,*Cit
 Howitzer        12   2   *1   *1\2(4) 30  *80   iron/oil  rubber   *Wheeled,*CityBuster
 
 Galley          1    1    3    1(1)   10  *20                       Cargo 2,*No unhappy,*Ocean Fuel 0
-Sailboat       *0    1    3    1      10  *20                      *Cargo 3,*No unhappy,*Ocean Fuel 2,*River
+Sailboat       *0    1    3    1      10  *20                      *Cargo 3,*No unhappy,*Ocean Fuel 2
 Caravel         1   *2    3    1(2)   10  *30                       Cargo 3,*No unhappy,*Capturable
 Galleon        *2    2    4    1(3)   20   40   iron,niter          Cargo 4,*No unhappy,*Capturable
 Transport       0    3    5    1      30   50   iron                Cargo 8,*No unhappy

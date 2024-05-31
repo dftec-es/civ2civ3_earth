@@ -22,6 +22,7 @@ Core:
 - Enabled tech leakage again, with halved effect: technologies are cheaper if already discovered by other nations you have embassy with (the cost of a technology known to all players would be half of the normal cost).
 - The city tile gets the same +50% defense bonus as a Fort (also against naval units, not only against ground units). Cities with size > 8 double this bonus to +100% (as before). Cities with size > 16 now get an additional +50% defense against air and missile units (being the total defense the same as a Fortress).
 - Waste of Food caused by distance to Palace is now relative to the map size, up to -10% Food for cities at max distance (-5% with Granary or Courthouse).
+* Each city can support a maximum of 20 units (no matter if the city pays upkeep for the unit or not).
 * Human players receive a negative AI Love, making it harder to keep the peace with every AI. This setting can no longer be adjusted in game from the menu (otherwise the AI was able to change it too).
 * A diplomatic treaty no longer allows trading technologies or giving embassies, and trading maps requires knowledge of Map Making. You have to send diplomat units to foreign cities if you want to establish embassies, steal technologies or steal maps. 
 
@@ -126,7 +127,7 @@ Units:
 - Defense bonus of +25% for units stacked outside of cities, as long as there is any other unit on the same tile.
 * Wheeled units outside cities and bases receive up to +25% defense bonus from terrain (they don't take full advantage of defensive terrain with rivers, hills or mountains). Armor no longer receives extra defense against other Armor units.
 * Wheeled units on unroaded Jungle, Swamp or River start the turn with -1 movement point (as do all ground units on Mountains). Enemy roads (within the borders of a nation at war with you) don't avoid this penalty.
-* Wheeled units (Big Land class) can be loaded onto any cargo boat, including Galleys (but no Carriers and Submarines). They can attack non-native tiles (mountains, jungles and swamps), and can bombard from shore to sea.
+* Wheeled units (Big Land class) can be loaded onto any cargo boat, including Galleys (but no Carriers and Submarines), and they can perform pillage. They can attack non-native tiles (mountains, jungles and swamps), and can bombard from shore to sea.
 - Increased the number of veteran levels by one, with the following effects: 100%, 125%, 150%, 175%, and 200%. Engineers up to 150%.
 * Units do not gain veterancy from combat if the enemy is not killed, or if either side of the fight is completely powerless.
 * All military infantry units can build fortresses. All worker units can build airbases and can pillage. Units cannot pillage foreign tiles unless at war.
@@ -145,7 +146,7 @@ Naval units:
 * Naval units adjacent to Naval Mines have a defense bonus only when not in enemy waters (within the borders of a nation you are at war with), and have a movement penalty only when not in friendly waters (within the borders of a nation you are not at war with).
 * Naval units lose all their movement points to move to enemy land tiles (via river/canal).
 * New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
-* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans or unsafe coasts (Mountains, Glaciers). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units).
+* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units).
 * Galleys, Sailboats and Transports can navigate rivers, and their unit class was renamed to Riverboat.
 * All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
 - Cargo boats don't cause unhappiness due to military activity, including Galley, Sailboat, Caravel, Galleon, Transport, Carrier and Submarine.
@@ -156,12 +157,12 @@ Naval units:
 
 Wonders:
 - Readjusted effects and obsolescence of many wonders. See the table (in README file).
-- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or specific resources available in the city ("Manhattan Project" and "Apollo Program").
+- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or specific resources available in the city ("Manhattan Project", "Apollo Program" and "SETI Program").
 - Continental range: "J.S. Bach's Cathedral", "Great Wall" and "Sun Tzu's War Academy" affects only to cities of the same continent.
 - Global range: some minor effects, that may affect every player, added to "Cure For Cancer", "Internet", and "Women's Suffrage".
 * Every wonder produces as much culture per turn as its building cost/100.
 * Internet bonus simplified to +2 Science in your cities with a Research Lab (the result after summing the +200% from all science buildings can be up to +6 bulbs per city).
-* SETI Program, available with Radio, allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
+* SETI Program, available with Radio, requires Rubber and allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
   This victory is only enabled if the server is set to end the game when the spaceship arrives (enabled by default).
 
 Future plans:

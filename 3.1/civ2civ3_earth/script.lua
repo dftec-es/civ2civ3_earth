@@ -542,7 +542,6 @@ function action_finished_callback(action, success, actor, target)
   elseif action:rule_name() == "Heal Unit" then
   -- (unit_unit) Kill the healer unit.
     if success then
-      -- FIXME: this kill crashes when healer is being transported
       actor:kill("used",Nil)
     end
   elseif action:rule_name() == "User Action 1" then

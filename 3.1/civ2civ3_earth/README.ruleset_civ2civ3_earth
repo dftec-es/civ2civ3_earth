@@ -50,9 +50,10 @@ CORE CHANGES:
 - Allowed 1 trade route per city (2 after the discovery of The Corporation). Removed the one time revenues, and reduced the ongoing revenues. Trade routes with foreign cities receive 50% of the income, and only if the cities are allies (or on the same team).
 
 - Every unit (except Settlers, Migrants, and Fanatics, which cost population to build) pays some kind of upkeep cost. Some governments pay shields as upkeep, and others pay coins (similar to civ3), but not both.
+  A city cannot support more than 20 units (no matter if the city pays upkeep for the unit or not).
 
 - Most units also require upkeep in Food, except for Workers/Engineers, Diplomat/Spy, Caravan/Freight, Explorer/AWACS, and Cruise Missile/Nuclear.
-  A city can support for free as many units (with upkeep in Food) as its population size (min 4, max 20). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
+  A city can support for free as many units (with upkeep in Food) as its population size (at least 4 are always free). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
 
 - Units lose one veteran level when upgraded, and they do not gain veterancy from combat if the enemy is not killed, or if either side of the fight is completely powerless.
   Increased by one the number of veteran levels, with effects: 100% (green), 125% (regular), 150% (veteran), 175% (hardened) and 200% (elite).
@@ -273,7 +274,7 @@ War Unhappiness   0        0        0       -1       -1       -1       -2       
 Martial Law      +1        0       +1       +1        0        0        0        0       +2       +2
 
 Content citizens  0        5        4        4        4        5        6        6        5        5
-Civil war        50%      40%      45%      35%      30%      15%      10%      5%       20%      25%
+Civil war        50%      40%      45%      35%      30%      15%      10%       5%      20%      25%
 
 Veteran                   +50%(land)                                            +Spies   +Spies    +25%(all)
 Special         +NoUpkeep +Vision  +75%Lux  +50%Lux  +Tithes  +1Trade  +1Trade  +2Luxury +NoUpkeep +1Gold
@@ -818,7 +819,7 @@ Ignores the effect of having a senate. Any government available. No Anarchy peri
 --- "Hoover Dam" 600. Requires adjacent river:
 Gives to all your Hydro Plants the same effect as Solar Plants (-25% pollution caused by production). Doubles the bonus to production of an Hydro Plant in the city (+50% Production).
 
--=- (#)"SETI Program" 600:
+-=- (#)"SETI Program" 600. Requires Rubber:
 # Enables a new victory condition for every nation: when a nation's score and culture are more than 4 times the second-highest.
 This victory is disabled if the setting to end the game when a spaceship arrives is disabled (enabled by default).
 -=- (#)"Manhattan Project" 600. Requires Uranium:

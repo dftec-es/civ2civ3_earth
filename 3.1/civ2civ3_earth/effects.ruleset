@@ -31,21 +31,6 @@ format_version=20
 
 ; AI: "Away" "Restricted" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 
-[effect_unit_slots]
-type    = "Unit_Slots"
-value   = 20
-reqs    =
-    { "type", "name", "range", "present"
-      "AI", "Hard", "Player", FALSE
-      "AI", "Cheating", "Player", FALSE
-    }
-
-; Each AI city can support up to 2 special units in total
-; (this tries to limit the upkeep of certain units problematic for the AI)
-[effect_ai_unit_slots]
-type    = "Unit_Slots"
-value   = 2
-
 ; Higher chance of AI wars (vs human)
 [effect_human_love]
 type    = "Gain_AI_Love"
@@ -1080,6 +1065,11 @@ reqs    =
     { "type", "name", "range", "present"
       "Terrain", "Inaccessible", "Local", FALSE
     }
+
+; each city can support up to 20 units
+[effect_unit_slots]
+type    = "Unit_Slots"
+value   = 20
 
 ; each city has at least one slot to build units
 [effect_city_build_slots_basic]

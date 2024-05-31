@@ -53,7 +53,6 @@ Uranium: One more veteran level when produced in cities with Uranium.\
 ")
     _("Cant_Pillage")
     _("CanWork")
-    _("Fortress"), _("Can build Forts and Fortresses.")
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
     _("Submarine"), _("\Attack value halved when attacking Destroyer.")
@@ -94,7 +93,7 @@ Cannot attack land tiles, and cannot attack once damaged, except to bombard.\
     _("HP30")
   }
 ; Flag "" is not being used currently by any unit and may cause warnings from unused action enablers
-; Used 36 out of 40 unit type flags
+; Used 35 out of 40 unit type flags
 
 ; Names for custom unit class flags. There can be up to 12 of these.
 ; name          = rule name; In some circumstances user may see this
@@ -535,188 +534,6 @@ flags         = "Unreachable", "DoesntOccupyTile", "CanPillage",
 ;
 ; */ <-- avoid gettext warnings
 
-[unit_settlers]
-name          = _("Settlers")
-class         = "Small Land"
-tech_req      = "None"
-obsolete_by   = "None"
-graphic       = "u.settlers"
-graphic_alt   = "-"
-sound_move    = "m_settlers"
-sound_move_alt = "m_generic"
-sound_fight   = "f_settlers"
-sound_fight_alt = "f_generic"
-build_cost    = 30
-pop_cost      = 2
-attack        = 0
-defense       = 1
-hitpoints     = 20
-firepower     = 1
-move_rate     = 1
-vision_radius_sq = 2
-transport_cap = 0
-fuel          = 0
-uk_happy      = 0
-uk_shield     = 0
-uk_food       = 1
-uk_gold       = 0
-tp_defense    = "Alight"
-flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
-                "HasNoZOC", "AddToCity", "Cities"
-; No veteran levels (level name is never displayed)
-veteran_names = _("green")
-veteran_base_raise_chance = 0
-veteran_work_raise_chance = 0
-veteran_power_fact = 100
-veteran_move_bonus = 0
-roles         = "CitiesStartUnit"
-helptext      = _("\
-Settlers are one of the key units in the game, as they are your main \
-means of founding new cities.\
-"), _("\
-Settlers can also perform the same terrain alterations as Workers.\
-"), _("\
-TIP: Optimal production of Settlers occurs in cities of at most \
-size 4, or cities with a Granary of at most size 6.\
-")
-
-[unit_migrants]
-name          = _("Migrants")
-class         = "Small Land"
-tech_req      = "Pottery"
-obsolete_by   = "None"
-graphic       = "u.migrants"
-graphic_alt   = "u.worker"
-sound_move    = "m_worker"
-sound_move_alt = "m_generic"
-sound_fight   = "f_worker"
-sound_fight_alt = "f_generic"
-build_cost    = 10
-pop_cost      = 1
-attack        = 0
-defense       = 1
-hitpoints     = 20
-firepower     = 1
-move_rate     = 1
-vision_radius_sq = 2
-transport_cap = 0
-fuel          = 0
-uk_happy      = 0
-uk_shield     = 0
-uk_food       = 1
-uk_gold       = 0
-tp_defense    = "Alight"
-flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
-                "HasNoZOC", "AddToCity", "Capturable"
-; No veteran levels (level name is never displayed)
-veteran_names = _("green")
-veteran_base_raise_chance = 0
-veteran_work_raise_chance = 0
-veteran_power_fact = 100
-veteran_move_bonus = 0
-roles         = "Settlers"
-helptext      = _("\
-Migrants can be used to transfer population to other cities (of at \
-most size 8), but may not found new cities. They can also perform the \
-same terrain alterations as Workers.\
-"), _("\
-This unit can be captured by military land units or by frigates.\
-"), _("\
-TIP: Migrants can be a good alternative to Workers in overpopulated \
-cities, as they benefit from free food upkeep.\
-")
-
-[unit_worker]
-name          = _("?unit:Workers")
-class         = "Small Land"
-tech_req      = "None"
-obsolete_by   = "Engineers"
-graphic       = "u.worker"
-graphic_alt   = "u.engineers" ; for compatibility
-sound_move    = "m_worker"
-sound_move_alt = "m_generic"
-sound_fight   = "f_worker"
-sound_fight_alt = "f_generic"
-build_cost    = 20
-pop_cost      = 0
-attack        = 0
-defense       = 1
-hitpoints     = 10
-firepower     = 1
-move_rate     = 1
-vision_radius_sq = 2
-transport_cap = 0
-fuel          = 0
-uk_happy      = 0
-uk_shield     = 1
-uk_food       = 0
-uk_gold       = 1
-tp_defense    = "Alight"
-flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil", "HasNoZOC"
-; No veteran levels (level name is never displayed)
-veteran_names = _("green")
-veteran_base_raise_chance = 0
-veteran_work_raise_chance = 0
-veteran_power_fact = 100
-veteran_move_bonus = 0
-roles         = "Settlers", "WorkerStartUnit"
-helptext      = _("\
-Workers have the ability to improve terrain tiles. See the help on \
-Terrain and Terrain Alterations for the effects of their actions.\
-"), _("\
-With the required knowledges, Workers can build fortresses, airbases, \
-and canals on land tiles. If on board a ship, they can also build oil \
-platforms, buoys and naval mines on oceanic tiles.\
-")
-
-[unit_engineers]
-name          = _("Engineers")
-class         = "Small Land"
-tech_req      = "Explosives"
-obsolete_by   = "None"
-graphic       = "u.engineers"
-graphic_alt   = "-"
-sound_move    = "m_engineers"
-sound_move_alt = "m_generic"
-sound_fight   = "f_engineers"
-sound_fight_alt = "f_generic"
-build_cost    = 30
-pop_cost      = 0
-attack        = 0
-defense       = 2
-hitpoints     = 20
-firepower     = 1
-move_rate     = 2
-vision_radius_sq = 2
-transport_cap = 0
-fuel          = 0
-uk_happy      = 0
-uk_shield     = 1
-uk_food       = 0
-uk_gold       = 1
-tp_defense    = "Alight"
-flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
-                "HasNoZOC", "Transform"
-veteran_names = _("beginner"), _("seasoned"), _("senior")
-veteran_base_raise_chance = 50, 33, 0
-veteran_work_raise_chance = 2, 1, 0
-veteran_power_fact        = 100, 125, 150
-veteran_move_bonus        = 0, 0, 0
-roles         = "Settlers", "WorkerStartUnit"
-helptext      = _("\
-Engineers are similar to Workers, but they work twice as fast, \
-move twice as fast, and may gain experience from work enabling \
-them to work even faster.\
-"), _("\
-With knowledge of Fusion Power, Engineers may also perform more \
-radical terrain transformations than Workers, Settlers, or Migrants, \
-with the \"transform\" order. Examples include conversion of Tundra \
-into Plains, or even Ocean into Grassland in some circumstances \
-(when on board an ocean-going vessel, on a tile surrounded by \
-sufficient existing land). See the Terrain Alterations section \
-for more details.\
-")
-
 [unit_warriors]
 name          = _("Warriors")
 class         = "Land"
@@ -742,10 +559,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Capturer", "Fortress"
+flags         = "OneAttack", "Capturer", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game. It is the weakest \
@@ -777,10 +595,11 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Capturer", "Fortress"
+flags         = "OneAttack", "Capturer", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
@@ -817,11 +636,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Capturer", "Bombarder", "Fortress"
+flags         = "OneAttack", "Capturer", "Bombarder", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -866,11 +686,12 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Raider", "Capturer",
-                "Iron", "Fortress"
+                "Iron", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry units with \
@@ -905,6 +726,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
@@ -912,7 +734,7 @@ bonuses       =
    { "flag", "type", "value"
      "Horse", "DefenseDividerPct", 100
    }
-flags         = "OneAttack", "Capturer", "Iron", "Fortress"
+flags         = "OneAttack", "Capturer", "Iron", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx as the preferred \
@@ -946,6 +768,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
@@ -955,7 +778,7 @@ bonuses       =
      "Horse", "DefenseDividerPct", -50
    }
 flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
-                "Niter", "Fortress"
+                "Niter", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
                 "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
@@ -1003,12 +826,13 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
-                "Niter", "Fortress"
+                "Niter", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good at defending your \
@@ -1040,12 +864,13 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "Capturer", "Bombarder",
-                "Niter", "Fortress"
+                "Niter", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Alpine Troops are highly mobile units as well as excellent defenders.\
@@ -1083,7 +908,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer",
-                "Bombarder", "Fortress"
+                "Bombarder", "Settlers"
 roles         = "DefendOk"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
@@ -1119,12 +944,13 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
-                "Fortress"
+                "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts at using the terrain \
@@ -1163,12 +989,13 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Raider", "BeachLander", "Capturer",
-                "Bombarder", "Rubber", "Fortress"
+                "Bombarder", "Rubber", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
@@ -1204,12 +1031,13 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
-                "Rubber", "Fortress"
+                "Rubber", "Settlers"
 roles         = "DefendOk"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
@@ -1246,6 +1074,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 flags         = "Bombarder", "Wheeled", "Iron_Oil", "Rubber"
@@ -1287,6 +1116,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Capturer", "Horse"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
@@ -1324,6 +1154,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Wheeled", "Horse"
 roles         = "AttackFastStartUnit"
@@ -1364,6 +1195,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Capturer", "Ivory"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
@@ -1397,6 +1229,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Capturer", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
@@ -1432,6 +1265,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Capturer", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "HutTech", "BarbarianTech",
@@ -1465,6 +1299,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 flags         = "Capturer", "Bombarder", "Horse", "Niter"
@@ -1498,6 +1333,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 flags         = "Capturer", "Bombarder", "Horse", "Niter"
@@ -1531,6 +1367,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 bonuses       =
@@ -1578,6 +1415,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 flags         = "Bombarder", "Wheeled"
@@ -1634,6 +1472,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 flags         = "Bombarder", "Wheeled", "Iron", "Niter"
@@ -1677,6 +1516,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 flags         = "CityBuster", "Bombarder", "Wheeled",
@@ -1722,6 +1562,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
 flags         = "CityBuster", "Bombarder", "Wheeled",
@@ -1767,6 +1608,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
@@ -1811,6 +1653,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 5
 ;targets       = "Sub"
@@ -1853,6 +1696,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
 cargo         = "Land"
@@ -1893,6 +1737,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
@@ -1936,6 +1781,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 5
 ;targets       = "Sub"
@@ -1978,6 +1824,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 1
 cargo         = "Land", "Small Land", "Big Land", "Fast Land"
@@ -2025,6 +1872,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 cargo         = "Land", "Small Land", "Big Land", "Fast Land"
 flags         = "Coast", "BadCityDefender", "HasNoZOC", "NonMil"
@@ -2063,6 +1911,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 cargo         = "Land", "Small Land", "Big Land", "Fast Land"
@@ -2100,6 +1949,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 cargo         = "Land", "Small Land", "Big Land", "Fast Land"
@@ -2137,6 +1987,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub"
@@ -2177,6 +2028,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub"
@@ -2212,6 +2064,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
 targets       = "Sub"
@@ -2254,6 +2107,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
 targets       = "Sub"
@@ -2288,6 +2142,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
 targets       = "Sub"
@@ -2327,6 +2182,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
 targets       = "Sub"
@@ -2362,6 +2218,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
 cargo         = "Missile"
@@ -2411,6 +2268,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 cargo         = "Land", "Air", "Missile", "Helicopter"
 flags         = "BadCityDefender", "HasNoZOC", "Iron_Oil", "Aluminum"
@@ -2450,6 +2308,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 cargo         = "Land", "Small Land", "Big Land", "Fast Land"
 flags         = "Settlers", "BadCityDefender", "HasNoZOC", "NonMil",
@@ -2536,6 +2395,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
@@ -2598,6 +2458,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Cant_Pillage"
 veteran_names =
@@ -2723,6 +2584,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "Cant_Pillage", "Spy"
 veteran_names =
@@ -2793,6 +2655,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC",
                 "Cant_Fortify", "Cant_Pillage", "Capturable"
@@ -2845,6 +2708,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "TradeRoute", "HelpWonder", "NonMil", "HasNoZOC",
                 "Cant_Fortify", "Cant_Pillage", "Capturable"
@@ -2881,6 +2745,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify",
                 "Cant_Pillage"
@@ -2928,6 +2793,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil"
 roles         = ""
@@ -2935,6 +2801,192 @@ helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \
 advanced radar that can determine the location of enemy units over a \
 wide area.\
+")
+
+[unit_settlers]
+name          = _("Settlers")
+class         = "Small Land"
+tech_req      = "None"
+obsolete_by   = "None"
+graphic       = "u.settlers"
+graphic_alt   = "-"
+sound_move    = "m_settlers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_settlers"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 2
+attack        = 0
+defense       = 1
+hitpoints     = 20
+firepower     = 1
+move_rate     = 1
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 1
+uk_gold       = 0
+city_slots    = 1
+tp_defense    = "Alight"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
+                "HasNoZOC", "AddToCity", "Cities"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_base_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "CitiesStartUnit"
+helptext      = _("\
+Settlers are one of the key units in the game, as they are your main \
+means of founding new cities.\
+"), _("\
+Settlers can also perform the same terrain alterations as Workers.\
+"), _("\
+TIP: Optimal production of Settlers occurs in cities of at most \
+size 4, or cities with a Granary of at most size 6.\
+")
+
+[unit_migrants]
+name          = _("Migrants")
+class         = "Small Land"
+tech_req      = "Pottery"
+obsolete_by   = "None"
+graphic       = "u.migrants"
+graphic_alt   = "u.worker"
+sound_move    = "m_worker"
+sound_move_alt = "m_generic"
+sound_fight   = "f_worker"
+sound_fight_alt = "f_generic"
+build_cost    = 10
+pop_cost      = 1
+attack        = 0
+defense       = 1
+hitpoints     = 20
+firepower     = 1
+move_rate     = 1
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 0
+uk_food       = 1
+uk_gold       = 0
+city_slots    = 1
+tp_defense    = "Alight"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
+                "HasNoZOC", "AddToCity", "Capturable"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_base_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "Settlers"
+helptext      = _("\
+Migrants can be used to transfer population to other cities (of at \
+most size 8), but may not found new cities. They can also perform the \
+same terrain alterations as Workers.\
+"), _("\
+This unit can be captured by military land units or by frigates.\
+"), _("\
+TIP: Migrants can be a good alternative to Workers in overpopulated \
+cities, as they benefit from free food upkeep.\
+")
+
+[unit_worker]
+name          = _("?unit:Workers")
+class         = "Small Land"
+tech_req      = "None"
+obsolete_by   = "Engineers"
+graphic       = "u.worker"
+graphic_alt   = "u.engineers" ; for compatibility
+sound_move    = "m_worker"
+sound_move_alt = "m_generic"
+sound_fight   = "f_worker"
+sound_fight_alt = "f_generic"
+build_cost    = 20
+pop_cost      = 0
+attack        = 0
+defense       = 1
+hitpoints     = 10
+firepower     = 1
+move_rate     = 1
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 1
+city_slots    = 1
+tp_defense    = "Alight"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil", "HasNoZOC"
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_base_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "Settlers", "WorkerStartUnit"
+helptext      = _("\
+Workers have the ability to improve terrain tiles. See the help on \
+Terrain and Terrain Alterations for the effects of their actions.\
+"), _("\
+With the required knowledges, Workers can build fortresses, airbases, \
+and canals on land tiles. If on board a ship, they can also build oil \
+platforms, buoys and naval mines on oceanic tiles.\
+")
+
+[unit_engineers]
+name          = _("Engineers")
+class         = "Small Land"
+tech_req      = "Explosives"
+obsolete_by   = "None"
+graphic       = "u.engineers"
+graphic_alt   = "-"
+sound_move    = "m_engineers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_engineers"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 0
+attack        = 0
+defense       = 2
+hitpoints     = 20
+firepower     = 1
+move_rate     = 2
+vision_radius_sq = 2
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 1
+city_slots    = 1
+tp_defense    = "Alight"
+flags         = "Settlers", "CanWork", "Cant_Fortify", "NonMil",
+                "HasNoZOC", "Transform"
+veteran_names = _("beginner"), _("seasoned"), _("senior")
+veteran_base_raise_chance = 50, 33, 0
+veteran_work_raise_chance = 2, 1, 0
+veteran_power_fact        = 100, 125, 150
+veteran_move_bonus        = 0, 0, 0
+roles         = "Settlers", "WorkerStartUnit"
+helptext      = _("\
+Engineers are similar to Workers, but they work twice as fast, \
+move twice as fast, and may gain experience from work enabling \
+them to work even faster.\
+"), _("\
+With knowledge of Fusion Power, Engineers may also perform more \
+radical terrain transformations than Workers, Settlers, or Migrants, \
+with the \"transform\" order. Examples include conversion of Tundra \
+into Plains, or even Ocean into Grassland in some circumstances \
+(when on board an ocean-going vessel, on a tile surrounded by \
+sufficient existing land). See the Terrain Alterations section \
+for more details.\
 ")
 
 [unit_leader]
@@ -2962,6 +3014,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 0
 tp_defense    = "Alight"
 flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy",
                 "EvacuateFirst", "Unbribable", "GameLoss", "Unique"
@@ -3003,6 +3056,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 0
 tp_defense    = "Alight"
 flags         = "IgZOC", "NonMil", "Unbribable", "EvacuateFirst",
                 "SuperSpy", "NoHome", "NoBuild"
@@ -3048,6 +3102,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 vision_layer  = "Stealth"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
@@ -3082,6 +3137,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3114,6 +3170,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3146,6 +3203,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3178,6 +3236,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3210,6 +3269,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3242,6 +3302,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3274,6 +3335,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3306,6 +3368,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable"
 roles         = ""
@@ -3338,6 +3401,7 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
+city_slots    = 1
 tp_defense    = "Alight"
 flags         = "NoBuild", "Cant_Fortify", "Cant_Pillage", "Unbribable",
                 "HasNoZOC", "NoVeteran"

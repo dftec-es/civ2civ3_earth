@@ -225,6 +225,7 @@ helptext = _("\
 Rubber resources produce 2 extra shields in the tile where they are \
 located.\
 "), _("\
+Rubber is required in a city to build the wonder SETI Program. \
 Cities with available Rubber build Marines, Paratroopers, Helicopter, \
 Mech. Inf. and Howitzer units with one extra veteran level.\
 ")
@@ -518,6 +519,7 @@ helptext = _("\
 Aluminum resources produce 2 extra shields in the tile where they are \
 located.\
 "), _("\
+Aluminum is required in a city to build the wonder Apollo Program. \
 Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
 Missile, Fighter and Bomber units with one extra veteran level.\
 ")

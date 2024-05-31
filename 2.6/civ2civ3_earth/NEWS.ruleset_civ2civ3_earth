@@ -25,6 +25,7 @@ Optional (server options):
 - If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool.
 
 Terrains:
+- Forts and Airstrips on river tiles cannot be upgraded to full bases.
 - Deep Ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food.
 - Forest and Jungle can be mined to produce Lumber (+1 production). Forests and Plains can no longer be transformed to Grassland at the beginning, only Grassland to Forest (10 turns), Forest to Plains (10 turns), and Plains to Forest (10 turns).
 - Added some new resources, up to 3 per terrain

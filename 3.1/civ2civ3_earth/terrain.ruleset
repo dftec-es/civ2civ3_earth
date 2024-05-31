@@ -2216,9 +2216,9 @@ buildable      = FALSE
 conflicts      = "Aluminum", "Niter", "Uranium"
 flags          = "TerrChangeRemoves"
 helptext       = _("\
-Strategic resource. Cities with available rubber build Marines, \
-Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
-veteran level.\
+Strategic resource, required in a city to build the wonder SETI Program. \
+Cities with available rubber build Marines, Paratroopers, Helicopter, \
+Mech. Inf. and Howitzer units with one extra veteran level.\
 "), _("\
 With the discovery of Chemistry, rubber produces 2 extra shields in \
 the tile (jungle, swamp or forest).\

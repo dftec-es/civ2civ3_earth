@@ -112,7 +112,7 @@ Units:
 - Defense bonus of +25% for units stacked outside of cities, as long as there is any other unit on the same tile.
 - Armor gets a +25% defense bonus against other Armor units. This makes armor slightly better than Mech. Infantry against attacks from Armors, and slightly worse against attacks from Howitzers or other units.
 * Wheeled units on unroaded Jungle, Swamp or River start the turn with -1 movement point (as do all ground units on Mountains).
-* Wheeled units (Big Land class) can be loaded onto any cargo boat, including Galleys (but no Carriers and Submarines). They can attack non-native tiles (mountains, jungles and swamps), and can bombard from shore to sea.
+* Wheeled units (Big Land class) can be loaded onto any cargo boat, including Galleys (but no Carriers and Submarines), and they can perform pillage. They can attack non-native tiles (mountains, jungles and swamps), and can bombard from shore to sea.
 - Increased the number of veteran levels by one, with the following effects: 100%, 125%, 150%, 175%, and 200%. Engineers up to 150%.
 - Units do not gain veterancy from combat if the enemy is not killed.
 - All military infantry units can build fortresses. All worker units can build airbases. Non-military units cannot pillage.
@@ -131,7 +131,7 @@ Units:
 Naval units:
 - Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against Sea units (not against Submarines).
 * New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
-* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans or unsafe coasts (Mountains, Glaciers). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units).
+* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units).
 * All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
 - Cargo boats don't cause unhappiness due to military activity, including Galley, Sailboat, Caravel, Galleon, Transport, Carrier and Submarine.
 - Enabled ZOC for naval units on Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.
