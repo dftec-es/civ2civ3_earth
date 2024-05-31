@@ -2,7 +2,7 @@
 [scenario]
 is_scenario=TRUE
 game_version=20600
-name=_("Earth (civ2civ3/small)")
+name=_("Earth (civ2civ3_earth/small)")
 description=_("Classic-style 80x50 map of the Earth.")
 save_random=FALSE
 players=FALSE
