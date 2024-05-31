@@ -163,7 +163,6 @@ Wonders:
 * Every wonder produces as much culture per turn as its building cost/100.
 * Internet bonus simplified to +2 Science in your cities with a Research Lab (the result after summing the +200% from all science buildings can be up to +6 bulbs per city).
 * SETI Program, available with Radio, requires Rubber and allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
-  This victory is only enabled if the server is set to end the game when the spaceship arrives (enabled by default).
 
 Future plans:
 * This might be the last version of the ruleset. Thanks to the impressive modding capabilities of Freeciv 3.1, I have finally been able to get the game balance that I like.

@@ -2209,6 +2209,26 @@ reqs    =
 ;      "Gov", "Democracy", "Player", FALSE
     }
 
+; Celebration: only city center tile
+[effect_gov_tile_bonus_celebrate_center]
+type    = "Output_Inc_Tile_Celebrate"
+value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Trade", "Local", TRUE
+      "CityTile", "Center", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+;      "Gov", "Fascism", "Player", FALSE
+;      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+    }
+
 [effect_vision_tribal]
 type    = "Unit_Vision_Radius_Sq"
 value   = 4

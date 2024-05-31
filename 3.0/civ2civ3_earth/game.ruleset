@@ -1699,5 +1699,4 @@ set =
       "phasemode", "ALL", FALSE
       "traitdistribution", "EVEN", FALSE
       "endspaceship", "ENABLED", FALSE
-      "victories", "", FALSE
     }

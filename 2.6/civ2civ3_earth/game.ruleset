@@ -835,5 +835,4 @@ set =
       "revolentype", "RANDQUICK"
       "revolen", 3
       "endspaceship", "ENABLED"
-      "victories", ""
     }

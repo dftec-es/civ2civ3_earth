@@ -957,7 +957,6 @@ reqs    =
     { "type", "name", "range", "present"
       "Building", "Airport", "City", TRUE
       "UnitType", "Nuclear", "Local", TRUE
-      "UnitState", "Transported", "Local", FALSE
     }
 
 ; Rocketry enables the movement of nuclear weapons,
@@ -2415,6 +2414,26 @@ reqs    =
 ;      "Gov", "Federation", "Player", FALSE
 ;      "Gov", "Republic", "Player", FALSE
 ;      "Gov", "Democracy", "Player", FALSE
+    }
+
+; Celebration: only city center tile
+[effect_gov_tile_bonus_celebrate_center]
+type    = "Output_Inc_Tile_Celebrate"
+value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Trade", "Local", TRUE
+      "CityTile", "Center", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+;      "Gov", "Fascism", "Player", FALSE
+;      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
     }
 
 [effect_vision_tribal]
@@ -4375,14 +4394,12 @@ reqs    =
     }
 
 ; Enables new victory condition by LUA script
-; (if server is set to end the game when the spaceship arrives)
 [effect_seti_program]
 type    = "User_Effect_1"
 value   = 1
 reqs    =
     { "type", "name", "range"
       "Building", "SETI Program", "World"
-      "ServerSetting", "endspaceship", "World"
     }
 
 [effect_seti_program_culture]

@@ -265,8 +265,8 @@ GOVERNMENTS:
 ------------
                   Anarch   Tribal   Despot   Monarc   Fundam   Republ   Democr   Federat  Commun   Fascism
 Tax/Lux/Sci Rate  0        60       60       70       70       80       90       80       90       80
-Output per tile * -1(if>2) -1(if>2) -1(if>2) 0        0        0        0        0        0        0
-Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) 0       (+1Trade)(+1Trade)(+1Trade) 0        0
+Output per tile * -1(if>2) -1(if>2) -1(if>2) -        -        -        -        -        -        -
+Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) -       (+1Trade)(+1Trade)(+1Trade) -        -
 
 Unit Upkeep       Shield   Shield   Coin     Coin     Coin(x2) Shield   Coin(x2) Coin(x2) Shield   Coin(x2)
 Free Units        2        3        2        3        2        1        1        2        3        3
@@ -291,6 +291,7 @@ by Distance      +2%      +2%      +2%      +2%      +2%      +2%      +1%      
 - Added Tribal (available with Warrior Code), Fundamentalism (available with Theology), Federation (available with Economics) and Fascism (available with Military Tactics).
 
 - "Celebration bonus": Republic and Democracy get the usual +1 Trade on every tile already producing Trade (same as Monarchy and Federation). Tribal and Despotism get the usual removal of the -1 penalty when any tile output is greater than 2.
+  The other governments get a small bonus of +1 Trade only in the city center tile (if already producing Trade).
 
 - "Base Corruption/Waste": Modern governments cause less Corruption in Trade, but more Waste in Production. The total % lost (Waste + Corruption) is equal for all governments. Corruption and waste by distance are fixed to +2% per tile for ancient governments, +1% for modern governments, and +0% for Federation and Communism.
 
@@ -747,87 +748,86 @@ WONDERS:
 - Readjusted effects of most wonders. Restored civ2 costs:
 
 FULL LIST OF WONDERS
---- It has some local effect that depends on the city where it is built.
--=- It does not matter the city where it is built.
+-=- It has some local effect that depends on the city where it is built.
+--- It does not matter the city where it is built.
 (#) It has some global effect that affects other nations.
 (*) Cost changes compared to civ2.
 "Name", Cost, Requirements, Obsolescence, Effect.
 
---- "Pyramids" 200. Obsolete by Railroad (that increases even more the production):
+-=- "Pyramids" 200. Obsolete by Railroad (that increases even more the production):
 +1 Production per worked tile in the city (already producing shields). Disables the output per tile penalty under Despotism/Tribal governments.
---- "Colossus" 200. Obsolete by Automobile (Super Highways):
+-=- "Colossus" 200. Obsolete by Automobile (Super Highways):
 +1 Trade per worked tile in the city (already producing Trade).
---- "Copernicus' Observatory" 300. Obsolete by Radio:
+-=- "Copernicus' Observatory" 300. Obsolete by Radio:
 +1 Science per worked tile, or +2 Science per scientist, in the city.
 
---- "Hanging Gardens" 200. Obsolete by Electricity (that increases Amphitheatre effect):
+-=- "Hanging Gardens" 200. Obsolete by Electricity (that increases Amphitheatre effect):
 +1 Content in all your cities, and +4 Luxury in the city where it is built.
--=- "Mausoleum of Mausolos" 200. Obsolete by Communism (Police Station):
+--- "Mausoleum of Mausolos" 200. Obsolete by Communism (Police Station):
 +1 Content in your cities with City Walls, and +1 extra content in your cities with Courthouse. Your cities are immune to incite actions.
--=- "Temple of Artemis" 300. Obsolete by Theology (that increases Cathedral effect):
+--- "Temple of Artemis" 300. Obsolete by Theology (that increases Cathedral effect):
 +2 Content in your cities with Temple.
--=- "Michelangelo's Chapel" 400:
+--- "Michelangelo's Chapel" 400:
 +1 Content in all your cities, or +2 Content in your cities with Cathedral.
---- "J.S. Bach's Cathedral" 400:
+-=- "J.S. Bach's Cathedral" 400:
 +2 Content in your cities of the same continent where it is built.
 
---- "Shakespeare's Theatre" 300:
+-=- "Shakespeare's Theatre" 300:
 +1 Luxury in your cities with Amphitheatre, and +6 additional Luxury in the city where it is built.
--=- (#)"Cure For Cancer" 600:
+--- (#)"Cure For Cancer" 600:
 +1 Luxury in all your cities, or +2 Luxury in your cities with Hospital.
 # Chance of plague reduced by -10% in every city of every nation with knowledge of Genetic Engineering.
 
---- "Marco Polo's Embassy" 200. Obsolete by The Corporation:
+-=- "Marco Polo's Embassy" 200. Obsolete by The Corporation:
 +50% Trade income from trade routes in all your cities. +1 trade route in the city where it is built.
---- "A.Smith's Trading Co" 400:
+-=- "A.Smith's Trading Co" 400:
 +1 Gold in all your cities. +1 trade route in the city where it is built.
 
---- "Great Library" 300. Obsolete by Computers (Research Lab):
+-=- "Great Library" 300. Obsolete by Computers (Research Lab):
 +1 Science in your cities with Library, and +3 additional Science in the city where it is built.
---- "Isaac Newton's College" 400:
+-=- "Isaac Newton's College" 400:
 +1 Science in your cities with University, and +6 additional Science in the city where it is built.
--=- "Darwin's Voyage" 400:
+--- "Darwin's Voyage" 400:
 +1 Science in all your cities.
--=- (#)"Internet" 600:
+--- (#)"Internet" 600:
 +2 Science in your cities with Research Lab.
 # Reveals all cities in the map for every nation with knowledge of Computers.
 
--=- "Lighthouse" 200. Requires adjacent ocean. Obsolete by Navigation (Frigate):
+--- "Lighthouse" 200. Requires adjacent ocean. Obsolete by Navigation (Frigate):
 +1 Move point for all your naval units, and they are built veteran in all your cities.
--=- "Magellan's Expedition" 400. Requires adjacent ocean. Obsolete by Nuclear Power (that increases even more the movement of naval units):
+--- "Magellan's Expedition" 400. Requires adjacent ocean. Obsolete by Nuclear Power (that increases even more the movement of naval units):
 +1 Move point for all your naval units, and +50% chance to become veteran after a battle.
 
---- "Sun Tzu's War Academy" 300. Obsolete by Mobile Warfare (Barracks III):
+-=- "Sun Tzu's War Academy" 300. Obsolete by Mobile Warfare (Barracks III):
 +1 Veteran level for all your military ground units built in cities of the same continent where this wonder is built (cumulative to Barracks).
--=- "King Richard's Crusade" 300. Obsolete by Flight:
+--- "King Richard's Crusade" 300. Obsolete by Flight:
 +50% Chance of veteran after a battle, for all military ground units. Prevents 1 unhappy citizen per city caused by the size of your empire.
---- "Great Wall" 300. Obsolete by Machine Tools (Artillery):
+-=- "Great Wall" 300. Obsolete by Machine Tools (Artillery):
 +50% Defense bonus against ground units in your cities of the same continent where this wonder is built (cumulative to City Walls).
--=- "Leonardo's Workshop" 400. Obsolete by Combustion:
+--- "Leonardo's Workshop" 400. Obsolete by Combustion:
 Upgrades one obsolete unit per game turn.
 
--=- "Statue of Zeus" 200. Obsolete by Conscription (that enables wonder with similar effect):
+--- "Statue of Zeus" 200. Obsolete by Conscription (that enables wonder with similar effect):
 +1 Unit per city free of causing unhappiness due to military activity, +2 free shield (or +2 coins) per city for upkeep of units.
--=- (#)"Women's Suffrage" 600:
+--- (#)"Women's Suffrage" 600:
 +2 Units per city free of causing unhappiness due to military activity (cumulative to Police Stations).
 # Revolution when unhappy (under Democracy or Republic) delayed 1 turn for every nation.
 
--=- "Statue of Liberty" 400:
+--- "Statue of Liberty" 400:
 Ignores the effect of having a senate. Any government available. No Anarchy periods when government changes.
---- "Eiffel Tower" 400*:
+-=- "Eiffel Tower" 400*:
 -25% Pollution caused by population in your cities. +50% Luxury in the city where it is built.
---- "Hoover Dam" 600. Requires adjacent river:
+-=- "Hoover Dam" 600. Requires adjacent river:
 Gives to all your Hydro Plants the same effect as Solar Plants (-25% pollution caused by production). Doubles the bonus to production of an Hydro Plant in the city (+50% Production).
 
--=- (#)"SETI Program" 600. Requires Rubber:
+--- (#)"SETI Program" 600. Requires Rubber:
 # Enables a new victory condition for every nation: when a nation's score and culture are more than 4 times the second-highest.
-This victory is disabled if the setting to end the game when a spaceship arrives is disabled (enabled by default).
--=- (#)"Manhattan Project" 600. Requires Uranium:
+--- (#)"Manhattan Project" 600. Requires Uranium:
 # Enables Nuclear units for every nation.
--=- (#)"Apollo Program" 600. Requires Aluminum:
+--- (#)"Apollo Program" 600. Requires Aluminum:
 Makes the entire map (but not the units) permanently visible for the owner.
 # Enables space race for every nation.
---- (#)"United Nations" 600:
+-=- (#)"United Nations" 600:
 +1 Veteran level for Diplomats and Spies built in the city.
 # Embassy with all players for every nation. Revolution when unhappy effect for every nation.
 
