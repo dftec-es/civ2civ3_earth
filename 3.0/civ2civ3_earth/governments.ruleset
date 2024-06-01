@@ -11,8 +11,8 @@
 ; than minor changes.
 
 [datafile]
-description="Civ2Civ3 governments data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset government data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 [governments]
@@ -81,6 +81,7 @@ _("\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
+* All citizens are unhappy by default.\n\
 * Each city can support up to 2 units for free; further units each cost\
  1 shield per turn.\n\
 * Military units do not cause unhappiness even when deployed aggressively.\n\
@@ -123,6 +124,8 @@ _("\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
+* The first 5 citizens of each city are content by default.\
+ The 6th citizen will be the first unhappy one.\n\
 * Each city can support up to 3 units for free; further units each cost\
  1 shield per turn.\n\
 * Unlike later governments, military units do not cause unhappiness even\
@@ -158,6 +161,8 @@ _("\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
  suffer a -1 penalty, unless the city working it is celebrating.\
  (Cities below size 3 will not celebrate.)\n\
+* The first 4 citizens of each city are content by default.\
+ The 5th citizen will be the first unhappy one.\n\
 * Each city can support up to 2 units for free; further units each cost\
  1 gold per turn.\n\
 * Unlike later governments, military units do not cause unhappiness even\
@@ -196,6 +201,7 @@ _("\
  Palace) get a +50% bonus to luxury production.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 4 citizens of each city are content by default.\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 gold per turn.\n\
 * Each city tolerates up to 3 aggressively deployed military units;\
@@ -241,6 +247,7 @@ _("\
 * City improvements which would normally have an upkeep of 1 or 2 gold\
  are free of upkeep.\n\
 * Cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).\n\
+* The first 5 citizens of each city are content by default.\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 shield per turn.\n\
 * Each city tolerates up to 3 aggressively deployed military units;\
@@ -286,6 +293,7 @@ Fundamentalism gets a significant bonus to gold production, especially\
 "),
 ; /* xgettext:no-c-format */
 _("\
+* The first 4 citizens of each city are content by default.\n\
 * Each city can support up to 2 units for free; further units each cost\
  2 gold per turn (except for Fanatics).\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
@@ -325,9 +333,10 @@ It is a good alternative to Democracy for larger empires or more\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Each city gets 2 extra luxury points.\n\
+* Citizens produce 2 extra luxury points in each city.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 6 citizens of each city are content by default.\n\
 * Each city can support up to 2 units for free; further units each cost\
  2 gold per turn.\n\
 * Each city tolerates up to 2 aggressively deployed military units;\
@@ -364,9 +373,11 @@ Republic gets a significant bonus to trade on irrigated land; but it\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Cities produce one extra trade point for every tile with an irrigation.\n\
+* Citizens produce one extra trade point when they work a tile with an \
+irrigation.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 5 citizens of each city are content by default.\n\
 * Each city can support one unit for free; further units each cost\
  1 shield per turn.\n\
 * Each city tolerates a single aggressively deployed military unit;\
@@ -407,9 +418,11 @@ It is the best government once city celebrations give revenues (when\
 "),
 ; /* xgettext:no-c-format */
 _("\
-* Cities produce one extra trade point for every tile with an irrigation.\n\
+* Citizens produce one extra trade point when they work a tile with an \
+irrigation.\n\
 * Celebrating cities produce one extra trade point for every tile which is\
  already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 6 citizens of each city are content by default.\n\
 * Each city can support one unit for free; further units each cost\
  2 gold per turn.\n\
 * Each city tolerates a single aggressively deployed military unit;\
@@ -451,8 +464,8 @@ It is a good alternative for militaristic nations, especially when city\
 _("\
 * Increases by a quarter the chance of any unit to obtain the next\
  veteran level after a battle.\n\
-* City improvements which would normally have an upkeep of 1 or 2 gold\
- are free of upkeep.\n\
+* Citizens produce one extra gold when they work a tile with a mine.\n\
+* The first 5 citizens of each city are content by default.\n\
 * Each city can support up to 3 units for free (the maximum possible);\
  further units each cost 1 shield per turn.\n\
 * Military units do not cause unhappiness even when deployed aggressively.\n\
@@ -491,15 +504,4 @@ _("\
 ; */ <-- avoid gettext warnings
 
 ; Multiplier factor * effect value should be 100 (this way UI values are used as-is)
-[multiplier_ai_love]
-name      = _("AI love for humans")
-start     = -20
-stop      = 20
-step      = 5
-offset    = 0
-factor    = -10
-default   = -10
-helptext  = _("\
-This setting allows you to reduce (to get a harder AI) or increase\
- (to get an easier AI) the love of the AI for the human players.\
-")
+

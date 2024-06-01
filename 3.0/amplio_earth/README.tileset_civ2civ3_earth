@@ -2,16 +2,17 @@
 Amplio Earth Tileset for Freeciv v3.0
 =====================================
 
-Tileset based on Amplio2, but with small flags, small resources, and colors more similar to Amplio (and to minimap).
+Tileset based on Amplio2 (by GriffonSpade), but with small flags, small resources, and colors more similar to Amplio (and to minimap).
 Compiled by Bardo and released under GPLv2 license (see each .spec file for detailed credits).
 
 Modded from Amplio2:
-- hills (matched amplio colors).
-- mountains (matched amplio colors).
+- mountains, with colors from Amplio mountains.
+- hills, with colors from Amplio plains.
 - forests from Freeland tileset, with colors from Amplio trees.
+- grid, with whiter colors and thinner lines.
 
 Terrains based on Amplio:
-- grassland, impassable terrain (with altered perspective), maglev, and ditter effect, from Amplio2.
+- grassland, impassable terrain (with isometric perspective), maglev, and ditter effect, from Amplio2.
 - hills and mountains use plains as first layer, forests use grassland.
 - swamp colors normalized.
 - added new resources.
@@ -20,10 +21,11 @@ Units:
 - added animals.
 - alternative gfx for some units from Amplio2XU.
 - fixed some white pixels that should be transparent in Trireme, Explorer, Horsemen and Dragoons.
+- edited hit-point bars for better approx of remaining hp.
 
 Extras:
 - added canals and extra bases.
-- gfx for Hospital, Ecclesiastical Palace, and Fascism.
+- gfx for Ecclesiastical Palace, and Fascism.
 
 
 Result:
@@ -33,3 +35,22 @@ hills     (amplio + amplio2)
 mountains (amplio + amplio2)
 terrain1  (amplio + amplio2)
 units     (amplio + amplio2XU)
+anything else      (amplio2)
+
+
+=====================================
+Ampliohex Earth Tileset
+=====================================
+
+The hexagonal version uses most of the files from amplio_earth folder, with the same isometric view and the same tile size.
+
+Edited .spec files of forest, hills and mountains to match the hexagonal topology (East-West tiles no longer adjacent).
+
+Modded from Hexemplio:
+- Rivers and canals, scaled down to Amplio hex tile size.
+- Grid file was mostly redone, with whiter colors and thinner lines, including new hex gfx for darkness and fog.
+
+Known issues:
+- Ocean file needs to be adjusted for the lack of E-W blend between land, ocean, and deep ocean.
+I made some minor adjustments, but it is still too noticeable.
+

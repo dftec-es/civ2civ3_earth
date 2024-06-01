@@ -249,13 +249,12 @@ sound		= "b_barracks_i"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-With a Barracks, each new land unit built in a city will automatically \
-have Veteran status, which means that its attack and defense strengths \
-are increased by 50%.\
+With a Barracks, each new military land unit built in a city will \
+automatically have Veteran status, which means that its attack and \
+defense strengths are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn without \
-moving recover half of their hit points. If there is a Hospital also \
-present in the city, the units are completely restored.\
+moving recover half of their hit points.\
 ")
 
 [building_barracks_ii]
@@ -279,13 +278,12 @@ sound		= "b_barracks_ii"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-With a Barracks, each new land unit built in a city will automatically \
-have Veteran status, which means that its attack and defense strengths \
-are increased by 50%.\
+With a Barracks, each new military land unit built in a city will \
+automatically have Veteran status, which means that its attack and \
+defense strengths are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn without \
-moving recover half of their hit points. If there is a Hospital also \
-present in the city, the units are completely restored.\
+moving recover half of their hit points.\
 ")
 
 [building_barracks_iii]
@@ -307,13 +305,12 @@ sound		= "b_barracks_iii"
 sound_alt	= "b_generic"
 ; /* xgettext:no-c-format */
 helptext	= _("\
-With a Barracks, each new land unit built in a city will automatically \
-have Veteran status, which means that its attack and defense strengths \
-are increased by 50%.\
+With a Barracks, each new military land unit built in a city will \
+automatically have Veteran status, which means that its attack and \
+defense strengths are increased by 50%.\
 "), _("\
 Also, damaged land units which stay in town for one full turn without \
-moving recover half of their hit points. If there is a Hospital also \
-present in the city, the units are completely restored.\
+moving recover half of their hit points.\
 ")
 
 [building_cathedral]
@@ -527,12 +524,13 @@ genus		= "Improvement"
 reqs	=
     { "type", "name", "range"
       "Tech", "Seafaring", "Player"
-      "TerrainFlag", "Sea", "Adjacent"
+      "TerrainClass", "Oceanic", "Adjacent"
     }
 graphic	= "b.harbour"
 graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range"
+    { "type", "name", "range", "present"
+      "Terrain", "Ocean", "Adjacent", FALSE
     }
 build_cost	= 40
 upkeep		= 1
@@ -574,7 +572,8 @@ limit.\
 "), _("\
 Also, damaged land units (non wheeled) which stay in town for one \
 full turn without moving recover half of their hit points. If there is \
-a Barracks also present in the city, the units are completely restored.\
+a Barracks also present in the city, these units recover two-thirds of \
+their hit points.\
 ")
 
 [building_hydro_plant]
@@ -1673,6 +1672,30 @@ further 25% in your cities with Hydro Plants, making them equivalent \
 to Solar Plants.\
 ")
 
+[building_internet]
+name		= _("Internet")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Computers", "Player"
+    }
+graphic		= "b.internet"
+graphic_alt	= "b.seti_program"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost	= 600
+upkeep		= 0
+sabotage	= 0
+sound		= "w_seti_program"
+sound_alt	= "w_generic"
+helptext	= _("\
+Citizens produce 2 extra science points in your cities with Research Lab.\
+"), _("\
+All cities on the map will be continuously visible, despite fog-of-war, \
+to every player with knowledge of Computers.\
+")
+
 [building_isaac_newtons_college]
 name		= _("Isaac Newton's College")
 genus		= "GreatWonder"
@@ -1741,8 +1764,8 @@ Doubles the base number of cities that your empire can support before \
 they start to cause additional unhappy citizens -- in other words, it \
 prevents 1 unhappy citizen per city caused by the size of your empire.\
 "), _("\
-The chance of a land unit getting the next veteran level after a battle \
-increases by half.\
+The chance of a military land unit getting the next veteran level after \
+a battle increases by half.\
 ")
 
 [building_leonardos_workshop]
@@ -1773,7 +1796,7 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Map Making", "Player"
-      "TerrainFlag", "Sea", "Adjacent"
+      "Terrain", "Ocean", "Adjacent"
     }
 graphic	= "b.lighthouse"
 graphic_alt	= "-"
@@ -1797,7 +1820,7 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Magnetism", "Player"
-      "TerrainFlag", "Sea", "Adjacent"
+      "Terrain", "Ocean", "Adjacent"
     }
 graphic	= "b.magellans_expedition"
 graphic_alt	= "-"
@@ -1862,29 +1885,6 @@ Increases the trade income of all your trade routes by 50%.\
 The city where it is built can establish one extra trade route.\
 ")
 
-[building_michelangelos_chapel]
-name		= _("Michelangelo's Chapel")
-genus		= "GreatWonder"
-reqs	=
-    { "type", "name", "range"
-      "Tech", "Monotheism", "Player"
-    }
-graphic	= "b.michelangelos_chapel"
-graphic_alt	= "-"
-obsolete_by	=
-    { "type", "name", "range"
-    }
-build_cost	= 400
-upkeep		= 0
-sabotage	= 0
-sound		= "w_michelangelos_chapel"
-sound_alt	= "w_generic"
-helptext	= _("\
-Makes 1 unhappy citizen content in all your cities, and a total of 2 \
-unhappy citizens content in your cities with Cathedral. However, it does \
-not affect citizens made unhappy by aggression.\
-")
-
 [building_mausoleum_of_mausolos]
 name		= _("Mausoleum of Mausolos")
 genus		= "GreatWonder"
@@ -1909,52 +1909,27 @@ citizen content in their city, unless that citizen is unhappy about \
 aggression. Also, none of the owner's cities can be incited to revolt.\
 ")
 
-[building_statue_of_zeus]
-name		= _("Statue of Zeus")
+[building_michelangelos_chapel]
+name		= _("Michelangelo's Chapel")
 genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
-      "Tech", "Polytheism", "Player"
+      "Tech", "Monotheism", "Player"
     }
-graphic         = "b.statue_of_zeus"
-graphic_alt     = "b.oracle"
+graphic	= "b.michelangelos_chapel"
+graphic_alt	= "-"
 obsolete_by	=
-    { "type", "name", "range", "survives"
-      "Tech", "Conscription", "Player", FALSE
-    }
-build_cost	= 200
-upkeep		= 0
-sabotage	= 0
-sound		= "w_oracle"
-sound_alt	= "w_generic"
-helptext	= _("\
-Neutralizes the unhappiness caused by one aggressively deployed \
-military unit per city.\
-"), _("\
-Each city also gets 2 free shields or 2 free gold to pay the upkeep of units.\
-")
-
-[building_temple_of_artemis]
-name		= _("Temple of Artemis")
-genus		= "GreatWonder"
-reqs	=
     { "type", "name", "range"
-      "Tech", "Mysticism", "Player"
     }
-graphic         = "b.temple_of_artemis"
-graphic_alt     = "b.oracle"
-obsolete_by	=
-    { "type", "name", "range", "survives"
-      "Tech", "Theology", "Player", FALSE
-    }
-build_cost	= 300
+build_cost	= 400
 upkeep		= 0
 sabotage	= 0
-sound		= "w_oracle"
+sound		= "w_michelangelos_chapel"
 sound_alt	= "w_generic"
 helptext	= _("\
-Makes 2 additional unhappy citizens content in every city with \
-a Temple. Does not affect citizens made unhappy by aggression.\
+Makes 1 unhappy citizen content in all your cities, and a total of 2 \
+unhappy citizens content in your cities with Cathedral. However, it does \
+not affect citizens made unhappy by aggression.\
 ")
 
 [building_pyramids]
@@ -1981,31 +1956,6 @@ generating some shield output produces one extra shield resource. \
 Under Despotism or Tribal governments, the Pyramids cancel the penalty \
 to worked tiles with output greater than 2 (for all kinds of output), \
 as if all your cities were always celebrating.\
-")
-
-[building_internet]
-name		= _("Internet")
-genus		= "GreatWonder"
-reqs	=
-    { "type", "name", "range"
-      "Tech", "Computers", "Player"
-    }
-graphic		= "b.internet"
-graphic_alt	= "b.seti_program"
-obsolete_by	=
-    { "type", "name", "range"
-    }
-build_cost	= 600
-upkeep		= 0
-sabotage	= 0
-sound		= "w_seti_program"
-sound_alt	= "w_generic"
-helptext	= _("\
-Technology upkeep is reduced by 2 bulbs in each of your cities, or by \
-a total of 4 bulbs in your cities with Research Lab.\
-"), _("\
-All cities on the map will be continuously visible, despite fog-of-war, \
-to every player with knowledge of Computers.\
 ")
 
 [building_shakespeares_theatre]
@@ -2056,6 +2006,31 @@ regardless of any senate instituted by a Democracy or Republic \
 government or by the United Nations.\
 ")
 
+[building_statue_of_zeus]
+name		= _("Statue of Zeus")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Polytheism", "Player"
+    }
+graphic         = "b.statue_of_zeus"
+graphic_alt     = "b.oracle"
+obsolete_by	=
+    { "type", "name", "range", "survives"
+      "Tech", "Conscription", "Player", FALSE
+    }
+build_cost	= 200
+upkeep		= 0
+sabotage	= 0
+sound		= "w_oracle"
+sound_alt	= "w_generic"
+helptext	= _("\
+Neutralizes the unhappiness caused by one aggressively deployed \
+military unit per city.\
+"), _("\
+Each city also gets 2 free shields or 2 free gold to pay the upkeep of units.\
+")
+
 [building_sun_tzus_war_academy]
 name		= _("Sun Tzu's War Academy")
 genus		= "GreatWonder"
@@ -2077,6 +2052,29 @@ sound_alt	= "w_generic"
 helptext	= _("\
 All your new military land units start with an additional veteran level, \
 in cities of the same continent where this wonder is built.\
+")
+
+[building_temple_of_artemis]
+name		= _("Temple of Artemis")
+genus		= "GreatWonder"
+reqs	=
+    { "type", "name", "range"
+      "Tech", "Mysticism", "Player"
+    }
+graphic         = "b.temple_of_artemis"
+graphic_alt     = "b.oracle"
+obsolete_by	=
+    { "type", "name", "range", "survives"
+      "Tech", "Theology", "Player", FALSE
+    }
+build_cost	= 300
+upkeep		= 0
+sabotage	= 0
+sound		= "w_oracle"
+sound_alt	= "w_generic"
+helptext	= _("\
+Makes 2 additional unhappy citizens content in every city with \
+a Temple. Does not affect citizens made unhappy by aggression.\
 ")
 
 [building_united_nations]

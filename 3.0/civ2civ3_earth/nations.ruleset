@@ -8,8 +8,8 @@
 ; use your new customized file.
 
 [datafile]
-description="Default nations data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset nation data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 ; This section contains meta information for freeciv-ruledit and freeciv-ruleup
@@ -43,18 +43,18 @@ default_government = "Despotism"
 
 ; Value of trait "expansionist" defines how much AI wants to settle new territory.
 expansionist_min = 30
-expansionist_max = 90
+expansionist_max = 70
 expansionist_default = 50
 
 ; Value of trait "trader" defines how much AI wants to establish trade routes.
 trader_min = 30
-trader_max = 90
-trader_default = 50
+trader_max = 50
+trader_default = 40
 
 ; Value of trait "aggressive" defines how easily AI declares war.
 aggressive_min = 30
 aggressive_max = 90
-aggressive_default = 50
+aggressive_default = 60
 
 ; Please keep [ruledit] section in sync with these includes
 *include "default/nationlist.ruleset"

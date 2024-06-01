@@ -8,8 +8,8 @@
 ; use your new customized file.
 
 [datafile]
-description="Civ2Civ3 technology data for Freeciv"
-options="+Freeciv-3.0-ruleset web-compatible"
+description="Civ2Civ3 Earth ruleset tech data for Freeciv"
+options="+Freeciv-3.0-ruleset"
 format_version=10
 
 [control]
@@ -517,6 +517,7 @@ helptext = _("\
 Aluminum resources produce 2 extra shields in the tile where they are \
 located.\
 "), _("\
+Aluminum is required in a city to build the wonder Apollo Program. \
 Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
 Missile, Fighter and Bomber units with one extra veteran level.\
 ")

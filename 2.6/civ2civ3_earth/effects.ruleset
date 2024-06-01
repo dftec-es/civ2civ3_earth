@@ -34,10 +34,8 @@ options="+Freeciv-2.6-ruleset"
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10
-multiplier = "AI love for humans"
 reqs    =
     { "type", "name", "range", "present"
-      "AI", "Away", "Player", FALSE
       "AI", "Novice", "Player", FALSE
       "AI", "Easy", "Player", FALSE
       "AI", "Normal", "Player", FALSE
@@ -253,10 +251,6 @@ reqs    =
       "OutputType", "Shield", "Local"
     }
 
-[effect_unhappysize]
-type    = "City_Unhappy_Size"
-value   = 5
-
 ; Barbarian effects
 
 [effect_barb1]
@@ -326,9 +320,9 @@ reqs    =
       "UnitClass", "Sea", "Local", TRUE
     }
 
-; Damage caused by naval mines (on adjacent tile)
-[effect_naval_mine_damage]
-type    = "Unit_Recover"
+; Movement penalty adjacent to naval mines
+[effect_naval_movement]
+type    = "Move_Bonus"
 value   = -6
 reqs    =
     { "type", "name", "range", "present"
@@ -338,7 +332,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -357,26 +351,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
-;      "UnitClass", "Sea", "Local", FALSE
-;      "UnitClass", "Trireme", "Local", FALSE
-;      "UnitClass", "Sub", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
-    }
-
-[effect_storm_damage]
-type    = "Unit_Recover"
-value   = -4
-reqs    =
-    { "type", "name", "range", "present"
-      "Extra", "Storm", "Adjacent", TRUE
-      "TerrainClass", "Oceanic", "Local", TRUE
-      "UnitClass", "Land", "Local", FALSE
-      "UnitClass", "Small Land", "Local", FALSE
-      "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -393,6 +368,31 @@ value   = -20
 reqs    =
     { "type", "name", "range"
       "UnitType", "Storm", "Local"
+    }
+
+; AI units seem to get stuck around tiles with negative Unit_Recover
+[effect_storm_damage]
+type    = "Unit_Recover"
+value   = -4
+reqs    =
+    { "type", "name", "range", "present"
+      "Extra", "Storm", "Adjacent", TRUE
+      "TerrainClass", "Oceanic", "Local", TRUE
+      "UnitClass", "Land", "Local", FALSE
+      "UnitClass", "Small Land", "Local", FALSE
+      "UnitClass", "Big Land", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
+;      "UnitClass", "Sea", "Local", FALSE
+;      "UnitClass", "Trireme", "Local", FALSE
+;      "UnitClass", "Sub", "Local", FALSE
+      "UnitClass", "Helicopter", "Local", FALSE
+      "UnitClass", "Air", "Local", FALSE
+      "UnitClass", "Missile", "Local", FALSE
+      "AI", "Novice", "Player", FALSE
+      "AI", "Easy", "Player", FALSE
+      "AI", "Normal", "Player", FALSE
+      "AI", "Hard", "Player", FALSE
+      "AI", "Cheating", "Player", FALSE
     }
 
 [effect_storm_vision]
@@ -414,7 +414,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -442,7 +442,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -460,7 +460,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -490,7 +490,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -511,7 +511,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -529,7 +529,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -558,7 +558,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -578,7 +578,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -599,7 +599,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -607,24 +607,6 @@ reqs    =
 ;      "UnitClass", "Air", "Local", FALSE
 ;      "UnitClass", "Missile", "Local", FALSE
     }
-
-[effect_trade_routes]
-type    = "Max_Trade_Routes"
-value   = 1
-
-; 1 + 1 = 2
-[effect_trade_routes_corporation]
-type    = "Max_Trade_Routes"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Tech", "The Corporation", "Player"
-    }
-
-; Default effect is 100, so this halves the income
-[effect_traderoute_pct]
-type    = "Traderoute_Pct"
-value   = -50
 
 ; Base vision range - radius of vision is sqrt(5) = 2.24
 [effect_city_vision]
@@ -650,7 +632,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -671,7 +653,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -680,7 +662,7 @@ reqs    =
       "UnitClass", "Missile", "Local", FALSE
     }
 
-; Movement penalty on unroaded river (for every land unit)
+; Movement penalty on unroaded river (for wheeled units)
 [effect_river_movement]
 type    = "Move_Bonus"
 value   = -1
@@ -689,16 +671,7 @@ reqs    =
       "Extra", "River", "Local", TRUE
       "Extra", "Road", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
-;      "UnitClass", "Land", "Local", FALSE
-;      "UnitClass", "Small Land", "Local", FALSE
-;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
-      "UnitClass", "Sea", "Local", FALSE
-      "UnitClass", "Trireme", "Local", FALSE
-      "UnitClass", "Sub", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+      "UnitClass", "Big Land", "Local", TRUE
     }
 
 ; Movement penalty on unroaded terrain (other than mountains) not suitable for wheeled units (big land)
@@ -711,16 +684,7 @@ reqs    =
       "Terrain", "Mountains", "Local", FALSE
       "Extra", "Road", "Local", FALSE
       "UnitFlag", "IgTer", "Local", FALSE
-      "UnitClass", "Land", "Local", FALSE
-      "UnitClass", "Small Land", "Local", FALSE
-;      "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
-      "UnitClass", "Sea", "Local", FALSE
-      "UnitClass", "Trireme", "Local", FALSE
-      "UnitClass", "Sub", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+      "UnitClass", "Big Land", "Local", TRUE
     }
 
 ; Nuclear power gives +1 moves to sea units
@@ -810,7 +774,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -830,13 +794,119 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
       "UnitClass", "Helicopter", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
+    }
+
+; tech_upkeep_divider = 6000, Max tech upkeep = 12
+[effect_upkeep_tech_base]
+type    = "Tech_Upkeep_Free"
+value   = 2
+
+[effect_tech_cost_base]
+type    = "Tech_Cost_Factor"
+value   = 3
+
+; No base pop pollution; buildings will increase it
+[effect_pollu_pop]
+type    = "Pollu_Pop_Pct"
+value   = -100
+
+; Cities can always work tiles
+[effect_tile_workable]
+type    = "Tile_Workable"
+value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "Terrain", "Inaccessible", "Local", FALSE
+    }
+
+; each city has at least one slot to build units
+[effect_city_build_slots_basic]
+type    = "City_Build_Slots"
+value   = 1
+
+[effect_trade_routes]
+type    = "Max_Trade_Routes"
+value   = 1
+
+; 1 + 1 = 2
+[effect_trade_routes_corporation]
+type    = "Max_Trade_Routes"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Tech", "The Corporation", "Player"
+    }
+
+; Default effect is 100, so this halves the income
+[effect_traderoute_pct]
+type    = "Traderoute_Pct"
+value   = -50
+
+;pow(2, value/1000) -> Base = 50%
+[effect_base_trade_revenue_reduce]
+type    = "Trade_Revenue_Bonus"
+value   = -1000
+
+; The 4 first citizens are content
+; (All citizens are unhappy under Anarchy)
+[effect_unhappysize]
+type    = "City_Unhappy_Size"
+value   = 4
+reqs    =
+    { "type", "name", "range", "present"
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+;      "Gov", "Despotism", "Player", FALSE
+;      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+    }
+
+; The 5 first citizens are content
+[effect_unhappysize_1]
+type    = "City_Unhappy_Size"
+value   = 5
+reqs    =
+    { "type", "name", "range", "present"
+      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+;      "Gov", "Fascism", "Player", FALSE
+;      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+;      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+    }
+
+; The 6 first citizens are content
+[effect_unhappysize_2]
+type    = "City_Unhappy_Size"
+value   = 6
+reqs    =
+    { "type", "name", "range", "present"
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+;      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+;      "Gov", "Democracy", "Player", FALSE
     }
 
 ; Base -1% food each 1 tile
@@ -1550,7 +1620,7 @@ reqs    =
 
 [effect_civil_war_anarchy]
 type    = "Civil_War_Chance"
-value   = 99
+value   = 50
 reqs    =
     { "type", "name", "range"
       "Gov", "Anarchy", "Player"
@@ -1558,7 +1628,7 @@ reqs    =
 
 [effect_civil_war_tribal]
 type    = "Civil_War_Chance"
-value   = 45
+value   = 40
 reqs    =
     { "type", "name", "range"
       "Gov", "Tribal", "Player"
@@ -1566,7 +1636,7 @@ reqs    =
 
 [effect_civil_war_despotism]
 type    = "Civil_War_Chance"
-value   = 50
+value   = 45
 reqs    =
     { "type", "name", "range"
       "Gov", "Despotism", "Player"
@@ -1582,7 +1652,7 @@ reqs    =
 
 [effect_civil_war_fascism]
 type    = "Civil_War_Chance"
-value   = 40
+value   = 25
 reqs    =
     { "type", "name", "range"
       "Gov", "Fascism", "Player"
@@ -1590,7 +1660,7 @@ reqs    =
 
 [effect_civil_war_communism]
 type    = "Civil_War_Chance"
-value   = 25
+value   = 20
 reqs    =
     { "type", "name", "range"
       "Gov", "Communism", "Player"
@@ -1606,7 +1676,7 @@ reqs    =
 
 [effect_civil_war_federation]
 type    = "Civil_War_Chance"
-value   = 10
+value   = 5
 reqs    =
     { "type", "name", "range"
       "Gov", "Federation", "Player"
@@ -1614,7 +1684,7 @@ reqs    =
 
 [effect_civil_war_republic]
 type    = "Civil_War_Chance"
-value   = 20
+value   = 15
 reqs    =
     { "type", "name", "range"
       "Gov", "Republic", "Player"
@@ -1622,7 +1692,7 @@ reqs    =
 
 [effect_civil_war_democracy]
 type    = "Civil_War_Chance"
-value   = 15
+value   = 10
 reqs    =
     { "type", "name", "range"
       "Gov", "Democracy", "Player"
@@ -2095,12 +2165,24 @@ reqs    =
 ;      "Gov", "Democracy", "Player", FALSE
     }
 
-[effect_content_tribal]
-type    = "Make_Content"
+; Celebration: only city center tile
+[effect_gov_tile_bonus_celebrate_center]
+type    = "Output_Inc_Tile_Celebrate"
 value   = 1
 reqs    =
-    { "type", "name", "range"
-      "Gov", "Tribal", "Player"
+    { "type", "name", "range", "present"
+      "OutputType", "Trade", "Local", TRUE
+      "CityTile", "Center", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+;      "Gov", "Fascism", "Player", FALSE
+;      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
     }
 
 [effect_vision_tribal]
@@ -2300,7 +2382,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2318,7 +2400,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2452,7 +2534,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2472,7 +2554,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2490,7 +2572,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2510,7 +2592,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2528,7 +2610,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2548,7 +2630,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2593,7 +2675,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2627,7 +2709,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -2813,9 +2895,29 @@ reqs    =
       "Building", "Hospital", "City"
     }
 
+; 15 + 50 = 65 with both Hospital and Barracks
 [effect_hospital_regen]
 type    = "HP_Regen"
-value   = 50
+value   = 15
+reqs    =
+    { "type", "name", "range", "present"
+      "Building", "Hospital", "City", TRUE
+;      "UnitClass", "Land", "Local", FALSE
+;      "UnitClass", "Small Land", "Local", FALSE
+      "UnitClass", "Big Land", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
+      "UnitClass", "Sea", "Local", FALSE
+      "UnitClass", "Trireme", "Local", FALSE
+      "UnitClass", "Sub", "Local", FALSE
+      "UnitClass", "Helicopter", "Local", FALSE
+      "UnitClass", "Air", "Local", FALSE
+      "UnitClass", "Missile", "Local", FALSE
+    }
+
+; 15 + 35 = 50 without Barracks
+[effect_hospital_regen_1]
+type    = "HP_Regen"
+value   = 35
 reqs    =
     { "type", "name", "range", "present"
       "Building", "Hospital", "City", TRUE
@@ -2825,7 +2927,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -2967,6 +3069,15 @@ reqs    =
 [effect_mfg_plant_1]
 type    = "Pollu_Pop_Pct"
 value   = 25
+reqs    =
+    { "type", "name", "range"
+      "Building", "Mfg. Plant", "City"
+    }
+
+; 1 + 1 = 2 slots total
+[effect_mfg_plant_2]
+type    = "City_Build_Slots"
+value   = 1
 reqs    =
     { "type", "name", "range"
       "Building", "Mfg. Plant", "City"
@@ -3225,7 +3336,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -3243,7 +3354,7 @@ reqs    =
       "UnitClass", "Land", "Local", FALSE
       "UnitClass", "Small Land", "Local", FALSE
       "UnitClass", "Big Land", "Local", FALSE
-      "UnitClass", "Merchant", "Local", FALSE
+      "UnitClass", "Fast Land", "Local", FALSE
 ;      "UnitClass", "Sea", "Local", FALSE
 ;      "UnitClass", "Trireme", "Local", FALSE
 ;      "UnitClass", "Sub", "Local", FALSE
@@ -3480,30 +3591,32 @@ type    = "Output_Add_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "Extra", "Road", "Local", TRUE
       "Building", "Super Highways", "City", TRUE
-      "OutputType", "Trade", "Local", TRUE
+      "Extra", "Road", "Local", TRUE
       "Extra", "Farmland", "Local", FALSE
       "Extra", "Mine", "Local", FALSE
       "Extra", "Oil Well", "Local", FALSE
       "Extra", "Lumber", "Local", FALSE
-      "CityTile", "Center", "Local", FALSE
+      "OutputType", "Trade", "Local", TRUE
     }
 
-; City center tiles do get the Super Highways + road trade bonus, even
-; if they are already receiving a (possibly 'automatic') farmland bonus
+; City center tiles don't get Super Highways + road trade bonus
+; if they are already receiving an automatic farmland bonus
 [effect_super_highways_city_center]
 type    = "Output_Add_Tile"
-value   = 1
+value   = -1
 reqs    =
     { "type", "name", "range", "present"
-      "Extra", "Road", "Local", TRUE
       "Building", "Super Highways", "City", TRUE
-      "OutputType", "Trade", "Local", TRUE
+      "Building", "Supermarket", "City", TRUE
+      "Extra", "Road", "Local", TRUE
+      "Extra", "Farmland", "Local", FALSE
       "Extra", "Mine", "Local", FALSE
       "Extra", "Oil Well", "Local", FALSE
       "Extra", "Lumber", "Local", FALSE
+      "TerrainAlter", "CanIrrigate", "Local", TRUE
       "CityTile", "Center", "Local", TRUE
+      "OutputType", "Trade", "Local", TRUE
     }
 
 [effect_super_highways_1]
@@ -3729,9 +3842,9 @@ reqs    =
 type    = "Health_Pct"
 value   = 10
 reqs    =
-    { "type", "name", "range", "survives"
-      "Building", "Cure For Cancer", "World", TRUE
-      "Tech", "Genetic Engineering", "Player", FALSE
+    { "type", "name", "range"
+      "Building", "Cure For Cancer", "World"
+      "Tech", "Genetic Engineering", "Player"
     }
 
 [effect_cure_for_cancer_culture]
@@ -3827,7 +3940,7 @@ reqs    =
 ;      "UnitClass", "Land", "Local", FALSE
 ;      "UnitClass", "Small Land", "Local", FALSE
 ;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
+;      "UnitClass", "Fast Land", "Local", FALSE
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Sub", "Local", FALSE
@@ -3887,6 +4000,34 @@ value   = 6
 reqs    =
     { "type", "name", "range"
       "Building", "Hoover Dam", "City"
+    }
+
+[effect_internet]
+type    = "Output_Add_Tile"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Internet", "Player"
+      "Building", "Research Lab", "City"
+      "CityTile", "Center", "Local"
+      "OutputType", "Science", "Local"
+    }
+
+[effect_internet_1]
+type    = "Reveal_Cities"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Internet", "World"
+      "Tech", "Computers", "Player"
+    }
+
+[effect_internet_culture]
+type    = "History"
+value   = 6
+reqs    =
+    { "type", "name", "range"
+      "Building", "Internet", "City"
     }
 
 [effect_isaac_newtons_college]
@@ -4115,6 +4256,32 @@ reqs    =
       "Building", "Marco Polo's Embassy", "City"
     }
 
+[effect_mausoleum_of_mausolos]
+type    = "Make_Content"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "City Walls", "City"
+      "Building", "Mausoleum of Mausolos", "Player"
+    }
+
+[effect_mausoleum_of_mausolos_1]
+type    = "Make_Content"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Courthouse", "City"
+      "Building", "Mausoleum of Mausolos", "Player"
+    }
+
+[effect_mausoleum_of_mausolos_culture]
+type    = "History"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Mausoleum of Mausolos", "City"
+    }
+
 [effect_michelangelos_chapel]
 type    = "Make_Content"
 value   = 1
@@ -4140,30 +4307,75 @@ reqs    =
       "Building", "Michelangelo's Chapel", "City"
     }
 
-[effect_mausoleum_of_mausolos]
-type    = "Make_Content"
+[effect_pyramids]
+type    = "Output_Inc_Tile"
 value   = 1
 reqs    =
     { "type", "name", "range"
-      "Building", "City Walls", "City"
-      "Building", "Mausoleum of Mausolos", "Player"
+      "Building", "Pyramids", "City"
+      "OutputType", "Shield", "Local"
     }
 
-[effect_mausoleum_of_mausolos_1]
-type    = "Make_Content"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Courthouse", "City"
-      "Building", "Mausoleum of Mausolos", "Player"
-    }
-
-[effect_mausoleum_of_mausolos_culture]
+[effect_pyramids_culture]
 type    = "History"
 value   = 2
 reqs    =
     { "type", "name", "range"
-      "Building", "Mausoleum of Mausolos", "City"
+      "Building", "Pyramids", "City"
+    }
+
+[effect_shakespeares_theatre]
+type    = "Output_Add_Tile"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Shakespeare's Theatre", "Player"
+      "Building", "Colosseum", "City"
+      "CityTile", "Center", "Local"
+      "OutputType", "Luxury", "Local"
+    }
+
+[effect_shakespeares_theatre_1]
+type    = "Output_Add_Tile"
+value   = 6
+reqs    =
+    { "type", "name", "range"
+      "Building", "Shakespeare's Theatre", "City"
+      "CityTile", "Center", "Local"
+      "OutputType", "Luxury", "Local"
+    }
+
+[effect_shakespeares_theatre_culture]
+type    = "History"
+value   = 3
+reqs    =
+    { "type", "name", "range"
+      "Building", "Shakespeare's Theatre", "City"
+    }
+
+; No_Anarchy includes no_senate effect
+[effect_statue_of_liberty]
+type    = "No_Anarchy"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Statue of Liberty", "Player"
+    }
+
+[effect_statue_of_liberty_1]
+type    = "Any_Government"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "Building", "Statue of Liberty", "Player"
+    }
+
+[effect_statue_of_liberty_culture]
+type    = "History"
+value   = 4
+reqs    =
+    { "type", "name", "range"
+      "Building", "Statue of Liberty", "City"
     }
 
 [effect_statue_of_zeus]
@@ -4210,128 +4422,6 @@ reqs    =
       "Building", "Statue of Zeus", "City"
     }
 
-[effect_temple_of_artemis]
-type    = "Make_Content"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Building", "Temple", "City"
-      "Building", "Temple of Artemis", "Player"
-    }
-
-[effect_temple_of_artemis_culture]
-type    = "History"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Building", "Temple of Artemis", "City"
-    }
-
-[effect_pyramids]
-type    = "Output_Inc_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Pyramids", "City"
-      "OutputType", "Shield", "Local"
-    }
-
-[effect_pyramids_culture]
-type    = "History"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Building", "Pyramids", "City"
-    }
-
-[effect_internet]
-type    = "Tech_Upkeep_Free"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Building", "Internet", "Player"
-    }
-
-[effect_internet_1]
-type    = "Tech_Upkeep_Free"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Building", "Internet", "Player"
-      "Building", "Research Lab", "City"
-    }
-
-[effect_internet_2]
-type    = "Reveal_Cities"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Internet", "World"
-      "Tech", "Computers", "Player"
-    }
-
-[effect_internet_culture]
-type    = "History"
-value   = 6
-reqs    =
-    { "type", "name", "range"
-      "Building", "Internet", "City"
-    }
-
-[effect_shakespeares_theatre]
-type    = "Output_Add_Tile"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Shakespeare's Theatre", "Player"
-      "Building", "Colosseum", "City"
-      "CityTile", "Center", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_shakespeares_theatre_1]
-type    = "Output_Add_Tile"
-value   = 6
-reqs    =
-    { "type", "name", "range"
-      "Building", "Shakespeare's Theatre", "City"
-      "CityTile", "Center", "Local"
-      "OutputType", "Luxury", "Local"
-    }
-
-[effect_shakespeares_theatre_culture]
-type    = "History"
-value   = 4
-reqs    =
-    { "type", "name", "range"
-      "Building", "Shakespeare's Theatre", "City"
-    }
-
-; No_Anarchy includes no_senate effect
-[effect_statue_of_liberty]
-type    = "No_Anarchy"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Statue of Liberty", "Player"
-    }
-
-[effect_statue_of_liberty_1]
-type    = "Any_Government"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "Building", "Statue of Liberty", "Player"
-    }
-
-[effect_statue_of_liberty_culture]
-type    = "History"
-value   = 3
-reqs    =
-    { "type", "name", "range"
-      "Building", "Statue of Liberty", "City"
-    }
-
 [effect_sun_tzus_war_academy]
 type    = "Veteran_Build"
 value   = 1
@@ -4362,6 +4452,23 @@ value   = 3
 reqs    =
     { "type", "name", "range"
       "Building", "Sun Tzu's War Academy", "City"
+    }
+
+[effect_temple_of_artemis]
+type    = "Make_Content"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Temple", "City"
+      "Building", "Temple of Artemis", "Player"
+    }
+
+[effect_temple_of_artemis_culture]
+type    = "History"
+value   = 3
+reqs    =
+    { "type", "name", "range"
+      "Building", "Temple of Artemis", "City"
     }
 
 [effect_united_nations]
@@ -4438,11 +4545,6 @@ reqs    =
       "Building", "Women's Suffrage", "City"
     }
 
-;pow(2, value/1000) -> Base = 50%
-[effect_base_trade_revenue_reduce]
-type    = "Trade_Revenue_Bonus"
-value   = -1000
-
 [effect_calendar_base]
 type    = "Turn_Years"
 value   = 50
@@ -4499,47 +4601,6 @@ value   = -1
 reqs    =
     { "type", "name", "range"
       "MinYear", "1900", "World"
-    }
-
-; No base pop pollution; buildings will increase it
-[effect_pollu_pop]
-type    = "Pollu_Pop_Pct"
-value   = -100
-
-; tech_upkeep_divider = 6000, Max tech upkeep = 12
-[effect_upkeep_tech_base]
-type    = "Tech_Upkeep_Free"
-value   = 2
-
-[effect_tech_cost_base]
-type    = "Tech_Cost_Factor"
-value   = 3
-
-; Cities can always work tiles
-[effect_tile_workable]
-type    = "Tile_Workable"
-value   = 1
-reqs    =
-    { "type", "name", "range", "present"
-      "Terrain", "Inaccessible", "Local", FALSE
-    }
-
-; each city has at least one slot to build units
-[effect_city_build_slots_basic]
-type    = "City_Build_Slots"
-value   = 1
-reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Mfg. Plant", "City", FALSE
-    }
-
-; Mfg. Plant => 2 slots total
-[effect_city_build_slots_mfg_plant]
-type    = "City_Build_Slots"
-value   = 2
-reqs    =
-    { "type", "name", "range"
-      "Building", "Mfg. Plant", "City"
     }
 
 ; free granary, etc, runs out
@@ -5079,7 +5140,7 @@ type    = "Veteran_Build"
 value   = 1
 reqs    =
     { "type", "name", "range", "present"
-      "UnitFlag", "Horses", "Local", TRUE
+      "UnitFlag", "Horse", "Local", TRUE
       "Resource", "Horses", "Traderoute", TRUE
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
@@ -5094,7 +5155,7 @@ reqs    =
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
-[effect_goods_veteran_2]
+[effect_goods_veteran_2_neg]
 type    = "Veteran_Build"
 value   = -1
 reqs    =
@@ -5104,7 +5165,7 @@ reqs    =
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
-[effect_goods_veteran_2_neg]
+[effect_goods_veteran_2_tech]
 type    = "Veteran_Build"
 value   = -1
 reqs    =
@@ -5116,7 +5177,7 @@ reqs    =
     }
 
 ; Refining + Oil, or Iron, to avoid penalty
-[effect_goods_veteran_3]
+[effect_goods_veteran_3_neg]
 type    = "Veteran_Build"
 value   = -1
 reqs    =
@@ -5127,7 +5188,7 @@ reqs    =
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
-[effect_goods_veteran_3_neg]
+[effect_goods_veteran_3_tech]
 type    = "Veteran_Build"
 value   = -1
 reqs    =
@@ -5139,7 +5200,7 @@ reqs    =
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
-[effect_goods_extra_veteran_0]
+[effect_goods_extra_veteran_0_neg]
 type    = "Veteran_Build"
 value   = -1
 reqs    =
@@ -5149,7 +5210,7 @@ reqs    =
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
-[effect_goods_extra_veteran_0_neg]
+[effect_goods_extra_veteran_0_tech]
 type    = "Veteran_Build"
 value   = -1
 reqs    =

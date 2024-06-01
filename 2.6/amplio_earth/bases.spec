@@ -32,10 +32,16 @@ tiles = { "row", "column", "tag"
  0,  1, "base.airstrip_bg"
  0,  2, "base.airbase_bg"
  0,  4, "base.outpost_bg"
+ 1,  4, "base.outpost_mg"
  0,  5, "base.fortress_bg"
+ 1,  5, "base.fortress_mg"
 ;[Lx]
- 0,  6, "base.castle_bg"
+ 0,  6, "base.castle1_bg"
+ 1,  6, "base.castle1_mg"
+ 0,  7, "base.castle_mg"
+ 1,  7, "base.castle2_mg"
 
+ 0,  8, "extra.void_bg"
 ;[VC]
  0,  9, "base.ruins_bg"
 ;[El]
@@ -44,11 +50,6 @@ tiles = { "row", "column", "tag"
  1,  1, "base.naval_mine_bg"
 ; [SK]
  1,  2, "extra.transport_hub_mg"
-
-;[HH][GS]
- 1,  4, "base.outpost_mg"
- 1,  5, "base.fortress_mg"
- 1,  6, "base.castle_mg"
 
  ;[HH]
  1,  8, "cd.occupied",

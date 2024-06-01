@@ -3,7 +3,7 @@ options = "+Freeciv-2.6-modpack"
 baseURL = "."
 name    = "Civ2civ3_Earth"
 type    = "Modpack"
-version = "2023_06"
+version = "2024_05"
 
 [files]
 list =

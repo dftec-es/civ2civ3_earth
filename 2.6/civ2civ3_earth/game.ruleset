@@ -25,7 +25,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "2.6_2023_06"
+version = "2.6_2024_05"
 
 ; Summary of the ruleset
 summary = _("\
@@ -415,7 +415,7 @@ target_reqs    =
       "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
-[actionenabler_traderoute]
+[actionenabler_trade_route]
 action = "Establish Trade Route"
 actor_reqs    =
     { "type",   "name", "range", "present"
@@ -507,10 +507,10 @@ free_tech_method = "Cheapest"
 
 [culture]
 ; Minimum culture points for cultural domination victory
-victory_min_points = 30000
+victory_min_points = 40000
 
 ; How big lead relative to second best player is needed for victory
-victory_lead_pct   = 100
+victory_lead_pct   = 300
 
 ; How much each culture point affects the migration
 ; from/to the city. Each culture point count as this many permilles
@@ -824,7 +824,7 @@ set =
       "unreachableprotects", "DISABLED"
       "occupychance", 100
       "razechance", 10
-      "onsetbarbs", 120
+      "onsetbarbs", 60
       "teamplacement", "DISABLED"
       "team_pooled_research", "DISABLED"
       "trading_tech", "DISABLED"
@@ -834,4 +834,5 @@ set =
       "techlossrestore", 50
       "revolentype", "RANDQUICK"
       "revolen", 3
+      "endspaceship", "ENABLED"
     }

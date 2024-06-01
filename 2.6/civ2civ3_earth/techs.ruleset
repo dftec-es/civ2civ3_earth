@@ -476,6 +476,7 @@ helptext = _("\
 Aluminum resources produce 2 extra shields in the tile where they are \
 located.\
 "), _("\
+Aluminum is required in a city to build the wonder Apollo Program. \
 Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
 Missile, Fighter and Bomber units with one extra veteran level.\
 ")
