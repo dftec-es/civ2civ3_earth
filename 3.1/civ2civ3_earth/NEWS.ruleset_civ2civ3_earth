@@ -8,10 +8,12 @@ Known issues:
 * If the ruleset is played with a version of Freeciv prior to 3.1.2, the AI will not move the infantry units. This happens because the "Settler" flag is mandatory to be able to build fortresses in 3.1, and the AI manages these units as settlers until it is fixed in 3.1.2.
 - The server settings suggested by the ruleset are no longer loaded by default. Due to changes in Freeciv 3.0, now user settings (from freeciv-client-rc) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of freeciv-client-rc-3.x before starting a new game.
 * This modpack includes 2 custom tilesets, one for square and one for hexagonal topology, but they are no longer loaded by default. The player has to select them manually from the client local options -> Graphics -> Tileset (or by editing the values starting with "default_tileset_" in the file freeciv-client-rc).
+* When playing with hexagonal topology, I suggest enabling the map grid (in the View menu) and increasing the minimum distance between cities (citymindist setting) to 4 in order to force the AI to build better cities.
 
 Fixed bugs:
 - Strategic resources no longer appear on the same tile as other special resources.
 * The AI seems to get stuck around tiles that cause damage. These effects are now disabled for the AI (hit point loss of air units in the open, galleys in deep ocean, and units near storms). Naval mines have also been changed to reduce movement points instead of hit points.
+* Fixed an error in the script that checks the new victory condition of SETI Program.
 
 Core:
 - Increased to 3 the output of Entertainer, Taxman and Scientist specialists (no longer increased by global effects of wonders).
@@ -45,9 +47,9 @@ Terrains:
   - Food resources (Seals, Oasis, Pheasant, Deer, Cattle, Corn, Fruit, Fish, Whales, Wheat, Buffalo, Sugar, Game): +1 unit free of upkeep in the receiving city.
   - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in the receiving city.
 - Some units get additional veteran levels when certain resources are available in the city:
-  - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in any city linked by trade route).
+  - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
   * Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city, or 10% reduction in building cost if both are available in the city.
-- Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program requires Aluminum.
+* Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program no longer requires Aluminum.
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
 
 Culture:
@@ -62,8 +64,8 @@ Governments:
 - New government: Fascism (available with Military Tactics, which requires Leadership and Conscription).
 - Empire Size no longer depends on the government chosen. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.
 * The number of content citizens, before the first unhappy one appears, is now 5 for most governments; 4 only for Despotism, Monarchy and Fundamentalism; 6 for Democracy and Federation.
-- Corruption and waste by distance are fixed to +2% per tile for ancient governments, +1% for modern governments, and +0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
-- Tribal (available with Warrior Code) gets 3 units per city free of upkeep, and extra vision range for ground units, instead of martial law.
+* Corruption and waste by distance are fixed to +4% per tile for Despotism and Tribalism, +2% for other ancient governments, +1% for modern governments, and +0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
+- Tribalism (available with Warrior Code) gets 3 units per city free of upkeep, and extra vision range for ground units, instead of martial law.
 - Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold). Federation gets +2 Luxury points per city.
 - Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, and regardless if the tile wasn't producing any trade.
 * Fascism gets a +1 Gold bonus on each tile with a mine (including lumber, oil well and oil platform), instead of buildings free of upkeep.
@@ -74,6 +76,7 @@ Governments:
 - Fundamentalism no longer gets any penalty to Science output. Anarchy doesn't get any penalty to Luxury output.
 
 Techs:
+* Trade: cancels the output per tile penalty under Anarchy, Despotism and Tribalism; no longer tied to The Pyramids wonder or the research of Railroad.
 - Astronomy increases vision range of cities and fortresses. Electricity grants you vision within your borders.
 - Feudalism: allows to upgrade a Fortress to a Castle when it is inside your national borders. Castles protect full stacks from dying when one unit is defeated.
 - Medicine: allows non-wheeled ground units to recover 2 HP per turn, on plains or grassland, even without resting. Physics allows the same for wheeled units (on plains or grassland), and for naval units on shallow ocean.
@@ -125,7 +128,7 @@ Combat:
 
 Units:
 - Defense bonus of +25% for units stacked outside of cities, as long as there is any other unit on the same tile.
-* Wheeled units outside cities and bases receive up to +25% defense bonus from terrain (they don't take full advantage of defensive terrain with rivers, hills or mountains). Armor no longer receives extra defense against other Armor units.
+* Wheeled units outside cities receive defense bonus from terrain (not from rivers), but only up to +25%. Armor no longer receives extra defense against other Armor units.
 * Wheeled units on unroaded Jungle, Swamp or River start the turn with -1 movement point (as do all ground units on Mountains). Enemy roads (within the borders of a nation at war with you) don't avoid this penalty.
 * Wheeled units (Big Land class) can be loaded onto any cargo boat, including Galleys (but no Carriers and Submarines), and they can perform pillage. They can attack non-native tiles (mountains, jungles and swamps), and can bombard from shore to sea.
 - Increased the number of veteran levels by one, with the following effects: 100%, 125%, 150%, 175%, and 200%. Engineers up to 150%.
@@ -142,7 +145,7 @@ Units:
 * HP recover rate of units was simplified, and the effect of buildings was reduced: 10% resting, 35% in cities or full bases, 50% in cities with the appropiate military building. Non-mechanized units recover up to 65% HP in cities with both Barracks and Hospital.
 
 Naval units:
-- Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against Sea units (not against Submarines).
+* Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against naval units (except against Submarines).
 * Naval units adjacent to Naval Mines have a defense bonus only when not in enemy waters (within the borders of a nation you are at war with), and have a movement penalty only when not in friendly waters (within the borders of a nation you are not at war with).
 * Naval units lose all their movement points to move to enemy land tiles (via river/canal).
 * New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
@@ -157,14 +160,14 @@ Naval units:
 
 Wonders:
 - Readjusted effects and obsolescence of many wonders. See the table (in README file).
-- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or specific resources available in the city ("Manhattan Project", "Apollo Program" and "SETI Program").
+- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or a resource available in the city ("Manhattan Project").
 - Continental range: "J.S. Bach's Cathedral", "Great Wall" and "Sun Tzu's War Academy" affects only to cities of the same continent.
 - Global range: some minor effects, that may affect every player, added to "Cure For Cancer", "Internet", and "Women's Suffrage".
 * Every wonder produces as much culture per turn as its building cost/100.
 * Internet bonus simplified to +2 Science in your cities with a Research Lab (the result after summing the +200% from all science buildings can be up to +6 bulbs per city).
-* SETI Program, available with Radio, requires Rubber and allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
+* SETI Program, available with Radio, allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
 
 Future plans:
 * This might be the last version of the ruleset. Thanks to the impressive modding capabilities of Freeciv 3.1, I have finally been able to get the game balance that I like.
 * I will try to keep porting and fixing the ruleset for 3.2 and beyond, but if I don't, anyone can easily upgrade the ruleset to a new version thanks to the ruleup tool included in Freeciv releases.
-* The main pending tasks are to improve the helptexts, and to revise the balance of spy actions, air-to-air combat, and auto-attacking units.
+* The main pending tasks are to improve the helptexts, and to revise the balance of spy actions, and auto-attacking units.

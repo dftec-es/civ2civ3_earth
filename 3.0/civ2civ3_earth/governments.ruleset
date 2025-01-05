@@ -79,8 +79,8 @@ Anarchy is simply the absence of any recognizable government.\
 _("\
 * Buildings and technologies do not require any upkeep.\n\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
- suffer a -1 penalty, unless the city working it is celebrating.\
- (Cities below size 3 will not celebrate.)\n\
+ suffer a -1 penalty, unless the player has researched Trade technology,\
+ or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
 * All citizens are unhappy by default.\n\
 * Each city can support up to 2 units for free; further units each cost\
  1 shield per turn.\n\
@@ -98,7 +98,8 @@ _("\
 ;------------------------------------------------------------------------
 [government_tribal]
 
-name        = _("Tribal")
+name        = _("Tribalism")
+rule_name   = _("Tribal")
 reqs = { "type", "name", "range"
          "tech", "Warrior Code", "Player"
        }
@@ -110,10 +111,10 @@ ruler_male_title = _("Warlord %s")
 ruler_female_title = _("Warlady %s")
 
 helptext = _("\
-Under a Tribal government, you are part ruler of your people. Your\
- control over your citizens is maintained largely by spiritual counsel.\
+Under Tribalism, you are part ruler of your people. Your control over\
+ your citizens is maintained largely by spiritual counsel.\
 "), _("\
-Compared to Despotism, a Tribal economy is more shield-oriented. Its\
+Compared to Despotism, a tribal economy is more shield-oriented. Its\
  bonuses to veterancy and vision range can be an advantage in wartime,\
  but it lacks the martial law of other early governments.\
 "),
@@ -122,8 +123,8 @@ _("\
 * Increases by half the chance of land units to obtain the next veteran\
  level after a battle, and also increases their vision range.\n\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
- suffer a -1 penalty, unless the city working it is celebrating.\
- (Cities below size 3 will not celebrate.)\n\
+ suffer a -1 penalty, unless the player has researched Trade technology,\
+ or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
 * The first 5 citizens of each city are content by default.\
  The 6th citizen will be the first unhappy one.\n\
 * Each city can support up to 3 units for free; further units each cost\
@@ -133,7 +134,7 @@ _("\
 * Base corruption is 30% (the highest under any government). This\
  increases by 2% for each tile of distance from the capital.\n\
 * There is no base level of production waste, but it increases\
- by 2% for each tile of distance from the capital.\n\
+ by 2% for each tile of distance from the capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -159,8 +160,8 @@ _("\
 * Your centers of government (cities with Palace and Ecclesiastical\
  Palace) get a +75% bonus to luxury production.\n\
 * Each worked tile that gives more than 2 Food, Production, or Trade will\
- suffer a -1 penalty, unless the city working it is celebrating.\
- (Cities below size 3 will not celebrate.)\n\
+ suffer a -1 penalty, unless the player has researched Trade technology,\
+ or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
 * The first 4 citizens of each city are content by default.\
  The 5th citizen will be the first unhappy one.\n\
 * Each city can support up to 2 units for free; further units each cost\
@@ -238,8 +239,8 @@ Communism eliminates the corruption and waste caused by distance from\
  buildings; but it does not get the trade bonus from irrigated land\
  or city celebrations.\
 "), _("\
-It is a good alternative to Federation for large empires, especially\
- when cities are surrounded by hills, mountains, jungles or forests\
+It is a good alternative to Federation for post-industrial large empires,\
+ especially when cities are surrounded by hills, mountains or jungles\
  (less trade, but more production).\
 "),
 ; /* xgettext:no-c-format */
@@ -287,8 +288,8 @@ Improvements that normally convert unhappy citizens to content\
  of people they would convert.\
 "), _("\
 Fundamentalism gets a significant bonus to gold production, especially\
- useful when terrain is not favorable for trade; but city celebrations\
- give no revenues, and science production is low even with taxes on\
+ useful when terrain is not favorable; but it receives no revenue from\
+ city celebrations, and science production is low even with taxes on\
  science at maximum.\
 "),
 ; /* xgettext:no-c-format */
@@ -329,7 +330,7 @@ Federation eliminates the corruption and waste caused by distance from\
 "), _("\
 It is a good alternative to Democracy for larger empires or more\
  aggressive wars, especially when cities are surrounded by sea (less\
- land, but more trade).\
+ irrigated or mined land, but more trade).\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -343,7 +344,7 @@ _("\
  each further unit causes 1 unhappy citizen.\n\
 * There is no corruption.\n\
 * Base production waste is 30%, but is not affected by distance to the\
- capital.\n\
+ capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -385,7 +386,7 @@ irrigation.\n\
 * Base corruption is 25%. This increases by 2% for each tile of distance\
  from the capital.\n\
 * Base production waste is 5%. This increases by 2% for each tile of\
- distance from the capital.\
+ distance from the capital.\n\
 * Has a senate that may prevent declaration of war.\
 ")
 
@@ -413,8 +414,9 @@ Democracy gets the same trade bonus on irrigated land as Republic,\
  palace; but it has a senate, and it doubles the unhappiness caused\
  by units outside your borders.\
 "), _("\
-It is the best government once city celebrations give revenues (when\
- they produce more trade than the required to celebrate).\
+It can be the best government once city celebrations generate revenue\
+ (when they produce more trade than the required to celebrate),\
+ especially when cities are surrounded by plains and rivers.\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -452,13 +454,14 @@ Fascism seeks to solve economic, political, and social problems by\
  achieving a national rebirth, exalting the nation or race above all\
  else, and promoting cults of unity, strength, and purity.\
 "), _("\
-Fascism avoids the upkeep costs of many buildings like Communism,\
- increases the chance of units becoming veteran, and it is the only\
- modern government whose units can't cause unhappiness; but corruption\
- and waste caused by distance is not eliminated.\
+Fascism gets a bonus to gold production on mined land, increases the\
+ chance of units becoming veteran, and it is the only modern government\
+ whose units can't cause unhappiness; but it has standard upkeep of\
+ buildings, and corruption and waste caused by distance is not eliminated.\
 "), _("\
-It is a good alternative for militaristic nations, especially when city\
- celebrations are not worth the cost.\
+It is a good alternative for militaristic nations, especially when\
+ cities are surrounded by a mix of grasslands and hills or forests\
+ (more mines, and food enough to work them).\
 "),
 ; /* xgettext:no-c-format */
 _("\
@@ -475,7 +478,7 @@ _("\
 * Base corruption is 15%. This increases by 1% for each tile of distance\
  from the capital.\n\
 * Base production waste is 15%. This increases by 1% for each tile of\
- distance from the capital.\n\
+ distance from the capital.\
 ")
 
 ; /* <-- avoid gettext warnings

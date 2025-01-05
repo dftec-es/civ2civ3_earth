@@ -549,6 +549,7 @@ reqs    =
     }
 
 ; City: against every land and sea
+; City defense is equal to a Fort
 [effect_city_defense_0]
 type    = "Defend_Bonus"
 value   = 50
@@ -568,6 +569,7 @@ reqs    =
     }
 
 ; City (size > 8): against every land and sea
+; 50 + 50 = 100
 [effect_city_defense_1]
 type    = "Defend_Bonus"
 value   = 50
@@ -2163,26 +2165,6 @@ reqs    =
 ;      "Gov", "Federation", "Player", FALSE
 ;      "Gov", "Republic", "Player", FALSE
 ;      "Gov", "Democracy", "Player", FALSE
-    }
-
-; Celebration: only city center tile
-[effect_gov_tile_bonus_celebrate_center]
-type    = "Output_Inc_Tile_Celebrate"
-value   = 1
-reqs    =
-    { "type", "name", "range", "present"
-      "OutputType", "Trade", "Local", TRUE
-      "CityTile", "Center", "Local", TRUE
-      "Gov", "Anarchy", "Player", FALSE
-      "Gov", "Tribal", "Player", FALSE
-      "Gov", "Despotism", "Player", FALSE
-      "Gov", "Monarchy", "Player", FALSE
-;      "Gov", "Fascism", "Player", FALSE
-;      "Gov", "Communism", "Player", FALSE
-;      "Gov", "Fundamentalism", "Player", FALSE
-      "Gov", "Federation", "Player", FALSE
-      "Gov", "Republic", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
     }
 
 [effect_vision_tribal]

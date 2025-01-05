@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v3.0 (Updated 05-2024)
+Civ2Civ3 Earth Ruleset for Freeciv v3.0 (Updated 12-2024)
 ============================================================
 
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
@@ -49,9 +49,9 @@ CORE CHANGES:
 
 - Allowed 1 trade route per city (2 after the discovery of The Corporation). Removed the one time revenues, and reduced the ongoing revenues. Trade routes with foreign cities receive 50% of the income, and only if the cities are allies (or on the same team).
 
-- Every unit (except Settlers, Migrants, and Fanatics, which cost population to build) pays some kind of upkeep cost. Some governments pay shields as upkeep, and others pay coins (similar to civ3), but not both.
+- Every unit pays some kind of upkeep cost (except Settlers, Migrants, and Fanatics, which cost population to build). Some governments pay shields as upkeep, and others pay coins (similar to civ3), but not both.
 
-- Most units also require upkeep in Food, except for Workers/Engineers, Diplomat/Spy, Caravan/Freight, Explorer/AWACS, and Cruise Missile/Nuclear.
+- Most units also require upkeep in Food (except for Workers/Engineers, Diplomat/Spy, Caravan/Freight, Explorer/AWACS, and Cruise Missile/Nuclear).
   A city can support for free as many units (with upkeep in Food) as its population size (min 4, max 20). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
 
 - Units lose one veteran level when upgraded, and they do not gain veterancy from combat if the enemy is not killed.
@@ -101,7 +101,7 @@ CORE CHANGES:
 
 - Added a new barbarian nation that controls hostile animal units, randomly placed at the start of the game.
 
-- Added a new feature: Storms randomly appear and disappear on Deep Ocean or Glacier tiles, and they damage units ending the turn on an adjacent tile (or the same tile). Every unit entering the storm has its vision range reduced.
+- Added a new feature: Storms randomly appear (1%) and disappear (50%) on Deep Ocean or Glacier tiles, and they damage units ending the turn on an adjacent tile (or the same tile). Every unit entering the storm has its vision range reduced.
 
 
 OPTIONAL RULES:
@@ -234,7 +234,7 @@ Mountains -(36)---> Hills
 
 - Some units get additional veteran levels when certain resources are available in the city:
 
-  - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in any city linked by trade route).
+  - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
 
   - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
 
@@ -274,7 +274,7 @@ Output per tile * -1(if>2) -1(if>2) -1(if>2) -        -        -        -       
 Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) -       (+1Trade)(+1Trade)(+1Trade) -        -
 
 Unit Upkeep       Shield   Shield   Coin     Coin     Coin(x2) Shield   Coin(x2) Coin(x2) Shield   Coin(x2)
-Free Units        2        3        2        3        2        1        1        2        3        3
+Free Units        3        3        2        3        2        1        1        2        3        3
 War Unhappiness   0        0        0       -1       -1       -1       -2       -1       -1        0
 Martial Law      +1        0       +1       +1        0        0        0        0       +2       +2
 
@@ -289,18 +289,18 @@ Special         +NoUpkeep +Vision  +75%Lux  +50%Lux  +Tithes  +1Trade  +1Trade  
 
 Base Corruption   0%      30%      20%      10%      15%      25%       5%       0%      30%      15%
 Base Waste       30%       0%      10%      20%      15%       5%      25%      30%       0%      15%
-by Distance      +2%      +2%      +2%      +2%      +2%      +2%      +1%      +0%      +0%      +1%
+by Distance      +4%      +4%      +4%      +2%      +2%      +2%      +1%      +0%      +0%      +1%
 
-*: The output per tile penalty is negated by The Pyramids wonder, or when Railroad is researched by any player.
+*: The output per tile penalty is negated when Trade is researched by the player.
 
-- Added Tribal (available with Warrior Code), Fundamentalism (available with Theology), Federation (available with Economics) and Fascism (available with Military Tactics).
+- Added Tribalism (available with Warrior Code), Fundamentalism (available with Theology), Federation (available with Economics) and Fascism (available with Military Tactics).
 
-- "Celebration bonus": Republic and Democracy get the usual +1 Trade on every tile already producing Trade (same as Monarchy and Federation). Tribal and Despotism get the usual removal of the -1 penalty when any tile output is greater than 2.
+- "Celebration bonus": Republic and Democracy get the usual +1 Trade on every tile already producing Trade (same as Monarchy and Federation). Tribalism and Despotism get the usual removal of the -1 penalty when any tile output is greater than 2.
   The other governments get a small bonus of +1 Trade only in the city center tile (if already producing Trade).
 
-- "Base Corruption/Waste": Modern governments cause less Corruption in Trade, but more Waste in Production. The total % lost (Waste + Corruption) is equal for all governments. Corruption and waste by distance are fixed to +2% per tile for ancient governments, +1% for modern governments, and +0% for Federation and Communism.
+- "Base Corruption/Waste": Modern governments cause less Corruption in Trade, but more Waste in Production. The total % lost (Waste + Corruption) is equal for all governments. Corruption and waste by distance are fixed to +4% per tile for Despotism and Tribalism, +2% for other ancient governments, +1% for modern governments, and +0% for Federation and Communism.
 
-- "Unit Upkeep": Tribal, Republic and Communism use the standard unit upkeep in shields, while the other governments use upkeep in coins (x2 coins per unit for modern governments).
+- "Unit Upkeep": Tribalism, Republic and Communism use the standard unit upkeep in shields, while the other governments use upkeep in coins (x2 coins per unit for modern governments).
 
 - "Free Units": Means units free of shield/coin upkeep and also free of unhappiness due to military activity. By default 2 free units per city.
 
@@ -325,7 +325,7 @@ by Distance      +2%      +2%      +2%      +2%      +2%      +2%      +1%      
 
 - Under Communism, you do not pay upkeep for buildings that cost 1 or 2 coins (they can be up to 31 coins with all buildings, but rarely more than 25).
 
-- Tribal and Fascism increase the chance of units to obtain the next veteran level after a battle. Every unit in the case of Fascism; only ground units in the case of Tribal, but they also get increased vision radius.
+- Tribalism and Fascism increase the chance of units to obtain the next veteran level after a battle. Every unit in the case of Fascism; only ground units in the case of Tribalism, but they also get increased vision radius.
 
 - Spies and Diplomats built under Federation or Communism will start at the first veteran level.
 
@@ -334,19 +334,19 @@ by Distance      +2%      +2%      +2%      +2%      +2%      +2%      +1%      
 - Under Fascism or Fundamentalism, citizens of enemy nationality cause extra unhappiness in the city (1 unhappy face for each 2 enemy citizens).
   When you conquer a city, 25% of the foreign population is converted to your nationality. After that, foreign population is converted at a pace of one population every 20 turns or so.
 
-TIP: There is some hurry to get Monarchy or Republic (or to build Pyramids), in order to avoid the initial penalty to output per tile. However, the differences are more subtle, and every government could be useful in some situation or stage of the game:
-- Tribal increases the vision range and the chance of units becoming veteran after a combat; but it uses shields to pay unit upkeep (Despotism uses gold which can be an advantage in some cases).
+TIP: There is some hurry to get Monarchy or Republic (or to research Trade), in order to avoid the initial penalty to output per tile. However, the differences are more subtle, and every government could be useful in some situation or stage of the game:
+- Tribalism increases the vision range and the chance of units becoming veteran after a combat; but it uses shields to pay unit upkeep (Despotism uses gold which can be an advantage in some cases).
 - Monarchy avoids the penalty to output per tile. It gives low unit upkeep costs, but units outside your borders may cause unhappiness.
 - Republic gets a bonus to trade on irrigated land; but it has a senate, units no longer impose martial law, and units outside your borders may cause unhappiness more easily.
 - Fundamentalism gets a significant bonus to gold production, especially useful when terrain is not favorable; but it receives no revenue from city celebrations, and science production is low even with taxes on science at maximum.
 - Democracy gets the same trade bonus on irrigated land as Republic, and reduces the corruption and waste caused by distance from the palace; but it has a senate, and it doubles the unhappiness caused by units outside your borders.
-  It can be the best government once city celebrations generate revenue (when they produce more trade than required to celebrate), especially when cities are surrounded by plains, grasslands or swamps.
+  It can be the best government once city celebrations generate revenue (when they produce more trade than required to celebrate), especially when cities are surrounded by plains, with some forests/hills on rivers.
 - Federation eliminates the corruption and waste caused by distance from the palace, and its bonus to luxury production allows cities to celebrate more easily; but it does not get the trade bonus from irrigated land.
   It is a good alternative to Democracy for larger empires or more aggressive wars, especially when cities are surrounded by sea (less irrigated or mined land, but more trade).
 - Communism also eliminates the corruption and waste caused by distance from the palace, and reduces considerably the gold paid for upkeep of buildings; but it receives no revenue from city celebrations.
-  It is a good alternative to Federation for post-industrial large empires, especially when cities are surrounded by hills/mountains or jungles/forests (less trade, but more production).
-- Fascism gets a bonus to gold production on mined land, increases the chance of units becoming veteran, and is the only modern government whose units can't cause unhappiness; but it has standard upkeep of buildings, and corruption and waste caused by distance is not eliminated.
-  It is a good alternative for militaristic nations, especially when cities are surrounded by a mix of grasslands and hills/forests (with more mines, and food enough to work them).
+  It is a good alternative to Federation for post-industrial large empires, especially when cities are surrounded by hills, mountains or jungles (less trade, but more production).
+- Fascism gets a bonus to gold production on mined land, increases the chance of units becoming veteran, and it is the only modern government whose units can't cause unhappiness; but it has standard upkeep of buildings, and corruption and waste caused by distance is not eliminated.
+  It is a good alternative for militaristic nations, especially when cities are surrounded by a mix of grasslands and forests/hills (with more mines, and food enough to work them).
 
 
 TECHS:
@@ -379,7 +379,7 @@ Special effects:
 - Explosives allow new terrain improvements: Naval Mines to increase the defense of shallow oceans and to reduce the movement of adjacent naval units; Canals to connect oceans separated by no more than 2 land tiles.
 - Electricity: Allows irrigation without adjacent water, improves the effect of Amphitheatres, and grants you vision within your borders.
 - Refining: Allows to upgrade mines to oil wells (+2 production) on Desert, Tundra and Glacier.
-- Trade: Allows 1 trade route per city.
+- Trade: Allows 1 trade route per city. Cancels the output per tile penalty under Anarchy, Despotism and Tribalism.
 - The Corporation: Allows 2 trade routes per city.
 - Labor Union: Engineers are built with +1 veteran level.
 - Computers: All cities on the map are continuously visible despite fog-of-war (once Internet wonder have been built by any player).
@@ -452,23 +452,21 @@ Recycling Center  140   2      -50%/-25%
 DEFENSE:
 --------
 
-- Halved the terrain defense bonuses, now more similar to civ3 values:
-
-TERRAIN                   NEW      CIV2
-Forest/Jungle/Swamp       +25%     +50%
-Hills                     +50%     +100%
-Mountains                 +100%    +200%
-
-RIVER                     +25%     +50%
-
 VETERAN
 Regular                   +25%
-Veteran                   +50%     (=)
-Hardened                  +75%     (=)
-Elite                     +100%    (=)
+Veteran                   +50%
+Hardened                  +75%
+Elite                     +100%
 
-FORTIFIED                 +50%     (=)
+FORTIFIED                 +50%
 (only military ground units can fortify; inside cities, they are always considered fortified)
+
+TERRAIN
+Forest/Jungle/Swamp       +25%
+Hills                     +50%
+Mountains                 +100%
+
+RIVER                     +25%
 
 BASE             VS LAND  VS SEA   VS AIR   VS MISSILE
 Fort/Bombardment +50%     +50%      -        -
@@ -492,13 +490,15 @@ SDI Defense       -        -        -       +100%
 
 Great Wall       +50%      -        -        -
 
-OUTSIDE CITY
+OUTSIDE CITY (STACK)
 Stack of units   +25%     +25%     +25%     +25%
 
 
+- Halved the terrain defense bonuses, now more similar to civ3 values.
+
 - Every unit receives a +25% defense bonus when it is stacked outside of cities, as long as there is another unit on the same tile.
 
-- Naval units on Deep Ocean, or shallow Ocean adjacent to a Naval Mine, receive a +50% defense bonus against Sea units (not against Galleys or Submarines).
+- Naval units on Deep Ocean, or shallow Ocean adjacent to a Naval Mine, receive a +50% defense bonus against other naval units (except against Submarines).
 
 - Every city of any size receives an inherent +50% defense bonus against all ground and naval units (same as a fort).
 
@@ -510,16 +510,16 @@ Stack of units   +25%     +25%     +25%     +25%
 
 - Great Wall wonder gives an additional +50% defense bonus against ground units.
 
-Total Defense = (UNIT DEFENSE) * (100+TERRAIN)/100 * (100+RIVER)/100 * (100+CITY+BASE)/100 * (100+FORTIFIED)/100 * (100+VETERAN)/100
+Total Defense = (UNIT DEFENSE) * (100+TERRAIN)/100 * (100+RIVER)/100 * (100+CITY+BASE)/100 * (100+FORTIFIED)/100 * (100+VETERAN)/100 * (100+STACK)/100
 (Same as classic/civ2 rules).
 
-EXAMPLE: Riflemen fortified in a fortress, on mountains, with a river, will get a total defense of 30 against land attacks:
+EXAMPLE: Riflemen fortified in a fortress, on mountains, stacked with another unit, will get a total defense of 30 against land attacks:
 
          Riflemen: defense 4
          Fortified (+50%): 4 + 2 = 6
          In Fortress (+100%):      6 + 6 = 12
          On Mountains (+100%):             12 + 12 = 24
-         With River (+25%):                          24 + 6 = 30.
+         Stacked with other units (+25%):            24 + 6 = 30.
 
 EXAMPLE: Riflemen in a size 9 city, with walls, on hills, will get a total defense of 27 against land attacks:
 
@@ -608,7 +608,7 @@ The following unit changes are included in the table below:
 - Given Marine ability (named Raider) to Legion, Musketeer, and Rifleman. This way, one-tile islands can be assaulted early in game. Yet, the Marine unit is still the best offensive/defensive infantry.
 - Caravel changed from (2/1) to (1/2), in order to encourage peaceful exploration of the seas in the age of discovery. Galleon attack increased to 2 and no longer non-military.
 - Removed transport capability from Frigates, to force the use of Galleons. Reduced attack of Frigate and defense of Ironclad to 3 (was 4).
-- Battleship's hit points reduced to 30 (was 40), Ironclad and Submarine to 20 (was 30). Submarine defense increased to 4, and doubled against air attacks. Doubled the defense of Destroyers against Submarines. Now there is a Rock-paper-scissors relationship between Submarine-Destroyer-Cruiser.
+- Battleship's hit points reduced to 30 (was 40), Ironclad and Submarine to 20 (was 30). Submarine defense increased to 4, and doubled against air attacks. Doubled the defense of Destroyers against Submarines.
 - Naval units with transport capability don't cause unhappiness due to military activity, but their military cargo do cause unhappiness when deployed outside national borders, as usual.
 - All air units can cause unhappiness when they end the turn outside national borders. Nuclear missiles and air bombers cause unhappiness all the time, even inside national borders.
 - Air bombers and Helicopters have more hit points, but halved attack to make it harder to bombard enemies successfully.
@@ -691,11 +691,11 @@ In full base              *(+24%)    34% Fortress   Deep Ocean)    34% Airbase
 RESTING INSIDE CITY  (HP REGEN %)    LAND           SEA            AIR
 Without improvement       #(+34%)    44%            44%            34%
 With improvement          *(+50%)    60% Barracks   60% Port       50% Airport
-(non mechanized)                    +15% Hospital
+(non wheeled)                       +15% Hospital
 
 EVERY TURN
 On plains, grassland or shallow ocean, with knowledge of:
-  Medicine (non mechanized units)                   +2 HP
+  Medicine (non wheeled ground units)               +2 HP
   Physics (wheeled or naval units)                  +2 HP
 
 On any oceanic or glacier tile adjacent to a Storm: -4 HP
@@ -726,7 +726,7 @@ FULL LIST OF WONDERS
 "Name", Cost, Requirements, Obsolescence, Effect.
 
 -=- "Pyramids" 200. Obsolete by Railroad (that increases even more the production):
-+1 Production per worked tile in the city (already producing shields). Disables the output per tile penalty under Despotism/Tribal governments.
++1 Production per worked tile in the city (already producing shields).
 -=- "Colossus" 200. Obsolete by Automobile (Super Highways):
 +1 Trade per worked tile in the city (already producing Trade).
 -=- "Copernicus' Observatory" 300. Obsolete by Radio:
@@ -793,7 +793,7 @@ Gives to all your Hydro Plants the same effect as Solar Plants (-25% pollution c
 
 --- (#)"Manhattan Project" 600. Requires Uranium:
 # Enables Nuclear units for every nation.
---- (#)"Apollo Program" 600. Requires Aluminum:
+--- (#)"Apollo Program" 600:
 Makes the entire map (but not the units) permanently visible for the owner.
 # Enables space race for every nation.
 -=- (#)"United Nations" 600:

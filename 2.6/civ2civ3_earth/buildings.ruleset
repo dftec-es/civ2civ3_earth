@@ -1397,7 +1397,6 @@ genus		= "GreatWonder"
 reqs	=
     { "type", "name", "range"
       "Tech", "Space Flight", "Player"
-      "Extra", "Aluminum", "Traderoute"
     }
 graphic	= "b.apollo_program"
 graphic_alt	= "-"

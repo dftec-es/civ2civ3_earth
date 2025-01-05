@@ -3,7 +3,7 @@ Amplio Earth Tileset for Freeciv v3.1
 =====================================
 
 Tileset based on Amplio2 (by GriffonSpade), but with small flags, small resources, and colors more similar to Amplio (and to minimap).
-Compiled by Bardo and released under GPLv2 license (see each .spec file for detailed credits).
+Edited by Bardo and released under GPLv2 license (see each .spec file for detailed credits).
 
 Modded from Amplio2:
 - mountains, with colors from Amplio mountains.
@@ -53,4 +53,5 @@ Modded from Hexemplio:
 Known issues:
 - Ocean file needs to be adjusted for the lack of E-W blend between land, ocean, and deep ocean.
 I made some minor adjustments, but it is still too noticeable.
+- I suggest to play with the Map Grid enabled (in the View menu).
 

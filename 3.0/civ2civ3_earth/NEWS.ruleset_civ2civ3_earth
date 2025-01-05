@@ -8,6 +8,7 @@ Known issues:
 - If the ruleset is played with a version of Freeciv prior to 3.0.8, the "Investigate city" action may cause a crash to desktop (related to the presence of traded resources in the target city). As an alternative, military units can use the "Bombard" action to see all defending units.
 - The server settings suggested by the ruleset are no longer loaded by default. Due to changes in Freeciv 3.0, now user settings (from freeciv-client-rc) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of freeciv-client-rc-3.x before starting a new game.
 * This modpack includes 2 custom tilesets, one for square and one for hexagonal topology, but they are no longer loaded by default. The player has to select them manually from the client local options -> Graphics -> Tileset (or by editing the values starting with "default_tileset_" in the file freeciv-client-rc).
+* When playing with hexagonal topology, I suggest enabling the map grid (in the View menu) and increasing the minimum distance between cities (citymindist setting) to 4 in order to force the AI to build better cities.
 
 Fixed bugs:
 - Strategic resources no longer appear on the same tile as other special resources.
@@ -46,7 +47,7 @@ Terrains:
 - Some units get additional veteran levels when certain resources are available in the city:
   - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
   - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
-- Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program requires Aluminum.
+* Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program no longer requires Aluminum.
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
 
 Culture:
@@ -61,8 +62,8 @@ Governments:
 - New government: Fascism (available with Military Tactics, which requires Leadership and Conscription).
 - Empire Size no longer depends on the government chosen. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.
 * The number of content citizens, before the first unhappy one appears, is now 5 for most governments; 4 only for Despotism, Monarchy and Fundamentalism; 6 for Democracy and Federation.
-- Corruption and waste by distance are fixed to +2% per tile for ancient governments, +1% for modern governments, and +0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
-- Tribal (available with Warrior Code) gets 3 units per city free of upkeep, and extra vision range for ground units, instead of martial law.
+* Corruption and waste by distance are fixed to +4% per tile for Despotism and Tribalism, +2% for other ancient governments, +1% for modern governments, and +0% for Federation and Communism; no longer tied to the research of Trade or The Corporation techs.
+- Tribalism (available with Warrior Code) gets 3 units per city free of upkeep, and extra vision range for ground units, instead of martial law.
 - Despotism and Monarchy get a bonus to Luxury from the Palace (was Gold). Federation gets +2 Luxury points per city.
 - Republic and Democracy get the +1 Trade bonus only on tiles with an irrigation, and regardless if the tile wasn't producing any trade.
 * Fascism gets a +1 Gold bonus on each tile with a mine (including lumber, oil well and oil platform), instead of buildings free of upkeep.
@@ -73,6 +74,7 @@ Governments:
 - Fundamentalism no longer gets any penalty to Science output. Anarchy doesn't get any penalty to Luxury output.
 
 Techs:
+* Trade: cancels the output per tile penalty under Anarchy, Despotism and Tribalism; no longer tied to The Pyramids wonder or the research of Railroad.
 - Astronomy increases vision range of cities and fortresses. Electricity grants you vision within your borders.
 - Feudalism: allows to upgrade a Fortress to a Castle when it is inside your national borders. Castles protect full stacks from dying when one unit is defeated.
 - Medicine: allows non-wheeled ground units to recover 2 HP per turn, on plains or grassland, even without resting. Physics allows the same for wheeled units (on plains or grassland), and for naval units on shallow ocean.
@@ -129,7 +131,7 @@ Units:
 * Some adjustments to the HP recover rate of units. See the new table (in README file).
 
 Naval units:
-- Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against Sea units (not against Submarines).
+* Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against naval units (except against Submarines).
 * New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
 * Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units).
 * All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
@@ -141,7 +143,7 @@ Naval units:
 
 Wonders:
 - Readjusted effects and obsolescence of many wonders. See the table (in README file).
-- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or specific resources available in the city ("Manhattan Project" and "Apollo Program").
+- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or a resource available in the city ("Manhattan Project").
 - Continental range: "J.S. Bach's Cathedral", "Great Wall" and "Sun Tzu's War Academy" affects only to cities of the same continent.
 - Global range: some minor effects, that may affect every player, added to "Cure For Cancer", "Internet", and "Women's Suffrage".
 * Every wonder produces as much culture per turn as its building cost/100.

@@ -61,7 +61,7 @@ Cannot move to rough terrain (mountains, jungles and swamps) unless \
 there is a road or base on the tile. If they start the turn on rough \
 terrain or rivers without friendly roads, they have -1 movement point.\
 ")
-    _("Tank")
+    _("Attacker")
     _("Unbribable")
     _("TradeRoute")
     _("HelpWonder")
@@ -641,7 +641,13 @@ tp_defense    = "Alight"
 bombard_rate  = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Capturer", "Bombarder", "Settlers"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "OneAttack", "Capturer", "Bombarder", "Attacker", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -690,7 +696,13 @@ city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Raider", "Capturer",
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "OneAttack", "Raider", "Capturer", "Attacker",
                 "Iron", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
@@ -1085,10 +1097,11 @@ of any land unit.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can bombard non-native tiles (including \
+coastal sea); and they can cause loss of population when attacking \
+a city without City Walls.\
 ")
 
 [unit_horsemen]
@@ -1118,7 +1131,13 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Horse"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Capturer", "Attacker", "Horse"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
 Horsemen are mounted warriors and an early shock-troop that can \
@@ -1156,7 +1175,13 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
-flags         = "Wheeled", "Horse"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Wheeled", "Attacker", "Horse"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
 Chariots are horse-pulled war wagons, stronger but more expensive \
@@ -1164,10 +1189,10 @@ than horsemen.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can cause loss of population when \
+attacking a city without City Walls.\
 ")
 
 [unit_elephants]
@@ -1197,7 +1222,13 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Ivory"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Capturer", "Attacker", "Ivory"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Elephants are towering animals trained for war that are often used as \
@@ -1231,7 +1262,13 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Iron", "Horse"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Capturer", "Attacker", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Crusaders are highly disciplined mounted warriors driven by a higher \
@@ -1267,7 +1304,13 @@ uk_food       = 1
 uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
-flags         = "Capturer", "Iron", "Horse"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Capturer", "Attacker", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "HutTech", "BarbarianTech",
                 "BarbarianBuildTech", "Hunter"
 helptext      = _("\
@@ -1302,7 +1345,13 @@ uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
-flags         = "Capturer", "Bombarder", "Horse", "Niter"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Capturer", "Bombarder", "Attacker", "Horse", "Niter"
 roles         = "DefendOk", "AttackFastStartUnit", "BarbarianTech", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
 Dragoons are mounted warriors carrying early firearms.\
@@ -1336,7 +1385,13 @@ uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
-flags         = "Capturer", "Bombarder", "Horse", "Niter"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Capturer", "Bombarder", "Attacker", "Horse", "Niter"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Cavalry are mounted and highly trained soldiers.\
@@ -1373,10 +1428,10 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Tank", "DefenseMultiplier", 3, TRUE
-     "Tank", "DefenseDivider", 3, TRUE
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Tank", "Iron_Oil", "Uranium"
+flags         = "Bombarder", "Wheeled", "Attacker", "Iron_Oil", "Uranium"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
@@ -1384,10 +1439,11 @@ more damage than any mounted unit.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can bombard non-native tiles (including \
+coastal sea); and they can cause loss of population when attacking \
+a city without City Walls.\
 ")
 
 [unit_catapult]
@@ -1418,7 +1474,13 @@ uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 2
-flags         = "Bombarder", "Wheeled"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Bombarder", "Wheeled", "Attacker"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Catapults are large rock-throwing machines of war. They are very \
@@ -1427,10 +1489,11 @@ to be effective.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can bombard non-native tiles (including \
+coastal sea); and they can cause loss of population when attacking \
+a city without City Walls.\
 "), _("\
 Catapults and archers are the only ancient units with the ability to \
 bombard.\
@@ -1475,7 +1538,13 @@ uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
-flags         = "Bombarder", "Wheeled", "Iron", "Niter"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "Bombarder", "Wheeled", "Attacker", "Iron", "Niter"
 roles         = "AttackStrongStartUnit", "BarbarianBuildTech"
 helptext      = _("\
 Cannons are large firearms that can fire heavy projectiles over long \
@@ -1485,10 +1554,11 @@ effective, and have limited mobility.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can bombard non-native tiles (including \
+coastal sea); and they can cause loss of population when attacking \
+a city without City Walls.\
 ")
 
 [unit_artillery]
@@ -1519,7 +1589,13 @@ uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
-flags         = "CityBuster", "Bombarder", "Wheeled",
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "CityBuster", "Bombarder", "Wheeled", "Attacker",
                 "Iron"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
@@ -1529,10 +1605,11 @@ to be effective, and has limited mobility.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can bombard non-native tiles (including \
+coastal sea); and they can cause loss of population when attacking \
+a city without City Walls.\
 "), _("\
 This unit gets double firepower when attacking cities.\
 ")
@@ -1565,7 +1642,13 @@ uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 4
-flags         = "CityBuster", "Bombarder", "Wheeled",
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "Attacker", "DefenseMultiplier", 3, TRUE
+     "Attacker", "DefenseDivider", 3, TRUE
+   }
+flags         = "CityBuster", "Bombarder", "Wheeled", "Attacker",
                 "Iron_Oil", "Rubber"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
@@ -1575,10 +1658,11 @@ of their predecessors.\
 "),
 ; /* xgettext:no-c-format */
 _("\
-As with other units in this class: they only get defense bonuses from \
-terrain outside cities and bases, and up to a maximum of +25%; they \
-can bombard from coastal land to sea; and they can cause loss of \
-population when attacking a city without City Walls.\
+As with other units in this class: they don't get the defense bonus \
+from rivers, they only get defense bonuses from terrain outside cities, \
+and up to a maximum of +25%; they can bombard non-native tiles (including \
+coastal sea); and they can cause loss of population when attacking \
+a city without City Walls.\
 "), _("\
 This unit gets double firepower when attacking cities.\
 ")
@@ -1626,6 +1710,10 @@ turns, it can automatically attack or bombard an incoming enemy.\
 _("\
 As with other aircraft: they lose 10% of their hit points for every \
 turn not spent in a city, airstrip, or airbase, or on a Carrier.\
+"), _("\
+TIP: When a fighter ends its turn in the open, you can use the Goto \
+action to automatically move it to a city or airbase, in order to prevent \
+it from auto-attacking and running out of fuel.\
 ")
 
 [unit_bomber]
@@ -2230,7 +2318,7 @@ bonuses       =
 flags         = "BadCityDefender", "Submarine", "Bombarder", "HPFullSea",
                 "HP20", "HasNoZOC", "Iron_Oil", "Uranium", "AutoAtt",
                 "NeverProtects"
-roles         = "Hunter", "DefendOk", "DefendOkStartUnit"
+roles         = "Hunter", "DefendOk"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\

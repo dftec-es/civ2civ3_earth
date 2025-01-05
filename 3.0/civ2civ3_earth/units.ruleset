@@ -1286,9 +1286,8 @@ Chariots are horse-pulled war wagons, stronger but more expensive \
 than horsemen.\
 "), _("\
 As with other units in this class: they cannot take advantage of \
-terrain to defend themselves; they can bombard from coastal land to \
-sea; and they can cause loss of population when attacking a city \
-without City Walls.\
+terrain to defend themselves; and they can cause loss of population \
+when attacking a city without City Walls.\
 ")
 
 [unit_elephants]
@@ -1737,6 +1736,10 @@ turns, it can automatically attack or bombard an incoming enemy.\
 _("\
 As with other aircraft: they lose 10% of their hit points for every \
 turn not spent in a city, airstrip, or airbase, or on a Carrier.\
+"), _("\
+TIP: When a fighter ends its turn in the open, you can use the Goto \
+action to automatically move it to a city or airbase, in order to prevent \
+it from auto-attacking and running out of fuel.\
 ")
 
 [unit_bomber]
@@ -2302,7 +2305,7 @@ bonuses       =
    }
 flags         = "Partial_Invis", "BadCityDefender", "Submarine", "Bombarder",
                 "HPFullSea", "HP20", "HasNoZOC", "Iron_Oil", "Uranium"
-roles         = "Hunter", "DefendOk", "DefendOkStartUnit"
+roles         = "Hunter", "DefendOk"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\
