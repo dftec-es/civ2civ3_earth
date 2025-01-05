@@ -1262,7 +1262,7 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
     }
 build_time     = 0
 removal_time   = 0
@@ -1307,8 +1307,8 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "TerrainFlag", "Wood", "Local", FALSE, TRUE
-      "TerrainClass", "Oceanic", "Local", FALSE, TRUE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
     }
 build_time     = 0
 removal_time   = 0
@@ -1338,8 +1338,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
-      "TerrainFlag", "Wood", "Local", TRUE, TRUE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "TerrainFlag", "Wood", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
     }
 build_time     = 0
 removal_time   = 0
@@ -1365,9 +1365,9 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Refining", "Player", TRUE, FALSE
-      "TerrainFlag", "Oil", "Local", TRUE, TRUE
+      "TerrainFlag", "Oil", "Local", TRUE, FALSE
       "Extra", "Mine", "Local", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
     }
 build_time     = 0
 removal_time   = 0
@@ -1512,11 +1512,11 @@ rmact_gfx_alt  = "-"
 ; Note, there are extra restrictions on where farmland can be built
 ; through "Build Irrigation" action enablers
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Refrigeration", "Player", TRUE
-      "Extra", "Irrigation", "Local", TRUE
-      "UnitFlag", "CanWork", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Refrigeration", "Player", TRUE, FALSE
+      "Extra", "Irrigation", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 build_time     = 0
 removal_time   = 0
@@ -1665,10 +1665,11 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "Extra", "Fortress", "Local", TRUE, FALSE
       "Tech", "Feudalism", "Player", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "DiplRelTile", "Foreign", "Local", FALSE, FALSE
-      "TerrainFlag", "NoCities", "Local", FALSE, FALSE
-      "CityTile", "Center", "Adjacent", FALSE, FALSE
+      "Terrain", "Glacier", "Local", FALSE, FALSE
+      "Terrain", "Mountains", "Local", FALSE, FALSE
+      "CityTile", "Center", "Adjacent", FALSE, TRUE
       "Extra", "Castle", "Adjacent", FALSE, FALSE
     }
 disappearance_reqs =
@@ -1711,7 +1712,7 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
 disappearance_reqs =
@@ -1760,7 +1761,7 @@ reqs           =
       "Extra", "Airstrip", "Local", TRUE, FALSE
       "Tech", "Radio", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "Extra", "River", "Local", FALSE, FALSE
       "CityTile", "Center", "Local", FALSE, TRUE
     }
@@ -1891,7 +1892,7 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 build_time     = 0
@@ -1927,7 +1928,7 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Railroad", "Player", TRUE, FALSE
       "Extra", "Road", "Local", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 build_time     = 3
@@ -1965,7 +1966,7 @@ reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Superconductors", "Player", TRUE, FALSE
       "Extra", "Railroad", "Local", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "TerrainClass", "Land", "Local", TRUE, FALSE
     }
 build_time     = 3
@@ -2037,10 +2038,10 @@ reqs           =
       "Tech", "Explosives", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "Terrain", "Glacier", "Local", FALSE, FALSE
-      "Terrain", "Hills", "Local", FALSE, FALSE
       "Terrain", "Mountains", "Local", FALSE, FALSE
+      "Terrain", "Hills", "Local", FALSE, FALSE
       "TerrainClass", "Oceanic", "CAdjacent", TRUE, FALSE
-      "UnitFlag", "CanWork", "Local", TRUE, FALSE
+      "UnitFlag", "CanWork", "Local", TRUE, TRUE
       "DiplRelTile", "Foreign", "Local", FALSE, FALSE
     }
 build_time     = 9
@@ -2163,11 +2164,11 @@ rmact_gfx_alt  = "-"
 ;visibility_req = "Industrialization"
 buildable      = FALSE
 conflicts      = "Niter", "Rubber", "Uranium"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
-Strategic resource, required in a city to build the wonder Apollo \
-Program. Cities with available aluminum build Carrier, AEGIS Cruiser, \
-Cruise Missile, Fighter and Bomber units with one extra veteran level.\
+Strategic resource. Cities with available aluminum build Carrier, \
+AEGIS Cruiser, Cruise Missile, Fighter and Bomber units with one extra \
+veteran level.\
 "), _("\
 With the discovery of Industrialization, aluminum produces 2 extra shields \
 in the tile (hills or tundra).\
@@ -2188,7 +2189,7 @@ rmact_gfx_alt  = "-"
 ;visibility_req = "Gunpowder"
 buildable      = FALSE
 conflicts      = "Aluminum", "Rubber", "Uranium"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource. Cities without available niter build gunpowder \
 based units with one less veteran level: Musketeers, Riflemen, Alpine \
@@ -2214,11 +2215,11 @@ rmact_gfx_alt  = "-"
 ;visibility_req = "Chemistry"
 buildable      = FALSE
 conflicts      = "Aluminum", "Niter", "Uranium"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
-Strategic resource, required in a city to build the wonder SETI Program. \
-Cities with available rubber build Marines, Paratroopers, Helicopter, \
-Mech. Inf. and Howitzer units with one extra veteran level.\
+Strategic resource. Cities with available rubber build Marines, \
+Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
+veteran level.\
 "), _("\
 With the discovery of Chemistry, rubber produces 2 extra shields in \
 the tile (jungle, swamp or forest).\
@@ -2239,7 +2240,7 @@ rmact_gfx_alt  = "-"
 ;visibility_req = "Atomic Theory"
 buildable      = FALSE
 conflicts      = "Aluminum", "Niter", "Rubber"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource, required in a city to build a Nuclear Plant or \
 the wonder Manhattan Project. Cities with available uranium build \

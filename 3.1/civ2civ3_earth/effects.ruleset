@@ -388,7 +388,8 @@ value   = 50
 reqs    =
     { "type", "name", "range", "present"
       "Terrain", "Deep Ocean", "Local", TRUE
-      "UnitClass", "Sea", "Local", TRUE
+      "UnitClassFlag", "Naval", "Local", TRUE
+      "UnitClass", "Sub", "Local", FALSE
     }
 
 ; WARNING
@@ -406,7 +407,8 @@ reqs    =
       "Extra", "Naval Mine", "Adjacent", TRUE
       "TerrainClass", "Oceanic", "Local", TRUE
       "Terrain", "Deep Ocean", "Local", FALSE
-      "UnitClass", "Sea", "Local", TRUE
+      "UnitClassFlag", "Naval", "Local", TRUE
+      "UnitClass", "Sub", "Local", FALSE
       "DiplRelTile", "War", "Local", FALSE
     }
 
@@ -418,7 +420,8 @@ reqs    =
       "Extra", "Naval Mine", "Adjacent", TRUE
       "TerrainClass", "Oceanic", "Local", TRUE
       "Terrain", "Deep Ocean", "Local", FALSE
-      "UnitClass", "Sea", "Local", TRUE
+      "UnitClassFlag", "Naval", "Local", TRUE
+      "UnitClass", "Sub", "Local", FALSE
       "CityTile", "Claimed", "Local", FALSE
     }
 
@@ -602,6 +605,7 @@ reqs    =
     }
 
 ; City: against every land and sea
+; City defense is equal to a Fort
 [effect_city_defense_0]
 type    = "Defend_Bonus"
 value   = 50
@@ -612,6 +616,7 @@ reqs    =
     }
 
 ; City (size > 8): against every land and sea
+; 50 + 50 = 100
 [effect_city_defense_1]
 type    = "Defend_Bonus"
 value   = 50
@@ -663,7 +668,7 @@ reqs    =
       "CityTile", "Center", "Local", FALSE
     }
 
-; Wheeled: +25% defense outside of cities and bases
+; Wheeled: +25% defense outside of cities
 ; (on any terrain with defense bonus)
 [effect_wheeled_defense]
 type    = "Fortify_Defense_Bonus"
@@ -674,8 +679,6 @@ reqs    =
       "UnitClassFlag", "TerrainDefense", "Local", FALSE
       "Activity", "Fortified", "Local", FALSE
       "Activity", "Fortifying", "Local", FALSE
-      "Extra", "Fort", "Local", FALSE
-      "Extra", "Airstrip", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
       "TerrainFlag", "Defense", "Local", TRUE
     }
@@ -691,8 +694,6 @@ reqs    =
       "UnitFlag", "Wheeled", "Local", TRUE
       "UnitClassFlag", "TerrainDefense", "Local", FALSE
       "Activity", "Fortified", "Local", TRUE
-      "Extra", "Fort", "Local", FALSE
-      "Extra", "Airstrip", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
       "TerrainFlag", "Defense", "Local", TRUE
     }
@@ -705,58 +706,8 @@ reqs    =
       "UnitFlag", "Wheeled", "Local", TRUE
       "UnitClassFlag", "TerrainDefense", "Local", FALSE
       "Activity", "Fortifying", "Local", TRUE
-      "Extra", "Fort", "Local", FALSE
-      "Extra", "Airstrip", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
       "TerrainFlag", "Defense", "Local", TRUE
-    }
-
-; Wheeled: +25% defense outside of cities and bases
-; (on river and terrain with no defense bonus)
-[effect_wheeled_defense_river]
-type    = "Fortify_Defense_Bonus"
-value   = 25
-reqs    =
-    { "type", "name", "range", "present"
-      "UnitFlag", "Wheeled", "Local", TRUE
-      "UnitClassFlag", "TerrainDefense", "Local", FALSE
-      "Activity", "Fortified", "Local", FALSE
-      "Activity", "Fortifying", "Local", FALSE
-      "Extra", "River", "Local", TRUE
-      "Extra", "Fort", "Local", FALSE
-      "Extra", "Airstrip", "Local", FALSE
-      "CityTile", "Center", "Local", FALSE
-      "TerrainFlag", "Defense", "Local", FALSE
-    }
-
-[effect_wheeled_defense_river_1]
-type    = "Fortify_Defense_Bonus"
-value   = 37
-reqs    =
-    { "type", "name", "range", "present"
-      "UnitFlag", "Wheeled", "Local", TRUE
-      "UnitClassFlag", "TerrainDefense", "Local", FALSE
-      "Activity", "Fortified", "Local", TRUE
-      "Extra", "River", "Local", TRUE
-      "Extra", "Fort", "Local", FALSE
-      "Extra", "Airstrip", "Local", FALSE
-      "CityTile", "Center", "Local", FALSE
-      "TerrainFlag", "Defense", "Local", FALSE
-    }
-
-[effect_wheeled_defense_river_2]
-type    = "Fortify_Defense_Bonus"
-value   = 37
-reqs    =
-    { "type", "name", "range", "present"
-      "UnitFlag", "Wheeled", "Local", TRUE
-      "UnitClassFlag", "TerrainDefense", "Local", FALSE
-      "Activity", "Fortifying", "Local", TRUE
-      "Extra", "River", "Local", TRUE
-      "Extra", "Fort", "Local", FALSE
-      "Extra", "Airstrip", "Local", FALSE
-      "CityTile", "Center", "Local", FALSE
-      "TerrainFlag", "Defense", "Local", FALSE
     }
 
 [effect_fortified]
@@ -954,9 +905,9 @@ reqs    =
 type    = "Move_Bonus"
 value   = 8
 reqs    =
-    { "type", "name", "range", "present"
-      "Building", "Airport", "City", TRUE
-      "UnitType", "Nuclear", "Local", TRUE
+    { "type", "name", "range"
+      "Building", "Airport", "City"
+      "UnitType", "Nuclear", "Local"
     }
 
 ; Rocketry enables the movement of nuclear weapons,
@@ -1178,9 +1129,49 @@ reqs    =
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
+; Trade waste -4% each tile
+[effect_corruption_distance]
+type    = "Output_Waste_By_Distance"
+value   = 400
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Trade", "Local", TRUE
+;      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Tribal", "Player", FALSE
+;      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
+    }
+
+; Trade waste -2% each tile
+[effect_corruption_distance_ancient]
+type    = "Output_Waste_By_Distance"
+value   = 200
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Trade", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+;      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+;      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
+    }
+
 ; Trade waste -1% each tile
 ; (Federation and Communism 0%)
-[effect_corruption_distance]
+[effect_corruption_distance_modern]
 type    = "Output_Waste_By_Distance"
 value   = 100
 reqs    =
@@ -1196,26 +1187,6 @@ reqs    =
       "Gov", "Federation", "Player", FALSE
       "Gov", "Republic", "Player", FALSE
 ;      "Gov", "Democracy", "Player", FALSE
-      "NationGroup", "Barbarian", "Player", FALSE
-    }
-
-; Trade waste -2% each tile
-[effect_corruption_distance_ancient]
-type    = "Output_Waste_By_Distance"
-value   = 200
-reqs    =
-    { "type", "name", "range", "present"
-      "OutputType", "Trade", "Local", TRUE
-;      "Gov", "Anarchy", "Player", FALSE
-;      "Gov", "Tribal", "Player", FALSE
-;      "Gov", "Despotism", "Player", FALSE
-;      "Gov", "Monarchy", "Player", FALSE
-      "Gov", "Fascism", "Player", FALSE
-      "Gov", "Communism", "Player", FALSE
-;      "Gov", "Fundamentalism", "Player", FALSE
-      "Gov", "Federation", "Player", FALSE
-;      "Gov", "Republic", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
@@ -1311,8 +1282,48 @@ reqs    =
       "OutputType", "Trade", "Local", FALSE
     }
 
-; Production waste -1% shields each tile
+; Production waste -4% shields each tile
 [effect_waste_distance]
+type    = "Output_Waste_By_Distance"
+value   = 400
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Shield", "Local", TRUE
+;      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Tribal", "Player", FALSE
+;      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
+    }
+
+; Production waste -2% shields each tile
+[effect_waste_distance_ancient]
+type    = "Output_Waste_By_Distance"
+value   = 200
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Shield", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+;      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+;      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+      "NationGroup", "Barbarian", "Player", FALSE
+    }
+
+; Production waste -1% shields each tile
+[effect_waste_distance_modern]
 type    = "Output_Waste_By_Distance"
 value   = 100
 reqs    =
@@ -1328,26 +1339,6 @@ reqs    =
       "Gov", "Federation", "Player", FALSE
       "Gov", "Republic", "Player", FALSE
 ;      "Gov", "Democracy", "Player", FALSE
-      "NationGroup", "Barbarian", "Player", FALSE
-    }
-
-; Production waste -2% shields each tile
-[effect_waste_distance_ancient]
-type    = "Output_Waste_By_Distance"
-value   = 200
-reqs    =
-    { "type", "name", "range", "present"
-      "OutputType", "Shield", "Local", TRUE
-;      "Gov", "Anarchy", "Player", FALSE
-;      "Gov", "Tribal", "Player", FALSE
-;      "Gov", "Despotism", "Player", FALSE
-;      "Gov", "Monarchy", "Player", FALSE
-      "Gov", "Fascism", "Player", FALSE
-      "Gov", "Communism", "Player", FALSE
-;      "Gov", "Fundamentalism", "Player", FALSE
-      "Gov", "Federation", "Player", FALSE
-;      "Gov", "Republic", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
       "NationGroup", "Barbarian", "Player", FALSE
     }
 
@@ -1613,7 +1604,7 @@ reqs    =
 
 [effect_upkeep_free_units_anarchy]
 type    = "Unit_Upkeep_Free_Per_City"
-value   = 2
+value   = 3
 reqs    =
     { "type", "name", "range", "quiet"
       "Gov", "Anarchy", "Player", TRUE
@@ -2296,15 +2287,13 @@ reqs    =
       "Gov", "Democracy", "Player", FALSE
     }
 
-; Railroad because makes Pyramids obsolete
 [effect_gov_tile_penalty_anarchy]
 type    = "Output_Penalty_Tile"
 value   = 2
 reqs    =
     { "type", "name", "range", "present", "quiet"
-      "Gov", "Anarchy", "Player", TRUE, TRUE
-      "Building", "Pyramids", "Player", FALSE, FALSE
-      "Tech", "Railroad", "World", FALSE, FALSE
+      "Gov", "Anarchy", "Player", TRUE, FALSE
+      "Tech", "Trade", "Player", FALSE, FALSE
       "OutputType", "Gold", "Local", FALSE, TRUE
       "OutputType", "Luxury", "Local", FALSE, TRUE
       "OutputType", "Science", "Local", FALSE, TRUE
@@ -2315,9 +2304,8 @@ type    = "Output_Penalty_Tile"
 value   = 2
 reqs    =
     { "type", "name", "range", "present", "quiet"
-      "Gov", "Tribal", "Player", TRUE, TRUE
-      "Building", "Pyramids", "Player", FALSE, FALSE
-      "Tech", "Railroad", "World", FALSE, FALSE
+      "Gov", "Tribal", "Player", TRUE, FALSE
+      "Tech", "Trade", "Player", FALSE, FALSE
       "OutputType", "Gold", "Local", FALSE, TRUE
       "OutputType", "Luxury", "Local", FALSE, TRUE
       "OutputType", "Science", "Local", FALSE, TRUE
@@ -2328,9 +2316,8 @@ type    = "Output_Penalty_Tile"
 value   = 2
 reqs    =
     { "type", "name", "range", "present", "quiet"
-      "Gov", "Despotism", "Player", TRUE, TRUE
-      "Building", "Pyramids", "Player", FALSE, FALSE
-      "Tech", "Railroad", "World", FALSE, FALSE
+      "Gov", "Despotism", "Player", TRUE, FALSE
+      "Tech", "Trade", "Player", FALSE, FALSE
       "OutputType", "Gold", "Local", FALSE, TRUE
       "OutputType", "Luxury", "Local", FALSE, TRUE
       "OutputType", "Science", "Local", FALSE, TRUE
@@ -2414,26 +2401,6 @@ reqs    =
 ;      "Gov", "Federation", "Player", FALSE
 ;      "Gov", "Republic", "Player", FALSE
 ;      "Gov", "Democracy", "Player", FALSE
-    }
-
-; Celebration: only city center tile
-[effect_gov_tile_bonus_celebrate_center]
-type    = "Output_Inc_Tile_Celebrate"
-value   = 1
-reqs    =
-    { "type", "name", "range", "present"
-      "OutputType", "Trade", "Local", TRUE
-      "CityTile", "Center", "Local", TRUE
-      "Gov", "Anarchy", "Player", FALSE
-      "Gov", "Tribal", "Player", FALSE
-      "Gov", "Despotism", "Player", FALSE
-      "Gov", "Monarchy", "Player", FALSE
-;      "Gov", "Fascism", "Player", FALSE
-;      "Gov", "Communism", "Player", FALSE
-;      "Gov", "Fundamentalism", "Player", FALSE
-      "Gov", "Federation", "Player", FALSE
-      "Gov", "Republic", "Player", FALSE
-      "Gov", "Democracy", "Player", FALSE
     }
 
 [effect_vision_tribal]

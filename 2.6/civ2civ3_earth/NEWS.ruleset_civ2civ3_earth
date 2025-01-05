@@ -40,7 +40,7 @@ Terrains:
 - Some units get additional veteran levels when certain resources are available in the city:
   - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
   - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
-- Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program requires Aluminum.
+* Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program no longer requires Aluminum.
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
 
 Culture:
@@ -113,7 +113,7 @@ Naval units:
 
 Wonders:
 - Readjusted effects and obsolescence of many wonders. See the table (in README file).
-- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or specific resources available in the city ("Manhattan Project" and "Apollo Program").
+- The construction of a wonder no longer requires the presence of other buildings in the city. This way, most wonders appear as available in every city, and it is easier to keep track of them. However, some wonders still require another building in the city in order to get the bonus, and some of them require adjacent water ("Lighthouse", "Magellan's Expedition", "Hoover Dam") or a resource available in the city ("Manhattan Project").
 - Continental range: "J.S. Bach's Cathedral", "Great Wall" and "Sun Tzu's War Academy" affects only to cities of the same continent.
 - Global range: some minor effects, that may affect every player, added to "Cure For Cancer", "Internet", and "Women's Suffrage".
 * Every wonder produces as much culture per turn as its building cost/100.

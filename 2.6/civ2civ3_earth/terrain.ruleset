@@ -1273,7 +1273,7 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "TerrainFlag", "Wood", "Local", FALSE, TRUE
-      "TerrainClass", "Oceanic", "Local", FALSE, TRUE
+      "TerrainClass", "Land", "Local", TRUE, FALSE
       "UnitClass", "Sea", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1307,7 +1307,7 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
-      "TerrainFlag", "Wood", "Local", TRUE, TRUE
+      "TerrainFlag", "Wood", "Local", TRUE, FALSE
       "UnitClass", "Sea", "Local", FALSE, TRUE
     }
 rmreqs         =
@@ -1337,7 +1337,7 @@ rmact_gfx_alt  = "-"
 reqs           =
     { "type", "name", "range", "present", "quiet"
       "Tech", "Refining", "Player", TRUE, FALSE
-      "TerrainFlag", "Oil", "Local", TRUE, TRUE
+      "TerrainFlag", "Oil", "Local", TRUE, FALSE
       "Extra", "Mine", "Local", TRUE, FALSE
       "UnitClass", "Sea", "Local", FALSE, TRUE
     }
@@ -1490,10 +1490,10 @@ rmact_gfx_alt  = "-"
 ; Note, there are extra restrictions on where farmland can be built
 ; through Irrig_Possible effects
 reqs           =
-    { "type", "name", "range", "present"
-      "Tech", "Refrigeration", "Player", TRUE
-      "Extra", "Irrigation", "Local", TRUE
-      "CityTile", "Center", "Local", FALSE
+    { "type", "name", "range", "present", "quiet"
+      "Tech", "Refrigeration", "Player", TRUE, FALSE
+      "Extra", "Irrigation", "Local", TRUE, FALSE
+      "CityTile", "Center", "Local", FALSE, TRUE
     }
 rmreqs         =
     { "type", "name", "range", "present"
@@ -1991,8 +1991,8 @@ reqs           =
       "Tech", "Explosives", "Player", TRUE, FALSE
       "TerrainClass", "Land", "Local", TRUE, FALSE
       "Terrain", "Glacier", "Local", FALSE, FALSE
-      "Terrain", "Hills", "Local", FALSE, FALSE
       "Terrain", "Mountains", "Local", FALSE, FALSE
+      "Terrain", "Hills", "Local", FALSE, FALSE
       "TerrainClass", "Oceanic", "CAdjacent", TRUE, FALSE
       "UnitFlag", "Settlers", "Local", TRUE, FALSE
     }
@@ -2069,11 +2069,11 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
 conflicts      = "Niter", "Rubber", "Uranium"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
-Strategic resource, required in a city to build the wonder Apollo \
-Program. Cities with available aluminum build Carrier, AEGIS Cruiser, \
-Cruise Missile, Fighter and Bomber units with one extra veteran level.\
+Strategic resource. Cities with available aluminum build Carrier, \
+AEGIS Cruiser, Cruise Missile, Fighter and Bomber units with one extra \
+veteran level.\
 "), _("\
 With the discovery of Industrialization, aluminum produces 2 extra shields \
 in the tile (hills or tundra).\
@@ -2093,7 +2093,7 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
 conflicts      = "Aluminum", "Rubber", "Uranium"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource. Cities without available niter build gunpowder \
 based units with one less veteran level: Musketeers, Riflemen, Alpine \
@@ -2118,7 +2118,7 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
 conflicts      = "Aluminum", "Niter", "Uranium"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource. Cities with available rubber build Marines, \
 Paratroopers, Helicopter, Mech. Inf. and Howitzer units with one extra \
@@ -2142,7 +2142,7 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 buildable      = FALSE
 conflicts      = "Aluminum", "Niter", "Rubber"
-flags          = "TerrChangeRemoves"
+;flags          = "TerrChangeRemoves"
 helptext       = _("\
 Strategic resource, required in a city to build a Nuclear Plant or \
 the wonder Manhattan Project. Cities with available uranium build \

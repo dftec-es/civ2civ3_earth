@@ -3,7 +3,7 @@ options = "+Freeciv-3.0-mpdl"
 baseURL = "."
 name    = "Civ2civ3_Earth"
 type    = "Modpack"
-version = "2024_05"
+version = "2024_05b"
 
 [files]
 list =

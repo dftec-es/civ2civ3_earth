@@ -225,7 +225,6 @@ helptext = _("\
 Rubber resources produce 2 extra shields in the tile where they are \
 located.\
 "), _("\
-Rubber is required in a city to build the wonder SETI Program. \
 Cities with available Rubber build Marines, Paratroopers, Helicopter, \
 Mech. Inf. and Howitzer units with one extra veteran level.\
 ")
@@ -519,7 +518,6 @@ helptext = _("\
 Aluminum resources produce 2 extra shields in the tile where they are \
 located.\
 "), _("\
-Aluminum is required in a city to build the wonder Apollo Program. \
 Cities with available Aluminum build Carrier, AEGIS Cruiser, Cruise \
 Missile, Fighter and Bomber units with one extra veteran level.\
 ")
@@ -828,10 +826,6 @@ graphic_alt = "-"
 helptext = _("\
 Allows Settlers, Migrants, Workers and Engineers to upgrade roads to \
 railroads.\
-"), _("\
-For Despotism or Tribal governments, cancels the penalty to worked \
-tiles with output greater than 2 (as if all your cities were always \
-celebrating).\
 ")
 ;cost     = 350
 
@@ -1049,6 +1043,9 @@ flags    = ""
 graphic     = "a.trade"
 graphic_alt = "-"
 helptext = _("\
+Cancels the penalty to output per tile caused by Anarchy, Despotism \
+or Tribalism governments.\
+"), _("\
 Allows establishing up to 1 trade route from each city.\
 "), _("\
 When 2 cities are linked by a trade route, any special resource present \

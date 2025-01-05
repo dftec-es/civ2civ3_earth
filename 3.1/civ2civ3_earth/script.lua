@@ -451,6 +451,7 @@ function score_victory(turn, year)
       local culture = player:culture()
 
       if score > score_1st then
+        score_2nd = score_1st
         score_1st = score
         -- save the score leader, that might not be the culture leader
         leader = player
@@ -458,6 +459,7 @@ function score_victory(turn, year)
         score_2nd = score
       end
       if culture > culture_1st then
+        culture_2nd = culture_1st
         culture_1st = culture
       elseif culture > culture_2nd then
         culture_2nd = culture
