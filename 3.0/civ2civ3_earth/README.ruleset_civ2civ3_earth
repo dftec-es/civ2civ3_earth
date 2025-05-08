@@ -2,7 +2,7 @@
 Civ2Civ3 Earth Ruleset for Freeciv v3.0 (Updated 12-2024)
 ============================================================
 
-"civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
+"civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth" (or "ampliohex_earth" for hexagonal topology), and a world map scenario, adapted to be played with these rules.
 
 I have been working on this ruleset since Freeciv 2.2. The version I made for Freeciv 2.5 was included in the official distro, and later they decided to make it the default ruleset for Freeciv 3.0. My opinion is that the ruleset was not ready for that, but now that it is the default one, it is hard to keep introducing changes there. Since 2.6, I have continued the development of the ruleset in this "earth" pack, which is available either from the modpack installer that comes with Freeciv, or from GitHub: https://github.com/dftec-es/civ2civ3_earth/tags
 
@@ -193,7 +193,7 @@ TERRAIN:
 
 - Cities on rivers always get roads, even before Bridge Building is known.
 
-- The only terrain transformations available before the end of the tech tree are: Jungle -> Swamp; and Grassland -> Forest -> Plains -> Forest (10 turns each step).
+- The only terrain transformations available before the end of the tech tree are: Jungle -> Swamp; and Grassland -> Forest -> Plains -> Forest (10 turns each step). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
 
 - The following diagram shows all the transformations available with the discovery of Fusion Power (and the turns required). Redesigned so all useful alterations can be finished in 1 or 2 steps, and all effects of global warming can be reverted:
 
@@ -553,7 +553,7 @@ Naval Units:
 
 - Enabled ZOC for naval units on Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.
 
-- Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans or unsafe coasts (Mountains, Glaciers). They lose 1 hit point every turn ended on deep ocean (-10% hp loss, like helicopters).
+- Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans or unsafe coasts (Mountains, Glaciers). They lose 1 hit point every turn ended on deep ocean (-10% hp loss, like helicopters). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys. 
 
 - New unit Sailboat (available with Astronomy), which can enter deep ocean, but cannot end far from safe coasts (on deep ocean completely surrounded by deep oceans or unsafe coasts) more than 1 consecutive turn. It cannot attack, so it can move inside the borders of peaceful nations.
 
@@ -577,7 +577,7 @@ Aerial Units:
 
 Agents:
 
-- Homeless units can no longer bribe or capture other units.
+- Homeless units can no longer bribe or capture other units. Otherwise they can be used to get units free of upkeep.
 
 - Diplomat units stay alive when they investigate cities, and they can establish embassies or investigate cities directly from boats without disembarking. Explorers can perform those two actions, same as Diplomats.
 
