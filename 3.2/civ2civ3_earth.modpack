@@ -1,0 +1,18 @@
+
+[datafile]
+options = "+Freeciv-3.2-modpack"
+
+[modpack]
+; Name of the modpack
+name = "civ2civ3_earth"
+
+[components]
+; Whether the modpack has a ruleset component
+ruleset = TRUE
+
+[ruleset]
+; For modpacks with the ruleset component, either "rulesetdir" or "serv" needs to be defined.
+; - "rulesetdir" gives the directory where the ruleset is
+; - "serv" gives a server script to load, and which is assumed to also set the rulesetdir
+;serv = "civ2civ3_earth.serv"
+rulesetdir = "civ2civ3_earth"
