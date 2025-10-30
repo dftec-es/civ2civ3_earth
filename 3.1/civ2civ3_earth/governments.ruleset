@@ -82,7 +82,7 @@ _("\
  suffer a -1 penalty, unless the player has researched Trade technology,\
  or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
 * All citizens are unhappy by default.\n\
-* Each city can support up to 2 units for free; further units each cost\
+* Each city can support up to 3 units for free; further units each cost\
  1 shield per turn.\n\
 * Military units do not cause unhappiness even when deployed aggressively.\n\
 * Military units impose martial law. Up to 3 military units inside a city\

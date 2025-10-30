@@ -53,7 +53,7 @@ CORE CHANGES:
   A city cannot support more than 20 units (no matter if the city pays upkeep for the unit or not). This helps AI cities to avoid starvation or bankruptcy due to excess of units.
 
 - Most units also require upkeep in Food (except for Workers/Engineers, Diplomat/Spy, Caravan/Freight, Explorer/AWACS, and Cruise Missile/Nuclear).
-  A city can support for free as many units (with upkeep in Food) as its population size (at least 4 are always free). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
+  A city can support for free as many units (with upkeep in Food) as half its population size, rounded up (at least 3 from the start, taking into account the additional free units granted by the government). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
 
 - Units lose one veteran level when upgraded, and they do not gain veterancy from combat if the enemy is not killed, or if either side of the fight is completely powerless.
   Increased by one the number of veteran levels, with effects: 100% (green), 125% (regular), 150% (veteran), 175% (hardened) and 200% (elite).
@@ -188,24 +188,26 @@ TERRAIN:
 
 - Cities on rivers always get roads, even before Bridge Building is known.
 
-- The only terrain transformations available before the end of the tech tree are: Jungle -> Swamp; and Grassland -> Forest -> Plains -> Forest (10 turns each step). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
+- Added Plantation, a new terrain that is equal to forest, except that it transforms into Grassland when cut down (while regular forest transforms into Plains).
 
-- The following diagram shows all the transformations available with the discovery of Fusion Power (and the turns required). Redesigned so all useful alterations can be finished in 1 or 2 steps, and all effects of global warming can be reverted:
+- The only terrain transformations (which cost 10 working time) available before the end of the tech tree are: Jungle -> Swamp; Plains <-> Forest; and Grassland <-> Forest (named Plantation). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
+
+- The following diagram shows all the transformations available with the discovery of Fusion Power (and the working time required). Redesigned so all useful alterations can be finished in 1 or 2 steps, and all effects of global warming can be reverted:
 
 
-Glacier ---(24)---> Lake
-                     /\ (36)
-Ocean  ----(36)\     \/ (36)
-                --> Grassland
-Swamp  ----(24)/     /\ (24)
- /\ (10)             \/ (10)
-Jungle ----(36)---> Forest
-                     /\ (10)
-Tundra ----(24)\     \/ (10)
-                --> Plains
-Desert ----(24)/     /\ (24)
-                     \/ (24)
-Mountains -(36)---> Hills
+Glacier ---(20)---> Lake
+                     /\ (30)
+Ocean  ----(30)\     \/ (30)
+                --> Grassland (Grassland)
+Swamp  ----(20)/     /\ (20)   /\ (10)
+ /\ (10)             /\        \/ (10)
+Jungle ----(30)---> Forest    (Plantation)
+                     /\ (10)   \/
+Tundra ----(20)\     \/ (10)   \/ (20)
+                --> Plains    (Plains)
+Desert ----(20)/     /\ (20)
+                     \/ (20)
+Mountains -(30)---> Hills
 
 
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
@@ -297,7 +299,7 @@ by Distance      +4%      +4%      +4%      +2%      +2%      +2%      +1%      
 
 - "Unit Upkeep": Tribalism, Republic and Communism use the standard unit upkeep in shields, while the other governments use upkeep in coins (x2 coins per unit for modern governments).
 
-- "Free Units": Means units free of shield/coin upkeep and also free of unhappiness due to military activity. By default 2 free units per city.
+- "Free Units": Means units free of shield/coin/food upkeep and also free of unhappiness due to military activity. By default 2 free units per city.
 
 - "War Unhappiness": Most governments cause unhappiness when military units end the turn outside national borders (same as Republic with civ2 rules).
 
@@ -529,6 +531,29 @@ EXAMPLE: Riflemen in a size 9 city, with walls, on hills, will get a total defen
          Fortified (+50%): 4 + 2 = 6
          On Hills (+50%):          6 + 3 = 9
          In City with Walls (+200%):       9 + 18 = 27.
+
+
+EXAMPLE: Marine (Defense 5, HP 20)
+                 
+Terrain          Defense  Fortify  Fort   \ Fortress
+                 (*HP/10) (+50%)   (+50%) \ (+100%)
+Plains           10       15       22,5   \ 30
+ + River         12,5     18,75    28,125
+Forest           12,5     18,75    28,125 \ 37,5
+ + River         15,625   23,4375  35,15625
+Hills            15,0     22,5     33,75  \ 45
+ + River         18,75    28,125   42,1875
+Mountains        20,0     30,0     45,0   \ 60
+ + River         25,0     37,5     56,25
+                 
+EXAMPLE: Mech. Inf. (Defense 6, HP 30)
+                 
+Terrain          Defense  Fortify  Fort   \ Fortress
+                 (*HP/10) (+50%)   (+50%) \ (+100%)
+Plains           18       27       40,5   \ 54
+ + River         18       27       40,5
+Forest\Hills\M   22,5     33,75    50,625 \ 67,5
+ + River         22,5     33,75    50,625
 
 
 ACTIONS:

@@ -9,7 +9,7 @@ name = "amplio_earth"
 priority = 30
 
 ; There`s no separate versioning in tilesets part of main freeciv distribution
-version = "3.1_2024_05b"
+version = "3.1_2024_05c"
 
 ; Summary and full description of the tileset.
 summary = _("Large isometric tileset based on Amplio.")
@@ -241,6 +241,16 @@ layer0_match_type = "land"
 
 [tile_forest]
 tag = "forest"
+blend_layer = 1
+num_layers = 2
+layer0_match_type = "land"
+layer1_match_type = "forest"
+layer1_match_with = "forest"
+layer1_is_tall = TRUE
+layer1_offset_y = 6
+
+[tile_plantation]
+tag = "plantation"
 blend_layer = 1
 num_layers = 2
 layer0_match_type = "land"

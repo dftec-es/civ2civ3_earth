@@ -260,7 +260,7 @@ Output per tile * -1(if>2) -1(if>2) -1(if>2) -        -        -        -       
 Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) -       (+1Trade)(+1Trade)(+1Trade) -        -
 
 Unit Upkeep       Shield   Shield   Coin     Coin     Coin(x2) Shield   Coin(x2) Coin(x2) Shield   Coin(x2)
-Free Units        2        3        2        3        2        1        1        2        3        3
+Free Units        3        3        2        3        2        1        1        2        3        3
 War Unhappiness   0        0        0       -1       -1       -1       -2       -1       -1        0
 Martial Law      +1        0       +1       +1        0        0        0        0       +2       +2
 

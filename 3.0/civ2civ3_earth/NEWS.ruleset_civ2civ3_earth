@@ -59,7 +59,7 @@ Culture:
 - Governments no longer get immunity against bribe or incite actions. Cities with a Courthouse or a Palace are now immune to incite actions.
 
 Governments:
-They have been mathematically balanced using as reference cities (with population 20) optimized for each government.
+They have been properly balanced using as reference cities (with population 20) optimized for each government.
 - Halved the chance of civil war for all governments.
 - The appearance of Partisans in conquered cities requires the owner to have knowledge of Guerrilla Warfare.
 - Empire Size no longer depends on the government chosen. Every time a new government becomes available, the Empire Size increases by 2, from 4 at the beginning, up to 20 when all governments have been discovered.

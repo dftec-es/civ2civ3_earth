@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.1_2024_05b"
+version = "3.1_2024_05c"
 
 ; When about to migrate ruleset under a new name in the future version, set
 ; alt_dir to the name of that future directory. Then savegames saved with this
@@ -1187,6 +1187,7 @@ target_reqs    =
       "BuildingGenus", "GreatWonder", "Local"
     }
 
+; New
 [actionenabler_resupply]
 action = "Heal Unit"
 actor_reqs    =
@@ -1220,11 +1221,31 @@ actor_reqs    =
     }
 
 ; New
-[actionenabler_capture]
+[actionenabler_capture_non_transported]
 action = "Capture Units"
 actor_reqs    =
     { "type",           "name",        "range", "present"
       "UnitFlag",       "Capturer",    "Local", TRUE
+      "UnitState",      "Transported", "Local", FALSE
+      "UnitState",      "HasHomeCity", "Local", TRUE
+      "DiplRel",        "War",         "Local", TRUE
+      "DiplRel",        "Foreign",     "Local", TRUE
+      "MinMoveFrags",   "1",           "Local", TRUE
+    }
+target_reqs    =
+    { "type",      "name",         "range", "present"
+      "UnitFlag",  "Capturable",   "Local", TRUE
+      "UnitState", "Transporting", "Local", FALSE
+      "CityTile",  "Center",       "Local", FALSE
+    }
+
+[actionenabler_capture_transported]
+action = "Capture Units"
+actor_reqs    =
+    { "type",           "name",        "range", "present"
+      "UnitFlag",       "Capturer",    "Local", TRUE
+      "UnitFlag",       "Raider",      "Local", TRUE
+      "UnitState",      "Transported", "Local", TRUE
       "UnitState",      "HasHomeCity", "Local", TRUE
       "DiplRel",        "War",         "Local", TRUE
       "DiplRel",        "Foreign",     "Local", TRUE
@@ -2429,6 +2450,7 @@ actor_reqs    =
       "CityTile",     "Center",     "Local", FALSE
     }
 
+; New
 [actionenabler_board_city]
 action        = "Transport Board"
 actor_reqs    =
@@ -2518,6 +2540,7 @@ actor_reqs    =
       "UnitClassFlag",  "HutFrighten",  "Local", TRUE
     }
 
+; New
 [actionenabler_claim_extra_war_non_transported]
 action        = "Conquer Extras"
 actor_reqs    =

@@ -1418,7 +1418,7 @@ type    = "Make_Content_Mil"
 value   = 2
 reqs    =
     { "type", "name", "range", "present"
-;      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Anarchy", "Player", FALSE
       "Gov", "Tribal", "Player", FALSE
 ;      "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -1436,7 +1436,7 @@ type    = "Make_Content_Mil"
 value   = 3
 reqs    =
     { "type", "name", "range", "present"
-      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Anarchy", "Player", FALSE
 ;      "Gov", "Tribal", "Player", FALSE
       "Gov", "Despotism", "Player", FALSE
 ;      "Gov", "Monarchy", "Player", FALSE

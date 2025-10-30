@@ -26,7 +26,7 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "3.0_2024_05b"
+version = "3.0_2024_05c"
 
 ; Summary of the ruleset
 summary = _("\
@@ -751,11 +751,31 @@ actor_reqs    =
     }
 
 ; New
-[actionenabler_capture]
+[actionenabler_capture_non_transported]
 action = "Capture Units"
 actor_reqs    =
     { "type",           "name",        "range", "present"
       "UnitFlag",       "Capturer",    "Local", TRUE
+      "UnitState",      "Transported", "Local", FALSE
+      "UnitState",      "HasHomeCity", "Local", TRUE
+      "DiplRel",        "War",         "Local", TRUE
+      "DiplRel",        "Is foreign",  "Local", TRUE
+      "MinMoveFrags",   "1",           "Local", TRUE
+    }
+target_reqs    =
+    { "type",      "name",         "range", "present"
+      "UnitFlag",  "Capturable",   "Local", TRUE
+      "UnitState", "Transporting", "Local", FALSE
+      "CityTile",  "Center",       "Local", FALSE
+    }
+
+[actionenabler_capture_transported]
+action = "Capture Units"
+actor_reqs    =
+    { "type",           "name",        "range", "present"
+      "UnitFlag",       "Capturer",    "Local", TRUE
+      "UnitFlag",       "Raider",      "Local", TRUE
+      "UnitState",      "Transported", "Local", TRUE
       "UnitState",      "HasHomeCity", "Local", TRUE
       "DiplRel",        "War",         "Local", TRUE
       "DiplRel",        "Is foreign",  "Local", TRUE

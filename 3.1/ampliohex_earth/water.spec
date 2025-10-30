@@ -27,6 +27,7 @@ pixel_border = 1
 
 tiles = { "row", "column", "tag"
 
+; ocean (water-ice):
  0, 0,  "t.l1.coast_cell_u_w_w_w" ;vacant cell
  0, 2,  "t.l1.coast_cell_u_i_w_w"
  0, 4,  "t.l1.coast_cell_u_w_i_w"
@@ -63,7 +64,44 @@ tiles = { "row", "column", "tag"
  2, 13, "t.l1.coast_cell_r_w_i_i"
  2, 15, "t.l1.coast_cell_r_i_i_i"
 
-; deep ocean cell sprites:
+; ocean (shallow-land):
+; 3, 0,  "t.l0.coast_cell_u_s_s_s" ;vacant cell
+; 3, 2,  "t.l0.coast_cell_u_l_s_s"
+; 3, 4,  "t.l0.coast_cell_u_s_l_s"
+; 3, 6,  "t.l0.coast_cell_u_l_l_s"
+; 3, 8,  "t.l0.coast_cell_u_s_s_l"
+; 3, 10, "t.l0.coast_cell_u_l_s_l"
+; 3, 12, "t.l0.coast_cell_u_s_l_l"
+; 3, 14, "t.l0.coast_cell_u_l_l_l"
+; 
+; 4, 0,  "t.l0.coast_cell_d_s_s_s" ;vacant cell
+; 4, 2,  "t.l0.coast_cell_d_l_s_s"
+; 4, 4,  "t.l0.coast_cell_d_s_l_s"
+; 4, 6,  "t.l0.coast_cell_d_l_l_s"
+; 4, 8,  "t.l0.coast_cell_d_s_s_l"
+; 4, 10, "t.l0.coast_cell_d_l_s_l"
+; 4, 12, "t.l0.coast_cell_d_s_l_l"
+; 4, 14, "t.l0.coast_cell_d_l_l_l"
+;
+; 5, 0,  "t.l0.coast_cell_l_s_s_s" ;vacant cell
+; 5, 2,  "t.l0.coast_cell_l_l_s_s"
+; 5, 4,  "t.l0.coast_cell_l_s_l_s"
+; 5, 6,  "t.l0.coast_cell_l_l_l_s"
+; 5, 8,  "t.l0.coast_cell_l_s_s_l"
+; 5, 10, "t.l0.coast_cell_l_l_s_l"
+; 5, 12, "t.l0.coast_cell_l_s_l_l"
+; 5, 14, "t.l0.coast_cell_l_l_l_l"
+;
+; 5, 1,  "t.l0.coast_cell_r_s_s_s"
+; 5, 3,  "t.l0.coast_cell_r_l_s_s"
+; 5, 5,  "t.l0.coast_cell_r_s_l_s"
+; 5, 7,  "t.l0.coast_cell_r_l_l_s"
+; 5, 9,  "t.l0.coast_cell_r_s_s_l"
+; 5, 11, "t.l0.coast_cell_r_l_s_l"
+; 5, 13, "t.l0.coast_cell_r_s_l_l"
+; 5, 15, "t.l0.coast_cell_r_l_l_l"
+
+; deep ocean (water-ice):
  0, 0,  "t.l1.floor_cell_u_w_w_w" ;vacant cell
  0, 2,  "t.l1.floor_cell_u_i_w_w"
  0, 4,  "t.l1.floor_cell_u_w_i_w"
@@ -100,7 +138,44 @@ tiles = { "row", "column", "tag"
  2, 13, "t.l1.floor_cell_r_w_i_i"
  2, 15, "t.l1.floor_cell_r_i_i_i"
 
-; lake tiles
+; deep ocean (deep-shallow):
+; 6, 0,  "t.l0.floor_cell_u_d_d_d" ;vacant cell
+; 6, 2,  "t.l0.floor_cell_u_s_d_d"
+; 6, 4,  "t.l0.floor_cell_u_d_s_d"
+; 6, 6,  "t.l0.floor_cell_u_s_s_d"
+; 6, 8,  "t.l0.floor_cell_u_d_d_s"
+; 6, 10, "t.l0.floor_cell_u_s_d_s"
+; 6, 12, "t.l0.floor_cell_u_d_s_s"
+; 6, 14, "t.l0.floor_cell_u_s_s_s"
+; 
+; 7, 0,  "t.l0.floor_cell_d_d_d_d" ;vacant cell
+; 7, 2,  "t.l0.floor_cell_d_s_d_d"
+; 7, 4,  "t.l0.floor_cell_d_d_s_d"
+; 7, 6,  "t.l0.floor_cell_d_s_s_d"
+; 7, 8,  "t.l0.floor_cell_d_d_d_s"
+; 7, 10, "t.l0.floor_cell_d_s_d_s"
+; 7, 12, "t.l0.floor_cell_d_d_s_s"
+; 7, 14, "t.l0.floor_cell_d_s_s_s"
+;
+; 8, 0,  "t.l0.floor_cell_l_d_d_d" ;vacant cell
+; 8, 2,  "t.l0.floor_cell_l_s_d_d"
+; 8, 4,  "t.l0.floor_cell_l_d_s_d"
+; 8, 6,  "t.l0.floor_cell_l_s_s_d"
+; 8, 8,  "t.l0.floor_cell_l_d_d_s"
+; 8, 10, "t.l0.floor_cell_l_s_d_s"
+; 8, 12, "t.l0.floor_cell_l_d_s_s"
+; 8, 14, "t.l0.floor_cell_l_s_s_s"
+;
+; 8, 1,  "t.l0.floor_cell_r_d_d_d"
+; 8, 3,  "t.l0.floor_cell_r_s_d_d"
+; 8, 5,  "t.l0.floor_cell_r_d_s_d"
+; 8, 7,  "t.l0.floor_cell_r_s_s_d"
+; 8, 9,  "t.l0.floor_cell_r_d_d_s"
+; 8, 11, "t.l0.floor_cell_r_s_d_s"
+; 8, 13, "t.l0.floor_cell_r_d_s_s"
+; 8, 15, "t.l0.floor_cell_r_s_s_s"
+
+; lake tiles (shallow-land):
  9, 0,  "t.l0.lake_cell_u_s_s_s" ;vacant cell
  9, 2,  "t.l0.lake_cell_u_l_s_s"
  9, 4,  "t.l0.lake_cell_u_s_l_s"

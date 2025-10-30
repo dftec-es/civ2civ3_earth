@@ -61,7 +61,7 @@ Cannot move to rough terrain (mountains, jungles and swamps) unless \
 there is a road or base on the tile. If they start the turn on rough \
 terrain or rivers without friendly roads, they have -1 movement point.\
 ")
-    _("Attacker")
+    _("AILove")
     _("Unbribable")
     _("TradeRoute")
     _("HelpWonder")
@@ -644,10 +644,10 @@ disembarks    = "Helicopter"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "OneAttack", "Capturer", "Bombarder", "Attacker", "Settlers"
+flags         = "OneAttack", "Capturer", "Bombarder", "AILove", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -699,10 +699,10 @@ disembarks    = "Helicopter"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "OneAttack", "Raider", "Capturer", "Attacker",
+flags         = "OneAttack", "Raider", "Capturer", "AILove",
                 "Iron", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
@@ -1048,8 +1048,14 @@ tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
+   }
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
-                "Rubber", "Settlers"
+                "AILove", "Rubber", "Settlers"
 roles         = "DefendOk"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
@@ -1134,10 +1140,10 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Horse"
+flags         = "Capturer", "AILove", "Horse"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
 Horsemen are mounted warriors and an early shock-troop that can \
@@ -1178,10 +1184,10 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Wheeled", "Attacker", "Horse"
+flags         = "Wheeled", "AILove", "Horse"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
 Chariots are horse-pulled war wagons, stronger but more expensive \
@@ -1225,10 +1231,10 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Ivory"
+flags         = "Capturer", "AILove", "Ivory"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Elephants are towering animals trained for war that are often used as \
@@ -1265,10 +1271,10 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Iron", "Horse"
+flags         = "Capturer", "AILove", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Crusaders are highly disciplined mounted warriors driven by a higher \
@@ -1307,10 +1313,10 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Iron", "Horse"
+flags         = "Capturer", "AILove", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "HutTech", "BarbarianTech",
                 "BarbarianBuildTech", "Hunter"
 helptext      = _("\
@@ -1348,10 +1354,10 @@ bombard_rate  = 2
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Bombarder", "Attacker", "Horse", "Niter"
+flags         = "Capturer", "Bombarder", "AILove", "Horse", "Niter"
 roles         = "DefendOk", "AttackFastStartUnit", "BarbarianTech", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
 Dragoons are mounted warriors carrying early firearms.\
@@ -1388,10 +1394,10 @@ bombard_rate  = 2
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Bombarder", "Attacker", "Horse", "Niter"
+flags         = "Capturer", "Bombarder", "AILove", "Horse", "Niter"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Cavalry are mounted and highly trained soldiers.\
@@ -1428,10 +1434,10 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Attacker", "Iron_Oil", "Uranium"
+flags         = "Bombarder", "Wheeled", "AILove", "Iron_Oil", "Uranium"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
@@ -1477,10 +1483,10 @@ bombard_rate  = 2
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Attacker"
+flags         = "Bombarder", "Wheeled", "AILove"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Catapults are large rock-throwing machines of war. They are very \
@@ -1541,10 +1547,10 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Attacker", "Iron", "Niter"
+flags         = "Bombarder", "Wheeled", "AILove", "Iron", "Niter"
 roles         = "AttackStrongStartUnit", "BarbarianBuildTech"
 helptext      = _("\
 Cannons are large firearms that can fire heavy projectiles over long \
@@ -1592,10 +1598,10 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "CityBuster", "Bombarder", "Wheeled", "Attacker",
+flags         = "CityBuster", "Bombarder", "Wheeled", "AILove",
                 "Iron"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
@@ -1645,10 +1651,10 @@ bombard_rate  = 4
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "CityBuster", "Bombarder", "Wheeled", "Attacker",
+flags         = "CityBuster", "Bombarder", "Wheeled", "AILove",
                 "Iron_Oil", "Rubber"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\

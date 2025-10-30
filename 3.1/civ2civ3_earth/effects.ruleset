@@ -108,6 +108,15 @@ reqs    =
       "AI", "Hard", "Player"
     }
 
+[effect_ai_hard_food]
+type    = "Upkeep_Factor"
+value   = -1
+reqs    =
+    { "type", "name", "range"
+      "AI", "Hard", "Player"
+      "OutputType", "Food", "Local"
+    }
+
 ; 1 or 2 free units, depending on the government and the type of upkeep
 [effect_ai_hard_upkeep]
 type    = "Unit_Upkeep_Free_Per_City"
@@ -201,6 +210,15 @@ value   = 40
 reqs    =
     { "type", "name", "range"
       "AI", "Cheating", "Player"
+    }
+
+[effect_ai_cheat_food]
+type    = "Upkeep_Factor"
+value   = -1
+reqs    =
+    { "type", "name", "range"
+      "AI", "Cheating", "Player"
+      "OutputType", "Food", "Local"
     }
 
 ; 1 or 2 free units, depending on the government and the type of upkeep
@@ -1547,7 +1565,7 @@ reqs    =
       "Gov", "Democracy", "Player", TRUE
     }
 
-; Govs with 1 free unit
+; Govs with 1 free unit (Military unhappiness)
 [effect_upkeep_free_mil_1]
 type    = "Make_Content_Mil"
 value   = 1
@@ -1572,7 +1590,7 @@ type    = "Make_Content_Mil"
 value   = 2
 reqs    =
     { "type", "name", "range", "present"
-;      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Anarchy", "Player", FALSE
       "Gov", "Tribal", "Player", FALSE
 ;      "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -1590,7 +1608,7 @@ type    = "Make_Content_Mil"
 value   = 3
 reqs    =
     { "type", "name", "range", "present"
-      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Anarchy", "Player", FALSE
 ;      "Gov", "Tribal", "Player", FALSE
       "Gov", "Despotism", "Player", FALSE
 ;      "Gov", "Monarchy", "Player", FALSE
@@ -1602,112 +1620,137 @@ reqs    =
       "Gov", "Democracy", "Player", FALSE
     }
 
-[effect_upkeep_free_units_anarchy]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 3
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Anarchy", "Player", TRUE
-      "OutputType", "Shield", "Local", FALSE
-    }
-
-[effect_upkeep_free_units_tribal]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 3
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Tribal", "Player", TRUE
-      "OutputType", "Shield", "Local", FALSE
-    }
-
-[effect_upkeep_free_units_despotism]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 2
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Despotism", "Player", TRUE
-      "OutputType", "Gold", "Local", FALSE
-    }
-
-[effect_upkeep_free_units_monarchy]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 3
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Monarchy", "Player", TRUE
-      "OutputType", "Gold", "Local", FALSE
-    }
-
-; 2 gold per unit, so 3 unit free
-[effect_upkeep_free_units_fascism]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 6
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Fascism", "Player", TRUE
-      "OutputType", "Gold", "Local", FALSE
-    }
-
-[effect_upkeep_free_units_communism]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 3
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Communism", "Player", TRUE
-      "OutputType", "Shield", "Local", FALSE
-    }
-
-; 2 gold per unit, so 2 units free
-[effect_upkeep_free_units_fundamentalism]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 4
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Fundamentalism", "Player", TRUE
-      "OutputType", "Gold", "Local", FALSE
-    }
-
-; 2 gold per unit, so 2 units free
-[effect_upkeep_free_units_federation]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 4
-reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Federation", "Player", TRUE
-      "OutputType", "Gold", "Local", FALSE
-    }
-
-[effect_upkeep_free_units_republic]
+; Govs with 1 free unit (Food, Gold, and Shield)
+[effect_upkeep_free_units_1]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Republic", "Player", TRUE
-      "OutputType", "Shield", "Local", FALSE
+    { "type", "name", "range", "present"
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+;      "Gov", "Republic", "Player", FALSE
+;      "Gov", "Democracy", "Player", FALSE
     }
 
-; 2 gold per unit, so 1 unit free
-[effect_upkeep_free_units_democracy]
+; Govs with 2 free units (exclusive with previous)
+[effect_upkeep_free_units_2]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 2
 reqs    =
-    { "type", "name", "range", "quiet"
-      "Gov", "Democracy", "Player", TRUE
-      "OutputType", "Gold", "Local", FALSE
+    { "type", "name", "range", "present"
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+;      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+;      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
     }
 
-; Any city can support for free up to four units...
-[effect_upkeep_free_units_food_base]
+; Govs with 3 free units (exclusive with previous)
+[effect_upkeep_free_units_3]
 type    = "Unit_Upkeep_Free_Per_City"
-value   = 4
+value   = 3
+reqs    =
+    { "type", "name", "range", "present"
+;      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+;      "Gov", "Monarchy", "Player", FALSE
+;      "Gov", "Fascism", "Player", FALSE
+;      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+    }
+
+; Govs with 1 free unit = 2 free gold
+[effect_upkeep_free_units_gold_1]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Gold", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+;      "Gov", "Democracy", "Player", FALSE
+    }
+
+; Govs with 2 free units = 4 free gold (exclusive with previous)
+[effect_upkeep_free_units_gold_2]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 2
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Gold", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+;      "Gov", "Fundamentalism", "Player", FALSE
+;      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+    }
+
+; Govs with 3 free units = 6 free gold (exclusive with previous)
+[effect_upkeep_free_units_gold_3]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 3
+reqs    =
+    { "type", "name", "range", "present"
+      "OutputType", "Gold", "Local", TRUE
+      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Tribal", "Player", FALSE
+      "Gov", "Despotism", "Player", FALSE
+      "Gov", "Monarchy", "Player", FALSE
+;      "Gov", "Fascism", "Player", FALSE
+      "Gov", "Communism", "Player", FALSE
+      "Gov", "Fundamentalism", "Player", FALSE
+      "Gov", "Federation", "Player", FALSE
+      "Gov", "Republic", "Player", FALSE
+      "Gov", "Democracy", "Player", FALSE
+    }
+
+; 1 additional unit free of food upkeep for each 2 pop in the city.
+[effect_upkeep_free_units_food_1]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
 reqs    =
     { "type", "name", "range"
       "OutputType", "Food", "Local"
+      "MinSize", "1", "City"
     }
 
-; ...or its size, whichever is bigger. Units above this limit have a
-; food penalty.
-[effect_upkeep_free_units_food_5]
+[effect_upkeep_free_units_food_2]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "3", "City"
+    }
+
+[effect_upkeep_free_units_food_3]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1716,16 +1759,7 @@ reqs    =
       "MinSize", "5", "City"
     }
 
-[effect_upkeep_free_units_food_6]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "6", "City"
-    }
-
-[effect_upkeep_free_units_food_7]
+[effect_upkeep_free_units_food_4]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1734,16 +1768,7 @@ reqs    =
       "MinSize", "7", "City"
     }
 
-[effect_upkeep_free_units_food_8]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "8", "City"
-    }
-
-[effect_upkeep_free_units_food_9]
+[effect_upkeep_free_units_food_5]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1752,16 +1777,7 @@ reqs    =
       "MinSize", "9", "City"
     }
 
-[effect_upkeep_free_units_food_10]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "10", "City"
-    }
-
-[effect_upkeep_free_units_food_11]
+[effect_upkeep_free_units_food_6]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1770,16 +1786,7 @@ reqs    =
       "MinSize", "11", "City"
     }
 
-[effect_upkeep_free_units_food_12]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "12", "City"
-    }
-
-[effect_upkeep_free_units_food_13]
+[effect_upkeep_free_units_food_7]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1788,16 +1795,7 @@ reqs    =
       "MinSize", "13", "City"
     }
 
-[effect_upkeep_free_units_food_14]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "14", "City"
-    }
-
-[effect_upkeep_free_units_food_15]
+[effect_upkeep_free_units_food_8]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1806,16 +1804,7 @@ reqs    =
       "MinSize", "15", "City"
     }
 
-[effect_upkeep_free_units_food_16]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "16", "City"
-    }
-
-[effect_upkeep_free_units_food_17]
+[effect_upkeep_free_units_food_9]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1824,16 +1813,7 @@ reqs    =
       "MinSize", "17", "City"
     }
 
-[effect_upkeep_free_units_food_18]
-type    = "Unit_Upkeep_Free_Per_City"
-value   = 1
-reqs    =
-    { "type", "name", "range"
-      "OutputType", "Food", "Local"
-      "MinSize", "18", "City"
-    }
-
-[effect_upkeep_free_units_food_19]
+[effect_upkeep_free_units_food_10]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
@@ -1842,13 +1822,94 @@ reqs    =
       "MinSize", "19", "City"
     }
 
+[effect_upkeep_free_units_food_11]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "21", "City"
+    }
+
+[effect_upkeep_free_units_food_12]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "23", "City"
+    }
+
+[effect_upkeep_free_units_food_13]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "25", "City"
+    }
+
+[effect_upkeep_free_units_food_14]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "27", "City"
+    }
+
+[effect_upkeep_free_units_food_15]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "29", "City"
+    }
+
+[effect_upkeep_free_units_food_16]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "31", "City"
+    }
+
+[effect_upkeep_free_units_food_17]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "33", "City"
+    }
+
+[effect_upkeep_free_units_food_18]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "35", "City"
+    }
+
+[effect_upkeep_free_units_food_19]
+type    = "Unit_Upkeep_Free_Per_City"
+value   = 1
+reqs    =
+    { "type", "name", "range"
+      "OutputType", "Food", "Local"
+      "MinSize", "37", "City"
+    }
+
 [effect_upkeep_free_units_food_20]
 type    = "Unit_Upkeep_Free_Per_City"
 value   = 1
 reqs    =
     { "type", "name", "range"
       "OutputType", "Food", "Local"
-      "MinSize", "20", "City"
+      "MinSize", "39", "City"
     }
 
 [effect_civil_war_anarchy]
