@@ -2324,7 +2324,7 @@ bonuses       =
 flags         = "BadCityDefender", "Submarine", "Bombarder", "HPFullSea",
                 "HP20", "HasNoZOC", "Iron_Oil", "Uranium", "AutoAtt",
                 "NeverProtects"
-roles         = "Hunter", "DefendOk"
+roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\

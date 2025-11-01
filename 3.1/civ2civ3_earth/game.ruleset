@@ -2008,12 +2008,7 @@ actor_reqs    =
 target_reqs   =
     { "type",          "name",          "range", "present"
       "CityTile",      "Claimed",       "Local", FALSE
-      "Terrain",       "Glacier",       "Local", FALSE
-      "Terrain",       "Forest",        "Local", FALSE
-      "Terrain",       "Hills",         "Local", FALSE
-      "Terrain",       "Jungle",        "Local", FALSE
-      "Terrain",       "Swamp",         "Local", FALSE
-      "Terrain",       "Mountains",     "Local", FALSE
+      "TerrainFlag",   "Beach",         "Local", TRUE
     }
 
 [actionenabler_beach_lander_to_claimed]
@@ -2032,12 +2027,7 @@ target_reqs   =
     { "type",          "name",          "range", "present"
       "CityTile",      "Claimed",       "Local", TRUE
       "CityTile",      "Center",        "Local", FALSE
-      "Terrain",       "Glacier",       "Local", FALSE
-      "Terrain",       "Forest",        "Local", FALSE
-      "Terrain",       "Hills",         "Local", FALSE
-      "Terrain",       "Jungle",        "Local", FALSE
-      "Terrain",       "Swamp",         "Local", FALSE
-      "Terrain",       "Mountains",     "Local", FALSE
+      "TerrainFlag",   "Beach",         "Local", TRUE
     }
 
 [actionenabler_beach_lander_to_war_conquer]
@@ -2058,12 +2048,7 @@ target_reqs   =
     { "type",          "name",          "range", "present"
       "CityTile",      "Claimed",       "Local", TRUE
       "CityTile",      "Center",        "Local", FALSE
-      "Terrain",       "Glacier",       "Local", FALSE
-      "Terrain",       "Forest",        "Local", FALSE
-      "Terrain",       "Hills",         "Local", FALSE
-      "Terrain",       "Jungle",        "Local", FALSE
-      "Terrain",       "Swamp",         "Local", FALSE
-      "Terrain",       "Mountains",     "Local", FALSE
+      "TerrainFlag",   "Beach",         "Local", TRUE
     }
 
 [actionenabler_upgrade_unit]

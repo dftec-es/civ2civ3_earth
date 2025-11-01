@@ -53,6 +53,7 @@ Uranium: One more veteran level when produced in cities with Uranium.\
 ")
     _("Cant_Pillage")
     _("CanWork")
+    _("Fortress"), _("Can build Forts and Fortresses.")
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
     _("Submarine"), _("\Attack value halved when attacking Destroyer.")
@@ -93,7 +94,7 @@ Cannot attack land tiles, and cannot attack once damaged, except to bombard.\
     _("HP30")
   }
 ; Flag "" is not being used currently by any unit and may cause warnings from unused action enablers
-; Used 35 out of 50 unit type flags
+; Used 36 out of 50 unit type flags
 
 ; Names for custom unit class flags. There can be up to 25 of these.
 ; name          = rule name; In some circumstances user may see this
@@ -567,7 +568,7 @@ city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Capturer", "Settlers"
+flags         = "OneAttack", "Capturer", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game. It is the weakest \
@@ -606,7 +607,7 @@ city_slots    = 1
 tp_defense    = "Alight"
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "OneAttack", "Capturer", "Settlers"
+flags         = "OneAttack", "Capturer", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
@@ -657,7 +658,7 @@ bonuses       =
      "AILove", "DefenseMultiplier", 3, TRUE
      "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "OneAttack", "Capturer", "Bombarder", "AILove", "Settlers"
+flags         = "OneAttack", "Capturer", "Bombarder", "AILove", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive value.\
@@ -716,7 +717,7 @@ bonuses       =
      "AILove", "DefenseDivider", 3, TRUE
    }
 flags         = "OneAttack", "Raider", "Capturer", "AILove",
-                "Iron", "Settlers"
+                "Iron", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry units with \
@@ -762,7 +763,7 @@ bonuses       =
    { "flag", "type", "value"
      "Horse", "DefenseDividerPct", 100
    }
-flags         = "OneAttack", "Capturer", "Iron", "Settlers"
+flags         = "OneAttack", "Capturer", "Iron", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx as the preferred \
@@ -809,7 +810,7 @@ bonuses       =
      "Horse", "DefenseDividerPct", -50
    }
 flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
-                "Niter", "Settlers"
+                "Niter", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
                 "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
@@ -866,7 +867,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
-                "Niter", "Settlers"
+                "Niter", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good at defending your \
@@ -907,7 +908,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "Capturer", "Bombarder",
-                "Niter", "Settlers"
+                "Niter", "Fortress"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Alpine Troops are highly mobile units as well as excellent defenders.\
@@ -948,7 +949,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer",
-                "Bombarder", "Settlers"
+                "Bombarder", "Fortress"
 roles         = "DefendOk"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
@@ -993,7 +994,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
-                "Settlers"
+                "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts at using the terrain \
@@ -1041,7 +1042,7 @@ bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 flags         = "OneAttack", "Raider", "BeachLander", "Capturer",
-                "Bombarder", "Rubber", "Settlers"
+                "Bombarder", "Rubber", "Fortress"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
@@ -1092,7 +1093,7 @@ bonuses       =
      "AILove", "DefenseDivider", 3, TRUE
    }
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
-                "AILove", "Rubber", "Settlers"
+                "AILove", "Rubber", "Fortress"
 roles         = "DefendOk"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
@@ -1782,7 +1783,7 @@ tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
-                "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects", "IgZOC"
+                "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fighters are your first airborne units. They can move anywhere and \
@@ -1835,7 +1836,7 @@ bombard_rate  = 5
 ;targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
                 "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
-                "NeverProtects", "IgZOC"
+                "NeverProtects"
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may only attack ground \
@@ -1881,7 +1882,7 @@ bombard_rate  = 4
 cargo         = "Land"
 targets       = "Sub", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP30",
-                "HasNoZOC", "Iron_Oil", "Rubber", "NeverProtects", "IgZOC"
+                "HasNoZOC", "Iron_Oil", "Rubber", "NeverProtects"
 roles         = ""
 helptext      = _("\
 Helicopters can transport one military infantry unit.\
@@ -1924,7 +1925,7 @@ tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
 flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
-                "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects", "IgZOC"
+                "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement radius.\
@@ -1972,7 +1973,7 @@ bombard_rate  = 5
 ;targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
                 "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
-                "NeverProtects", "IgZOC"
+                "NeverProtects"
 roles         = ""
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement radius.\
@@ -2448,7 +2449,7 @@ bonuses       =
 flags         = "BadCityDefender", "Submarine", "Bombarder", "HPFullSea",
                 "HP20", "HasNoZOC", "Iron_Oil", "Uranium", "AutoAtt",
                 "NeverProtects"
-roles         = "Hunter", "DefendOk"
+roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\
@@ -2586,7 +2587,7 @@ tp_defense    = "Alight"
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
 flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC",
-                "Aluminum", "NeverProtects", "IgZOC"
+                "Aluminum", "NeverProtects"
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile that can strike deep \
@@ -2630,7 +2631,7 @@ tp_defense    = "Alight"
 targets       = "Sub", "Air", "Missile", "Helicopter"
 disembarks    = "Sub", "Sea", "Air"
 flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC",
-                "NeverProtects", "IgZOC"
+                "NeverProtects"
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3043,7 +3044,7 @@ uk_food       = 0
 uk_gold       = 1
 city_slots    = 1
 tp_defense    = "Alight"
-flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil", "IgZOC"
+flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil"
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \

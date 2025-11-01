@@ -31,7 +31,7 @@ flags =
     _("Defense"), _("Units get a defense bonus on this terrain.")
     _("RecoverHP"), _("Allows units to recover extra HP.")
     _("CanHaveStorm"), _("Storms can appear here.")
-; Max = 8
+    _("Beach"), _("Terrain with no movement penalty, suitable for beach landing.")
 ;    _("Low Land"), _("Terrain suitable for canal digging.")
   }
 
@@ -494,7 +494,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Tundra"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "CanHaveRiver", "Oil"
+flags                = "CanHaveRiver", "Oil", "Beach"
 property_dry         = 100
 property_tropical    = 50
 property_temperate   = 20
@@ -651,7 +651,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Swamp"
 cooler_drier_result  = "Tundra"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "RecoverHP"
+flags                = "Starter", "CanHaveRiver", "RecoverHP", "Beach"
 property_green       = 50
 property_temperate   = 50
 color.r              = 11
@@ -851,7 +851,7 @@ warmer_drier_result  = "Desert"
 cooler_wetter_result = "Desert"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "RecoverHP"
+flags                = "Starter", "CanHaveRiver", "RecoverHP", "Beach"
 property_green       = 50
 property_temperate   = 50
 color.r              = 122
@@ -949,7 +949,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "NoBarbs", "CanHaveRiver", "Oil"
+flags                = "NoBarbs", "CanHaveRiver", "Oil", "Beach"
 property_cold        = 50
 color.r              = 188
 color.g              = 188

@@ -46,7 +46,7 @@ format_version = 30
 
 ; AI: "Away" "Restricted" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 
-; Higher chance of AI wars (vs human)
+; Higher chance of AI wars (vs human, or away ai)
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10

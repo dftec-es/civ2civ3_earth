@@ -431,7 +431,7 @@ ui_name_unit_move = _("%sKeep moving%s")
 
 ; Blank ruleset defined user actions.
 ; See the section "Ruleset defined actions" in doc/README.actions
-; Example: set up "User Action 1"
+
 ui_name_user_action_1                = _("%sCancel Trade Routes (after end of turn)%s")
 user_action_1_target_kind            = "City"
 user_action_1_min_range              = 0
@@ -478,7 +478,7 @@ quiet_actions = "Transport Disembark", "Transport Disembark 2",
                 "Disband Unit", "Disband Unit Recover",
                 "Cultivate", "Plant",
                 "Home City", "Upgrade Unit",
-                "Unit Move", "Airlift Unit", "User Action 2"
+                "Unit Move", "Airlift Unit", "Collect Ransom", "User Action 2"
 
 ; /* <-- avoid gettext warnings
 ;
@@ -505,14 +505,7 @@ actor_reqs    =
     { "type",         "name",        "range",  "present"
       "UnitFlag",     "TradeRoute",  "Local",  TRUE
       "DiplRel",      "Foreign",     "Local",  FALSE
-      "AI",           "Away",        "Player", FALSE
-      "AI",           "Restricted",  "Player", FALSE
-      "AI",           "Novice",      "Player", FALSE
-      "AI",           "Easy",        "Player", FALSE
-      "AI",           "Normal",      "Player", FALSE
-      "AI",           "Hard",        "Player", FALSE
-      "AI",           "Cheating",    "Player", FALSE
-      "AI",           "Experimental", "Player", FALSE
+      "PlayerFlag",   "AI",          "Player", FALSE
     }
 target_reqs   =
     { "type",         "name",        "range",  "present"
@@ -1015,13 +1008,7 @@ actor_reqs    =
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Tile",  FALSE
-      "AI",           "Away",        "Player", FALSE
-      "AI",           "Novice",      "Player", FALSE
-      "AI",           "Easy",        "Player", FALSE
-      "AI",           "Normal",      "Player", FALSE
-      "AI",           "Hard",        "Player", FALSE
-      "AI",           "Cheating",    "Player", FALSE
-      "AI",           "Experimental", "Player", FALSE
+      "PlayerFlag",   "AI",          "Player", FALSE
     }
 target_reqs   =
     { "type",         "name",        "range", "present"
@@ -1037,13 +1024,7 @@ actor_reqs    =
       "MinMoveFrags", "1",           "Local", TRUE
       "DiplRel",      "War",         "Local", TRUE
       "Extra",        "Bombardment", "Tile",  FALSE
-      "AI",           "Away",        "Player", FALSE
-      "AI",           "Novice",      "Player", FALSE
-      "AI",           "Easy",        "Player", FALSE
-      "AI",           "Normal",      "Player", FALSE
-      "AI",           "Hard",        "Player", FALSE
-      "AI",           "Cheating",    "Player", FALSE
-      "AI",           "Experimental", "Player", FALSE
+      "PlayerFlag",   "AI",          "Player", FALSE
     }
 target_reqs   =
     { "type",         "name",        "range", "present"
@@ -1774,12 +1755,7 @@ actor_reqs    =
 target_reqs   =
     { "type",          "name",          "range", "present"
       "CityTile",      "Claimed",       "Tile",  FALSE
-      "Terrain",       "Glacier",       "Tile",  FALSE
-      "Terrain",       "Forest",        "Tile",  FALSE
-      "Terrain",       "Hills",         "Tile",  FALSE
-      "Terrain",       "Jungle",        "Tile",  FALSE
-      "Terrain",       "Swamp",         "Tile",  FALSE
-      "Terrain",       "Mountains",     "Tile",  FALSE
+      "TerrainFlag",   "Beach",         "Tile",  TRUE
     }
 
 [actionenabler_beach_lander_to_claimed]
@@ -1798,12 +1774,7 @@ target_reqs   =
     { "type",          "name",          "range", "present"
       "CityTile",      "Claimed",       "Tile",  TRUE
       "CityTile",      "Center",        "Tile",  FALSE
-      "Terrain",       "Glacier",       "Tile",  FALSE
-      "Terrain",       "Forest",        "Tile",  FALSE
-      "Terrain",       "Hills",         "Tile",  FALSE
-      "Terrain",       "Jungle",        "Tile",  FALSE
-      "Terrain",       "Swamp",         "Tile",  FALSE
-      "Terrain",       "Mountains",     "Tile",  FALSE
+      "TerrainFlag",   "Beach",         "Tile",  TRUE
     }
 
 [actionenabler_beach_lander_to_war_conquer]
@@ -1824,12 +1795,7 @@ target_reqs   =
     { "type",          "name",          "range", "present"
       "CityTile",      "Claimed",       "Tile",  TRUE
       "CityTile",      "Center",        "Tile",  FALSE
-      "Terrain",       "Glacier",       "Tile",  FALSE
-      "Terrain",       "Forest",        "Tile",  FALSE
-      "Terrain",       "Hills",         "Tile",  FALSE
-      "Terrain",       "Jungle",        "Tile",  FALSE
-      "Terrain",       "Swamp",         "Tile",  FALSE
-      "Terrain",       "Mountains",     "Tile",  FALSE
+      "TerrainFlag",   "Beach",         "Tile",  TRUE
     }
 
 [actionenabler_upgrade_unit]
@@ -1990,20 +1956,18 @@ target_reqs   =
       "TerrainClass",  "Oceanic",      "Tile",  TRUE
     }
 
-; FIXME: uncomment to enable infantry to build bases for 3.2
-; (won't work on 3.1 where Settlers flag is mandatory)
 ; Unit flag Fortress allows to build bases on land
-;[actionenabler_base_fortress]
-;action        = "Build Base"
-;actor_reqs    =
-;    { "type",          "name",         "range", "present"
-;      "UnitFlag",      "Fortress",     "Local", TRUE
-;    }
-;target_reqs   =
-;    { "type",          "name",         "range", "present"
-;      "TerrainAlter",  "CanBase",      "Tile",  TRUE
-;      "TerrainClass",  "Land",         "Tile",  TRUE
-;    }
+[actionenabler_base_fortress]
+action        = "Build Base"
+actor_reqs    =
+    { "type",          "name",         "range", "present"
+      "UnitFlag",      "Fortress",     "Local", TRUE
+    }
+target_reqs   =
+    { "type",          "name",         "range", "present"
+      "TerrainAlter",  "CanBase",      "Tile",  TRUE
+      "TerrainClass",  "Land",         "Tile",  TRUE
+    }
 
 [actionenabler_mining]
 action        = "Build Mine"
