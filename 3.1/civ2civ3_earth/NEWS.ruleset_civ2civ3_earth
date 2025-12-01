@@ -6,6 +6,7 @@ LATEST CHANGES:
 
 Known issues:
 - If the ruleset is played with a version of Freeciv prior to 3.1.2 (from 3.1.0 to 3.1.1), the AI will not move the infantry units. This happens because the "Settler" flag is mandatory to be able to build fortresses in 3.1, and the AI manages these units as settlers until it is fixed in 3.1.2.
+- The GTK client (since v3) doesn't display bombardment animations correctly, and units are animated without the alpha channel (in my tests, even when playing with default rulesets). I suggest using the QT client.
 - The server settings suggested by the ruleset are not loaded by default. Due to changes in Freeciv 3.0, user settings (from freeciv-client-rc) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of freeciv-client-rc-3.x before starting a new game.
 - This modpack includes 2 custom tilesets, one for square and one for hexagonal topology, but they are not loaded by default. The player has to select them manually from the client local options -> Graphics -> Tileset (or by editing the values starting with "default_tileset_" in the file freeciv-client-rc).
 - The hexagonal tileset looks better when the map grid is enabled (in the View menu).
@@ -31,15 +32,15 @@ Core:
 
 Optional (server options):
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points.
-- If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. This rule, together with the previous one, forces the use of research points to obtain new techs.
+* If the pool of research points ends negative, and the negative points are greater than the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. This rule, together with the previous one, forces the use of research points to obtain new techs.
 - AI trait distribution is now Even (instead of Fixed): each AI will start with different random values (and a very subtle effect) that determine how much they want to settle new territory, establish trade routes, declare war, or build buildings.
 
 Terrains:
 Introduced a new resource system that gives players a reason to fight for strategic resources, and to use trade routes to connect cities with different variety of resources.
 - Forts and Airstrips disappear automatically if there are no units on the same tile at the end of the turn. Forts and Airstrips on river tiles cannot be upgraded to full bases.
-- Deep Ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food.
+* Deep Ocean tiles require Supermarket (in addition to Harbour) to produce 1 extra Food. A hidden effect is used to encourage AI to build harbours and supermarkets.
 - Forest and Jungle can be mined to produce Lumber (+1 production).
-* Forests and Plains can no longer be transformed to Grassland at the beginning, only Plains <-> Forest, and Grassland <-> Forest (implemented as a clone named Plantation). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
+* Forests and Plains can no longer be transformed to Grassland at the beginning, only Plains <-> Forest, and Grassland <-> Forest (named Plantation). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
 - Added some new resources, up to 3 per terrain
 - There are now 6 resources on Grassland, with 3 different effects: Cattle or Corn (+1 food), Wool or Cotton (+1 production), Tea or Tobacco (+2 trade).
 - There are also 4 extra strategic resources that can be used when certain tech is researched by the player (adding +2 production in the tile): Niter (on plains or desert, usable with Gunpowder), Rubber (on jungle, swamp or forest, with Chemistry), Aluminum (on hills or tundra, with Industrialization), Uranium (on mountains or glacier, with Atomic Theory).
@@ -105,31 +106,31 @@ Buildings:
 - Doubled the coins needed to buy spaceship parts (same as wonders).
 
 Actions:
-Some actions have been adjusted to ensure that the best way to manage the transport units is also the most intuitive (without micromanagement). 
+Some actions have been adjusted to try to reduce micromanagement and make more intuitive the use of cargo units. 
 - Homeless units can no longer bribe or capture other units. Otherwise they can be used to get units free of upkeep.
 - New actions for Diplomat and Spy: steal map fragments from foreign cities; expel non-military units from your territory if you are at peace with the target; expel unreachable units that are not inside cities or bases.
 - New actions for Caravan and Freight: resupply an adjacent target unit, healing all of its hit points, and being consumed by the action; cancel the current trade routes of a target city you own (effective at the end of the turn). Currently available only with GTK client.
 - Fortifying units receive the same defense bonus as units already fortified. This allows both human and AI players to get the bonus in the same turn. Units require some remaining move fragment, while not being transported, to start fortifying.
 - Units require some remaining move fragment and spend the entire movement to board/embark (load onto transport) inside cities. When units board/embark outside cities, it is the target transport that loses its remaining movement points. This prevents using a chain of transports to load-move-unload a unit multiple times in the same turn.
-- Ground units spend the entire movement to alight/disembark (unload from transport). This forces slow invasions no matter if the terrain is native or not.
-- Units can defend while being transported, but they cannot attack (ground units need to alight/disembark first, losing all movement points until the next turn).
+- Ground units spend the entire movement to deboard/disembark (unload from transport). This forces slow invasions no matter if the terrain is native or not.
+- Units can defend while being transported, but they cannot attack (ground units need to deboard/disembark first, losing all movement points until the next turn).
 - Flag Raider: Legion, Musketeers, Riflemen and Marines are the only units that can attack while being transported.
 - Flag BeachLander: Marines can disembark normally, or drop 1 tile onto easy terrain (movement cost 1), without losing movement points.
 - Flag AirBomber: allows a new action to bombard the current tile and destroy all the infrastructure (as pillaging all at once). Currently available only with GTK client.
   Air bombers no longer attack with a limited number of combat rounds, and they cannot attack Submarines.
 
 Combat:
-It is now more similar to civ3, where you can use support units to surround and bombard the target before attacking it, reducing the chances of losing your units.
+It is now more similar to civ3, where you can use support units to surround and bombard the target before attacking it (representing skirmish tactics or suppressive fire), reducing the chances of losing your units.
 - When attacking, it is now possible to choose between different actions, if available for the unit, and if the unit has a remaining move fragment:
   - Regular attack: costs 1 entire move point, and moves the unit to the target tile (if possible, ZOC rules might prevent it), where both units keep fighting until one dies. The remaining movement points of the winner may end up being less due to the damage received.
   - Capture units: costs all the remaining move points, and has the same effect as Bribe action, but without paying gold. It only works if all the units in the target tile are capturable and are not carrying any load (hardcoded limitation).
   - Bombard: costs all the remaining move points, without moving to the target tile, and allows to damage (up to the bombard rate value) all the units of the target tile without risk of receiving damage back.
 - Bombard action is only allowed for 1 unit from each tile per turn. When a unit bombards from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn.
-  Until that bombardment marker disappears at the end of the turn, if there is no city nor base on the tile, it gets the same defense bonus as if there was a Fort: +50% against land and sea units. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games).
-- Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
+  Until that bombardment marker disappears at the end of the turn, it gets the same defense bonus as if there was a Fort: +50% against land and sea units. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games).
+- Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard (archers, catapults, and every unit after musketeers). The bombard rate is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
   The bombard rate gets scaled down by the damage of the bombarding unit (being always at least 1).
 - Flags Capturer/Capturable: All military infantry units can capture enemy Migrants (as slaves) and Caravans/Freights (as loot). Frigates can capture Galleons and Caravels (as pirates).
-- Flag HPFull: Air units and Submarines can't attack once damaged, except to bombard.
+- Flag HPAtt: Air units and Submarines can't attack once damaged, except to bombard.
 - Flag AutoAtt: Auto-attack enabled only for air fighters and submarines. These units can attack or bombard an incoming enemy. The auto-attacking units of the player try to bombard if possible, and else attack. The AI usually tries to attack first.
 
 Units:

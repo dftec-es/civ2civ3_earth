@@ -73,7 +73,7 @@ tiles = { "row", "column", "tag"
 ; 3, 10, "t.l0.coast_cell_u_l_s_l"
 ; 3, 12, "t.l0.coast_cell_u_s_l_l"
 ; 3, 14, "t.l0.coast_cell_u_l_l_l"
-; 
+;
 ; 4, 0,  "t.l0.coast_cell_d_s_s_s" ;vacant cell
 ; 4, 2,  "t.l0.coast_cell_d_l_s_s"
 ; 4, 4,  "t.l0.coast_cell_d_s_l_s"
@@ -147,7 +147,7 @@ tiles = { "row", "column", "tag"
 ; 6, 10, "t.l0.floor_cell_u_s_d_s"
 ; 6, 12, "t.l0.floor_cell_u_d_s_s"
 ; 6, 14, "t.l0.floor_cell_u_s_s_s"
-; 
+;
 ; 7, 0,  "t.l0.floor_cell_d_d_d_d" ;vacant cell
 ; 7, 2,  "t.l0.floor_cell_d_s_d_d"
 ; 7, 4,  "t.l0.floor_cell_d_d_s_d"

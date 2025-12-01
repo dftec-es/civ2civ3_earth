@@ -36,7 +36,7 @@ version = "3.1_2024_05c"
 
 ; Summary of the ruleset
 summary = _("\
-You are playing a custom version of civ2civ3 rules, from the same author:\
+You are playing an upgraded version of civ2civ3 rules, from the same author:\
 \n\n\
 It includes new features, tries to improve balance, and is more suitable \
 for playing on Earth maps, or similar scenarios.\
@@ -858,7 +858,7 @@ set =
       "conquercost", 50, FALSE
       "diplbulbcost", 50, FALSE
       "techleak", 50, FALSE
-      "techlossforgiveness", 50, FALSE
+      "techlossforgiveness", 100, FALSE
       "techlossrestore", 50, FALSE
       "techlost_donor", 0, FALSE
       "techlost_recv", 0, FALSE

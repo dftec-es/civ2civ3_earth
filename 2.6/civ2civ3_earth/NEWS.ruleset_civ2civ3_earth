@@ -22,7 +22,7 @@ Core:
 Optional (server options):
 - Trading technologies in the diplomacy dialog is not allowed (otherwise the AI can't handle the following options).
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points.
-- If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. This rule, together with the previous one, forces the use of research points to obtain new techs.
+* If the pool of research points ends negative, and the negative points are greater than the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. This rule, together with the previous one, forces the use of research points to obtain new techs.
 
 Terrains:
 - Forts and Airstrips on river tiles cannot be upgraded to full bases.

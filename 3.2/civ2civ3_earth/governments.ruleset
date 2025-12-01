@@ -98,8 +98,8 @@ _("\
 * You have no control over tax rates. All trade income is\
  converted to luxuries.\n\
 * There is no base level of conventional corruption, but it increases\
- by 2% for each tile of distance from the capital.\n\
-* Base production waste is 30%. This increases by 2% for each tile of\
+ by 4% for each tile of distance from the capital.\n\
+* Base production waste is 30%. This increases by 4% for each tile of\
  distance from the capital.\
 ")
 
@@ -143,9 +143,9 @@ _("\
 * Unlike later governments, military units do not cause unhappiness even\
  when deployed aggressively.\n\
 * Base corruption is 30% (the highest under any government). This\
- increases by 2% for each tile of distance from the capital.\n\
+ increases by 4% for each tile of distance from the capital.\n\
 * There is no base level of production waste, but it increases\
- by 2% for each tile of distance from the capital.\
+ by 4% for each tile of distance from the capital.\
 ")
 
 ;------------------------------------------------------------------------
@@ -184,9 +184,9 @@ _("\
  when deployed aggressively.\n\
 * Military units impose martial law. Up to 3 military units inside a city\
  will each force 1 unhappy citizen to become content.\n\
-* Base corruption is 20%. This increases by 2% for each tile of distance\
+* Base corruption is 20%. This increases by 4% for each tile of distance\
  from the capital.\n\
-* Base production waste is 10%. This increases by 2% for each tile of\
+* Base production waste is 10%. This increases by 4% for each tile of\
  distance from the capital.\
 ")
 

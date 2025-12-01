@@ -113,7 +113,7 @@ OPTIONAL RULES:
 
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points. ('conquercost', 'diplbulbcost')
 
-- If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. ('techlossforgiveness', 'techlossrestore')
+- If the pool of research points ends negative, and the negative points are greater than the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. ('techlossforgiveness', 'techlossrestore')
 
 - Random period of anarchy when changing government (1 to 3 turns). Revolutions become quicker the more times any player has changed to the target government. ('revolentype', 'revolen')
 

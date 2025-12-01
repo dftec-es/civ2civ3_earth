@@ -36,7 +36,7 @@ attack_actions = "Capture Units", "Bombard", "Collect Ransom", "Attack", "Suicid
 
 [actions]
 ; Forbid "Bombard" if any one of the listed actions are legal.
-bombard_blocked_by = "Capture Units"
+bombard_blocked_by = "Collect Ransom", "Capture Units"
 
 ; Forbid "Explode Nuclear" if any one of the listed actions are legal.
 ;explode_nuclear_blocked_by = "Capture Units"
@@ -976,7 +976,7 @@ target_reqs   =
     }
 
 [actionenabler_capture_transported]
-action = "Capture Units"
+action        = "Capture Units"
 actor_reqs    =
     { "type",           "name",        "range", "present"
       "UnitFlag",       "Capturer",    "Local", TRUE
@@ -1102,16 +1102,16 @@ target_reqs   =
       "CityTile",     "Center",       "Tile",  FALSE
     }
 
-; AI: Enable bombard for damaged HPFull units (when attack is disabled)
+; AI: Enable bombard for damaged HPAtt units (when attack is disabled)
 [actionenabler_bombard_ai_hp10]
 action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFull",      "Local", TRUE
+      "UnitFlag",     "HPAtt",       "Local", TRUE
       "UnitFlag",     "HP20",        "Local", FALSE
       "UnitFlag",     "HP30",        "Local", FALSE
-      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "HPAttSea",    "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
@@ -1129,9 +1129,9 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFull",      "Local", TRUE
+      "UnitFlag",     "HPAtt",       "Local", TRUE
       "UnitFlag",     "HP20",        "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "HPAttSea",    "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
@@ -1149,9 +1149,9 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFull",      "Local", TRUE
+      "UnitFlag",     "HPAtt",       "Local", TRUE
       "UnitFlag",     "HP30",        "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "HPAttSea",    "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
@@ -1169,10 +1169,10 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFull",      "Local", TRUE
+      "UnitFlag",     "HPAtt",       "Local", TRUE
       "UnitFlag",     "HP20",        "Local", FALSE
       "UnitFlag",     "HP30",        "Local", FALSE
-      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "HPAttSea",    "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
@@ -1191,9 +1191,9 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFull",      "Local", TRUE
+      "UnitFlag",     "HPAtt",       "Local", TRUE
       "UnitFlag",     "HP20",        "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "HPAttSea",    "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
@@ -1212,9 +1212,9 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFull",      "Local", TRUE
+      "UnitFlag",     "HPAtt",       "Local", TRUE
       "UnitFlag",     "HP30",        "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", FALSE
+      "UnitFlag",     "HPAttSea",    "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
       "MinMoveFrags", "1",           "Local", TRUE
@@ -1228,13 +1228,13 @@ target_reqs   =
       "DiplRelTileOther", "War",     "Local", TRUE
     }
 
-; AI: Enable bombard to land for HPFullSea units (when attack is disabled)
+; AI: Enable bombard to land for HPAttSea units (when attack is disabled)
 [actionenabler_bombard_ai_hp_sea]
 action        = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "Bombarder",    "Local", TRUE
-      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HPAttSea",     "Local", TRUE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
@@ -1247,13 +1247,13 @@ target_reqs   =
       "CityTile",     "Center",       "Tile",  FALSE
     }
 
-; AI: Enable bombard to city for HPFullSea units (when attack is disabled)
+; AI: Enable bombard to city for HPAttSea units (when attack is disabled)
 [actionenabler_bombard_ai_hp_sea_b]
 action        = "Bombard"
 actor_reqs    =
     { "type",         "name",         "range", "present"
       "UnitFlag",     "Bombarder",    "Local", TRUE
-      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HPAttSea",     "Local", TRUE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitState",    "Transported",  "Local", FALSE
       "MinMoveFrags", "1",            "Local", TRUE
@@ -1266,13 +1266,13 @@ target_reqs   =
       "DiplRelTileOther", "War",      "Local", TRUE
     }
 
-; AI: Enable bombard for damaged HPFullSea units (when attack is disabled)
+; AI: Enable bombard for damaged HPAttSea units (when attack is disabled)
 [actionenabler_bombard_ai_hp10_sea]
 action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", TRUE
+      "UnitFlag",     "HPAttSea",    "Local", TRUE
       "UnitFlag",     "HP20",        "Local", FALSE
       "UnitFlag",     "HP30",        "Local", FALSE
       "UnitFlag",     "Wheeled",     "Local", FALSE
@@ -1293,7 +1293,7 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", TRUE
+      "UnitFlag",     "HPAttSea",    "Local", TRUE
       "UnitFlag",     "HP20",        "Local", TRUE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
@@ -1313,7 +1313,7 @@ action        = "Bombard"
 actor_reqs    =
     { "type",         "name",        "range", "present"
       "UnitFlag",     "Bombarder",   "Local", TRUE
-      "UnitFlag",     "HPFullSea",   "Local", TRUE
+      "UnitFlag",     "HPAttSea",    "Local", TRUE
       "UnitFlag",     "HP30",        "Local", TRUE
       "UnitFlag",     "Wheeled",     "Local", FALSE
       "UnitState",    "Transported", "Local", FALSE
@@ -1399,12 +1399,12 @@ target_reqs   =
 action        = "Attack"
 actor_reqs    =
     { "type",          "name",         "range", "present"
-      "UnitFlag",      "HPFull",       "Local", FALSE
-      "UnitFlag",      "HPFullSea",    "Local", FALSE
+      "UnitState",     "Transported",  "Local", FALSE
+      "UnitFlag",      "HPAtt",        "Local", FALSE
+      "UnitFlag",      "HPAttSea",     "Local", FALSE
       "UnitFlag",      "Wheeled",      "Local", FALSE
       "UnitFlag",      "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",      "Local", FALSE
-      "UnitState",     "Transported",  "Local", FALSE
       "MinMoveFrags",  "1",            "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
     }
@@ -1413,13 +1413,13 @@ actor_reqs    =
 action        = "Attack"
 actor_reqs    =
     { "type",          "name",         "range", "present"
+      "UnitState",     "Transported",  "Local", TRUE
       "UnitFlag",      "Raider",       "Local", TRUE
-      "UnitFlag",      "HPFull",       "Local", FALSE
-      "UnitFlag",      "HPFullSea",    "Local", FALSE
+      "UnitFlag",      "HPAtt",        "Local", FALSE
+      "UnitFlag",      "HPAttSea",     "Local", FALSE
       "UnitFlag",      "Wheeled",      "Local", FALSE
       "UnitFlag",      "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",      "Local", FALSE
-      "UnitState",     "Transported",  "Local", TRUE
       "MinMoveFrags",  "1",            "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
     }
@@ -1442,17 +1442,17 @@ target_reqs   =
       "TerrainClass", "Oceanic",      "Tile",  FALSE
     }
 
-; New HPFull: Can attack only if the attacker is undamaged (doesn't work together with Wheeled)
+; New HPAtt: Can attack only if the attacker is undamaged (doesn't work together with Wheeled)
 ; (can attack from non-native tiles if not being transported)
 ; When HP flag is missing, default to 10
 [actionenabler_attack_hp10]
 action        = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HPAtt",        "Local", TRUE
       "UnitFlag",     "HP20",         "Local", FALSE
       "UnitFlag",     "HP30",         "Local", FALSE
-      "UnitFlag",     "HPFullSea",    "Local", FALSE
+      "UnitFlag",     "HPAttSea",     "Local", FALSE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
@@ -1466,9 +1466,9 @@ actor_reqs    =
 action        = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HPAtt",        "Local", TRUE
       "UnitFlag",     "HP20",         "Local", TRUE
-      "UnitFlag",     "HPFullSea",    "Local", FALSE
+      "UnitFlag",     "HPAttSea",     "Local", FALSE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
@@ -1482,9 +1482,9 @@ actor_reqs    =
 action        = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFull",       "Local", TRUE
+      "UnitFlag",     "HPAtt",        "Local", TRUE
       "UnitFlag",     "HP30",         "Local", TRUE
-      "UnitFlag",     "HPFullSea",    "Local", FALSE
+      "UnitFlag",     "HPAttSea",     "Local", FALSE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",     "Local", FALSE
@@ -1494,14 +1494,14 @@ actor_reqs    =
       "MinHitPoints", "30",           "Local", TRUE
     }
 
-; New HPFullSea: Can attack only oceanic tiles, except to bombard
+; New HPAttSea: Can attack only oceanic tiles, except to bombard
 ; and only if the attacker is undamaged (doesn't work together with Wheeled)
 ; (can attack from non-native tiles if not being transported)
 [actionenabler_attack_hp10_sea]
 action        = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HPAttSea",     "Local", TRUE
       "UnitFlag",     "HP20",         "Local", FALSE
       "UnitFlag",     "HP30",         "Local", FALSE
       "UnitFlag",     "Wheeled",      "Local", FALSE
@@ -1521,7 +1521,7 @@ target_reqs   =
 action        = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HPAttSea",     "Local", TRUE
       "UnitFlag",     "HP20",         "Local", TRUE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
@@ -1540,7 +1540,7 @@ target_reqs   =
 action        = "Attack"
 actor_reqs    =
     { "type",         "name",         "range", "present"
-      "UnitFlag",     "HPFullSea",    "Local", TRUE
+      "UnitFlag",     "HPAttSea",     "Local", TRUE
       "UnitFlag",     "HP30",         "Local", TRUE
       "UnitFlag",     "Wheeled",      "Local", FALSE
       "UnitFlag",     "NonMil",       "Local", FALSE
@@ -1559,9 +1559,9 @@ target_reqs   =
 action        = "Collect Ransom"
 actor_reqs    =
     { "type",          "name",         "range", "present"
+      "UnitState",     "Transported",  "Local", FALSE
       "UnitFlag",      "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",      "Local", FALSE
-      "UnitState",     "Transported",  "Local", FALSE
       "MinMoveFrags",  "1",            "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
     }
@@ -1570,10 +1570,10 @@ actor_reqs    =
 action        = "Collect Ransom"
 actor_reqs    =
     { "type",          "name",         "range", "present"
+      "UnitState",     "Transported",  "Local", TRUE
       "UnitFlag",      "Raider",       "Local", TRUE
       "UnitFlag",      "NonMil",       "Local", FALSE
       "UnitClassFlag", "Missile",      "Local", FALSE
-      "UnitState",     "Transported",  "Local", TRUE
       "MinMoveFrags",  "1",            "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
     }
@@ -1592,12 +1592,12 @@ actor_reqs    =
 action        = "Conquer City"
 actor_reqs    =
     { "type",           "name",           "range",  "present"
-      "UnitClassFlag",  "CanOccupyCity",  "Local",  TRUE
+      "UnitState",      "Transported",    "Local",  FALSE
       "UnitFlag",       "NonMil",         "Local",  FALSE
+      "UnitClassFlag",  "CanOccupyCity",  "Local",  TRUE
       "DiplRel",        "War",            "Local",  TRUE
       "MinMoveFrags",   "1",              "Local",  TRUE
       "Nation",         "Animal Kingdom", "Player", FALSE
-      "UnitState",      "Transported",    "Local",  FALSE
     }
 target_reqs   =
     { "type",           "name",           "range",  "present"
@@ -1608,13 +1608,13 @@ target_reqs   =
 action        = "Conquer City 2"
 actor_reqs    =
     { "type",           "name",           "range",  "present"
-      "UnitClassFlag",  "CanOccupyCity",  "Local",  TRUE
+      "UnitState",      "Transported",    "Local",  TRUE
+      "UnitFlag",       "Raider",         "Local",  TRUE
       "UnitFlag",       "NonMil",         "Local",  FALSE
+      "UnitClassFlag",  "CanOccupyCity",  "Local",  TRUE
       "DiplRel",        "War",            "Local",  TRUE
       "MinMoveFrags",   "1",              "Local",  TRUE
       "Nation",         "Animal Kingdom", "Player", FALSE
-      "UnitState",      "Transported",    "Local",  TRUE
-      "UnitFlag",       "Raider",         "Local",  TRUE
     }
 target_reqs   =
     { "type",           "name",           "range",  "present"

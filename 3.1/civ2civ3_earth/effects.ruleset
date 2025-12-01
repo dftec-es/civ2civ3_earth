@@ -31,7 +31,7 @@ format_version=20
 
 ; AI: "Away" "Restricted" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 
-; Higher chance of AI wars (vs human)
+; Higher chance of AI wars (vs human, or away ai)
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10
@@ -46,7 +46,7 @@ reqs    =
       "AI", "Experimental", "Player", FALSE
     }
 
-; Lower chance of AI wars (vs Hard AI)
+; Lower chance of AI wars (vs hard ai)
 [effect_ai_hard_love]
 type    = "Gain_AI_Love"
 value   = 20
@@ -108,15 +108,6 @@ reqs    =
       "AI", "Hard", "Player"
     }
 
-[effect_ai_hard_food]
-type    = "Upkeep_Factor"
-value   = -1
-reqs    =
-    { "type", "name", "range"
-      "AI", "Hard", "Player"
-      "OutputType", "Food", "Local"
-    }
-
 ; 1 or 2 free units, depending on the government and the type of upkeep
 [effect_ai_hard_upkeep]
 type    = "Unit_Upkeep_Free_Per_City"
@@ -150,7 +141,7 @@ reqs    =
       "AI", "Hard", "Player"
     }
 
-; Lower chance of AI wars (vs Cheating AI)
+; Lower chance of AI wars (vs cheating ai)
 [effect_ai_cheat_love]
 type    = "Gain_AI_Love"
 value   = 40
@@ -210,15 +201,6 @@ value   = 40
 reqs    =
     { "type", "name", "range"
       "AI", "Cheating", "Player"
-    }
-
-[effect_ai_cheat_food]
-type    = "Upkeep_Factor"
-value   = -1
-reqs    =
-    { "type", "name", "range"
-      "AI", "Cheating", "Player"
-      "OutputType", "Food", "Local"
     }
 
 ; 1 or 2 free units, depending on the government and the type of upkeep
@@ -319,7 +301,7 @@ reqs    =
       "OutputType", "Gold", "Local"
     }
 
-; Simulates hp_loss_pct = 10% for air units with HPFull flag
+; Simulates hp_loss_pct = 10% for air units with HPAtt flag
 ; (AI can't handle hp_loss_pct or negative Unit_Recover)
 [effect_air_hp_loss_1]
 type    = "Unit_Recover"
@@ -327,7 +309,7 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "UnitClassFlag", "Aerial", "Local", TRUE
-      "UnitFlag", "HPFull", "Local", TRUE
+      "UnitFlag", "HPAtt", "Local", TRUE
       "UnitState", "Transported", "Local", FALSE
       "Extra", "Airstrip", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
@@ -347,7 +329,7 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "UnitClassFlag", "Aerial", "Local", TRUE
-      "UnitFlag", "HPFull", "Local", TRUE
+      "UnitFlag", "HPAtt", "Local", TRUE
       "UnitFlag", "HP20", "Local", TRUE
       "UnitState", "Transported", "Local", FALSE
       "Extra", "Airstrip", "Local", FALSE
@@ -368,7 +350,7 @@ value   = -2
 reqs    =
     { "type", "name", "range", "present"
       "UnitClassFlag", "Aerial", "Local", TRUE
-      "UnitFlag", "HPFull", "Local", TRUE
+      "UnitFlag", "HPAtt", "Local", TRUE
       "UnitFlag", "HP30", "Local", TRUE
       "UnitState", "Transported", "Local", FALSE
       "Extra", "Airstrip", "Local", FALSE
@@ -2973,6 +2955,16 @@ reqs    =
       "Building", "Factory", "City"
     }
 
+; Encourages AI to build it
+[effect_factory_ai]
+type    = "Veteran_Build"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Factory", "City"
+      "UnitFlag", "NoBuild", "Local"
+    }
+
 ; default effect is 100, so this halves food waste
 [effect_granary]
 type    = "Output_Waste_By_Rel_Distance"
@@ -3043,6 +3035,16 @@ reqs    =
       "Building", "Harbour", "City", TRUE
       "Building", "Supermarket", "City", TRUE
       "OutputType", "Food", "Local", TRUE
+    }
+
+; Encourages AI to build it
+[effect_harbour_ai]
+type    = "Veteran_Build"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Harbour", "City"
+      "UnitFlag", "NoBuild", "Local"
     }
 
 [effect_hospital]
@@ -3832,6 +3834,16 @@ value   = 25
 reqs    =
     { "type", "name", "range"
       "Building", "Supermarket", "City"
+    }
+
+; Encourages AI to build it
+[effect_supermarket_ai]
+type    = "Veteran_Build"
+value   = 2
+reqs    =
+    { "type", "name", "range"
+      "Building", "Supermarket", "City"
+      "UnitFlag", "NoBuild", "Local"
     }
 
 [effect_temple]
@@ -6946,6 +6958,8 @@ reqs    =
 
 ; WARNING Use value lower than 65535 for units with coast refuel, else it causes assertion error
 
+; WARNING Enter Hut, Frighten Hut and Conquer Extras can bypass Unit Move costs
+
 ; Naval unit moving to enemy land (via a river or canal)
 [effect_action_success_move_cost_enemy_river]
 type    = "Action_Success_Actor_Move_Cost"
@@ -6957,8 +6971,6 @@ reqs    =
       "UnitClassFlag", "Naval", "Local", TRUE
       "DiplRelTile", "War", "Local", TRUE
     }
-
-; WARNING Enter Hut, Frighten Hut and Conquer Extras can bypass Unit Move costs
 
 [effect_action_success_move_cost_hut_enemy_river]
 type    = "Action_Success_Actor_Move_Cost"
@@ -6983,6 +6995,8 @@ reqs    =
     }
 
 ; Board\embark actions (inside cities) spend all the movement of the unit
+; (it prevents chaining of load-move-unload)
+; WARNING If it was the same outside cities, air units could run out of fuel ending the turn on a carrier
 [effect_action_success_move_cost_board]
 type    = "Action_Success_Actor_Move_Cost"
 value   = 999
@@ -7003,6 +7017,7 @@ reqs    =
 
 ; Board\embark actions (outside cities) spend all the movement of the target transport
 ; (it prevents chaining of load-move-unload)
+; WARNING If it was the same inside cities, it would be better to embark to a tile outside the city
 [effect_action_success_target_move_cost_board]
 type    = "Action_Success_Target_Move_Cost"
 value   = 999

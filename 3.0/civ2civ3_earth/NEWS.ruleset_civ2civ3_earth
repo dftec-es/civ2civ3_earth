@@ -28,7 +28,7 @@ Core:
 Optional (server options):
 - Trading technologies in the diplomacy dialog is not allowed (otherwise the AI can't handle the following options).
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points.
-- If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. This rule, together with the previous one, forces the use of research points to obtain new techs.
+* If the pool of research points ends negative, and the negative points are greater than the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. This rule, together with the previous one, forces the use of research points to obtain new techs.
 * AI trait distribution is now Even (instead of Fixed): each AI will start with different random values (and a very subtle effect) that determine how much they want to settle new territory, establish trade routes, or declare war.
 
 Terrains:
@@ -102,16 +102,16 @@ Buildings:
 - Doubled the coins needed to buy spaceship parts (same as wonders).
 
 Combat:
-It is now more similar to civ3, where you can use support units to surround and bombard the target before attacking it, reducing the chances of losing your units.
+It is now more similar to civ3, where you can use support units to surround and bombard the target before attacking it (representing skirmish tactics or suppressive fire), reducing the chances of losing your units.
 - When attacking, it is now possible to choose between different actions, if available for the unit, and if the unit has a remaining move fragment:
   - Regular attack: costs 1 entire move point, and moves the unit to the target tile (if possible, ZOC rules might prevent it), where both units keep fighting until one dies. The remaining movement points of the winner may end up being less due to the damage received.
   - Capture units: costs 1 entire move point, and has the same effect as Bribe action, but without paying gold. It only works if all the units in the target tile are capturable and are not carrying any load (hardcoded limitation).
   - Bombard: costs all the remaining move points, without moving to the target tile, and allows to damage (up to the bombard rate value) all the units of the target tile without risk of receiving damage back.
 - Bombard action is only allowed for 1 unit from each tile per turn. When a unit bombards from a tile, a marker appears on that tile and prevents other units to bombard from the same tile until the next turn.
-  Until that bombardment marker disappears at the end of the turn, if there is no city nor base on the tile, it gets the same defense bonus as if there was a Fort: +50% against land and sea units. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games).
-* Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
+  Until that bombardment marker disappears at the end of the turn, it gets the same defense bonus as if there was a Fort: +50% against land and sea units. This bonus is only useful for the player who moves earlier in the turn order (only for the AI in the case of single player games).
+- Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard (archers, catapults, and every unit after musketeers). The bombard rate is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
 - Flags Capturer/Capturable: All military infantry units can capture enemy Migrants (as slaves) and Caravans/Freights (as loot). Frigates can capture Galleons and Caravels (as pirates).
-- Flag HPFull: Air units and Submarines can't attack once damaged, except to bombard.
+- Flag HPAtt: Air units and Submarines can't attack once damaged, except to bombard.
 - Flag AutoAtt: Auto-attack enabled only for air fighters and submarines. These units can attack or bombard an incoming enemy. The auto-attacking units of the player try to bombard if possible, and else attack. The AI usually tries to attack first.
 
 Units:

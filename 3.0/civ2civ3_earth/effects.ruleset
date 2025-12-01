@@ -316,7 +316,7 @@ reqs    =
       "OutputType", "Gold", "Local"
     }
 
-; Simulates hp_loss_pct = 10% for air units with HPFull flag
+; Simulates hp_loss_pct = 10% for air units with HPAtt flag
 ; (AI can't handle hp_loss_pct or negative Unit_Recover)
 [effect_air_hp_loss_1]
 type    = "Unit_Recover"
@@ -324,7 +324,7 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "UnitClassFlag", "Aerial", "Local", TRUE
-      "UnitFlag", "HPFull", "Local", TRUE
+      "UnitFlag", "HPAtt", "Local", TRUE
       "UnitState", "Transported", "Local", FALSE
       "Extra", "Airstrip", "Local", FALSE
       "CityTile", "Center", "Local", FALSE
@@ -344,7 +344,7 @@ value   = -1
 reqs    =
     { "type", "name", "range", "present"
       "UnitClassFlag", "Aerial", "Local", TRUE
-      "UnitFlag", "HPFull", "Local", TRUE
+      "UnitFlag", "HPAtt", "Local", TRUE
       "UnitFlag", "HP20", "Local", TRUE
       "UnitState", "Transported", "Local", FALSE
       "Extra", "Airstrip", "Local", FALSE
@@ -365,7 +365,7 @@ value   = -2
 reqs    =
     { "type", "name", "range", "present"
       "UnitClassFlag", "Aerial", "Local", TRUE
-      "UnitFlag", "HPFull", "Local", TRUE
+      "UnitFlag", "HPAtt", "Local", TRUE
       "UnitFlag", "HP30", "Local", TRUE
       "UnitState", "Transported", "Local", FALSE
       "Extra", "Airstrip", "Local", FALSE

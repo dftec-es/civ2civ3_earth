@@ -2200,7 +2200,8 @@ then it disappears.\
 ; Strategic resources are added to the map by lua script (chance 200/10000)
 
 [extra_aluminum]
-name           = _("Aluminum")
+name           = _("Aluminum P")
+rule_name      = "Aluminum"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2225,7 +2226,8 @@ in the tile (hills or tundra).\
 ")
 
 [extra_niter]
-name           = _("Niter")
+name           = _("Niter P")
+rule_name      = "Niter"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2251,7 +2253,8 @@ the tile (plains or desert).\
 ")
 
 [extra_rubber]
-name           = _("Rubber")
+name           = _("Rubber P")
+rule_name      = "Rubber"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2276,7 +2279,8 @@ the tile (jungle, swamp or forest).\
 ")
 
 [extra_uranium]
-name           = _("Uranium")
+name           = _("Uranium P")
+rule_name      = "Uranium"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2301,7 +2305,8 @@ the tile (mountains or glacier).\
 ")
 
 [extra_gold]
-name           = _("Gold")
+name           = _("Gold L")
+rule_name      = "Gold"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2314,7 +2319,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_iron]
-name           = _("Iron")
+name           = _("Iron P")
+rule_name      = "Iron"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2327,7 +2333,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_peat]
-name           = _("Peat")
+name           = _("Peat P")
+rule_name      = "Peat"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2340,7 +2347,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_buffalo]
-name           = _("Buffalo")
+name           = _("Buffalo F")
+rule_name      = "Buffalo"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2353,7 +2361,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_coal]
-name           = _("Coal")
+name           = _("Coal P")
+rule_name      = "Coal"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2366,7 +2375,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_corn]
-name           = _("Corn")
+name           = _("Corn F")
+rule_name      = "Corn"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2379,7 +2389,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_deer]
-name           = _("Deer")
+name           = _("Deer F")
+rule_name      = "Deer"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2392,7 +2403,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_game]
-name           = _("?animals:Game")
+name           = _("?animals:Game F")
+rule_name      = "Game"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2405,7 +2417,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_fruit]
-name           = _("Fruit")
+name           = _("Fruit F")
+rule_name      = "Fruit"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2418,7 +2431,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_gems]
-name           = _("Gems")
+name           = _("Gems L")
+rule_name      = "Gems"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2431,7 +2445,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_horses]
-name           = _("Horses")
+name           = _("Horses P")
+rule_name      = "Horses"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2444,7 +2459,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_icy_ivory]
-name           = _("Seals")
+name           = _("Seals F")
+rule_name      = "Seals"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2457,7 +2473,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_ivory]
-name           = _("Ivory")
+name           = _("Ivory P")
+rule_name      = "Ivory"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2470,7 +2487,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_wheat]
-name           = _("Wheat")
+name           = _("Wheat F")
+rule_name      = "Wheat"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2483,7 +2501,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_cattle]
-name           = _("Cattle")
+name           = _("Cattle F")
+rule_name      = "Cattle"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2496,7 +2515,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_cotton]
-name           = _("Cotton")
+name           = _("Cotton P")
+rule_name      = "Cotton"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2509,7 +2529,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_salt]
-name           = _("Salt")
+name           = _("Salt P")
+rule_name      = "Salt"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2522,7 +2543,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_marble]
-name           = _("Marble")
+name           = _("Marble P")
+rule_name      = "Marble"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2535,7 +2557,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_incense]
-name           = _("Incense")
+name           = _("Incense L")
+rule_name      = "Incense"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2548,7 +2571,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_oasis]
-name           = _("Oasis")
+name           = _("Oasis F")
+rule_name      = "Oasis"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2562,7 +2586,8 @@ rmact_gfx_alt  = "-"
 flags          = "AllowsFarmlandOnDesert"
 
 [extra_pheasant]
-name           = _("Pheasant")
+name           = _("Pheasant F")
+rule_name      = "Pheasant"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2575,7 +2600,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_tobacco]
-name           = _("Tobacco")
+name           = _("Tobacco L")
+rule_name      = "Tobacco"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2602,7 +2628,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_silk]
-name           = _("Silk")
+name           = _("Silk L")
+rule_name      = "Silk"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2615,7 +2642,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_sugar]
-name           = _("Sugar")
+name           = _("Sugar F")
+rule_name      = "Sugar"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2628,7 +2656,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_spice]
-name           = _("Spice")
+name           = _("Spice L")
+rule_name      = "Spice"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2641,7 +2670,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_tea]
-name           = _("Tea")
+name           = _("Tea L")
+rule_name      = "Tea"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2654,7 +2684,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_furs]
-name           = _("Furs")
+name           = _("Furs L")
+rule_name      = "Furs"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2667,7 +2698,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_whales]
-name           = _("Whales")
+name           = _("Whales F")
+rule_name      = "Whales"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2680,7 +2712,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_wine]
-name           = _("Wine")
+name           = _("Wine L")
+rule_name      = "Wine"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2693,7 +2726,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_wool]
-name           = _("Wool")
+name           = _("Wool P")
+rule_name      = "Wool"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2706,7 +2740,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_oil]
-name           = _("Oil")
+name           = _("Oil P")
+rule_name      = "Oil"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2719,7 +2754,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_fish]
-name           = _("Fish")
+name           = _("Fish F")
+rule_name      = "Fish"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2732,7 +2768,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_shellfish]
-name           = _("Shellfish")
+name           = _("Shellfish L")
+rule_name      = "Shellfish"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
