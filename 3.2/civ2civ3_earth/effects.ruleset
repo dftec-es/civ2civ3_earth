@@ -1008,6 +1008,14 @@ reqs    =
       "UnitClassFlag", "Naval", "Local", TRUE
     }
 
+[effect_attack_bombard_no_city_destruction]
+type    = "Unit_No_Lose_Pop"
+value   = 1
+reqs    =
+    { "type",    "name",  "range", "present"
+      "MinSize", "2",     "City",  FALSE
+    }
+
 ; tech_upkeep_divider = 6000, Max tech upkeep = 12
 [effect_upkeep_tech_base]
 type    = "Tech_Upkeep_Free"
