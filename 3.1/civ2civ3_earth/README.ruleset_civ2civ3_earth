@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v3.1 (Updated 12-2024)
+Civ2Civ3 Earth Ruleset for Freeciv v3.1 (Updated 12-2025)
 ============================================================
 
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth" (or "ampliohex_earth" for hexagonal topology), and a world map scenario, adapted to be played with these rules.
@@ -53,7 +53,7 @@ CORE CHANGES:
   A city cannot support more than 20 units (no matter if the city pays upkeep for the unit or not). This helps AI cities to avoid starvation or bankruptcy due to excess of units.
 
 - Most units also require upkeep in Food (except for Workers/Engineers, Diplomat/Spy, Caravan/Freight, Explorer/AWACS, and Cruise Missile/Nuclear).
-  A city can support for free as many units (with upkeep in Food) as its population size (at least 4 are always free). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
+  A city can support for free as many units (with upkeep in Food) as half its population size, rounded up (at least 3 from the start, taking into account the additional free units granted by the government). Additional units cause waste of Food. If the city shrinks due to starvation, one of those extra units will be disbanded.
 
 - Units lose one veteran level when upgraded, and they do not gain veterancy from combat if the enemy is not killed, or if either side of the fight is completely powerless.
   Increased by one the number of veteran levels, with effects: 100% (green), 125% (regular), 150% (veteran), 175% (hardened) and 200% (elite).
@@ -120,7 +120,7 @@ OPTIONAL RULES:
 
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points. ('conquercost', 'diplbulbcost')
 
-- If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. ('techlossforgiveness', 'techlossrestore')
+- If the pool of research points ends negative, and the negative points are greater than the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. ('techlossforgiveness', 'techlossrestore')
 
 - Random period of anarchy when changing government (1 to 3 turns). Revolutions become quicker the more times any player has changed to the target government. ('revolentype', 'revolen')
 
@@ -188,24 +188,26 @@ TERRAIN:
 
 - Cities on rivers always get roads, even before Bridge Building is known.
 
-- The only terrain transformations available before the end of the tech tree are: Jungle -> Swamp; and Grassland -> Forest -> Plains -> Forest (10 turns each step). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
+- Added Plantation, a new terrain that is equal to forest, except that it transforms into Grassland when cut down (while regular forest transforms into Plains).
 
-- The following diagram shows all the transformations available with the discovery of Fusion Power (and the turns required). Redesigned so all useful alterations can be finished in 1 or 2 steps, and all effects of global warming can be reverted:
+- The only terrain transformations (which cost 10 working time) available before the end of the tech tree are: Jungle -> Swamp; Plains <-> Forest; and Grassland <-> Forest (named Plantation). Otherwise, all cities would end up surrounded by the same types of terrain too early in the game, especially problematic on historical maps.
+
+- The following diagram shows all the transformations available with the discovery of Fusion Power (and the working time required). Redesigned so all useful alterations can be finished in 1 or 2 steps, and all effects of global warming can be reverted:
 
 
-Glacier ---(24)---> Lake
-                     /\ (36)
-Ocean  ----(36)\     \/ (36)
-                --> Grassland
-Swamp  ----(24)/     /\ (24)
- /\ (10)             \/ (10)
-Jungle ----(36)---> Forest
-                     /\ (10)
-Tundra ----(24)\     \/ (10)
-                --> Plains
-Desert ----(24)/     /\ (24)
-                     \/ (24)
-Mountains -(36)---> Hills
+Glacier ---(20)---> Lake
+                     /\ (30)
+Ocean  ----(30)\     \/ (30)
+                --> Grassland (Grassland)
+Swamp  ----(20)/     /\ (20)   /\ (10)
+ /\ (10)             /\        \/ (10)
+Jungle ----(30)---> Forest    (Plantation)
+                     /\ (10)   \/
+Tundra ----(20)\     \/ (10)   \/ (20)
+                --> Plains    (Plains)
+Desert ----(20)/     /\ (20)
+                     \/ (20)
+Mountains -(30)---> Hills
 
 
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
@@ -231,7 +233,7 @@ Mountains -(36)---> Hills
 
   - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
 
-  - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city, or 10% reduction in building cost if both are available in the city.
+  - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
 
 - There is no minimum city output (was 1/1/0). City central tile simply gets +1 Production.
   This way, no matter the tile where you place your city, you never waste any resource (for example, with classic/civ2 rules, a city placed over bonused Grassland was wasting the Production bonus).
@@ -259,6 +261,7 @@ Bonus resources increase the tile output; and give +1 unit free of upkeep (F), o
 # = These strategic resources increase the tile output by 2 shields with the required technology.
 
 TIP: The optimal tiles to place your initial cities are those with MAX1 output equal or similar to 2/1/2, mainly those with bonus resources or rivers. Hills and Plains are always good places for cities, as well as Desert with river, or bonused Grassland. The best defense comes from cities placed on Hills with river.
+TIP: The most urgent tile improvements, in tiles without special resources, use to be: irrigation and road on Plains, road on Grassland, irrigation or mine on Hills, and transformation of some Forest (those not on rivers, with no trade) into Plains.
 
 
 GOVERNMENTS:
@@ -297,7 +300,7 @@ by Distance      +4%      +4%      +4%      +2%      +2%      +2%      +1%      
 
 - "Unit Upkeep": Tribalism, Republic and Communism use the standard unit upkeep in shields, while the other governments use upkeep in coins (x2 coins per unit for modern governments).
 
-- "Free Units": Means units free of shield/coin upkeep and also free of unhappiness due to military activity. By default 2 free units per city.
+- "Free Units": Means units free of shield/coin/food upkeep and also free of unhappiness due to military activity. By default 2 free units per city.
 
 - "War Unhappiness": Most governments cause unhappiness when military units end the turn outside national borders (same as Republic with civ2 rules).
 
@@ -531,6 +534,29 @@ EXAMPLE: Riflemen in a size 9 city, with walls, on hills, will get a total defen
          In City with Walls (+200%):       9 + 18 = 27.
 
 
+EXAMPLE: Marine (Defense 5, HP 20)
+                 
+Terrain          Defense  Fortify  Fort   \ Fortress
+                 (*HP/10) (+50%)   (+50%) \ (+100%)
+Plains           10       15       22,5   \ 30
+ + River         12,5     18,75    28,125
+Forest           12,5     18,75    28,125 \ 37,5
+ + River         15,625   23,4375  35,15
+Hills            15,0     22,5     33,75  \ 45
+ + River         18,75    28,125   42,1875
+Mountains        20,0     30,0     45,0   \ 60
+ + River         25,0     37,5     56,25
+                 
+EXAMPLE: Mech. Inf. (Defense 6, HP 30)
+                 
+Terrain          Defense  Fortify  Fort   \ Fortress
+                 (*HP/10) (+50%)   (+50%) \ (+100%)
+Plains           18       27       40,5   \ 54
+ + River         18       27       40,5
+Forest\Hills\M   22,5     33,75    50,625 \ 67,5
+ + River         22,5     33,75    50,625
+
+
 ACTIONS:
 --------
 
@@ -548,10 +574,10 @@ Combat:
 
   - Flags Capturer/Capturable: All military infantry units can capture enemy Migrants (as slaves) and Caravans/Freights (as loot). Frigates can capture Galleons and Caravels (as pirates).
 
-  - Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard. The bombard rate (damage caused) is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
+  - Flag Bombarder: All units with ranged weapons or firearms get the ability to bombard, representing skirmish tactics or suppressive fire. The bombard rate (damage caused) is 1 for each 10 hit points of the bombarding unit; +1 for artillery, naval and aerial units; +2 for air bombers.
     The bombard rate gets scaled down by the damage of the bombarding unit (being always at least 1).
 
-  - Flag HPFull: Air units and Submarines can't attack once damaged, except to bombard.
+  - Flag HPAtt: Air units and Submarines can't attack once damaged, except to bombard.
 
   - Flag AutoAtt: Auto-attack enabled only for air fighters and submarines. These units can attack or bombard an incoming enemy. The auto-attacking units of the player try to bombard if possible, and else attack. The AI usually tries to attack first.
 
@@ -562,10 +588,10 @@ Movement:
 
 - Naval units lose all their movement points to move to enemy land tiles (via river/canal).
 
-- Units need some remaining move fragment and spend the entire movement to board/embark (load onto transport) inside cities. When units board/embark outside cities, it is the target transport that loses its remaining movement points.
-  This prevents using a chain of transports to load-move-unload a unit multiple times in the same turn, and ensures that the best way to manage the transport units is also the most intuitive (without micromanagement). 
+- Units need some remaining move fragment and spend the entire movement to board/embark (load onto transport). When units board/embark outside cities, it is the target transport that loses its remaining movement points.
+  This prevents using a chain of transports to load-move-unload a unit multiple times in the same turn.
 
-- Ground units spend the entire movement to alight/disembark (unload from transport). This forces slow invasions no matter if terrain is native or not.
+- Ground units spend the entire movement to deboard/disembark (unload from transport). This forces slow invasions no matter if terrain is native or not.
 
 - Units can defend while being transported, but they cannot attack (ground units need to unload first, losing all movement points until the next turn).
 
@@ -660,14 +686,14 @@ Warrior         1    1    1    1      10   10
 Phalanx         1    2    1    1      10   20   
 Archers         3   *1    1    1(1)   10  *20                      
 Legion          4    2    1    1      10  *30   iron               *Raider
-Pikemen        *2   *3    1    1      10  *30   iron               *(x2 att vs Horses)
-Musketeers      3    3    1    1(2)   20  *40   niter              *Raider,*(/2 att vs Horses)
+Pikemen        *2   *3    1    1      10  *30   iron               *(x2 Att vs Horses)
+Musketeers      3    3    1    1(2)   20  *40   niter              *Raider,*(/2 Att vs Horses)
 Riflemen        5    4    1    1(2)   20  *50   niter              *Raider
 Alpine Troops  *7   *4    1    1(2)   20  *60   niter               IgTer
 Partisan        4   *5    1    1(2)   20  *60                       IgTer, IgZOC
-Fanatics       *5   *5    1    1(2)   20   20                      *1 Pop, No upkeep, No unhappy
+Fanatics       *5   *5    1    1(2)   20   20                      *Pop Cost 1, No upkeep, No unhappy
 Marines         8    5    1    1(2)   20   60             rubber    Raider,*BeachLander
-Paratroopers    6    4    1    1(2)   20   60             rubber    Paratroopers
+Paratroopers    6    4    1    1(2)   20   60             rubber    Paratrooper
 
 Horsemen        2    1    2    1      10   20             horses   
 Elephants      *3   *2    2    1      10  *30             ivory    
@@ -681,8 +707,8 @@ Armor           10   5    3    1(3)   30  *90   iron/oil  uranium  *Wheeled
 
 Catapult        6    1    1    1(2)   10   40                      *Wheeled
 Cannon          8    1    1    1(3)   20  *50   iron,niter         *Wheeled
-Artillery       10  *2    1   *1\2(3) 20  *60   iron               *Wheeled,*CityBuster
-Howitzer        12   2   *1   *1\2(4) 30  *80   iron/oil  rubber   *Wheeled,*CityBuster
+Artillery       10  *2    1   *1\2(3) 20  *60   iron               *Wheeled,*(x2 Att vs City)
+Howitzer        12   2   *1   *1\2(4) 30  *80   iron/oil  rubber   *Wheeled,*(x2 Att vs City)
 
 Galley          1    1    3    1(1)   10  *20                       Cargo 2,*No unhappy,*Ocean Fuel 0,*River
 Sailboat       *0    1    3    1      10  *20                      *Cargo 3,*No unhappy,*Ocean Fuel 2,*River
@@ -693,19 +719,19 @@ Carrier        *0    9    5   *1      40  *150  iron/oil  aluminum  Cargo 8,*No 
 
 Frigate        *3    2    4    1(3)   20  *40   iron,niter         *No Cargo,*Capturer
 Ironclad        4   *3    4    1(3)  *20  *50   iron,niter         
-Destroyer       4    4    6    1(4)   30   60   iron               *(x2 def vs Sub)
+Destroyer       4    4    6    1(4)   30   60   iron               *(x2 Def vs Sub)
 Cruiser         6    6    5   *1(4)   30   80   iron               
-AEGIS Cruiser   8    8    5   *1(4)   30   100  iron/oil  aluminum *(x2 def vs Air)
+AEGIS Cruiser   8    8    5   *1(4)   30   100  iron/oil  aluminum *(x2 Def vs Air)
 Battleship      12   12   4   *1(4)  *30   160  iron/oil           
-Submarine      *12  *4   *5   *1(2)  *20  *70   iron/oil  uranium  *(x2 def vs Air),*Cargo 1,*No unhappy,*HPFull,*AutoAtt
+Submarine      *12  *4   *5   *1(2)  *20  *70   iron/oil  uranium  *(x2 Def vs Air),*Cargo 1,*No unhappy,*HPAtt,*AutoAtt
 
-Fighter         4   *4    10  *1(3)   20   60   iron/oil  aluminum *Fuel 2,*HPFull,*AutoAtt
-Bomber         *6   *2    8   *1(5)  *30  *100  iron/oil  aluminum *Fuel 3,*HPFull, FieldUnit
-Helicopter     *5    3    6   *1(4)  *30  *70   iron/oil  rubber   *Cargo 1,*HPFull
-Stealth Fighter 8   *8    14  *1(3)   20   80   iron/oil  aluminum *Fuel 2,*HPFull,*AutoAtt
-Stealth Bomber *9    5    12  *1(5)  *30  *120  iron/oil  aluminum *Fuel 3,*HPFull, FieldUnit
+Fighter         4   *4    10  *1(3)   20   60   iron/oil  aluminum *Fuel 2,*HPAtt,*AutoAtt
+Bomber         *6   *2    8   *1(5)  *30  *100  iron/oil  aluminum *Fuel 3,*HPAtt, FieldUnit
+Helicopter     *5    3    6   *1(4)  *30  *70   iron/oil  rubber   *Cargo 1,*HPAtt
+Stealth Fighter 8   *8    14  *1(3)   20   80   iron/oil  aluminum *Fuel 2,*HPAtt,*AutoAtt
+Stealth Bomber *9    5    12  *1(5)  *30  *120  iron/oil  aluminum *Fuel 3,*HPAtt, FieldUnit
 
-Cruise Missile  18   0   *16  *1\2    10  *50             aluminum *CityBuster,*No FieldUnit
+Cruise Missile  18   0   *16  *1\2    10  *50             aluminum *(x2 Att vs City),*No FieldUnit
 Nuclear         99   0    16   1      10   160            uranium   Nuclear, FieldUnit
 
 FP = Firepower, BR = Bombard Rate, HP = Hit Points

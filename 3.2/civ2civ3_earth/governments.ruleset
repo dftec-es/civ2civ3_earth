@@ -1,0 +1,548 @@
+
+; Modifying this file:
+; You should not modify this file except to make bugfixes or
+; for other "maintenance".  If you want to make custom changes
+; you should create a new datadir subdirectory and copy this file
+; into that directory, and then modify that copy.  Then use the
+; command "rulesetdir <mysubdir>" in the server to have freeciv
+; use your new customized file.
+
+; Note that the freeciv AI may not cope well with anything more
+; than minor changes.
+
+[datafile]
+description = "Civ2Civ3 Earth governments data for Freeciv"
+options = "+Freeciv-3.2-ruleset"
+format_version = 30
+
+[governments]
+during_revolution = "Anarchy"
+
+; /* <-- avoid gettext warnings
+;
+; Below: The individual government types, one per section.
+;
+; The actual tag used (the * in [government_*]) does not matter, except
+; it must be unique within this file, and it may be used in debug
+; output when reading this file.
+;
+; For the "official" rulesets, the order of these sections should not
+; be changed because that would break backward compatibility with
+; savegames.  (In particular, if Fundamentalism is added to default
+; ruleset, should be added at end.)
+;
+; Notes on fields:
+;
+; name         = translatable name as seen by user
+; rule_name    = (optional) internal name for savegames, rulesets etc; if
+;                not present, "name" is used for this purpose too. Since
+;                the name used in savegames must not change, if you want
+;                to rename an item after a ruleset has been released, you
+;                should set "rule_name" to the original value of "name".
+; reqs         = requirements for this government (see README.effects)
+; graphic      = tag specifying preferred graphic
+; graphic_alt  = alternate graphics tag if preferred is not found;
+;                should be a standard tag if preferred is not;
+;                otherwise may be "-"
+; sound        = Sound tag for the audio to play when player switch
+;                to government.
+; sound_alt    = Alternative sound tag, in case primary one is not found.
+; sound_alt2   = Second alternative sound tag, in case neither primary tag
+;                nor the first alt tag is found.
+; ai_better    = AI will not consider this government for use if the
+;                government listed here is available
+; ruler_male_title   = The default male ruler title for the government type.
+;                      It's a format string where name of the ruler is marked
+;                      by '%s'.
+;                      Individual nations may override this by their
+;                      own title.
+; ruler_female_title = The default female ruler title for the government type.
+;                      See above ruler_male_title.
+; helptext     = optional help text string; should escape all raw newlines
+;                so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+;------------------------------------------------------------------------
+[government_anarchy]
+
+name        = _("Anarchy")
+; No reqs
+graphic     = "gov.anarchy"
+graphic_alt = "-"
+sound       = "g_anarchy"
+sound_alt   = "-"
+sound_alt2  = "-"
+
+ruler_male_title = _("Warlord %s")
+ruler_female_title = _("Warlady %s")
+
+helptext = _("\
+Anarchy is simply the absence of any recognizable government.\
+ Citizens are disorganized and unproductive, and will spend all\
+ income as quickly as possible, rather than paying taxes or\
+ conducting research.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Buildings and technologies do not require any upkeep.\n\
+* Each worked tile that gives more than 2 Food, Production, or Trade will\
+ suffer a -1 penalty, unless the player has researched Trade technology,\
+ or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
+* All citizens are unhappy by default.\n\
+* Each city can support up to 3 units for free; further units each cost\
+ 1 shield per turn.\n\
+* Military units do not cause unhappiness even when deployed aggressively.\n\
+* Military units impose martial law. Up to 3 military units inside a city\
+ will each force 1 unhappy citizen to become content.\n\
+* You have no control over tax rates. All trade income is\
+ converted to luxuries.\n\
+* There is no base level of conventional corruption, but it increases\
+ by 4% for each tile of distance from the capital.\n\
+* Base production waste is 30%. This increases by 4% for each tile of\
+ distance from the capital.\
+")
+
+;------------------------------------------------------------------------
+[government_tribal]
+
+name        = _("Tribalism")
+rule_name   = _("Tribal")
+reqs = { "type", "name", "range"
+         "tech", "Warrior Code", "Player"
+       }
+graphic     = "gov.tribal"
+graphic_alt = "s.tax_luxury"
+sound       = "g_tribal"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+ai_better   = "Republic"
+
+ruler_male_title = _("Warlord %s")
+ruler_female_title = _("Warlady %s")
+
+helptext = _("\
+Under Tribalism, you are part ruler of your people. Your control over\
+ your citizens is maintained largely by spiritual counsel.\
+"), _("\
+Compared to Despotism, a tribal economy is more shield-oriented. Its\
+ bonuses to veterancy and vision range can be an advantage in wartime,\
+ but it lacks the martial law of other early governments.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Increases by half the chance of land units to obtain the next veteran\
+ level after a battle, and also increases their vision range.\n\
+* Each worked tile that gives more than 2 Food, Production, or Trade will\
+ suffer a -1 penalty, unless the player has researched Trade technology,\
+ or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
+* The first 5 citizens of each city are content by default.\
+ The 6th citizen will be the first unhappy one.\n\
+* Each city can support up to 3 units for free; further units each cost\
+ 1 shield per turn.\n\
+* Unlike later governments, military units do not cause unhappiness even\
+ when deployed aggressively.\n\
+* Base corruption is 30% (the highest under any government). This\
+ increases by 4% for each tile of distance from the capital.\n\
+* There is no base level of production waste, but it increases\
+ by 4% for each tile of distance from the capital.\
+")
+
+;------------------------------------------------------------------------
+[government_despotism]
+
+name        = _("Despotism")
+; No reqs
+graphic     = "gov.despotism"
+graphic_alt = "-"
+sound       = "g_despotism"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+ai_better   = "Monarchy"
+
+ruler_male_title = _("Chief %s")
+ruler_female_title = _("?female:Chief %s")
+
+helptext = _("\
+Under Despotism, you are the absolute ruler of your people. Your\
+ control over your citizens is maintained largely by martial law.\
+"), _("\
+Compared to Tribalism, a Despotic economy is more trade-oriented.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Your centers of government (cities with Palace and Ecclesiastical\
+ Palace) get a +75% bonus to luxury production.\n\
+* Each worked tile that gives more than 2 Food, Production, or Trade will\
+ suffer a -1 penalty, unless the player has researched Trade technology,\
+ or the city is celebrating. (Cities below size 3 will not celebrate.)\n\
+* The first 4 citizens of each city are content by default.\
+ The 5th citizen will be the first unhappy one.\n\
+* Each city can support up to 2 units for free; further units each cost\
+ 1 gold per turn.\n\
+* Unlike later governments, military units do not cause unhappiness even\
+ when deployed aggressively.\n\
+* Military units impose martial law. Up to 3 military units inside a city\
+ will each force 1 unhappy citizen to become content.\n\
+* Base corruption is 20%. This increases by 4% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 10%. This increases by 4% for each tile of\
+ distance from the capital.\
+")
+
+;------------------------------------------------------------------------
+[government_monarchy]
+
+name        = _("Monarchy")
+reqs = { "type", "name", "range"
+         "tech", "Monarchy", "Player"
+       }
+graphic     = "gov.monarchy"
+graphic_alt = "-"
+sound       = "g_monarchy"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("King %s")
+ruler_female_title = _("Queen %s")
+
+helptext = _("\
+Under Monarchy, a king or queen serves as a hereditary figurehead\
+ for your government.\
+"), _("\
+Monarchy avoids the penalty to output per tile. It gives low unit upkeep\
+ costs, but units outside your borders may cause unhappiness.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Your centers of government (cities with Palace and Ecclesiastical\
+ Palace) get a +50% bonus to luxury production.\n\
+* Celebrating cities produce one extra trade point for every tile which is\
+ already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 4 citizens of each city are content by default.\n\
+* Each city can support up to 3 units for free (the maximum possible);\
+ further units each cost 1 gold per turn.\n\
+* Each city tolerates up to 3 aggressively deployed military units;\
+ each further unit causes 1 unhappy citizen.\n\
+* Military units impose martial law. Up to 3 military units inside a city\
+ will each force 1 unhappy citizen to become content.\n\
+* Base corruption is 10%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 20%. This increases by 2% for each tile of\
+ distance from the capital.\
+")
+
+;------------------------------------------------------------------------
+[government_communism]
+
+name        = _("Communism")
+reqs = { "type", "name", "range"
+         "tech", "Communism", "Player"
+       }
+graphic     = "gov.communism"
+graphic_alt = "-"
+sound       = "g_communism"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("Comrade %s")
+ruler_female_title = _("?female:Comrade %s")
+
+helptext = _("\
+A Communist government is based on the ideal that all people are\
+ equal. All goods are owned by the state, rather than by private\
+ citizens. Communism gives a balance between military and commercial\
+ styles of government.\
+"), _("\
+Communism eliminates the corruption and waste caused by distance from\
+ the palace, and reduces considerably the gold paid for upkeep of\
+ buildings; but it does not get the trade bonus from irrigated land\
+ or city celebrations.\
+"), _("\
+It is a good alternative to Federation for post-industrial large empires,\
+ especially when cities are surrounded by hills, mountains or jungles\
+ (less trade, but more production).\
+"),
+; /* xgettext:no-c-format */
+_("\
+* City improvements which would normally have an upkeep of 1 or 2 gold\
+ are free of upkeep.\n\
+* Cancels the bonus from Mysticism and Theology (to Temples and Cathedrals).\n\
+* The first 5 citizens of each city are content by default.\n\
+* Each city can support up to 3 units for free (the maximum possible);\
+ further units each cost 1 shield per turn.\n\
+* Each city tolerates up to 3 aggressively deployed military units;\
+ each further unit causes 1 unhappy citizen.\n\
+* Military units impose martial law. Up to 3 military units inside a city\
+ will each force 2 unhappy citizens to become content (the maximum\
+ possible).\n\
+* Base corruption is 30%, but is not affected by distance from the capital.\n\
+* There is no production waste.\
+")
+
+;------------------------------------------------------------------------
+[government_fundamentalism]
+
+name        = _("Fundamentalism")
+reqs = { "type", "name", "range"
+         "tech", "Theology", "Player"
+       }
+graphic     = "gov.fundamentalism"
+graphic_alt = "-"
+sound       = "g_fundamentalism"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("High Priest %s")
+ruler_female_title = _("High Priestess %s")
+
+helptext = _("\
+Fundamentalism is a form of government organized around a central\
+ set of beliefs. The beliefs, usually religious in nature, form\
+ a rigid guideline for actions and reactions of both the rulers\
+ and the people.\
+"), _("\
+In a fundamentalist society, the people and the rulers are entirely\
+ devoted to their beliefs, and are usually willing to die to\
+ preserve them.\
+"), _("\
+Improvements that normally convert unhappy citizens to content\
+ citizens, produce `tithes' (gold) equivalent to the number\
+ of people they would convert.\
+"), _("\
+Fundamentalism gets a significant bonus to gold production, especially\
+ useful when terrain is not favorable; but it receives no revenue from\
+ city celebrations, and science production is low even with taxes on\
+ science at maximum.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* The first 4 citizens of each city are content by default.\n\
+* Each city can support up to 2 units for free; further units each cost\
+ 2 gold per turn (except for Fanatics).\n\
+* Each city tolerates up to 2 aggressively deployed military units;\
+ each further unit causes 1 unhappy citizen.\n\
+* Base corruption is 15%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 15%. This increases by 2% for each tile of\
+ distance from the capital.\
+")
+
+;------------------------------------------------------------------------
+[government_federation]
+
+name        = _("Federation")
+reqs = { "type", "name", "range"
+         "tech", "Economics", "Player"
+       }
+graphic     = "gov.federation"
+graphic_alt = "s.tax_gold"
+sound       = "g_federation"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("Consul %s")
+ruler_female_title = _("?female:Consul %s")
+
+helptext = _("\
+Federalism is a system in which the power to govern is shared between\
+ national and provincial governments.\
+ This decentralization minimizes the corruption and waste, and avoids\
+ separatist movements.\
+"), _("\
+Federation eliminates the corruption and waste caused by distance from\
+ the palace, and its bonus to luxury production allows cities to celebrate\
+ more easily; but it does not get the trade bonus from irrigated land.\
+"), _("\
+It is a good alternative to Democracy for larger empires or more\
+ aggressive wars, especially when cities are surrounded by sea (less\
+ irrigated or mined land, but more trade).\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Citizens produce 2 extra luxury points in each city.\n\
+* Celebrating cities produce one extra trade point for every tile which is\
+ already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 6 citizens of each city are content by default.\n\
+* Each city can support up to 2 units for free; further units each cost\
+ 2 gold per turn.\n\
+* Each city tolerates up to 2 aggressively deployed military units;\
+ each further unit causes 1 unhappy citizen.\n\
+* There is no corruption.\n\
+* Base production waste is 30%, but is not affected by distance to the\
+ capital.\
+")
+
+;------------------------------------------------------------------------
+[government_republic]
+
+name        = _("Republic")
+reqs = { "type", "name", "range"
+         "tech", "The Republic", "Player"
+       }
+graphic     = "gov.republic"
+graphic_alt = "-"
+sound       = "g_republic"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("President %s")
+ruler_female_title = _("?female:President %s")
+
+helptext = _("\
+Under a Republican government, citizens hold an election to select a\
+ representative who will govern them; since elected leaders must\
+ remain popular to remain in control, citizens are given a greater\
+ degree of freedom. Citizens under the Republic become unhappy\
+ easily, but the self-sufficiency of your citizens allows high levels\
+ of trade.\
+"), _("\
+Republic gets a significant bonus to trade on irrigated land; but it\
+ has a senate, units cannot impose martial law, and units outside your\
+ borders may cause unhappiness more easily.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Citizens produce one extra trade point when they work a tile with an \
+irrigation.\n\
+* Celebrating cities produce one extra trade point for every tile which is\
+ already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 5 citizens of each city are content by default.\n\
+* Each city can support one unit for free; further units each cost\
+ 1 shield per turn.\n\
+* Each city tolerates a single aggressively deployed military unit;\
+ each further unit causes 1 unhappy citizen.\n\
+* Base corruption is 25%. This increases by 2% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 5%. This increases by 2% for each tile of\
+ distance from the capital.\n\
+* Has a senate that may prevent declaration of war.\
+")
+
+;------------------------------------------------------------------------
+[government_democracy]
+
+name        = _("Democracy")
+reqs = { "type", "name", "range"
+         "tech", "Democracy", "Player"
+       }
+graphic     = "gov.democracy"
+graphic_alt = "-"
+sound       = "g_democracy"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("Prime Minister %s")
+ruler_female_title = _("?female:Prime Minister %s")
+
+helptext = _("\
+Under Democracy, citizens govern directly by voting on issues.\
+ Democracy offers the highest possible level of trade, but also\
+ offers the most potential for unhappiness; citizens become very\
+ upset during wars.\
+"), _("\
+Democracy gets the same trade bonus on irrigated land as Republic,\
+ and reduces the corruption and waste caused by distance from the\
+ palace; but it has a senate, and it doubles the unhappiness caused\
+ by units outside your borders.\
+"), _("\
+It can be the best government once city celebrations generate revenue\
+ (when they produce more trade than the required to celebrate),\
+ especially when cities are surrounded by plains and rivers.\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Citizens produce one extra trade point when they work a tile with an \
+irrigation.\n\
+* Celebrating cities produce one extra trade point for every tile which is\
+ already producing trade. (Cities below size 3 will not celebrate.)\n\
+* The first 6 citizens of each city are content by default.\n\
+* Each city can support one unit for free; further units each cost\
+ 2 gold per turn.\n\
+* Each city tolerates a single aggressively deployed military unit;\
+ each further unit causes 2 unhappy citizens.\n\
+* Base corruption is 5%. This increases by 1% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 25%. This increases by 1% for each tile of\
+ distance from the capital.\n\
+* Has a senate that may prevent declaration of war.\
+")
+
+;------------------------------------------------------------------------
+[government_fascism]
+
+name        = _("Fascism")
+reqs = { "type", "name", "range"
+         "tech", "Tactics", "Player"
+       }
+graphic     = "gov.fascism"
+graphic_alt = "citizen.unhappy_0"
+sound       = "g_fascism"
+sound_alt   = "g_generic"
+sound_alt2  = "-"
+
+ruler_male_title = _("Chancellor %s")
+ruler_female_title = _("?female:Chancellor %s")
+
+helptext = _("\
+Fascism seeks to solve economic, political, and social problems by\
+ achieving a national rebirth, exalting the nation or race above all\
+ else, and promoting cults of unity, strength, and purity.\
+"), _("\
+Fascism gets a bonus to gold production on mined land, increases the\
+ chance of units becoming veteran, and it is the only modern government\
+ whose units can't cause unhappiness; but it has standard upkeep of\
+ buildings, and corruption and waste caused by distance is not eliminated.\
+"), _("\
+It is a good alternative for militaristic nations, especially when\
+ cities are surrounded by a mix of grasslands and hills or forests\
+ (more mines, and food enough to work them).\
+"),
+; /* xgettext:no-c-format */
+_("\
+* Increases by a quarter the chance of any unit to obtain the next\
+ veteran level after a battle.\n\
+* Citizens produce one extra gold when they work a tile with a mine.\n\
+* The first 5 citizens of each city are content by default.\n\
+* Each city can support up to 3 units for free (the maximum possible);\
+ further units each cost 1 shield per turn.\n\
+* Military units do not cause unhappiness even when deployed aggressively.\n\
+* Military units impose martial law. Up to 3 military units inside a city\
+ will each force 2 unhappy citizens to become content (the maximum\
+ possible).\n\
+* Base corruption is 15%. This increases by 1% for each tile of distance\
+ from the capital.\n\
+* Base production waste is 15%. This increases by 1% for each tile of\
+ distance from the capital.\
+")
+
+; /* <-- avoid gettext warnings
+;
+; Multipliers (aka policies)
+;
+; name                    = translatable name as seen by user
+; rule_name               = (optional) internal name for savegames, rulesets
+;                           etc; if not present, "name" is used for this
+;                           purpose too. Since the name used in savegames must
+;                           not change, if you want to rename an item after a
+;                           ruleset has been released, you should set
+;                           "rule_name" to the original value of "name".
+; default                 = default value (as presented in UI)
+; start                   = minimum value (as presented in UI)
+; stop                    = maximum value (as presented in UI)
+; step                    = minimum increase/decrease (as presented in UI)
+; offset                  = offset/factor control how UI values are turned
+; factor                  = into effect values for use in effects.ruleset.
+;                           effect_value = (ui_value + offset) * (factor/100)
+;                           Optional; by default offset=0, factor=100, so
+;                           that UI values are used as-is.
+; minimum_turns           = how often multiplier can be changed, or: how long one is stuck
+;                           with the given value after changing to it
+; reqs                    = requirements for adjusting this policy (see README.effects)
+; helptext                = optional help text string; should escape all raw
+;                           newlines so that xgettext parsing works
+;
+; */ <-- avoid gettext warnings
+
+; Multiplier factor * effect value should be 100 (this way UI values are used as-is)
+

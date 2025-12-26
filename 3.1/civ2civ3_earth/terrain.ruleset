@@ -31,7 +31,7 @@ flags =
     _("Defense"), _("Units get a defense bonus on this terrain.")
     _("RecoverHP"), _("Allows units to recover extra HP.")
     _("CanHaveStorm"), _("Storms can appear here.")
-; Max = 8
+    _("Beach"), _("Terrain with no movement penalty, suitable for beach landing.")
 ;    _("Low Land"), _("Terrain suitable for canal digging.")
   }
 
@@ -290,7 +290,7 @@ irrigation_time      = 0
 mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Grassland"
-transform_time       = 36
+transform_time       = 30
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -336,7 +336,7 @@ irrigation_time      = 0
 mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Grassland"
-transform_time       = 36
+transform_time       = 30
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -435,7 +435,7 @@ irrigation_time      = 0
 mining_shield_incr   = 1
 mining_time          = 10
 transform_result     = "Lake"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -482,7 +482,7 @@ irrigation_time      = 5
 mining_shield_incr   = 1
 mining_time          = 5
 transform_result     = "Plains"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -494,7 +494,7 @@ warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Tundra"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "CanHaveRiver", "Oil"
+flags                = "CanHaveRiver", "Oil", "Beach"
 property_dry         = 100
 property_tropical    = 50
 property_temperate   = 20
@@ -539,7 +539,7 @@ irrigation_time      = 0
 mining_shield_incr   = 1
 mining_time          = 10
 transform_result     = "Grassland"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -563,6 +563,56 @@ Forests are densely wooded, making agriculture and trade somewhat \
 problematic.\
 ")
 
+[terrain_plantation]
+name                 = _("Plantation")
+graphic              = "plantation"
+graphic_alt          = "forest"
+identifier           = "F"
+class                = "Land"
+movement_cost        = 2
+defense_bonus        = 25
+food                 = 1
+shield               = 2
+trade                = 0
+resources            = "Pheasant", "Silk", "Deer"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 2
+road_time            = 4
+cultivate_result     = "Grassland"
+cultivate_time       = 10
+plant_result         = "no"
+plant_time           = 0
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_shield_incr   = 1
+mining_time          = 10
+transform_result     = "Plains"
+transform_time       = 20
+placing_time         = 1
+pillage_time         = 1
+clean_pollution_time = 3
+clean_fallout_time   = 3
+animal               = "Wolf"
+warmer_wetter_result = "Jungle"
+warmer_drier_result  = "no"
+cooler_wetter_result = "no"
+cooler_drier_result  = "no"
+native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
+flags                = "NotGenerated", "Starter", "CanHaveRiver", "Defense", "Wood"
+property_cold        = 20
+property_wet         = 20
+property_foliage     = 50
+property_temperate   = 50
+color.r              = 43
+color.g              = 107
+color.b              = 19
+helptext             = _("\
+Plantations are equal to forests, except that they transform into \
+grassland when cut down.\
+")
+
 [terrain_grassland]
 name                 = _("Grassland")
 graphic              = "grassland"
@@ -582,14 +632,14 @@ base_time            = 1
 road_time            = 2
 cultivate_result     = "no"
 cultivate_time       = 0
-plant_result         = "Forest"
+plant_result         = "Plantation"
 plant_time           = 10
 irrigation_food_incr = 1
 irrigation_time      = 5
 mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Lake"
-transform_time       = 36
+transform_time       = 30
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -601,7 +651,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Swamp"
 cooler_drier_result  = "Tundra"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "RecoverHP"
+flags                = "Starter", "CanHaveRiver", "RecoverHP", "Beach"
 property_green       = 50
 property_temperate   = 50
 color.r              = 11
@@ -637,7 +687,7 @@ irrigation_time      = 10
 mining_shield_incr   = 2
 mining_time          = 10
 transform_result     = "Plains"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -688,7 +738,7 @@ irrigation_time      = 0
 mining_shield_incr   = 1
 mining_time          = 10
 transform_result     = "Forest"
-transform_time       = 36
+transform_time       = 30
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -739,7 +789,7 @@ irrigation_time      = 0
 mining_shield_incr   = 2
 mining_time          = 10
 transform_result     = "Hills"
-transform_time       = 36
+transform_time       = 30
 pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
@@ -790,7 +840,7 @@ irrigation_time      = 5
 mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Hills"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -801,7 +851,7 @@ warmer_drier_result  = "Desert"
 cooler_wetter_result = "Desert"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "Starter", "CanHaveRiver", "RecoverHP"
+flags                = "Starter", "CanHaveRiver", "RecoverHP", "Beach"
 property_green       = 50
 property_temperate   = 50
 color.r              = 122
@@ -837,7 +887,7 @@ irrigation_time      = 5
 mining_shield_incr   = 0
 mining_time          = 0
 transform_result     = "Grassland"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -888,7 +938,7 @@ irrigation_time      = 0
 mining_shield_incr   = 1
 mining_time          = 5
 transform_result     = "Plains"
-transform_time       = 24
+transform_time       = 20
 placing_time         = 1
 pillage_time         = 1
 clean_pollution_time = 3
@@ -899,7 +949,7 @@ warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Desert"
 native_to            = "Land", "Small Land", "Fast Land", "Big Land", "Air", "Missile", "Helicopter"
-flags                = "NoBarbs", "CanHaveRiver", "Oil"
+flags                = "NoBarbs", "CanHaveRiver", "Oil", "Beach"
 property_cold        = 50
 color.r              = 188
 color.g              = 188
@@ -2150,7 +2200,8 @@ then it disappears.\
 ; Strategic resources are added to the map by lua script (chance 200/10000)
 
 [extra_aluminum]
-name           = _("Aluminum")
+name           = _("Aluminum P")
+rule_name      = "Aluminum"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2175,7 +2226,8 @@ in the tile (hills or tundra).\
 ")
 
 [extra_niter]
-name           = _("Niter")
+name           = _("Niter P")
+rule_name      = "Niter"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2201,7 +2253,8 @@ the tile (plains or desert).\
 ")
 
 [extra_rubber]
-name           = _("Rubber")
+name           = _("Rubber P")
+rule_name      = "Rubber"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2226,7 +2279,8 @@ the tile (jungle, swamp or forest).\
 ")
 
 [extra_uranium]
-name           = _("Uranium")
+name           = _("Uranium P")
+rule_name      = "Uranium"
 category       = "Natural"
 ;causes         = "Appear"
 ;rmcauses       = "Disappear"
@@ -2251,7 +2305,8 @@ the tile (mountains or glacier).\
 ")
 
 [extra_gold]
-name           = _("Gold")
+name           = _("Gold L")
+rule_name      = "Gold"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2264,7 +2319,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_iron]
-name           = _("Iron")
+name           = _("Iron P")
+rule_name      = "Iron"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2277,7 +2333,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_peat]
-name           = _("Peat")
+name           = _("Peat P")
+rule_name      = "Peat"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2290,7 +2347,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_buffalo]
-name           = _("Buffalo")
+name           = _("Buffalo F")
+rule_name      = "Buffalo"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2303,7 +2361,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_coal]
-name           = _("Coal")
+name           = _("Coal P")
+rule_name      = "Coal"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2316,7 +2375,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_corn]
-name           = _("Corn")
+name           = _("Corn F")
+rule_name      = "Corn"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2329,7 +2389,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_deer]
-name           = _("Deer")
+name           = _("Deer F")
+rule_name      = "Deer"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2342,7 +2403,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_game]
-name           = _("?animals:Game")
+name           = _("?animals:Game F")
+rule_name      = "Game"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2355,7 +2417,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_fruit]
-name           = _("Fruit")
+name           = _("Fruit F")
+rule_name      = "Fruit"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2368,7 +2431,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_gems]
-name           = _("Gems")
+name           = _("Gems L")
+rule_name      = "Gems"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2381,7 +2445,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_horses]
-name           = _("Horses")
+name           = _("Horses P")
+rule_name      = "Horses"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2394,7 +2459,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_icy_ivory]
-name           = _("Seals")
+name           = _("Seals F")
+rule_name      = "Seals"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2407,7 +2473,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_ivory]
-name           = _("Ivory")
+name           = _("Ivory P")
+rule_name      = "Ivory"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2420,7 +2487,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_wheat]
-name           = _("Wheat")
+name           = _("Wheat F")
+rule_name      = "Wheat"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2433,7 +2501,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_cattle]
-name           = _("Cattle")
+name           = _("Cattle F")
+rule_name      = "Cattle"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2446,7 +2515,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_cotton]
-name           = _("Cotton")
+name           = _("Cotton P")
+rule_name      = "Cotton"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2459,7 +2529,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_salt]
-name           = _("Salt")
+name           = _("Salt P")
+rule_name      = "Salt"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2472,7 +2543,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_marble]
-name           = _("Marble")
+name           = _("Marble P")
+rule_name      = "Marble"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2485,7 +2557,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_incense]
-name           = _("Incense")
+name           = _("Incense L")
+rule_name      = "Incense"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2498,7 +2571,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_oasis]
-name           = _("Oasis")
+name           = _("Oasis F")
+rule_name      = "Oasis"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2512,7 +2586,8 @@ rmact_gfx_alt  = "-"
 flags          = "AllowsFarmlandOnDesert"
 
 [extra_pheasant]
-name           = _("Pheasant")
+name           = _("Pheasant F")
+rule_name      = "Pheasant"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2525,7 +2600,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_tobacco]
-name           = _("Tobacco")
+name           = _("Tobacco L")
+rule_name      = "Tobacco"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2552,7 +2628,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_silk]
-name           = _("Silk")
+name           = _("Silk L")
+rule_name      = "Silk"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2565,7 +2642,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_sugar]
-name           = _("Sugar")
+name           = _("Sugar F")
+rule_name      = "Sugar"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2578,7 +2656,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_spice]
-name           = _("Spice")
+name           = _("Spice L")
+rule_name      = "Spice"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2591,7 +2670,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_tea]
-name           = _("Tea")
+name           = _("Tea L")
+rule_name      = "Tea"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2604,7 +2684,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_furs]
-name           = _("Furs")
+name           = _("Furs L")
+rule_name      = "Furs"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2617,7 +2698,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_whales]
-name           = _("Whales")
+name           = _("Whales F")
+rule_name      = "Whales"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2630,7 +2712,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_wine]
-name           = _("Wine")
+name           = _("Wine L")
+rule_name      = "Wine"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2643,7 +2726,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_wool]
-name           = _("Wool")
+name           = _("Wool P")
+rule_name      = "Wool"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2656,7 +2740,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_oil]
-name           = _("Oil")
+name           = _("Oil P")
+rule_name      = "Oil"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2669,7 +2754,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_fish]
-name           = _("Fish")
+name           = _("Fish F")
+rule_name      = "Fish"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""
@@ -2682,7 +2768,8 @@ rmact_gfx      = "None"
 rmact_gfx_alt  = "-"
 
 [extra_shellfish]
-name           = _("Shellfish")
+name           = _("Shellfish L")
+rule_name      = "Shellfish"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""

@@ -1341,7 +1341,7 @@ type    = "Make_Content_Mil"
 value   = 2
 reqs    =
     { "type", "name", "range", "present"
-;      "Gov", "Anarchy", "Player", FALSE
+      "Gov", "Anarchy", "Player", FALSE
       "Gov", "Tribal", "Player", FALSE
 ;      "Gov", "Despotism", "Player", FALSE
       "Gov", "Monarchy", "Player", FALSE
@@ -1359,7 +1359,7 @@ type    = "Make_Content_Mil"
 value   = 3
 reqs    =
     { "type", "name", "range", "present"
-      "Gov", "Anarchy", "Player", FALSE
+;      "Gov", "Anarchy", "Player", FALSE
 ;      "Gov", "Tribal", "Player", FALSE
       "Gov", "Despotism", "Player", FALSE
 ;      "Gov", "Monarchy", "Player", FALSE
@@ -1373,7 +1373,7 @@ reqs    =
 
 [effect_upkeep_free_units_anarchy]
 type    = "Unit_Upkeep_Free_Per_City"
-value   = 2
+value   = 3
 reqs    =
     { "type", "name", "range"
       "Gov", "Anarchy", "Player"

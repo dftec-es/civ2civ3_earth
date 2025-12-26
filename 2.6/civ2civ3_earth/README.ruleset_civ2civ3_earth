@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 12-2024)
+Civ2Civ3 Earth Ruleset for Freeciv v2.6 (Updated 12-2025)
 ============================================================
 
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth", and a world map scenario, adapted to be played with these rules.
@@ -113,7 +113,7 @@ OPTIONAL RULES:
 
 - When you get a new tech by conquest, or diplomatic mission, half of its cost is subtracted from your pool of research points. ('conquercost', 'diplbulbcost')
 
-- If the pool of research points ends negative, and the negative points are greater than half the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. ('techlossforgiveness', 'techlossrestore')
+- If the pool of research points ends negative, and the negative points are greater than the cost of the current research, then a random technology is lost, and only half of its value is returned to the research pool. ('techlossforgiveness', 'techlossrestore')
 
 - Random period of anarchy when changing government (1 to 3 turns). Revolutions become quicker the more times any player has changed to the target government. ('revolentype', 'revolen')
 
@@ -250,6 +250,7 @@ Bonus resources increase the tile output; and give +1 unit free of upkeep (F), o
 # = These strategic resources increase the tile output by 2 shields with the required technology.
 
 TIP: The optimal tiles to place your initial cities are those with MAX1 output equal or similar to 2/1/2, mainly those with bonus resources or rivers. Hills and Plains are always good places for cities, as well as Desert with river, or bonused Grassland. The best defense comes from cities placed on Hills with river.
+TIP: The most urgent tile improvements, in tiles without special resources, use to be: irrigation and road on Plains, road on Grassland, irrigation or mine on Hills, and transformation of some Forest (those not on rivers, with no trade) into Plains.
 
 
 GOVERNMENTS:
@@ -260,7 +261,7 @@ Output per tile * -1(if>2) -1(if>2) -1(if>2) -        -        -        -       
 Celebration Bonus (no -1)  (no -1)  (no -1) (+1Trade) -       (+1Trade)(+1Trade)(+1Trade) -        -
 
 Unit Upkeep       Shield   Shield   Coin     Coin     Coin(x2) Shield   Coin(x2) Coin(x2) Shield   Coin(x2)
-Free Units        2        3        2        3        2        1        1        2        3        3
+Free Units        3        3        2        3        2        1        1        2        3        3
 War Unhappiness   0        0        0       -1       -1       -1       -2       -1       -1        0
 Martial Law      +1        0       +1       +1        0        0        0        0       +2       +2
 

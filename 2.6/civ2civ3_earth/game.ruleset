@@ -25,11 +25,11 @@ description_file = "civ2civ3_earth/README.ruleset_civ2civ3_earth"
 name = _("Civ2Civ3 Earth ruleset")
 
 ; There`s no separate versioning in rulesets part of main freeciv distribution
-version = "2.6_2024_05b"
+version = "2.6_2025_12"
 
 ; Summary of the ruleset
 summary = _("\
-You are playing a custom version of civ2civ3 rules, from the same author:\
+You are playing an upgraded version of civ2civ3 rules, from the same author:\
 \n\n\
 It includes new features, tries to improve balance, and is more suitable \
 for playing on Earth maps, or similar scenarios.\
@@ -830,7 +830,7 @@ set =
       "trading_tech", "DISABLED"
       "conquercost", 50
       "diplbulbcost", 50
-      "techlossforgiveness", 50
+      "techlossforgiveness", 100
       "techlossrestore", 50
       "revolentype", "RANDQUICK"
       "revolen", 3

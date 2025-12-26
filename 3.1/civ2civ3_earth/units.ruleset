@@ -51,17 +51,27 @@ Aluminum: One more veteran level when produced in cities with Aluminum.\
     _("Uranium"), _("\
 Uranium: One more veteran level when produced in cities with Uranium.\
 ")
+    _("BeachLander"), _("\
+Beach Lander: Won't lose movement when disembarking, and can be \
+dropped 1 tile into native terrain whose movement cost is 1.\
+")
+    _("Paratroopers"), _("\
+Paratrooper: Can be paradropped from a friendly city or suitable base.\
+")
+    _("Raider"), _("\
+Raider: Can launch attack while being transported.\
+")
+    _("Wheeled"), _("\
+Wheeled: Cannot move to rough terrain (mountains, jungles and swamps) unless \
+there is a road or base on the tile. If they start the turn on rough \
+terrain or rivers, without friendly roads, they have -1 movement point.\
+")
+    _("AILove")
     _("Cant_Pillage")
     _("CanWork")
     _("Transform")
     _("AirAttacker"), _("Attack value halved when attacking AEGIS or Submarine.")
-    _("Submarine"), _("\Attack value halved when attacking Destroyer.")
-    _("Wheeled"), _("\
-Cannot move to rough terrain (mountains, jungles and swamps) unless \
-there is a road or base on the tile. If they start the turn on rough \
-terrain or rivers without friendly roads, they have -1 movement point.\
-")
-    _("Attacker")
+    _("Submarine"), _("Attack value halved when attacking Destroyer.")
     _("Unbribable")
     _("TradeRoute")
     _("HelpWonder")
@@ -74,21 +84,18 @@ The bombard rate gets scaled down by the damage of the bombarding unit.\
     _("Cities")
     _("AddToCity")
     _("Nuclear")
-    _("Paratroopers"), _("Can be paradropped from a friendly city or suitable base.")
-    _("Raider"), _("Can launch attack while being transported.")
-    _("BeachLander"), _("\
-Won't lose movement when disembarking, and can be dropped 1 tile into native terrain whose movement cost is 1.\
-")
     _("Cant_Fortify")
     _("OneAttack")
     _("AutoAtt"), _("Can auto attack units moving to an adjacent tile.")
     _("AirBomber"), _("Can bombard a tile to destroy all its infrastructure.")
-    _("HPFullSea"), _("\
+    _("HPAttSea"), _("\
 Cannot attack land tiles, and cannot attack once damaged, except to bombard.\
 ")
-    _("HPFull"), _("Cannot attack once damaged, except to bombard.")
-; HPFull and HPFullSea are cancelled by Wheeled flag, and they ignore Raider flag
-; Units with HPFull or HPFullSea, with more than 10 HP, require one of the following HP flags to know when they are undamaged
+    _("HPAtt"), _("\
+Cannot attack once damaged, except to bombard.\
+")
+; HPAtt and HPAttSea are cancelled by Wheeled flag, and they ignore Raider flag
+; Units with HPAtt or HPAttSea, with more than 10 HP, require one of the following HP flags to know when they are undamaged
     _("HP20")
     _("HP30")
   }
@@ -644,27 +651,29 @@ disembarks    = "Helicopter"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "OneAttack", "Capturer", "Bombarder", "Attacker", "Settlers"
+flags         = "OneAttack", "Capturer", "Bombarder", "AILove", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
+(Bombard Rate: 1)\
+"), _("\
 Archers fight with bows and arrows and have a good offensive value.\
 "), _("\
 Archers and catapults are the only ancient units with the ability to \
 bombard.\
 "), _("\
-Bombard actions will only damage (never kill) defenders, but damage \
-all defenders on a tile, and have no risk for the attacker.\
+Bombard actions represent skirmish tactics or suppressive fire, that \
+can damage all defenders on the target tile, up to the bombard rate, \
+but with no risk to the attackers, who remain on their own tile.\
 "), _("\
 When a unit bombards from a tile, a marker appears on that tile and \
 prevents other units to bombard from the same tile until the next turn. \
-Until that bombardment marker disappears at the end of the turn, if \
-there is no city nor base on the tile, it gets the same defense bonus \
-as if there was a Fort. This bonus is only useful for the player who \
-moves earlier in the turn order (only for the AI in the case of single \
-player games).\
+Until that bombardment marker disappears at the end of the turn, it \
+gets the same defense bonus as if there was a Fort. This bonus is only \
+useful for the player who moves earlier in the turn order (only for \
+the AI in the case of single player games).\
 ")
 
 [unit_legion]
@@ -699,13 +708,15 @@ disembarks    = "Helicopter"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "OneAttack", "Raider", "Capturer", "Attacker",
+flags         = "OneAttack", "Raider", "Capturer", "AILove",
                 "Iron", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
+(Iron-) (Raider)\
+"), _("\
 Legions are heavily armed and well disciplined infantry units with \
 an excellent offensive value.\
 "), _("\
@@ -749,6 +760,8 @@ bonuses       =
 flags         = "OneAttack", "Capturer", "Iron", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
+(Iron-) (x2 Att vs Horses)\
+"), _("\
 Equipped with long pikes, Pikemen replaces Phalanx as the preferred \
 city defender.\
 "), _("\
@@ -794,6 +807,8 @@ flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "HutTech",
                 "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
+(Bombard Rate: 2) (Niter-) (Raider) (/2 Att vs Horses)\
+"), _("\
 Musketeers are infantry equipped with early firearms and replace \
 Pikemen as the preferred city defender.\
 "), _("\
@@ -801,16 +816,9 @@ Attack value halved when attacking horses.\
 "), _("\
 From now on, every unit will have the ability to bombard.\
 "), _("\
-Bombard actions will only damage (never kill) defenders, but damage \
-all defenders on a tile, and have no risk for the attacker.\
-"), _("\
-When a unit bombards from a tile, a marker appears on that tile and \
-prevents other units to bombard from the same tile until the next turn. \
-Until that bombardment marker disappears at the end of the turn, if \
-there is no city nor base on the tile, it gets the same defense bonus \
-as if there was a Fort. This bonus is only useful for the player who \
-moves earlier in the turn order (only for the AI in the case of single \
-player games).\
+Bombard actions represent skirmish tactics or suppressive fire, that \
+can damage all defenders on the target tile, up to the bombard rate, \
+but with no risk to the attackers, who remain on their own tile.\
 ")
 
 [unit_riflemen]
@@ -847,6 +855,8 @@ flags         = "OneAttack", "Raider", "Capturer", "Bombarder",
                 "Niter", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
+(Bombard Rate: 2) (Niter-) (Raider)\
+"), _("\
 Riflemen are World War-era infantry, very good at defending your \
 cities.\
 ")
@@ -885,6 +895,8 @@ flags         = "OneAttack", "IgTer", "Capturer", "Bombarder",
                 "Niter", "Settlers"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
+(Bombard Rate: 2) (Niter-) (Ignore Terrain)\
+"), _("\
 Alpine Troops are highly mobile units as well as excellent defenders.\
 ")
 
@@ -923,6 +935,8 @@ flags         = "OneAttack", "Fanatic", "AddToCity", "Capturer",
                 "Bombarder", "Settlers"
 roles         = "DefendOk"
 helptext      = _("\
+(Bombard Rate: 2) (Pop Cost: 1)\
+"), _("\
 Fanatics are warriors extremely devoted to a higher cause.\
 "), _("\
 This unit does not cause unhappiness due to military activity.\
@@ -965,6 +979,8 @@ flags         = "OneAttack", "IgTer", "IgZOC", "Capturer", "Bombarder",
                 "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
+(Bombard Rate: 2) (Ignore Terrain)\
+"), _("\
 Partisans are guerilla fighters who are experts at using the terrain \
 to their advantage.\
 "), _("\
@@ -1010,6 +1026,8 @@ flags         = "OneAttack", "Raider", "BeachLander", "Capturer",
                 "Bombarder", "Rubber", "Settlers"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
 helptext      = _("\
+(Bombard Rate: 2) (Rubber+) (Raider) (Beach Lander Range: 1)\
+"), _("\
 Marines are infantry who are experts at marine warfare.\
 "), _("\
 Marines that have not expended any movement points may drop from any \
@@ -1048,10 +1066,18 @@ tp_defense    = "Alight"
 bombard_rate  = 2
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
+bonuses       =
+; Net effect is null, but it encourages AI to build them
+   { "flag", "type", "value", "quiet"
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
+   }
 flags         = "OneAttack", "Paratroopers", "Capturer", "Bombarder",
-                "Rubber", "Settlers"
+                "AILove", "Rubber", "Settlers"
 roles         = "DefendOk"
 helptext      = _("\
+(Bombard Rate: 2) (Rubber+) (Paratrooper Range: 10)\
+"), _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
 airbase, or airstrip, Paratroopers who have not expended any \
 movement points can paradrop directly to any tile in range, and be \
@@ -1092,6 +1118,8 @@ bombard_rate  = 3
 flags         = "Bombarder", "Wheeled", "Iron_Oil", "Rubber"
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-Oil-) (Rubber) (Wheeled)\
+"), _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
 of any land unit.\
 "),
@@ -1134,12 +1162,14 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Horse"
+flags         = "Capturer", "AILove", "Horse"
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
+(Horse+)\
+"), _("\
 Horsemen are mounted warriors and an early shock-troop that can \
 penetrate deep into enemy territory.\
 "), _("\
@@ -1178,12 +1208,14 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Wheeled", "Attacker", "Horse"
+flags         = "Wheeled", "AILove", "Horse"
 roles         = "AttackFastStartUnit"
 helptext      = _("\
+(Horse+) (Wheeled)\
+"), _("\
 Chariots are horse-pulled war wagons, stronger but more expensive \
 than horsemen.\
 "),
@@ -1225,12 +1257,14 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Ivory"
+flags         = "Capturer", "AILove", "Ivory"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
+(Ivory+)\
+"), _("\
 Elephants are towering animals trained for war that are often used as \
 powerful shock troops.\
 ")
@@ -1265,12 +1299,14 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Iron", "Horse"
+flags         = "Capturer", "AILove", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
+(Iron-) (Horse+)\
+"), _("\
 Crusaders are highly disciplined mounted warriors driven by a higher \
 cause.\
 "), _("\
@@ -1307,13 +1343,15 @@ tp_defense    = "Alight"
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Attacker", "Iron", "Horse"
+flags         = "Capturer", "AILove", "Iron", "Horse"
 roles         = "DefendOk", "AttackFastStartUnit", "HutTech", "BarbarianTech",
                 "BarbarianBuildTech", "Hunter"
 helptext      = _("\
+(Iron-) (Horse+)\
+"), _("\
 Knights are mounted and heavily armored warriors.\
 ")
 
@@ -1348,12 +1386,14 @@ bombard_rate  = 2
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Bombarder", "Attacker", "Horse", "Niter"
+flags         = "Capturer", "Bombarder", "AILove", "Horse", "Niter"
 roles         = "DefendOk", "AttackFastStartUnit", "BarbarianTech", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
+(Bombard Rate: 2) (Niter-) (Horse+)\
+"), _("\
 Dragoons are mounted warriors carrying early firearms.\
 ")
 
@@ -1388,12 +1428,14 @@ bombard_rate  = 2
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Capturer", "Bombarder", "Attacker", "Horse", "Niter"
+flags         = "Capturer", "Bombarder", "AILove", "Horse", "Niter"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
+(Bombard Rate: 2) (Niter-) (Horse+)\
+"), _("\
 Cavalry are mounted and highly trained soldiers.\
 ")
 
@@ -1428,12 +1470,14 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Attacker", "Iron_Oil", "Uranium"
+flags         = "Bombarder", "Wheeled", "AILove", "Iron_Oil", "Uranium"
 roles         = "DefendOk", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-Oil-) (Uranium+) (Wheeled)\
+"), _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
 more damage than any mounted unit.\
 "),
@@ -1477,12 +1521,14 @@ bombard_rate  = 2
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Attacker"
+flags         = "Bombarder", "Wheeled", "AILove"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
+(Bombard Rate: 2) (Wheeled)\
+"), _("\
 Catapults are large rock-throwing machines of war. They are very \
 strong attackers but equally weak defenders and will need an escort \
 to be effective.\
@@ -1498,16 +1544,9 @@ a city without City Walls.\
 Catapults and archers are the only ancient units with the ability to \
 bombard.\
 "), _("\
-Bombard actions will only damage (never kill) defenders, but damage \
-all defenders on a tile, and have no risk for the attacker.\
-"), _("\
-When a unit bombards from a tile, a marker appears on that tile and \
-prevents other units to bombard from the same tile until the next turn. \
-Until that bombardment marker disappears at the end of the turn, if \
-there is no city nor base on the tile, it gets the same defense bonus \
-as if there was a Fort. This bonus is only useful for the player who \
-moves earlier in the turn order (only for the AI in the case of single \
-player games).\
+Bombard actions represent skirmish tactics or suppressive fire, that \
+can damage all defenders on the target tile, up to the bombard rate, \
+but with no risk to the attackers, who remain on their own tile.\
 ")
 
 [unit_cannon]
@@ -1541,12 +1580,14 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "Bombarder", "Wheeled", "Attacker", "Iron", "Niter"
+flags         = "Bombarder", "Wheeled", "AILove", "Iron", "Niter"
 roles         = "AttackStrongStartUnit", "BarbarianBuildTech"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-) (Niter-) (Wheeled)\
+"), _("\
 Cannons are large firearms that can fire heavy projectiles over long \
 distances. As with the catapults they replace, they are very strong \
 attackers but equally weak defenders and will need an escort to be \
@@ -1592,13 +1633,15 @@ bombard_rate  = 3
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "CityBuster", "Bombarder", "Wheeled", "Attacker",
+flags         = "CityBuster", "Bombarder", "Wheeled", "AILove",
                 "Iron"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-) (Wheeled) (x2 Att vs City)\
+"), _("\
 The artillery is an upgraded cannon. As with its predecessors, it is a \
 very strong attacker but equally weak defender and will need an escort \
 to be effective, and has limited mobility.\
@@ -1645,13 +1688,15 @@ bombard_rate  = 4
 bonuses       =
 ; Net effect is null, but it encourages AI to build them
    { "flag", "type", "value", "quiet"
-     "Attacker", "DefenseMultiplier", 3, TRUE
-     "Attacker", "DefenseDivider", 3, TRUE
+     "AILove", "DefenseMultiplier", 3, TRUE
+     "AILove", "DefenseDivider", 3, TRUE
    }
-flags         = "CityBuster", "Bombarder", "Wheeled", "Attacker",
+flags         = "CityBuster", "Bombarder", "Wheeled", "AILove",
                 "Iron_Oil", "Rubber"
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
+(Bombard Rate: 4) (Iron-Oil-) (Rubber+) (Wheeled) (x2 Att vs City)\
+"), _("\
 Howitzers are upgraded artillery with improved defensive as well as \
 offensive capabilities. However, they still have the limited mobility \
 of their predecessors.\
@@ -1696,10 +1741,12 @@ city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
-flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
+flags         = "AirAttacker", "Bombarder", "HPAtt", "HP20", "HasNoZOC",
                 "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-Oil-) (Aluminum+) (Air Fuel: 2) (HP Att)\
+"), _("\
 Fighters are your first airborne units. They can move anywhere and \
 attack any unit.\
 "), _("\
@@ -1746,10 +1793,12 @@ tp_defense    = "Alight"
 bombard_rate  = 5
 ;targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
-                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
+                "HPAtt", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
                 "NeverProtects"
 roles         = ""
 helptext      = _("\
+(Bombard Rate: 5) (Iron-Oil-) (Aluminum+) (Air Fuel: 3) (HP Att) (Field)\
+"), _("\
 Bombers are specialized airborne units that may only attack ground \
 targets, not other airborne units.\
 "),
@@ -1789,10 +1838,12 @@ tp_defense    = "Alight"
 bombard_rate  = 4
 cargo         = "Land"
 targets       = "Sub", "Helicopter"
-flags         = "AirAttacker", "Bombarder", "HPFull", "HP30",
+flags         = "AirAttacker", "Bombarder", "HPAtt", "HP30",
                 "HasNoZOC", "Iron_Oil", "Rubber", "NeverProtects"
 roles         = ""
 helptext      = _("\
+(Bombard Rate: 4) (Cargo: 1) (Iron-Oil-) (Rubber+) (HP Att)\
+"), _("\
 Helicopters can transport one military infantry unit.\
 "), _("\
 Unlike other aircraft, Helicopters are not required to return to a city, \
@@ -1829,10 +1880,12 @@ city_slots    = 1
 tp_defense    = "Alight"
 bombard_rate  = 3
 targets       = "Sub", "Air", "Helicopter"
-flags         = "AirAttacker", "Bombarder", "HPFull", "HP20", "HasNoZOC",
+flags         = "AirAttacker", "Bombarder", "HPAtt", "HP20", "HasNoZOC",
                 "Iron_Oil", "Aluminum", "AutoAtt", "NeverProtects"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-Oil-) (Aluminum+) (Air Fuel: 2) (HP Att)\
+"), _("\
 An improved Fighter, with improved attack and a higher movement radius.\
 "), _("\
 This unit cannot attack once damaged, except to bombard. During enemy \
@@ -1874,10 +1927,12 @@ tp_defense    = "Alight"
 bombard_rate  = 5
 ;targets       = "Sub"
 flags         = "FieldUnit", "AirAttacker", "Bombarder", "AirBomber",
-                "HPFull", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
+                "HPAtt", "HP30", "HasNoZOC", "Iron_Oil", "Aluminum",
                 "NeverProtects"
 roles         = ""
 helptext      = _("\
+(Bombard Rate: 5) (Iron-Oil-) (Aluminum+) (Air Fuel: 3) (HP Att) (Field)\
+"), _("\
 An improved Bomber, with improved attack and a higher movement radius.\
 "),
 ; /* xgettext:no-c-format */
@@ -1919,6 +1974,8 @@ cargo         = "Land", "Small Land", "Big Land", "Fast Land"
 flags         = "CoastStrict", "BadCityDefender", "HasNoZOC", "Bombarder"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
+(Bombard Rate: 1) (Cargo: 2) (River) (Ocean Fuel: 0)\
+"), _("\
 The Galley is your first boat unit. It can act as a transport ship, \
 can travel on rivers, and has rudimentary offensive capabilities.\
 "), _("\
@@ -1966,6 +2023,8 @@ cargo         = "Land", "Small Land", "Big Land", "Fast Land"
 flags         = "Coast", "BadCityDefender", "HasNoZOC", "NonMil"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
+(Cargo: 3) (River) (Ocean Fuel: 2)\
+"), _("\
 Sailboats cannot attack other ships, though they may still defend \
 themself when attacked.\
 "), _("\
@@ -2007,6 +2066,8 @@ flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC",
                 "Capturable", "Bombarder"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
+(Bombard Rate: 2) (Cargo: 3) (Capturable)\
+"), _("\
 The Caravel is a transport ship that can enter any ocean tile.\
 "), _("\
 This unit can be captured by an enemy Frigate.\
@@ -2045,6 +2106,8 @@ flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC",
                 "Capturable", "Bombarder", "Iron", "Niter"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
+(Bombard Rate: 3) (Cargo: 4) (Iron-) (Niter-) (Capturable)\
+"), _("\
 The Galleon is a transport ship that can enter any ocean tile.\
 "), _("\
 This unit can be captured by an enemy Frigate.\
@@ -2083,6 +2146,8 @@ flags         = "BadCityDefender", "Capturer", "Bombarder",
                 "Iron", "Niter"
 roles         = "Hunter"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-) (Niter-) (Capturer)\
+"), _("\
 The Frigate is a specialized ship with a strong offensive value. It \
 can attack units on land, but it cannot transport units.\
 "), _("\
@@ -2124,6 +2189,8 @@ flags         = "BadCityDefender", "Bombarder",
                 "Iron", "Niter"
 roles         = "Hunter"
 helptext      = _("\
+(Bombard Rate: 3) (Iron-) (Niter-)\
+"), _("\
 The Ironclad is an armored ship, more sturdy than the Frigate.\
 ")
 
@@ -2163,6 +2230,8 @@ bonuses       =
 flags         = "BadCityDefender", "Bombarder", "Iron"
 roles         = ""
 helptext      = _("\
+(Bombard Rate: 4) (Iron-) (x2 Def vs Sub)\
+"), _("\
 An improved Ironclad, with better move rate and vision. Anti-submarine \
 weapons double its defense against Submarines.\
 "), _("\
@@ -2202,6 +2271,8 @@ targets       = "Sub"
 flags         = "BadCityDefender", "Bombarder", "Iron"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
+(Bombard Rate: 4) (Iron-)\
+"), _("\
 The Cruiser is a strong offensive boat unit.\
 ")
 
@@ -2241,6 +2312,8 @@ bonuses       =
 flags         = "BadCityDefender", "Bombarder", "Iron_Oil", "Aluminum"
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
+(Bombard Rate: 4) (Iron-Oil-) (Aluminum+) (x2 Def vs Air)\
+"), _("\
 The AEGIS Cruiser is equipped with an advanced defensive missile \
 system, giving it double defense against all air attacks.\
 ")
@@ -2277,6 +2350,8 @@ targets       = "Sub"
 flags         = "BadCityDefender", "Bombarder", "Iron_Oil"
 roles         = "DefendOk"
 helptext      = _("\
+(Bombard Rate: 4) (Iron-Oil-)\
+"), _("\
 The Battleship is the supreme naval unit with excellent offensive and \
 defensive values.\
 ")
@@ -2315,11 +2390,13 @@ bonuses       =
    { "flag", "type", "value"
      "AirAttacker", "DefenseMultiplier", 1
    }
-flags         = "BadCityDefender", "Submarine", "Bombarder", "HPFullSea",
+flags         = "BadCityDefender", "Submarine", "Bombarder", "HPAttSea",
                 "HP20", "HasNoZOC", "Iron_Oil", "Uranium", "AutoAtt",
                 "NeverProtects"
-roles         = "Hunter", "DefendOk"
+roles         = "Hunter"
 helptext      = _("\
+(Bombard Rate: 2) (Cargo: 1) (Iron-Oil-) (Uranium+) (x2 Def vs Air) (HP Att)\
+"), _("\
 Traveling under the surface of the ocean, Submarines have a very high \
 strategic value, but a weak defense if caught off guard.\
 "), _("\
@@ -2362,6 +2439,8 @@ cargo         = "Land", "Air", "Missile", "Helicopter"
 flags         = "BadCityDefender", "HasNoZOC", "Iron_Oil", "Aluminum"
 roles         = "Ferryboat", "DefendGood"
 helptext      = _("\
+(Cargo: 8) (Iron-Oil-) (Aluminum+)\
+"), _("\
 The Carrier is a mobile airport.\
 "), _("\
 It can transport aircraft and military infantry units.\
@@ -2408,6 +2487,8 @@ veteran_power_fact        = 100, 125, 150, 175, 200
 veteran_move_bonus        = 0, 0, 0, 0, 0
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
+(Cargo: 8) (Iron-) (River)\
+"), _("\
 The Transport cannot attack on its own but may defend itself when \
 under attack.\
 "), _("\
@@ -2450,6 +2531,8 @@ flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC",
                 "Aluminum", "NeverProtects"
 roles         = ""
 helptext      = _("\
+(Iron-) (x2 Att vs City)\
+"), _("\
 The Cruise Missile is a long-distance missile that can strike deep \
 into enemy territory, can attack other air units, and has double \
 firepower against cities.\
@@ -2496,6 +2579,8 @@ veteran_power_fact = 100
 veteran_move_bonus = 0
 roles         = ""
 helptext      = _("\
+(Nuclear) (Field)\
+"), _("\
 You can build Nuclear units when you have the required advance, and \
 the Manhattan Project wonder has been built by any player. \
 However, without further technology they cannot move on their own.\
@@ -2838,6 +2923,8 @@ flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify",
                 "Cant_Pillage"
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
+(Ignore Terrain)\
+"), _("\
 Explorers are brave individuals that are very useful for mapping \
 unknown territory.\
 "), _("\
@@ -2885,6 +2972,8 @@ tp_defense    = "Alight"
 flags         = "NonMil", "HasNoZOC", "Cant_Pillage", "Iron_Oil"
 roles         = ""
 helptext      = _("\
+(Iron-Oil-)\
+"), _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \
 advanced radar that can determine the location of enemy units over a \
 wide area.\

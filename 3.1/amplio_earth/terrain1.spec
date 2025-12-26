@@ -38,7 +38,7 @@ tiles = { "row", "column", "tag"
 ; terrain
  0,  0, "t.l0.desert1"
 
- 1,  0, "t.l0.plains1"
+ 1,  0, "t.l0.plains1", "t.l0.plantation1"
 
  2,  0, "t.l0.forest1"
 
