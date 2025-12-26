@@ -2369,6 +2369,7 @@ rmact_gfx_alt  = "-"
 
 [extra_game]
 name           = _("?animals:Game F")
+rule_name      = "Game"
 category       = "Resource"
 causes         = "Resource"
 ;rmcauses       = ""

@@ -29,7 +29,8 @@ format_version=10
 ;
 ; */ <-- avoid gettext warnings
 
-; AI: "Away" "Handicapped" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
+; AI: "Away" "Handicapped" "Novice" "Easy" "Normal" "Hard" "Cheating"
+; WARNING Ruleset won't load if it references "Experimental" ai, unless freeciv was compiled with DEBUG enabled
 
 [effect_unit_slots]
 type    = "Unit_Slots"
@@ -46,7 +47,7 @@ reqs    =
 type    = "Unit_Slots"
 value   = 2
 
-; Higher chance of AI wars (vs human)
+; Higher chance of AI wars (vs human, or away ai)
 [effect_human_love]
 type    = "Gain_AI_Love"
 value   = -10
@@ -58,10 +59,9 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
-; Lower chance of AI wars (vs Hard AI)
+; Lower chance of AI wars (vs hard ai)
 [effect_ai_hard_love]
 type    = "Gain_AI_Love"
 value   = 20
@@ -156,7 +156,7 @@ reqs    =
       "AI", "Hard", "Player"
     }
 
-; Lower chance of AI wars (vs Cheating AI)
+; Lower chance of AI wars (vs cheating ai)
 [effect_ai_cheat_love]
 type    = "Gain_AI_Love"
 value   = 40
@@ -334,7 +334,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; -1 - 1 = -2 HP (for units with 20 HP)
@@ -355,7 +354,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; -1 - 2 = -3 HP (for units with 30 HP)
@@ -376,7 +374,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 [effect_deep_ocean_hp_loss]
@@ -393,7 +390,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; Defense bonus against sea units (no submarines) on deep ocean
@@ -467,7 +463,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 [effect_storm_damage_land]
@@ -485,7 +480,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 [effect_storm_vision]

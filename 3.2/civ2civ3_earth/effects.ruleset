@@ -48,7 +48,8 @@ ai_valued_as = "Veteran_Build"
 ;
 ; */ <-- avoid gettext warnings
 
-; AI: "Away" "Restricted" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
+; AI: "Away" "Restricted" "Novice" "Easy" "Normal" "Hard" "Cheating"
+; WARNING Ruleset won't load if it references "Experimental" ai, unless freeciv was compiled with DEBUG enabled
 
 ; Higher chance of AI wars (vs human, or away ai)
 [effect_human_love]
@@ -62,7 +63,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; Lower chance of AI wars (vs hard ai)
@@ -338,7 +338,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; -1 - 1 = -2 HP (for units with 20 HP)
@@ -359,7 +358,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; -1 - 2 = -3 HP (for units with 30 HP)
@@ -380,7 +378,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 [effect_deep_ocean_hp_loss]
@@ -397,7 +394,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 ; Defense bonus against sea units (no submarines) on deep ocean
@@ -504,7 +500,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 [effect_storm_damage_land]
@@ -522,7 +517,6 @@ reqs    =
       "AI", "Normal", "Player", FALSE
       "AI", "Hard", "Player", FALSE
       "AI", "Cheating", "Player", FALSE
-      "AI", "Experimental", "Player", FALSE
     }
 
 [effect_storm_vision]

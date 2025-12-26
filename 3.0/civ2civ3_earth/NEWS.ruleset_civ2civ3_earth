@@ -11,6 +11,8 @@ Known issues:
 * The hexagonal tileset looks better when the map grid is enabled (in the View menu).
 
 Fixed bugs:
+* Removed the references to "Experimental" AI, that seems to prevent the ruleset from loading unless freeciv is compiled with debug enabled.
+  I didn't notice it until now because I always test it with debug enabled. But I guess most players have been unable to load this ruleset since v3.0.
 - Strategic resources no longer appear on the same tile as other special resources.
 * The AI used to get stuck around tiles that cause damage. These effects are now disabled for the AI (hit point loss of air units in the open, galleys in deep ocean, and units near storms). Naval mines have also been changed to reduce movement points instead of hit points.
 
