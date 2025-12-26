@@ -1555,6 +1555,8 @@ target_reqs   =
       "TerrainClass", "Oceanic",      "Tile",  TRUE
     }
 
+; NEW: disabled against cities
+; (otherwise, the option to Collect Ransom appears every time a unit attacks any city)
 [actionenabler_ransom_att_non_transported]
 action        = "Collect Ransom"
 actor_reqs    =
@@ -1564,6 +1566,10 @@ actor_reqs    =
       "UnitClassFlag", "Missile",      "Local", FALSE
       "MinMoveFrags",  "1",            "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
+    }
+target_reqs   =
+    { "type",          "name",         "range", "present"
+      "CityTile",      "Center",       "Tile",  FALSE
     }
 
 [actionenabler_ransom_att_transported]
@@ -1576,6 +1582,10 @@ actor_reqs    =
       "UnitClassFlag", "Missile",      "Local", FALSE
       "MinMoveFrags",  "1",            "Local", TRUE
       "DiplRel",       "War",          "Local", TRUE
+    }
+target_reqs   =
+    { "type",          "name",         "range", "present"
+      "CityTile",      "Center",       "Tile",  FALSE
     }
 
 [actionenabler_explode_missile]

@@ -139,7 +139,8 @@ Naval units:
 Combat rules are now similar for both naval and land units (ZOC, terrain bonuses, fortresses/mines, movement on rivers).
 * Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against naval units (except against Submarines).
 * New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
-* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys.
+* Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps).
+  Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys.
 * All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
 - Cargo boats don't cause unhappiness due to military activity, including Galley, Sailboat, Caravel, Galleon, Transport, Carrier and Submarine.
 - Enabled ZOC for naval units on Deep Ocean. Cargo boats and Submarines do not impose ZOC to enemy units. Air units can be used to ignore enemy ZOCs.

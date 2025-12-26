@@ -849,14 +849,10 @@ helptext = _("\
 Allows Settlers, Migrants, Workers and Engineers to upgrade mines to \
 oil wells on Desert, Tundra and Glacier tiles, for an extra production \
 point.\
-"),
-; /* xgettext:no-c-format */
-_("\
+"), _("\
 Allows cities to use Oil resource as an alternative to Iron in order to \
 build certain veteran units. Units that require Oil are built with one \
-less veteran level, unless there are Oil or Iron resources in the city; \
-if there is both Oil and Iron in the city, the cost to build these units \
-is reduced by 10%.\
+less veteran level, unless there are Oil or Iron resources in the city.\
 ")
 ;cost     = 400
 

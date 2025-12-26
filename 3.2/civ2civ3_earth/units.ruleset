@@ -675,9 +675,9 @@ Archers fight with bows and arrows and have a good offensive value.\
 Archers and catapults are the only ancient units with the ability to \
 bombard.\
 "), _("\
-Bombard actions represent skirmish tactics or suppressive fire, with \
-the possibility of damaging (up to the bombard rate) all defenders on a \
-tile, but without risk to the attackers, who don't move from their tile.\
+Bombard actions represent skirmish tactics or suppressive fire, that \
+can damage all defenders on the target tile, up to the bombard rate, \
+but with no risk to the attackers, who remain on their own tile.\
 "), _("\
 When a unit bombards from a tile, a marker appears on that tile and \
 prevents other units to bombard from the same tile until the next turn. \
@@ -836,9 +836,9 @@ Attack value halved when attacking horses.\
 "), _("\
 From now on, every unit will have the ability to bombard.\
 "), _("\
-Bombard actions represent skirmish tactics or suppressive fire, with \
-the possibility of damaging (up to the bombard rate) all defenders on a \
-tile, but without risk to the attackers, who don't move from their tile.\
+Bombard actions represent skirmish tactics or suppressive fire, that \
+can damage all defenders on the target tile, up to the bombard rate, \
+but with no risk to the attackers, who remain on their own tile.\
 ")
 
 [unit_riflemen]
@@ -1612,9 +1612,9 @@ a city without City Walls.\
 Catapults and archers are the only ancient units with the ability to \
 bombard.\
 "), _("\
-Bombard actions represent skirmish tactics or suppressive fire, with \
-the possibility of damaging (up to the bombard rate) all defenders on a \
-tile, but without risk to the attackers, who don't move from their tile.\
+Bombard actions represent skirmish tactics or suppressive fire, that \
+can damage all defenders on the target tile, up to the bombard rate, \
+but with no risk to the attackers, who remain on their own tile.\
 ")
 
 [unit_cannon]
@@ -1837,10 +1837,6 @@ turns, it can automatically attack or bombard an incoming enemy.\
 _("\
 As with other aircraft: they lose 10% of their hit points for every \
 turn not spent in a city, airstrip, or airbase, or on a Carrier.\
-"), _("\
-TIP: When a fighter ends its turn in the open, you can use the Goto \
-action to automatically move it to a city or airbase, in order to prevent \
-it from auto-attacking and running out of fuel.\
 ")
 
 [unit_bomber]

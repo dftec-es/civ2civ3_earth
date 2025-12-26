@@ -5,8 +5,6 @@ LATEST CHANGES:
 *: Changes compared to previous civ2civ3_earth v2024_05 (available with Modpack Installer).
 
 Known issues:
-* When you order a unit to move using goto (drag and drop with the mouse), on the following turns the unit will automatically move until it reaches its destination. In the default concurrent mode, this auto-move used to be resolved before the enemies could attack the unit, but now enemy movements and attacks are resolved before the auto-move, due to hardcoded changes in 3.2.
- I liked how it used to work, because it reduced micromanagement when moving your units. It allowed a double movement before enemy units could attack, and it wasn't that important to check where each unit ended each turn. But players who moved last in the turn had an unfair advantage over players who moved earlier (such as AI).
 - The GTK client (since v3) doesn't display bombardment animations correctly, and units are animated without the alpha channel (in my tests, even when playing with default rulesets). I suggest using the QT client.
 - The server settings suggested by the ruleset are not loaded by default. Due to changes in Freeciv 3.0, user settings (from freeciv-client-rc) and ruleset settings (from game.ruleset) are mixed in a kind of unpredictable way. I suggest using a clean version of freeciv-client-rc-3.x before starting a new game.
 - This modpack includes 2 custom tilesets, one for square and one for hexagonal topology, but they are not loaded by default. The player has to select them manually from the client local options -> Graphics -> Tileset (or by editing the values starting with "default_tileset_" in the file freeciv-client-rc).
@@ -48,7 +46,7 @@ Introduced a new resource system that gives players a reason to fight for strate
   - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in the receiving city.
 - Some units get additional veteran levels when certain resources are available in the city:
   - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
-  - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city, or 10% reduction in building cost if both are available in the city.
+  * Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
 - Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program no longer requires Aluminum.
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
 
@@ -152,9 +150,10 @@ Naval units:
 Combat rules are now similar for both naval and land units (ZOC, terrain bonuses, fortresses/mines, movement on rivers).
 - Defense bonus of +50% in Deep Ocean (or shallow Ocean adjacent to a Naval Mine) against naval units (except against Submarines).
 - Naval units adjacent to Naval Mines have a defense bonus only when not in enemy waters (within the borders of a nation you are at war with), and have a movement penalty only when not in friendly waters (within the borders of a nation you are not at war with).
-- Naval units lose all their movement points to move to enemy land tiles (via river/canal).
+- Naval units lose all their movement points to move to enemy land tiles (via river/canal), if 'restrictinfra' setting is enabled.
 - New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
-- Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys.
+- Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps).
+  Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys.
 - Galleys, Sailboats and Transports can navigate rivers, and their unit class was renamed to Riverboat.
 - All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
 - Cargo boats don't cause unhappiness due to military activity, including Galley, Sailboat, Caravel, Galleon, Transport, Carrier and Submarine.
@@ -172,3 +171,48 @@ Wonders:
 - Internet bonus simplified to +2 Science in your cities with a Research Lab (the result after summing the +200% from all science buildings can be up to +6 bulbs per city).
 - SETI Program, available with Radio, allows a new way to achieve victory for every nation: when both the score and culture of a player are more than 4 times those of the 2nd best player.
 
+
+GAME TIPS:
+----------
+
+- There is a penalty of -1 when the output of a tile is greater than 2. This penalty disappears when the city is celebrating, when you research the tech Trade, or when you change your government to anything other than Despotism/Tribalism.
+ Try to research Trade, or change your government to Monarchy as soon as possible.
+
+- Try to place your initial city near a tile (within city radius) that can produce 4 Food (3 with the -1 output penalty), or at least near some tiles with output close to 2/2/2 (Food/Production/Trade, taking into account Irrigation/Mine/Road). The central city tile gives +1 Production but has no minimum output.
+ A good city in the intermediate stages of the game (no output penalty, but no Farmlands either) will have a tile with 3 Food (like Grassland) for each tile with 1 Food (like Forests), for an average of at least 2 Food per worked tile.
+
+- At the beginning, it is not possible to transform the terrain, except Plains <-> Forest, Grassland <-> Forest, and Jungle -> Swamp. But most terrains can be improved by mines/lumber (including Forest, Jungle and Tundra) or irrigation (including Swamps).
+ Try to build at least one worker per city, and use them first to improve the tiles with special resources or rivers (taking into account that it is useless to increase the output to 3, until you get rid of the output penalty).
+ The most urgent tile improvements, in tiles without special resources, use to be: irrigation and road on Plains, road on Grassland, irrigation or mine on Hills, and transformation of some Forest (those not on rivers, with no trade) into Plains.
+
+- Cities with good shield production can build some unit or building, then a Settler, and then some other unit or building before the next Settler, without losing expansion effectiveness (because the food needed to grow 1 population remains constant, up to city size 4, or up to city size 6 with Granary).
+ You can see a Granary as a way to transform shields into food. Try to build it in cities that have problems to grow. And try to build it before cities grow larger than size 4 (when they lose the free Granary effect).
+ On the other hand, Migrants help to transform some food into shields (cost 1 pop, but less shields). Build them, instead of workers, in cities that grow too much (working tiles not fully improved). When you no longer need them, they can be added to the population of other cities to grow up to size 8.
+
+- Try to minimize your upkeep costs by sending some unit to each newly created city, and setting it as the home city (taking advantage of the default 2 free units per city; or up to 3 for other governments).
+ Remember that some units as Settlers and Migrants pay food as upkeep, but no shields/coins; while other units as Workers and Diplomats pay shields/coins, but no food. This way, a city with 1 free unit (food, shield and coin) can support 1 Worker (1 free shield/coin) and at the same time 1 Migrant (1 free food).
+ The free food for unit upkeep increases by 1 for each 2 population in the city (rounded up). It also increases when a city trades a food resource from other city.
+
+- Try to build defensive buildings (Barracks and Walls) in your frontier cities, and to build at least one military unit per city, to protect it, and to take advantage of martial law (if needed).
+ If at war, try to research as soon as possible the best defensive units: Phalanx, Pikemen, Musketeers, Riflemen.
+
+- Some units are built with one extra veteran level when a certain resource is present in the city (or a city linked by trade route). Take these strategic resources into account when you decide the units to research, the trade routes to establish, and the cities to conquer.
+ A city with Iron, Horses, Ivory, or Niter can be powerful in the first stages of the game.
+
+- Try to send diplomats or explorers to establish embassies with the other nations, because it will reduce the researching costs of the techs that they already know. Embassies also allow you to keep contact with far nations to be able to renew cease fire agreements.
+ When there are many players (more than 20), sending diplomats to steal techs is usually better than establishing embassies.
+
+- Map making tech allows coastal cities to build Galleys to explore the seas.
+ Remember that Galleys can navigate rivers, they lose 1 hit point when they end on deep ocean tiles, and they cannot enter deep ocean tiles completely surrounded by deep ocean.
+ Remember that ground units spend the entire movement to embark or disembark, and the target cargo boat also loses its remaining move points if boarded outside cities.
+
+- Seafaring tech allows you to build Harbours in your coastal cities, which will increase the food output of ocean tiles.
+ Remember that deep ocean tiles also need Supermarkets to increase their food output.
+
+- Construction tech allows you to build Aqueducts that are needed in a city to grow larger than size 8. Cities adjacent to rivers or lakes can build cheaper Aqueducts. Cities will need a Hospital or Sewer System to grow larger than size 12.
+ Construction also allows all your infantry units to build fortresses, important to protect the units that end the turn outside cities.
+ Remember that a stack of units outside a city is completely destroyed when the first defender is killed, but it gets a bonus of +25% to defense as long as there is another unit in the same tile.
+
+- In the intermediate stages of the game, the best governments use to be either Republic/Democracy or Fundamentalism.
+ Republic/Democracy: irrigations get a bonus to trade, try to build them better than mines (even on Hills). Once your cities have Marketplaces and Banks, increase your luxury rates until most of your cities start celebrations. Once celebrating, the extra trade will allow you to reduce the luxury rates (hopefully to 20% or so) while keeping the celebrations.
+ Fundamentalism: try to build as many buildings and wonders as possible with bonuses to content citizens (because they produce extra gold). Use the gold to buy Libraries and Universities to compensate for the lower research rates.

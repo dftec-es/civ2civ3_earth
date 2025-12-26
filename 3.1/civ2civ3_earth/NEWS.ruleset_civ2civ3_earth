@@ -52,7 +52,7 @@ Introduced a new resource system that gives players a reason to fight for strate
   - Production resources (Oil, Wool, Cotton, Coal, Marble, Ivory, Iron, Salt, Horse, Peat; Niter, Rubber, Aluminum, Uranium): +1 Production in the receiving city.
 - Some units get additional veteran levels when certain resources are available in the city:
   - Strategic resources (Horses, Ivory; Rubber, Aluminum, Uranium): +1 veteran level for certain units built in the city (or in a city linked by trade route).
-  - Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city, or 10% reduction in building cost if both are available in the city.
+  * Key resources (Iron, Niter, Oil). For units that require Iron, Niter: -1 veteran level for each one of these resources that is not available in the city. For units that require Iron/Oil: -1 veteran level if none of these resources are available in the city.
 - Power Plants require Oil resource available in the city. Nuclear Plants and Manhattan Project require Uranium. Apollo Program no longer requires Aluminum.
 - Added Natural Wonders, that produce +2 Luxury points in the tile, and increase a bit the risk of natural disasters in a city. Marked with a text label and a red flag icon on the map. They are destroyed when the underlying terrain is transformed.
 
@@ -158,7 +158,8 @@ Combat rules are now similar for both naval and land units (ZOC, terrain bonuses
 - Naval units adjacent to Naval Mines have a defense bonus only when not in enemy waters (within the borders of a nation you are at war with), and have a movement penalty only when not in friendly waters (within the borders of a nation you are not at war with).
 - Naval units lose all their movement points to move to enemy land tiles (via river/canal).
 - New unit Sailboat (available with Astronomy), which cannot attack, so it can move inside the borders of peaceful nations. It can enter deep oceans, but cannot end far from shore (on deep ocean surrounded by deep oceans) more than 1 consecutive turn.
-- Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps). Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys.
+- Trireme was renamed to Galley, which can now enter 1 tile into deep ocean, but cannot enter a deep ocean tile completely surrounded by deep oceans (or by mountains or glaciers, to prevent early discovery of America on some world maps).
+  Galleys lose 1 hit point every turn ended on deep ocean (-10% HP loss as air units). This rule tries to prevent the use of stationary Galleys on coastal ocean to block the movement of enemy Galleys.
 - Galleys, Sailboats and Transports can navigate rivers, and their unit class was renamed to Riverboat.
 - All naval units capable of attacking, also have bombardment capabilities. Galleon attack increased to 2, with a bombard rate of 3 (no longer nonMil).
 - Cargo boats don't cause unhappiness due to military activity, including Galley, Sailboat, Caravel, Galleon, Transport, Carrier and Submarine.

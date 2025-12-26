@@ -1,5 +1,5 @@
 ============================================================
-Civ2Civ3 Earth Ruleset for Freeciv v3.0 (Updated 12-2024)
+Civ2Civ3 Earth Ruleset for Freeciv v3.0 (Updated 12-2025)
 ============================================================
 
 "civ2civ3_earth" is a fork of the ruleset civ2civ3 (shipped with Freeciv since 2.5), from the same author. It includes new features, tries to improve balance, and is more suitable for playing on Earth maps, or similar scenarios. It includes its own tileset "amplio_earth" (or "ampliohex_earth" for hexagonal topology), and a world map scenario, adapted to be played with these rules.
@@ -264,6 +264,7 @@ Bonus resources increase the tile output; and give +1 unit free of upkeep (F), o
 # = These strategic resources increase the tile output by 2 shields with the required technology.
 
 TIP: The optimal tiles to place your initial cities are those with MAX1 output equal or similar to 2/1/2, mainly those with bonus resources or rivers. Hills and Plains are always good places for cities, as well as Desert with river, or bonused Grassland. The best defense comes from cities placed on Hills with river.
+TIP: The most urgent tile improvements, in tiles without special resources, use to be: irrigation and road on Plains, road on Grassland, irrigation or mine on Hills, and transformation of some Forest (those not on rivers, with no trade) into Plains.
 
 
 GOVERNMENTS:

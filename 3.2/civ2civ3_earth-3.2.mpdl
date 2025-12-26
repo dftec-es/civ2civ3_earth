@@ -2,7 +2,7 @@
 options = "+Freeciv-3.2-mpdl"
 name    = "Civ2civ3_Earth"
 type    = "Modpack"
-version = "2024_05c"
+version = "2025_12"
 
 [files_0]
 baseURL = "./"

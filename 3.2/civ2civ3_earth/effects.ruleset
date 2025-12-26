@@ -5378,18 +5378,6 @@ reqs    =
       "UnitFlag", "NoVeteran", "Local", FALSE
     }
 
-; Refining + Oil, and Iron, to reduce build cost by 10%
-[effect_goods_veteran_3_cost]
-type    = "Unit_Build_Cost_Pct"
-value   = -10
-reqs    =
-    { "type", "name", "range", "present"
-      "UnitFlag", "Iron_Oil", "Local", TRUE
-      "Tech", "Refining", "Player", TRUE
-      "Extra", "Oil", "Traderoute", TRUE
-      "Extra", "Iron", "Traderoute", TRUE
-    }
-
 [effect_goods_extra_veteran_0_neg]
 type    = "Veteran_Build"
 value   = -1
