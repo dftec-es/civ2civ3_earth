@@ -708,7 +708,6 @@ actor_reqs    =
       "AI",           "Normal",      "Player", FALSE
       "AI",           "Hard",        "Player", FALSE
       "AI",           "Cheating",    "Player", FALSE
-      "AI",           "Experimental", "Player", FALSE
     }
 target_reqs    =
     { "type",         "name",        "range",  "present"
@@ -808,7 +807,6 @@ actor_reqs    =
       "AI",           "Normal",      "Player", FALSE
       "AI",           "Hard",        "Player", FALSE
       "AI",           "Cheating",    "Player", FALSE
-      "AI",           "Experimental", "Player", FALSE
     }
 
 ; AI: Enable bombard from city
