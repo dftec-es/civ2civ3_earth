@@ -19,7 +19,7 @@ https://raw.githubusercontent.com/dftec-es/civ2civ3_earth/release/3.2/civ2civ3_e
 * Press install modpack.
 
 #### How to install it manually from github:
-* Download the latest pack from the "tags" section.
+* Download the latest Source Code pack from the "[releases](https://github.com/dftec-es/civ2civ3_earth/releases)" section.
 * Extract to the same folder where "saves" folder is located (where savegames are stored).<br/>
 In linux it uses to be: /home/username/.freeciv/
 * Launch freeciv, start a new game, select the ruleset civ2civ3_earth, and load the tileset amplio_earth when asked.<br/>
@@ -38,4 +38,4 @@ The installed files and folders should look like this:
 where /3.2/ should match the freeciv version that you had installed.
 
 #### Earth map 124x68 Rhye enlarged
-The world map scenario (seen in the screenshot) was designed for this ruleset, but it cannot have an open license (map made by Rhye for civ4). It is available to [download here](https://drive.google.com/file/d/1Di-O4LCYN0X2cOp9K_FGcqwsoDr8vKt2/view?usp=sharing) (it includes one version for civ2civ3_earth and one for default civ2civ3).
+The world map scenario (seen in the screenshot) was designed for this ruleset, but it cannot have an open license (map made by Rhye for civ4). It is available to [download here](https://github.com/dftec-es/civ2civ3_earth/releases/download/v2025_12/Freeciv_scenario-civ2civ3_earth-124x68-Rhye_Enlarged.zip) (it includes one version for this civ2civ3_earth ruleset, and one for default civ2civ3).
